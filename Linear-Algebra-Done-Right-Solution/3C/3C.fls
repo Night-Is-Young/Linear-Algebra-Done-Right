@@ -213,7 +213,11 @@ INPUT d:/LaTex/texlive/2024/texmf-dist/tex/generic/ctex/zhmap/ctex-zhmap-windows
 INPUT d:/LaTex/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT d:/LaTex/texlive/2024/texmf-dist/fonts/sfd/ttf2pk/UGBK.sfd
 INPUT d:/LaTex/texlive/2024/texmf-dist/fonts/sfd/ttf2pk/Unicode.sfd
+INPUT d:/LaTex/texlive/2024/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong71.tfm
+INPUT d:/LaTex/texlive/2024/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong99.tfm
 INPUT 3C.aux
+INPUT c:/Windows/Fonts/simsun.ttc
+INPUT c:/Windows/Fonts/simsun.ttc
 INPUT c:/Windows/Fonts/simsun.ttc
 INPUT c:/Windows/Fonts/simsun.ttc
 INPUT c:/Windows/Fonts/simsun.ttc

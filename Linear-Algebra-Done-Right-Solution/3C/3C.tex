@@ -90,7 +90,22 @@
     如此,我们可以把$\li w,m$和$\li v,m$分别扩展为$W$和$V$的基,进而这个矩阵满足题意.
 \end{proof}
 \begin{problem}[6.]
-    设$\li v,m$是$V$的一组基,$W$是有限维的.设$T\in\mathcal{L}(V,W)$,%
+    设$\li v,m$是$V$的一组基,$W$是有限维的.设$T\in\mathcal{L}(V,W)$.\\
     试证明:存在$W$的一组基$\li w,n$使得$\mathcal{M}(T)$除了第一行第一列可能为$1$以外,第一列的所有元素均为$0$.
 \end{problem}
+\begin{proof}
+    若$Tv_1=\mbf{0}$,那么显然第一列所有元素均为$0$.\\
+    若$Tv_1\neq\mbf{0}$,不妨设$w_1:=Tv_1\in W$.于是$w_1$可以被扩展为$W$的一组基$\li w,n$.由于$\li w,n$线性无关,于是
+    $$Tv_1=1w_1+0w_2+\cdots+0w_n$$
+    于是$\mathcal{M}(V,W)$的第一行第一列的元素为$1$,其余元素均为$0$.
+\end{proof}
+\begin{problem}[7.]
+    设$\li w,n$是$W$的一组基,$V$是有限维的.设$T\in\mathcal{L}(V,W)$.\\
+    试证明:存在$V$的一组基$\li v,m$使得$\mathcal{M}(T)$除了第一行第一列可能为$1$以外,第一行的所有元素均为$0$.
+\end{problem}
+\begin{proof}
+    我们首先任取$V$的一组$\li v,m$.\\
+    若此时矩阵的第一行均为$0$或仅有第一列第一行为$1$,其余为$0$,那么命题得证.\\
+    否则,我们有
+\end{proof}
 \end{document}
