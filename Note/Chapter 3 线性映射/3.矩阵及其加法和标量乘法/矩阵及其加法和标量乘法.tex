@@ -1,0 +1,128 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+\usepackage{nicematrix}
+
+\allowdisplaybreaks
+\linespread{1.5}
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 矩阵及其加法和标量乘法\end{center}
+终于,我们将见到线性代数中最重要的概念:矩阵.\\
+\tbf{1.用矩阵表示线性映射}\\
+我们知道,如果$v_1,\cdots,v_n$是$V$的基且$T:V\to W$是线性的,那么根据线性映射引理,
+$Tv_1,\cdots,Tv_n$的值决定了$T$将$V$中任意向量所映射到的值.
+我们马上可以看到利用$W$的基,矩阵可以高效地记录各$Tv_k$的值,从而表示一个线性映射.
+\begin{definition}[1.1 矩阵]
+    假设$m,n\in\N$,$m\times n$矩阵$A$是由$\F$中元素构成的$m$行$n$列的矩形阵列,记为
+    $$A=\begin{pmatrix}
+        A_{1,1} & \cdots & A_{1,n} \\
+        \vdots & \ddots & \vdots \\
+        A_{m,1} & \cdots & A_{m,n}
+    \end{pmatrix}$$
+    记号$A_{j,k}$表示$A$的第$j$行第$k$列中的元素.
+\end{definition}\noindent
+现在我们给出一个关键的定义.
+\begin{definition}[1.2 定义:线性映射的矩阵]
+    假定$T\in\mathcal{L}(V,W)$,且$v_1,\cdots,v_m$是$V$的基,$w_1,\cdots,w_n$是$W$的基.
+    那么,线性映射$T$关于这些基的矩阵$\mathcal{M}(T)$是一个$m\times n$矩阵,其中各$A_{j,k}$由下式确定
+    $$Tv_k=A_{1,k}w_1+\cdots+A_{m,k}w_m$$
+    如果无法从上下文确定基的选取,那么可以采用$\mathcal{M}\left(T,(v_1,\cdots,v_m),(w_1,\cdots,w_n)\right)$表示.
+\end{definition}\noindent
+一个线性映射对应的矩阵$\mathcal{M}(T)$被$V$的基$v_1,\cdots,v_n$和$W$的基$w_1,\cdots,w_m$和$T$本身决定.
+由于我们通常能在上下文中知道这些基,所以常常把它们从记号中省去.
+于是我们可以写出这样的矩阵
+$$\mathcal{M}(T)=
+\begin{pNiceMatrix}[first-row,first-col]
+           & v_1     & \cdots & v_k     & \cdots & v_n     \\
+    w_1    & A_{1,1} & \cdots & A_{1,k} & \cdots & A_{1,n} \\
+    \vdots & \vdots  &        & \vdots  &        & \vdots  \\
+    w_m    & A_{m,1} & \cdots & A_{m,k} & \cdots & A_{m,n} \\
+\end{pNiceMatrix}$$
+上面这种写法表明了计算$Tv_k$的算法:将第$k$列的各$A_{j,k}$与各$w_j$相乘后相加即得$Tv_k$,即
+$$Tv_k=\sum_{j=1}^mA_{j,k}w_j$$
+在不加说明的情况下,如果$T$是$\F^m$到$\F^n$的映射,那么总把基选作标准基.研究$\mathcal{P}_m(\F)$时同理.\\
+\tbf{2.矩阵的加法和标量乘法}\\
+自然地,我们可以定义矩阵的加法和标量乘法.
+\begin{definition}[2.1 定义:矩阵的加法]
+    \tbf{两个相同大小的矩阵之和}是把两矩阵对应位置上的元素相加所得的矩阵,即
+    $$\begin{pmatrix}
+        A_{1,1} & \cdots & A_{1,n} \\
+        \vdots & \ddots & \vdots \\
+        A_{m,1} & \cdots & A_{m,n}
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        C_{1,1} & \cdots & C_{1,n} \\
+        \vdots & \ddots & \vdots \\
+        C_{m,1} & \cdots & C_{m,n}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        A_{1,1}+C_{1,1} & \cdots & A_{1,n}+C_{1,n} \\
+        \vdots          & \ddots & \vdots          \\
+        A_{m,1}+C_{m,1} & \cdots & A_{m,n}+A_{m,n}
+    \end{pmatrix}$$
+\end{definition}\noindent
+假定对于$S,T\in\mathcal{L}(V,W)$,选取相同的基,可以得到下面的结论.
+\begin{formal}[2.2 线性映射之和的矩阵]
+    假设$S,T\in\mathcal{L}(V,W)$,那么$\mathcal{M}(S+T)=\mathcal{M}(M)+\mathcal{M}(T)$.
+\end{formal}\noindent
+这是容易验证的.类似的,我们可以定义矩阵的标量乘法.
+\begin{definition}[2.3 定义:矩阵的标量乘法]
+    一个标量和一个矩阵的乘积是将矩阵的各元素都乘以该标量所得的矩阵.
+    $$\lambda\begin{pmatrix}
+        A_{1,1} & \cdots & A_{1,n} \\
+        \vdots & \ddots & \vdots \\
+        A_{m,1} & \cdots & A_{m,n}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \lambda A_{1,1} & \cdots & \lambda A_{1,n} \\
+        \vdots          & \ddots & \vdots          \\
+        \lambda A_{m,1} & \cdots & \lambda A_{m,n}
+    \end{pmatrix}$$
+\end{definition}\noindent
+类似的,我们有如下结论.
+\begin{formal}[2.4 标量与线性映射之积的矩阵]
+    假定$\lambda\in\F$且$T\in\mathcal{L}(V,W)$,则$\mathcal{M}(\lambda T)=\lambda\mathcal{M}(T)$.
+\end{formal}\noindent
+定义了加法和标量乘法后,由此产生一个向量空间也就不足为奇了.我们先引入一个记号.
+\begin{definition}[2.5 定义:$\F^{m,n}$]
+    对于$m,n\in\N$,记$\F^{m,n}$为所有各元素均属于$\F$的$m\times n$矩阵构成的集合.
+\end{definition}
+\begin{formal}[2.6 $\F^{m,n}$是向量空间]
+    对于$m,n\in\N$,$\F^{m,n}$是维数为$mn$的向量空间.
+\end{formal}
+\begin{solution}[Proof.]
+    $\F^{m,n}$的加法恒等元是所有元素均为$0$的$m\times n$矩阵.\\
+    对于任意$A\in\F^{m,n}$,其加法逆元是所有元素均为$A$中对应位置的元素的相反数构成的$m\times n$矩阵.\\
+    其余向量空间的性质不难验证.下面我们来证明$\dim\F^{m,n}=mn$.\\
+    我们记$C_{j,k}$代表除第$j$行第$k$列的元素为$1$,其余元素为$0$的矩阵.\\
+    假定一组标量$a_{1,1},\cdots,a_{m,n}$使得
+    $$\mbf{0}=a_{1,1}C_{1,1}+\cdots+a_{m,n}C_{m,n}
+    =\begin{pmatrix}
+        a_{1,1} & \cdots & a_{1,n} \\
+        \vdots & \ddots & \vdots \\
+        a_{m,1} & \cdots & a_{m,n}
+    \end{pmatrix}$$
+    当且仅当$a_{1,1}=\cdots=a_{m,n}=0$时上式成立,于是$C_{1,1},\cdots,C_{m,n}$线性无关.\\
+    又对于任意$A\in\F^{m,n}$,都有
+    $$A=\begin{pmatrix}
+        A_{1,1} & \cdots & A_{1,n} \\
+        \vdots & \ddots & \vdots \\
+        A_{m,1} & \cdots & A_{m,n}
+    \end{pmatrix}
+    =A_{1,1}C_{1,1}+\cdots+A_{m,n}C_{m,n}$$
+    上式中各$A\in\F$,从而$\F^{m,n}=\span\left(C_{1,1},\cdots,C_{m,n}\right)$.\\
+    综上可知$C_{1,1},\cdots,C_{m,n}$是$\F^{m,n}$的一组基,从而$\dim\F^{m,n}=mn$,命题得证.
+\end{solution}
+\end{document}

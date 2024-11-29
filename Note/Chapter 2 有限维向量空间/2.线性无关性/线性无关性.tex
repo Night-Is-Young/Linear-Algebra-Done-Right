@@ -1,0 +1,114 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 线性无关性\end{center}
+假设$v_1,\cdots,v_m\in V$且$v\in\text{span}(v_1,\cdots,v_m)$.根据张成空间的定义有
+$$\exists a_1,\cdots,a_m\in\F\st v=a_1v_1+\cdots+a_mv_m$$
+问题在于,上述表出方式是否是唯一的(这和子空间的直和有类似之处)?我们不妨假设另一组$b_1,\cdots,b_m\in\F$使得
+$$v=b_1v_1+\cdots+b_mv_m$$
+将上面两式相减可得
+$$\mbf{0}=(a_1-b_1)v_1+\cdots+(a_m-b_m)v_m$$
+如果表出$\mbf{0}$的唯一方法是令所有$v_k$的系数均为$0$,那么此处等式成立当且仅当$a_1=b_1,\cdots,a_m=b_m$,
+从而表出任意$v$的方法均是唯一的.这种情况十分重要,因此我们有如下定义.
+\begin{definition}[1.1 定义:线性无关]
+    对于$V$中的一个向量组$v_1,\cdots,v_m$,如果使得$$\mbf{0}=a_1v_1+\cdots+a_mv_m$$
+    成立的$a_1,\cdots,a_m\in\F$唯一选取方式是$a_1=\cdots=a_m=0$,那么称该向量组是\tbf{线性无关的}.\\
+    特别的,规定空向量组$()$也是线性无关的.
+\end{definition}\noindent
+上面的定义等价于:$V$中的一个向量组$v_1,\cdots,v_m$是线性无关的,当且仅当$\text{span}(v_1,\cdots,v_m)$
+中的每个向量都只能用$v_1,\cdots,v_m$的唯一的线性组合表出.\\
+与线性无关对应的自然是线性相关.
+\begin{definition}[1.2 定义:线性相关]
+    对于$V$中的一个向量组$v_1,\cdots,v_m$,如果它不是线性无关的,则称它是\tbf{线性相关的}.\\
+    换言之,对于$V$中的一个向量组$v_1,\cdots,v_m$,如果存在不全为$0$的$a_1,\cdots,a_m\in\F$
+    使得$\mbf{0}=a_1v_1+\cdots+a_mv_m$成立,那么称该向量组是线性相关的.
+\end{definition}\noindent
+从直观的感受来看,如果一个向量组是线性相关的,那么其中必然有一些向量能被其它向量所线性表出.
+下面的引理为此提供了严格的叙述和证明.
+\begin{formal}[1.3 线性相关性引理]
+    设$v_1,\cdots,v_m$是$V$中的一个线性相关组.那么存在$k\in\left\{1,2,\cdots,m\right\}$满足
+    $$v_k\in\text{span}(v_1,\cdots,v_{k-1})$$
+    进而,原来的向量组移除$v_k$后形成的新向量组的张成空间仍然与原向量组的张成空间相同.
+\end{formal}
+\begin{solution}[Proof.]
+    因为$v_1,\cdots,v_m$是线性相关的,所以存在不全为$0$的$a_1,\cdots,a_m\in\F$
+    使得$$\mbf{0}=a_1v_1+\cdots+a_mv_m$$成立.
+    设$\displaystyle k=\min_{1\leqslant i\leqslant m,a_i\neq0}k$,则
+    $$v_k=-\left(\dfrac{a_1}{a_k}v_i+\cdots+\dfrac{a_{k-1}}{a_k}v_{k-1}\right)$$
+    于是$v_k\in\text{span}(v_1,\cdots,v_{k-1})$.\\
+    现在假设$u\in\text{span}(v_1,\cdots,v_{m})$,于是存在$c_1,\cdots,c_m\in\F$使得
+    $$u=c_1v_1+\cdots+c_mv_m$$
+    将上式中的$v_k$替换成前面求得的表达式,于是得到$c$处于用移除$v_k$后的新向量组的张成空间中.\\
+    从而该引理得证.
+\end{solution}\noindent
+于是,我们可以通过移除某些向量而不改变其张成空间的方式修改线性相关组.\\
+关于线性无关组的长度,我们有如下关键的定理.
+\begin{formal}[1.4 线性无关组的长度]
+    在有限维向量空间$V$中,每个线性无关组的长度小于或等于每个张成$V$的向量组的长度.
+\end{formal}
+\begin{solution}[Proof.]
+    设$u_1,\cdots,u_m$为$V$中的一个线性相关组,$w_1,\cdots,w_n$张成$V$.只需证明$m\leqslant n$即可.\\
+    我们经过下述的$m$个步骤证明之.\\
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 第$1$步\\
+            令$B_0$为向量组$w_1,\cdots,w_n$,于是$\text{span }B_0=V$.从而$u_1$能被$w_1,\cdots,w_n$线性表出.
+            将$u_1$写在$B_0$之前,有
+            $$u_1,w_1,\cdots,w_n$$
+            根据定义,这是一个线性相关组.根据\tbf{1.3}可知,我们可以移除某个$w$使得由$u_1$和剩余各$w$构成的向量组张成$V$.
+            不妨记这个新的向量组为$B_1$.
+        \item 第$k$步$(2\leqslant k\leqslant m)$\\
+            由第$k-1$得到的向量组$B_{k-1}$张成$V$,于是$u_k\in \text{span }B_{k-1}$.\\
+            我们将$u_k$插入$u_1,\cdots,u_{k-1}$后,得到
+            $$u_1,\cdots,u_{k-1},u_k,w,\cdots$$
+            其中$w$代表$B_{k-1}$中剩余的$w\in\left\{w_1,\cdots,w_n\right\}$.\\
+            上面得到的新向量组依旧是线性相关的,于是根据\tbf{1.3}可知,该组中的某个向量处于排在它前面的向量的张成空间中.\\
+            由于$u_1,\cdots,u_m$线性无关,这个向量自然只能是剩余的$w$中的某一个.
+            我们去除这个$w$后,将得到的向量组记为$B_k$,自然有$\text{span }B_k=V$.
+    \end{enumerate}
+    在上述的每一步中,都有一个$u$被加入$B$的同时有一个$w$被移出.这个步骤能进行$m$次,表明$w$的数量不少于$u$,即$m\leqslant n$,于是原命题得证.
+\end{solution}\noindent
+运用这样的思想,我们还可以证明如下定理.
+\begin{formal}[1.5 有限维的子空间]
+    有限维向量空间的子空间都是有限维的.
+\end{formal}
+\begin{solution}[Proof.]
+    假定向量空间$V$是有限维的,$U$是$V$的子空间.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 第1步:\\如果$U=\left\{\mbf{0}\right\}$,那么$U$是有限维的.如果$U\neq\left\{\mbf{0}\right\}$,那么选取一$u_1\in U$.
+        \item 第k步:\\如果$U=\span{(u_1,\cdots,u_{k-1})}$,那么$U$是有限维的.如果$U\neq\span{(u_1,\cdots,u_{k-1})}$,那么选取一向量$u_k\in U\backslash\span{(u_1,\cdots,u_{k-1})}$.
+    \end{enumerate}
+    每一步构造都将出现一个线性无关组,根据\tbf{1.4},这个线性无关组的长度不能大于$V$的任一张成组,
+    进而,上面的构造最多只能进行有限次,于是$U$是有限维的.
+\end{solution}
+\ \\
+我们来看一些例题.
+\begin{problem}[Example 1.]
+    证明:由$[0,1]$上的所有连续实值函数构成的实向量空间是无限维的.
+\end{problem}
+\begin{solution}[Proof.]
+    定义函数$f_n=\left\{\begin{array}{l}
+        x-\dfrac{1}{n},x\in\left[\dfrac{1}{n},1\right]\\
+        0,x\in\left[0,\dfrac{1}{n}\right]
+    \end{array}\right.$.\\
+    对于任意正整数$n$,$f_n$均为$[0,1]$上的连续实值函数.
+    然而,对于任意$n\in\N^*$都有
+    $$f_{n+1}\notin\span{(f_1,\cdots,f_n)}$$
+    否则,假定存在$a_1,\cdots,a_n\in\R$使得
+    $$\forall z\in[0,1],f_{n+1}(z)=a_1f_1(z)+\cdots+a_nf_n(z)$$
+    取$z=\dfrac{1}{n}$,于是$$f_1(z)=\cdots=f_n(z)=0<f_{n+1}(z)$$
+    从而无论$a_1,\cdots,a_n$取何值都不能满足上式,即$f_{n+1}\notin\span{(f_1,\cdots,f_n)}$.\\
+    于是这样的向量空间是无限维的.
+\end{solution}
+\end{document}

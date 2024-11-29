@@ -1,0 +1,101 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 基\end{center}
+\tbf{1.基的定义}\\
+我们已经知道了线性无关组和张成组,并且已经证明了一个向量空间中的线性无关组的长度必然不大于张成组.
+那么,如果一个向量组同时具有这两者的性质,可以得到什么结论呢?为此,我们引入一个重要的定义.
+\begin{definition}[1.1 定义:基]
+    $V$的一个\tbf{基}是$V$中的一个线性无关且张成$V$的组.
+\end{definition}\noindent
+我们有一些相关的定义和例子.
+\begin{problem}[1.2 例:基]
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 向量组$(1,0,\cdots,0),(0,1,\cdots,0),\cdots,(0,\cdots,0,1)$是$\F^n$的一个基,它被称为$\F^n$的\tbf{标准基}.
+        \item 向量组$f_0,f_1,\cdots,f_m$(其中$f_k=z^k:\F\to\F$)是$\mathcal{P}(\F)$的一个基,它被称为$\mathcal{P}(\F)$的\tbf{标准基}.
+    \end{enumerate}
+\end{problem}\noindent
+\tbf{2.基的判定}\\
+我们有如下判断基的准则.
+\begin{formal}[2.1 基的判定准则]
+    $V$中的一个向量组$v_1,\cdots,v_m$是$V$的基,当且仅当任意$v\in V$都可以被唯一地写作如下形式:
+    $$v=a_1v_1+\cdots+a_mv_m$$
+    其中$a_1,\cdots,a_m\in\F$.
+\end{formal}\noindent
+回顾张成空间和线性无关性的定义,我们知道上面的表示方法说明了$\span{(v_1,\cdots,v_m)}=V$,
+而线性表出方法的唯一性说明$v_1,\cdots,v_m$线性无关.下面我们用严格的语言证明之.
+\begin{solution}[Proof.]
+    首先假设$v_1,\cdots,v_m$是$V$的基.对于任意$v\in V$,都存在$a_1,\cdots,a_m\in\F$使得
+    $$v=a_1v_1+\cdots+a_mv_m$$
+    又$v_1,\cdots,v_m$线性无关,于是上述表出方法是唯一的.\\
+    现在假设对于任意$v\in V$,都存在唯一的一组$a_1,\cdots,a_m\in\F$使得
+    $$v=a_1v_1+\cdots+a_mv_m$$
+    根据张成空间的定义可知$v_1,\cdots,v_m$张成$V$.
+    令$v=\mbf{0}$可以得知$v_1,\cdots,v_m$线性无关.\\
+    于是上述定理得证.
+\end{solution}\noindent
+\tbf{3.基的性质}\\
+我们已经证明了一个向量空间中的线性无关组的长度必然不大于张成组.
+那么它们的长度和基的长度有什么关系呢?下面我们来证明两个定理.
+\begin{formal}[3.1.1 每个张成组都包含一个基]
+    向量空间中的每个张成组都可以被削减为该向量空间的一个基.
+\end{formal}
+\begin{solution}[Proof.]
+    假定$v_1,\cdots,v_m$张成$V$.\\
+    如果$v_1,\cdots,v_m$线性无关,那么根据定义,这时$v_1,\cdots,v_m$就是$V$的一个基.\\
+    否则,根据线性相关性引理,存在$k\in\left\{1,\cdots,m\right\}$使得$k\in\span{(v_1,\cdots,v_{k-1})}$.
+    我们从$v_1,\cdots,v_m$中删去$v_k$,那么剩余向量构成的向量组依然张成$V$.\\
+    重复上述步骤直至$\forall k\in\left\{1,\cdots,m\right\},v_k\notin\span{(v_1,\cdots,v_{k-1})}$.
+    根据线性相关性引理,此时$v_1,\cdots,v_m$线性无关,于是为$V$的基,证毕.
+\end{solution}\noindent
+根据上述定理,我们可以知道任何有限维向量空间都有基.
+这是因为根据定义,任意有限维向量空间都有张成组,于是该张成组必然可以削减为该向量空间的一个基.\\
+我们也可以知道对于一个向量空间,其张成组的长度必然不小于基的长度.那么该向量空间内的线性无关组呢?
+\begin{formal}[3.1.2 每个线性无关组都可扩充为一个基]
+    有限维向量空间中每个线性无关向量组都可以被扩充为该向量空间的一个基.
+\end{formal}
+\begin{solution}[Proof.]
+    假定$u_1,\cdots,u_m$是有限维向量空间$V$中的一个线性无关组.设$w_1,\cdots,w_n$张成$V$.于是
+    $$u_1,\cdots,u_m,w_1,\cdots,w_n$$
+    张成$V$.根据\tbf{3.1.1}可知上述向量组可以削减为$V$的一个基(此过程不应有某个$u$被删去,因为$u_1,\cdots,w_m$线性无关).
+    于是$u_1,\cdots,u_m$和剩余的某些$w$构成$V$的一个基,从而$u_1,\cdots,u_m$可以被扩充为$V$的一个基.
+\end{solution}\noindent
+应用上述定理,我们现在可以证明下面这一定理.
+\begin{formal}[3.2 $V$的每个子空间都是等于$V$的直和的组成部分]
+    假设$U$是有限维向量空间$V$的子空间,那么存在$V$的子空间$W$,使得$V=U\oplus W$.
+\end{formal}
+\begin{solution}[Proof.]
+    由于$V$是有限维的,那么$U$亦如是.取$U$的一组基$u_1,\cdots,u_m$.\\
+    根据\tbf{3.1.2},$u_1,\cdots,u_m$可以被扩充为$V$的一组基
+    $u_1,\cdots,u_m,w_1,\cdots,w_n$.\\
+    设$W=\span{(w_1,\cdots,w_n)}$.于是$W$是$V$的子空间.\\
+    根据直和的定义,我们只需证明
+    $$V=U+W,U\cap W=\left\{\mbf{0}\right\}$$
+    首先证明$V=U+W$.\\
+    对于任意$v\in V$,由$u_1,\cdots,u_m,w_1,\cdots,w_n$是$V$的一组基可知,
+    存在一组$a_1,\cdots,a_m,b_1,\cdots,b_n$使得
+    $$v=a_1u_1+\cdots+a_mu_m+b_1w_1+\cdots+b_nw_n$$
+    于是$a_1u_1+\cdots+a_mu_m\in U,b_1w_1+\cdots+b_nw_n\in W$,进而$v\in U+W$.\\
+    接下来证明$U\cap W=\left\{\mbf{0}\right\}$.\\
+    假定存在$v\in U\cap W\backslash\left\{\mbf{0}\right\}$,
+    则存在一组$a_1,\cdots,a_m,b_1,\cdots,b_n$使得
+    $$v=a_1u_1+\cdots+a_mu_m$$
+    $$v=b_1w_1+\cdots+b_nw_n$$
+    显然$a_1,\cdots,a_m,b_1,\cdots,b_n$不全为$0$(否则$v=\mbf{0}$与假设不符).上面两式相减有$$\mbf{0}=a_1u_1+\cdots+a_mu_m-b_1w_1-\cdots-b_nw_n$$
+    从而存在至少一组不全为零的系数使得$u_1,\cdots,u_m,w_1,\cdots,w_n$线性表出$\mbf{0}$.\\
+    这与$u_1,\cdots,u_m,w_1,\cdots,w_n$线性无关矛盾,从而$U\cap W=\left\{\mbf{0}\right\}$.\\
+    综上,原命题得证.
+\end{solution}
+\end{document}

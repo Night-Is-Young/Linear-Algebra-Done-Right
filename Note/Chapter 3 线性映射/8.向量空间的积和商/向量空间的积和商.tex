@@ -1,0 +1,126 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+\usepackage{nicematrix}
+
+\allowdisplaybreaks
+\linespread{1.5}
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 向量空间的积和商\end{center}
+\tbf{1.向量空间的积}\\
+通常,我们讨论与多个向量空间有关的命题时都约定它们在相同的域上.
+\begin{definition}[1.1 定义:向量空间的积]
+    设$V_1,\cdots,V_m$都是$\F$上的向量空间.\tbf{乘积}$V_1\times\cdots\times V_m$定义为$$V_1\times\cdots\times V_m=\left\{\left(v_1,\cdots,v_m\right):v_1\in V_1,\cdots,v_m\in V_m\right\}$$
+\end{definition}\noindent
+$V_1\times\cdots\times V_m$上的加法和标量乘法的定义不再赘述.
+\begin{formal}[1.2 向量空间的积是向量空间]
+    设$V_1,\cdots,V_m$都是$\F$上的向量空间,那么$V_1\times\cdots\times V_m$也是$\F$上的向量空间.
+\end{formal}\noindent
+这一点也是容易证明的.
+\begin{formal}[1.3 向量空间之积的维数]
+    设$V_1,\cdots,V_m$都是$\F$上的有限维向量空间,那么$V_1\times\cdots\times V_m$也是$\F$上的有限维向量空间,其维数满足
+    $$\dim\left(V_1\times\cdots\times V_m\right)=\dim V_1+\cdots+\dim V_m$$
+\end{formal}
+\begin{formal}[1.4 积与直和]
+    设$V_1,\cdots,V_m$都是$V$的子空间,由下式定义线性映射$\Gamma:V_1\times\cdots\times V_m\to V_1+\cdots+V_m$:
+    $$\Gamma(v_1,\cdots,v_m)=v_1+\cdots+v_m$$
+    那么$V_1+\cdots+V_m$是直和,当且仅当$\Gamma$是单射.
+\end{formal}\noindent
+上面的命题根据单射和直和的定义不难得到.于是我们有如下命题.
+\begin{formal}[1.5 直和与维数]
+    设$V$是有限维向量空间,$V_1,\cdots,V_m$都是$V$的子空间,那么$V_1+\cdots+V_m$是直和,当且仅当
+    $$\dim\left(V_1+\cdots+V_m\right)=\dim V_1+\cdots+\dim V_m$$
+\end{formal}
+\begin{solution}[Proof.]
+    \tbf{1.4}中的$\Gamma$是满射,于是根据线性映射基本定理,$\Gamma$是单射,当且仅当
+    $$\dim\left(\li V+m\right)=\dim\left(\li V\times m\right)$$
+    结合\tbf{1.3}可得$\li V+m$是直和,当且仅当
+    $$\dim\left(\li V,m\right)=\dim V_1+\cdots+\dim V_m$$
+    命题得证.
+\end{solution}\noindent
+\tbf{2.商空间}\\
+我们首先定义向量与子集之和.
+\begin{definition}[2.1 定义:向量与子集之和,平移]
+    设$v\in V$且$U\subseteq$,那么$v+U$是一个由下式定义的$V$的子集
+    $$v+U=\left\{v+u:u\in U\right\}$$
+    我们称$v+U$是$U$的一个\tbf{平移}.
+\end{definition}\noindent
+有了这样的概念,我们就可以来定义商空间.
+\begin{definition}[2.2 定义:商空间]
+    设$U$是$V$的子空间,那么\tbf{商空间}$V/U$是由$U$的所有平移构成的集合,即
+    $$V/U=\left\{v+U:v\in V\right\}$$
+\end{definition}\noindent
+商空间是否也是向量空间?为此,我们首先需要下面这个命题.
+\begin{formal}[2.3 子空间的平移的关系]
+    设$U$是$V$的一个子空间且$v,w\in V$.那么
+    $$v-w\in U\Leftrightarrow v+U=w+U\Leftrightarrow \left(v+U\right)\cap\left(w+U\right)\neq\varnothing$$
+    即子空间的两个平移要么相等要么不相交.
+\end{formal}
+\begin{solution}[Proof.]
+    若$v-w\in U$,那么任意$u\in U$都有
+    $$v+u=w+\left(u+(v-w)\right)\in w+U$$
+    于是$v+U\subseteq w+U$.同理可得$w+U\subseteq v+U$,于是$v+U=w+U$.\\
+    而$v+U=w+U$显然表明$(v+U)\cap(w+U)\neq\varnothing$.\\
+    现在设$(v+U)\cap(w+U)\neq\varnothing$,于是存在$u_1,u_2\in U$使得$$v+u_1=w+u_2$$
+    于是$v-w=u_2-u_1\in U$,这表明从$(v+U)\cap(w+U)\neq\varnothing$可以推出$v-w\in U$.\\
+    命题得证.
+\end{solution}\noindent
+现在我们可以来定义$V/U$上的加法和标量乘法了.
+\begin{definition}[2.4 定义:商空间上的加法和标量乘法]
+    设$U$是$V$的一个子空间.那么$V/U$上的加法和标量乘法分别由如下两式定义.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$v,w\in V$,$(v+U)+(w+U)=(v+w)+U$.
+        \item 对于任意$\lambda\in\F$和任意$v\in V$,$\lambda(v+U)=(\lambda v)+U$.
+    \end{enumerate}
+\end{definition}
+\begin{solution}[Proof.]
+    上面的加法和标量乘法定义可能是有问题的,即$U$的同一个平移可能存在不同的表达方式.\\
+    为此,我们先来证明加法结果的唯一性.假定$v_1,v_2,w_1,w_2\in V$满足
+    $$v_1+U=v_2+U,w_1+U=w_2+U$$
+    我们必须证明$(v_1+w_1)+U=(v_2+w_2)+U$.\\
+    由\tbf{2.3}可得$v_1-v_2\in U$且$w_1-w_2\in U$.由于$U$是$V$的子空间,从而$U$对加法是封闭的.\\
+    于是$(v_1-v_2)+(w_1-w_2)\in U$,即$(v_1+w_1)-(v_2+w_2)\in U$.\\
+    再次利用\tbf{2.3}可知$(v_1+w_1)+U=(v_2+w_2)+U$,即我们定义的加法是唯一的.\\
+    对于标量乘法结果唯一的证明,其过程是类似的,这里就不再赘述.\\
+    于是我们知道上面定义的加法和标量乘法都是符合逻辑的.
+\end{solution}\noindent
+接下来的概念系那个引出$V/U$的计算方法.
+\begin{definition}[2.5 定义:商映射]
+    设$U$是$V$的一个子空间,\tbf{商映射}$\pi:V\to V/U$是由下式定义的线性映射
+    $$\forall v\in V,\pi(v)=v+U$$
+\end{definition}\noindent
+根据商映射的定义,我们就知道了商空间的维数.
+\begin{formal}[2.6 商空间的维数]
+    设$V$是有限维的,$U$是$V$的子空间,那么
+    $$\dim V/U=\dim V-\dim U$$
+\end{formal}
+\begin{solution}[Proof.]
+    令$\pi:V\to V/U$表示$V$到$V/U$的线性映射.那么$\nul\pi=U,\range\pi=V/U$,于是根据线性映射基本定理有
+    $$\dim V=\dim\range\pi+\dim\nul\pi=\dim U+\dim V/U$$
+    于是命题得证.
+\end{solution}\noindent
+$V$上的每个线性映射都能在$V/\nul T$上引出一个线性映射$\tilde{T}$.我们现在给出其定义.
+\begin{definition}[2.7 记号:$\tilde{T}$]
+    设$T\in\mathcal{L}(V,W)$.$\tilde{T}:V/(\nul T)\to W$由下式定义
+    $$\tilde{T}(v+\nul T)=Tv$$
+\end{definition}
+下面的结果说明,我们可以将$\tilde{T}$看作$T$的修改版.
+\begin{formal}[2.7 $\tilde{T}$的零空间和值域]
+    设$T\in\mathcal{L}(V,W)$,那么
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T\circ\pi=T$,其中$\pi$是将$V$映成$V/(\nul T)$的商映射.
+        \item $\tilde{T}$是单射.
+        \item $\range{\tilde{T}}=\range{T}$.
+        \item $V/(\nul T)$与$\range T$同构.
+    \end{enumerate}
+\end{formal}
+\end{document}

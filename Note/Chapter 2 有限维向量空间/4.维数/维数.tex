@@ -1,0 +1,188 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 维数\end{center}
+\tbf{1.维数的定义}\\
+到目前为止,我们一直讨论着有限维向量空间,却始终没有明确地定义向量空间的维数.
+一个合理的维数的定义,至少从直观上来看,应该使$\F^n$的维数为$n$.\\
+注意到$\F^n$的标准基$$(1,0,\cdots,0),(0,1,\cdots,0),\cdots,(0,\cdots,0,1)$$的长度恰好为$n$.
+于是,我们想把维数定义为基的长度.然而在这之前,我们需要明确这样的定义不会带来歧义,
+即首先要证明一个有限维向量空间的任意两个基的长度相等.
+\begin{formal}[1.1 基的长度不依赖于基的选取]
+    一个有限维向量空间的任意两个基的长度相等.
+\end{formal}
+\begin{solution}[Proof.]
+    假设$V$是有限维的,$B_1,B_2$是$V$的两个基.于是
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $B_1$在$V$中线性无关,$B_2$张成$V$,于是$B_1$的长度不大于$B_2$的长度.
+        \item $B_2$在$V$中线性无关,$B_1$张成$V$,于是$B_2$的长度不大于$B_1$的长度.
+    \end{enumerate}
+    综上,$B_1$与$B_2$的长度相等,命题得证.
+\end{solution}\noindent
+于是基于上述想法的定义不会产生矛盾.如此,我们便可以给出维数的正式定义了.
+\begin{definition}[1.2 定义:维数,$\dim{V}$]
+    一个有限维向量空间的\tbf{维数}是这个向量空间的任意一个基的长度,记为$\dim{V}$.
+\end{definition}\noindent
+基于前面的证明,我们知道有限维向量空间的子空间也一定是有限维的.它们之间的维数实际上满足如下定理.
+\begin{formal}[1.3 子空间的维数]
+    如果$U$是有限维向量空间$V$的子空间,那么$\dim{U}\leqslant\dim{V}$.
+\end{formal}
+\begin{solution}[Proof.]
+    假定$U$是有限维向量空间$V$的子空间,$B_1,B_2$分别为$U,V$的一组基.\\
+    那么$B_1$是$V$中的线性无关组,$B_2$是$V$的一个张成组.于是$B_1$的长度不大于$B_2$,即$\dim{U}\leqslant\dim{V}$.
+\end{solution}\noindent
+这里有一点是需要说明的.向量空间的维数与$\F$的选取密切相关.
+$\C$作为$\R$上的向量空间,其维数为$2$,标准基为$(1,\text{i})$;
+而$\C$作为$\C$上的向量空间时,其维数为$1$,标准基为$1$.
+事实上,这与我们定义向量空间的标量乘法时选取的标量$\lambda$的取值密切相关.\\
+\tbf{2.用维数判断基}\\
+我们已经知道,为了确定$V$中一个向量组是$V$的基,根据定义必须确定该向量组线性无关且张成$V$.
+下面的两个结论表明,在确定$V$的维数之后,有更简单的条件判断基.
+\begin{formal}[2.1 长度恰当的线性无关组是一个基]
+    假设$V$是有限维的,那么$V$中每个长度为$\dim{V}$的线性无关的向量组都是$V$的一个基.
+\end{formal}
+\begin{solution}[Proof.]
+    我们知道每个$V$中的线性无关组都可以被扩充为$V$的一个基.然而,$V$中的每个基的长度均为$\dim{V}$.
+    于是这里的扩充是平凡情况下的,即没有向量被加进向量组,从而该向量组是$V$的一个基.
+\end{solution}
+\begin{formal}[2.2 长度恰当的张成组是一个基]
+    假设$V$是有限维的,那么$V$中每个长度为$\dim{V}$的张成组都是$V$的一个基.
+\end{formal}
+\begin{solution}[Proof.]
+    我们知道每个$V$中的张成组都可以被削减为$V$的一个基.然而,$V$中的每个基的长度均为$\dim{V}$.
+    于是这里的削减是平凡情况下的,即没有向量从向量组中被剔除,从而该向量组是$V$的一个基.
+\end{solution}\noindent
+根据\tbf{2.1}的结论,我们很容易有如下的推论.
+\begin{formal}[2.3 空间中与其维数相等的子空间等于该空间]
+    假设$V$是有限维的,$U$是$V$的子空间且$\dim U=\dim V$,那么$U=V$.
+\end{formal}
+\begin{solution}
+    令$u_1,\cdots,u_n$是$U$的基,那么$n=\dim U$,根据前提条件又有$n=\dim V$.\\
+    显然$u_1,\cdots,u_n$在$V$中线性无关,又$n=\dim V$,于是根据\tbf{2.1}可知$u_1,\cdots,u_n$是$V$的基.
+    于是我们有$U=V=\span{(u_1,\cdots,u_n)}$,从而命题成立.
+\end{solution}\noindent
+\tbf{3.子空间的维数}\\
+我们有如下计算子空间之和的维数公式.
+\begin{formal}[3.1 子空间之和的维数公式]
+    如果$V_1$和$V_2$是一个有限维向量空间的子空间,那么
+    $$\dim(V_1+V_2)=\dim V_1+\dim V_2-\dim(V_1\cap V_2)$$
+\end{formal}
+\begin{solution}[Proof.]
+    令$v_1,\cdots,v_m$是$V_1\cap V_2$的一个基,于是它在$V_1$中线性无关,
+    因此可被扩充为$V_1$的一个基$v_1,\cdots,v_m,u_1,\cdots,u_j$.\\
+    同理它也可以被扩充为$V_2$的一个基$v_1,\cdots,v_m,w_1,\cdots,w_k$.\\
+    下面证明$v_1,\cdots,v_m,u_1,\cdots,u_j,w_1,\cdots,w_k$是$V_1+V_2$的一个基.\\
+    不难发现$\span(v_1,\cdots,v_m,u_1,\cdots,u_j,w_1,\cdots,w_k)=V_1+V_2$.\\
+    我们只需证明$v_1,\cdots,v_m,u_1,\cdots,u_j,w_1,\cdots,w_k$线性无关即可.假定
+    $$\mbf{0}=a_1v_1+\cdots+a_mv_m+b_1u_1+\cdots+b_ju_j+c_1w_1+\cdots+c_kw_k$$
+    其中各$a,b,c$均为标量.我们将上式移项可得
+    $$c_1w_1+\cdots+c_kw_k=-a_1v_1-\cdots-a_mv_m-b_1u_1-\cdots-b_ju_j$$
+    这表明$c_1w_1+\cdots+c_kw_k\in V_1$.又因为各$w$均在$V_2$中,于是$c_1w_1+\cdots+c_kw_k\in V_1\in V_1\cap V_2$.\\
+    由于$v_1,\cdots,v_m$是$V_1\cap V_2$的基,于是存在一组标量$d_1,\cdots,d_m$使得
+    $$c_1w_1+\cdots+c_kw_k=d_1v_1+\cdots+d_mv_m$$
+    又因为$v_1,\cdots,v_m,w_1,\cdots,w_k$线性无关,于是上式中各$c,d$均只能为$0$.进而我们有
+    $$\mbf{0}=a_1v_1+\cdots+a_mv_m+b_1u_1+\cdots+b_ju_j$$
+    又因为$v_1,\cdots,v_m,u_1,\cdots,u_j$线性无关,于是上式中各$a,b$均只能为$0$.\\
+    于是$v_1,\cdots,v_m,u_1,\cdots,u_j,w_1,\cdots,w_k$线性无关,进而我们有
+    $$\begin{aligned}
+        \dim(V_1+V_2)
+        &= m+j+k \\
+        &= (m+j)+(m+k)-m \\
+        &= \dim V_1+\dim V_2-\dim(V_1\cap V_2)
+    \end{aligned}$$
+\end{solution}\noindent
+\ \\
+以及,我们有接下来的一些例题.
+\begin{problem}[Example 1.]
+    设$v_1,\cdots,v_m$在$V$中线性无关,$w\in V$,证明
+    $$\dim\span(v_1+w,\cdots,v_m+w)\geqslant m-1$$
+\end{problem}
+\begin{solution}[Proof.]
+    注意到对于任意$2\leqslant k\leqslant m$有$$v_k-v_1=(v_k+w)-(v_1+w)$$
+    于是$v_k-v_1\in\span(v_1+w,\cdots,v_m+w)$.\\
+    又$v_1,\cdots,v_m$在$V$中线性无关,故$v_2-v_1,\cdots,v_m-v_1$在$V$中线性无关.\\
+    从而我们有$\dim\span(v_1+w,\cdots,v_m+w)\geqslant m-1$,命题得证.
+\end{solution}
+\begin{problem}[Example 2.]
+    设$m\in\N^*$,对于$0\leqslant k\leqslant m$,定义
+    $$p_k(x)=x^k(1-x)^{m-k}$$
+    证明:$p_0,\cdots,p_m$是$\mathcal{P}_m(\F)$的一组基.
+\end{problem}
+\begin{solution}[Proof.]
+    我们先来证明对于$m\in\N^*$,$f_0,\cdots,f_m\in\mathcal{P}_m(\F)$,其中$f_k$是次数为$k$的多项式,
+    那么$f_0,\cdots,f_m$是$\mathcal{P}_m(\F)$的一组基.\\
+    不妨设$f_k=a_{k,0}x^0+\cdots+a_{k,k}x^k$.于是存在一组$b_0,\cdots,b_m$使得
+    $$\mbf{0}(x)=b_0f_0(x)+\cdots+b_mf_m(x)$$
+    当且仅当每个$x^k$的系数为$0$时,上式才成立.于是我们有方程组
+    $$\left\{\begin{array}{l}
+        b_ma_{m,m}=0\\
+        b_ma_{m,m-1}+b_{m-1}a_{m-1,m-1}=0\\
+        b_ma_{m,m-2}+b_{m-1}a_{m-1,m-2}+b_{m-2}a_{m-2,m-2}=0\\
+        \cdots\\
+        b_ma_{m,0}+\cdots+b_0a_{0,0}=0
+    \end{array}\right.$$
+    又$a_{k,k}\neq 0$.于是从上到下依次解每个方程,可知方程组的唯一解是$b_m=\cdots=b_0=0$,
+    进而用$f_0,\cdots,f_m$线性表出$\mbf{0}(x)$的方式是唯一的,于是$f_0,\cdots,f_m$线性无关.\\
+    又$\dim\mathcal{P}_m(\F)=m+1$,根据\tbf{2.1}可知,$f_0,\cdots,f_m$是$\mathcal{P}_m(\F)$的一个基.\\
+    特别地,题设的$p_0,\cdots,p_m$自然也是$\mathcal{P}_m(\F)$的一个基.
+\end{solution}
+\begin{problem}[Example 3.]
+    设$V_1,V_2,V_3$是有限维空间$V$的子空间,$\displaystyle\sum_{i=1}^{3}\dim V_i>2\dim V$.
+    试证明:$\displaystyle\bigcap_{i=1}^3V_i\neq\left\{\mbf{0}\right\}$.
+\end{problem}
+\begin{solution}[Proof.]
+    不妨设$v_1,\cdots,v_n$为$V$的一个基.\\
+    自然地,对于任意$V_i$,向量组$v_1,\cdots,v_n$都可以被视作$V_i$的张成组而被削减为$V_i$的基.\\
+    即我们可以在$v_1,\cdots,v_n$任意地选取一些元素使得它们构成$V_i$的基.\\
+    我们一共需要选$\displaystyle\sum_{i=1}^{3}\dim V_i$个元素,又$\displaystyle\sum_{i=1}^{3}\dim V_i>2\dim V$,
+    于是根据容斥原理,必然存在一个$v_k$被选择了三次,即$\exists v_k\st v_k\in V_1\cap V_2\cap V_3$,从而命题得证.
+\end{solution}
+\begin{problem}[Example 4.]
+    设$U$是有限维向量空间$V$的子空间且$U\neq V$.令$n=\dim V,m=\dim U$.试证明:$V$存在这样的$n-m$个子空间,其中每个子空间维数都为$n-1$而它们的交集为$U$.
+\end{problem}
+\begin{solution}[Proof.]
+    设$u_1,\cdots,u_m$为$U$的一个基,于是$v_1,\cdots,v_m$在$V$中线性无关,因而可以被扩充为$V$的一个基
+    $$u_1,\cdots,u_m,v_1,\cdots,v_{n-m}$$
+    于是我们设$V$的子空间$W_k$的基为上面的基除去$v_k$后的组.\\
+    这样的$W_k$一共有$n-m$个,且$\dim W_k=n-1$.我们只需证明$\displaystyle\bigcap_{i=1}^{k}W_i=U$即可.\\
+    对于$V$中的元素$w$,存在唯一的一组标量$a_1,\cdots,a_m,b_1,\cdots,b_{n-m}$使得
+    $$w=a_1u_1+\cdots+a_mu_m+b_1v_1+\cdots+b_{n-m}v_{n-m}$$
+    当且仅当$b_1=\cdots=b_{n-m}=0$时$\displaystyle w\in\bigcap_{i=1}^{k}W_i$.\\
+    否则,若$b_k\neq0$,则必然有$w\notin W_k$.\\
+    又$U$为任意$W_k$的子空间,于是$U\subseteq\displaystyle\bigcap_{i=1}^{k}W_i$.\\
+    综上,存在这样的$n-m$个子空间$W_1,\cdots,W_{n-m}$使得$\displaystyle\bigcap_{i=1}^{k}W_i=U$,命题成立.
+\end{solution}
+\begin{problem}[Example 5.]
+    假定$V_1,V_2,V_3$是有限维向量空间$V$的子空间.试证明
+    $$\begin{aligned}
+        \dim(V_1+V_2+V_3)
+        =&\dim V_1+\dim V_2+\dim V_3\\
+        &-\dfrac{\dim(V_1\cap V_2)+\dim(V_1\cap V_3)+\dim(V_2\cap V_3)}{3}\\
+        &-\dfrac{\dim\left((V_1+V_2)\cap V_3\right)+\dim\left((V_1+V_3)\cap V_2\right)+\dim\left((V_2+V_3)\cap V_1\right)}{3}
+    \end{aligned}$$
+\end{problem}
+\begin{solution}[Proof.]
+    我们知道
+    $$\begin{aligned}
+        \dim(V_1+V_2+V_3)
+        &= \dim(V_1+V_2)+\dim V_3-\dim\left((V_1+V_2)\cap V_3\right)\\
+        &= \dim V_1+\dim V_2+\dim V_3-\dim(V_1\cap V_2)-\dim\left((V_1+V_2)\cap V_3\right)
+    \end{aligned}$$
+    同理可知
+    $$\dim(V_1+V_2+V_3)=\dim V_1+\dim V_2+\dim V_3-\dim(V_1\cap V_3)-\dim\left((V_1+V_3)\cap V_2\right)$$
+    $$\dim(V_1+V_2+V_3)=\dim V_1+\dim V_2+\dim V_3-\dim(V_2\cap V_1)-\dim\left((V_2+V_3)\cap V_1\right)$$
+    将上面三式相加之后即得题中的结果.
+\end{solution}
+\end{document}

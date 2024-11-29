@@ -1,0 +1,128 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+\usepackage{nicematrix}
+
+\allowdisplaybreaks
+\linespread{1.5}
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 线性映射与矩阵乘法\end{center}
+\tbf{1.将线性映射视为矩阵乘法}\\
+之前我们定义了线性映射的矩阵,现在我们定义向量的矩阵.
+\begin{definition}[1.1 定义:向量的矩阵]
+    假设$v\in V$且$v_1,\cdots,v_n$是$V$的基.$v$关于这基的\tbf{矩阵}是$n\times 1$矩阵
+    $$\mathcal{M}(v)=\begin{pmatrix}
+        a_1\\\vdots\\a_n
+    \end{pmatrix}$$
+    其中$a_1,\cdots,a_n\in\F$满足$v=a_1v_1+\cdots+a_nv_n$.
+\end{definition}\noindent
+回忆一下定义线性映射的矩阵的每一列,实际上就是一个向量.
+\begin{formal}[1.2 矩阵的列是映成空间的向量]
+    设$T\in\mathcal{L}(V,W)$,$v_1,\cdots,v_n$是$V$的基,$w_1,\cdots,w_m$是$W$的基.
+    对于任意$k\in\left\{1,\cdots,n\right\}$,$\mathcal{M}(T)$的第$k$列记作$\mathcal{M}(T)_{\cdot,k}$,
+    就等于$\mathcal{M}(Tv_k)$.
+\end{formal}\noindent
+下面的结果展示了线性映射的矩阵,向量的矩阵以及矩阵乘法是怎样联系在一起的.
+\begin{formal}[1.3 线性映射可以视作矩阵乘法]
+    假设$T\in\mathcal{L}(V,W)$且$v\in V$.假设$v_1,\cdots,v_n$是$V$的基,$w_1,\cdots,w_m$是$W$的基.那么
+    $$\mathcal{M}(Tv)=\mathcal{M}(T)\mathcal{M}(v)$$
+\end{formal}
+\begin{proof}
+    假设$v=a_1v_1+\cdots+a_nv_n$,其中$a_1,\cdots,a_n\in\F$.于是
+    $$Tv=b_1Tv_1+\cdots+b_nTv_n$$
+    于是
+    $$\begin{aligned}
+        \mathcal{M}(Tv)
+        &= b_1\mathcal{M}(Tv_1)+\cdots+b_n\mathcal{M}(Tv_n) \\
+        &= b_1\mathcal{M}(T)_{\cdot,1}+\cdots+b_n\mathcal{M}(T)_{\cdot,n} \\
+        &= \mathcal{M}(T)\mathcal{M}(v)
+    \end{aligned}$$
+    式中最后一个等号是矩阵乘法的定义.
+\end{proof}\noindent
+上面这个式子是联通矩阵乘法和线性映射的最重要的式子.
+因为$\mathcal{M}$是同构,于是我们可以把$Tv$和$\mathcal{M}(Tv)$等同起来看,
+于是$Tv$就可以视作$\mathcal{M}(T)\mathcal{M}(v)$.这表明我们在研究这两者时,
+可以把它们进行互相转化而简化问题.\\
+需要注意的一点是,同构得到的矩阵依赖于基的选取.我们尽量选择简单的基(例如标准基)使得问题得到进一步的简化.\\
+现在我们有如下命题.
+\begin{formal}[1.4 线性映射的值域和矩阵的秩]
+    假设$V$和$W$是有限维的,$T\in\mathcal{L}(V,W)$,那么$\dim\range T$等于$\mathcal{M}(T)$的秩.
+\end{formal}
+\begin{proof}
+    假设$v_1,\cdots,v_n$是$V$的基,$w_1,\cdots,w_m$是$W$的基.\\
+    将$w\in W$对应到$\mathcal{M}(w)$的线性映射$\mathcal{M}$是同构,它将$W$映成由$m\times 1$向量构成的空间$\F^{m,1}$.\\
+    我们在之前的习题知道$\text{span}(Tv_1,\cdots,Tv_n)=\range T$.\\
+    将$\mathcal{M}$作用于等式两端可知
+    $\mathcal{M}$将$\range T$映成$\text{span}\left(\mathcal{M}(Tv_1),\cdots,\mathcal{M}(Tv_k)\right)$.\\
+    根据秩的定义,$\mathcal{M}(T)$的秩等于$\range\text{span}\left(\mathcal{M}(Tv_1),\cdots,\mathcal{M}(Tv_k)\right)$,又后者与$\range T$同构,于是原命题成立.
+\end{proof}\noindent
+\tbf{2.换基}\\
+我们之前所定义的线性映射和向量的矩阵都依赖于基的选取.那么选取不同的基是否会造成不一样的结果呢?
+为此,我们先来看矩阵的逆.了解矩阵的逆之前,我们需要知道恒等矩阵.
+\begin{definition}[2.1 恒等矩阵]
+    设$n\in\N^*$.仅对角线上(行号和列号相等的位置)的元素为$1$而其余各元素均为$0$的$n\times n$矩阵
+    $$\begin{pmatrix}
+        1 &       & 0 \\
+          &\ddots &   \\
+        0 &       & 1 \\
+    \end{pmatrix}$$
+    为\tbf{恒等矩阵}$I$.
+\end{definition}\noindent
+恒等算子$I\in\mathcal{L}(V)$关于$V$的每个基的矩阵都是恒等矩阵$I$.\\
+如果$A$是与$I$大小相同的方阵,那么$AI=IA=A$.
+\begin{definition}[2.2 定义:可逆的,逆]
+    我们称方阵$A$是\tbf{可逆的},如果存在与之大小相同的方阵$B$使得$AB=BA=I$.\\
+    我们称$B$是$A$的\tbf{逆}且将其记为$A^{-1}$.
+\end{definition}\noindent
+用证明线性映射的逆唯一的方法也可以证明矩阵的逆唯一.因此,$A^{-1}$的记号是合理的.\\
+可逆方阵的乘积也是可逆的.对于大小相同的可逆方阵$A$和$C$,有$(AC)^{-1}=C^{-1}A^{-1}$.这是因为
+$$(AC)(C^{-1}A^{-1})=A(CC^{-1})A^{-1}=AIA^{-1}=AA^{-1}=I$$
+类似的,可以得到$(C^{-1}A^{-1})AC=I$.
+\begin{formal}[2.3 线性映射之积的乘法]
+    设$T\in\mathcal{L}(U,V)$且$S\in\mathcal{L}(V,W)$.在相同空间选取的基相同的情况下,有$\mathcal{M}(ST)=\mathcal{M}(S)\mathcal{M}(T)$.\\
+    更严谨地说,设$u_1,\cdots,u_m$是$U$的基,$v_1,\cdots,v_n$是$V$的基且$w_1,\cdots,w_p$是$W$的基,那么
+    $$\begin{aligned}
+        &\mathcal{M}\left(ST,(u_1,\cdots,u_m),(w_1,\cdots,w_p)\right)\\
+        =&\mathcal{M}\left(S,(v_1,\cdots,v_n),(w_1,\cdots,w_p)\right)\mathcal{M}(T,(u_1,\cdots,u_m),(v_1,\cdots,v_n))
+    \end{aligned}$$
+\end{formal}\noindent
+对于恒等算子关于不同的基的矩阵,我们有如下命题.
+\begin{formal}[2.4 恒等算子关于两个基的矩阵]
+    假设$u_1,\cdots,u_n$和$v_1,\cdots,v_n$是$V$的两个基,
+    那么矩阵$$\mathcal{M}\left(I,(u_1,\cdots,u_n),(v_1,\cdots,v_n)\right)\text{\ \ \ 和\ \ \ }\mathcal{M}\left(I,(v_1,\cdots,v_n),(u_1,\cdots,u_n)\right)$$
+    都是可逆的,且互为对方的逆.
+\end{formal}
+\begin{solution}[Proof.]
+    在\tbf{2.3}中将各$w_k$替换成各$u_k$并将$S$和$T$替换成$I$可得
+    $$I=\mathcal{M}\left(I,(v_1,\cdots,v_n),(u_1,\cdots,u_n)\right)\mathcal{M}(I,(u_1,\cdots,u_m),(v_1,\cdots,v_n))$$
+    将$u$与$v$互换有
+    $$I=\mathcal{M}(I,(u_1,\cdots,u_m),(v_1,\cdots,v_n))\mathcal{M}\left(I,(v_1,\cdots,v_n),(u_1,\cdots,u_n)\right)$$
+    于是就证明了上述结果.
+\end{solution}\noindent
+这告诉我们线性映射的基是可以更换的.为此,我们有换基公式.
+我们把$\mathcal{M}(T,(u_1,\cdots,u_n),(u_1,\cdots,u_n))$简记为$\mathcal{M}(T,(u_1,\cdots,u_n))$.
+\begin{formal}[2.5 换基公式]
+    设$T\in\mathcal{L}(V)$.假设$u_1,\cdots,u_n$和$v_1,\cdots,v_n$分别是$V$的两组基,令
+    $$A=\mathcal{M}\left(T,(u_1,\cdots,u_n)\right),B=\mathcal{M}\left(T,(v_1,\cdots,v_n)\right)$$
+    且$C=\mathcal{M}\left(T,(u_1,\cdots,u_n),(v_1,\cdots,v_n)\right)$.那么
+    $$A=C^{-1}BC$$
+\end{formal}
+\begin{solution}[Proof.]
+    由\tbf{2.3}可得$$A=C^{-1}\mathcal{M}\left(T,(u_1,\cdots,u_n),(v_1,\cdots,v_n)\right)$$
+    又$$\mathcal{M}\left(T,(u_1,\cdots,u_n),(v_1,\cdots,v_n)\right)=BC$$
+    于是$$A=C^{-1}BC$$
+\end{solution}
+\begin{formal}[2.6 逆的矩阵等于矩阵的逆]
+    设$v_1,\cdots,v_n$是$V$的基且$T\in\mathcal{L}$可逆,那么$\mathcal{M}\left(T^{-1}\right)=\left(\mathcal{M}(T)\right)^{-1}$,%
+    式中两个矩阵都是关于基$v_1,\cdots,v_n$的.
+\end{formal}
+\end{document}

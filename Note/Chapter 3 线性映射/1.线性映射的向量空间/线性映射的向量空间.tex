@@ -1,0 +1,230 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 线性映射的向量空间\end{center}
+\tbf{注}:在没有特殊说明的情况下,本章中的$\F$代表$\R$或$\C$;$U,V$和$W$代表$\F$上的向量空间.
+\tbf{1.线性映射的定义}\\
+线性代数中真正有趣的部分,是我们现在要转而研究的主题——线性映射.\\
+现在我们给出线性代数中的一个关键定义.
+\begin{definition}[1.1 定义:线性映射]
+    一个从$V$到$W$的\tbf{线性映射}是一个满足下列性质的函数$T:V\to W$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item \tbf{可加性}:对于所有$u,v\in V$,$T(u+v)=Tu+Tv$.
+        \item \tbf{齐次性}:对于所有$\lambda\in\F$和所有$v\in V$,$T(\lambda v)=\lambda T(v)$.
+    \end{enumerate}
+\end{definition}\noindent
+注意,对于线性映射,除了用函数的记号$T(v)$之外,我们也经常用记号$Tv$.
+\begin{definition}[1.2 定义:$\mathcal{L}(V,W),\mathcal{L}(V)$]
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 从$V$到$W$的全体线性映射$T:V\to W$的集合记作$\mathcal{L}(V,W)$.
+        \item 从$V$到$V$的全体线性映射$T:V\to V$的集合记作$\mathcal{L}(V)$.换言之,$\mathcal{L}(V,V)=\mathcal{L}(V)$.
+    \end{enumerate}
+\end{definition}\noindent
+我们给出下面这些线性映射的例子.
+\begin{problem}[1.3 例:线性映射]
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item \tbf{零映射}\\
+            除作其它用途,我们令$\mbf{0}$表示这样的一个线性映射:它将空间中的每个元素都对应到目标向量空间的加法恒等元.
+            具体而言,$\mbf{0}\in\mathcal{L}(V,W)$定义为
+            $$\forall v\in V,\mbf{0}v=\mbf{0}$$
+            前面的$\mbf{0}$指的是零映射,后面的$\mbf{0}$指的是空间$W$中的加法恒等元.
+        \item \tbf{恒等算子}\\
+            恒等算子记作$I$,是某个向量空间上的这样一个映射:它将空间中的每个元素对应到它本身.
+            具体而言,$I\in\mathcal{L}(V)$定义为
+            $$\forall v\in V,Iv=v$$
+        \item 微分映射\\
+            定义微分映射$D\in\mathcal{L}\left(\mathcal{P}(\R)\right)$为
+            $$\forall f\in\mathcal{P}(\R),Df=f'$$
+        \item 积分映射\\
+            定义微分映射$T\in\mathcal{L}\left(\mathcal{P}(\R),\R\right)$为
+            $$\forall f\in\mathcal{P}(\R),Tf=\int_{0}^{1}f$$
+        \item 后向位移映射\\
+            定义后向位移映射$T\in\mathcal{L}(\F^\infty)$为
+            $$\forall v=(x_1,x_2,x_3,\cdots)\in\F^\infty,Tv=(x_2,x_3,\cdots)$$
+        \item $\F^n$到$\F^m$的映射\\
+            令$A_{j,k}\in\F$,其中$j=1,\cdots,m$且$k=1,\cdots,n$.
+            定义线性映射$T\in\mathcal{L}(\F^n,\F^m)$为
+            $$T(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n}A_{1,i}x_i,\cdots,\sum_{i=1}^{n}A_{m,i}x_i\right)$$
+            事实上每个$\F^n$到$\F^m$的映射都是这种形式的.
+    \end{enumerate}
+\end{problem}\noindent
+\tbf{2.线性映射引理}\\
+线性映射引理告诉我们一个向量空间的基和线性映射之间的关系.
+\begin{formal}[2.1 线性映射引理]
+    假定$v_1,\cdots,v_n$是$V$的基且$w_1,\cdots,w_n\in W$.那么存在唯一的线性映射$T:V\to W$使得
+    $$\forall k\in\left\{1,\cdots,n\right\},Tv_k=w_k$$
+\end{formal}
+\begin{solution}
+    我们首先证明这样的线性映射$T$存在.定义
+    $$T(a_1v_1+\cdots+a_nv_n)=a_1w_1+\cdots+a_nw_n$$
+    其中$a_1,\cdots,a_n$是$\F$中的任意元素.
+    由于$v_1,\cdots,v_n$是$V$的基,因此上述定义中的自变量可以以唯一的方式取遍$V$中的每个元素.
+    于是这样的定义确定了函数$T:V\in W$.\\
+    我们现在只需证明$T$满足题设且是一个线性映射.\\
+    对于每个$k$,取上式中$a_k=1$,其余$a=0$即可得出$Tv_k=w_k$.\\
+    对于任意$u,v\in V$,不妨把它们写成$u=a_1v_1+\cdots+a_nv_n,v=b_1v_1+\cdots+b_nv_n$.于是
+    $$\begin{aligned}
+        T(u+v)
+        &= T\left((a_1+b_1)v_1+\cdots+(a_n+b_n)v_n\right) \\
+        &= (a_1+b_1)w_1+\cdots+(a_n+b_n)w_n \\
+        &= a_1w_1+\cdots+a_nw_n+b_1w_1+\cdots+b_nw_n \\
+        &= T(u)+T(v)
+    \end{aligned}$$
+    于是$T$具有可加性.同理可以证明$T$的齐次性.\\
+    现在我们证明这样的$T$是唯一的.假设$T\in\mathcal{L}(V,W)$,且$Tv_k=w_k$.\\
+    那么根据$T$的齐次性对于任意$c_1,\cdots,c_n\in\F$都有$T(c_kv_k)=c_kw_k$.再根据$T$的可加性可知
+    $$T(a_1v_1+\cdots+a_nv_n)=a_1w_1+\cdots+a_nw_n$$
+    于是$T$在$\span(v_1,\cdots,v_n)=V$上由上式唯一确定.\\
+    综上所述,命题得证.
+\end{solution}\noindent
+线性映射引理告诉我们,研究一个线性映射$T:V\to W$的性质可以从$V$的基的对应值入手,从而简化问题.
+\tbf{3.$\mathcal{L}(V,W)$上的代数运算}\\
+我们知道$\mathcal{L}(V,W)$也是一个由众多线性映射组成的集合.
+这个集合是否具有类似于向量空间的性质呢?为此,我们先从定义$\mathcal{L}(V,W)$上的加法和标量乘法开始.
+\begin{definition}[3.1 定义:$\mathcal{L}(V,W)$上的加法和标量乘法]
+    假设$S,T\in\mathcal{L}(V,W)$且$\lambda\in\F$.\tbf{和}$S+T$与\tbf{积}$\lambda T$都是$V$到$W$的线性映射,分别定义为
+    $$\forall v\in V,(S+T)(v)=S(v)+T(v),(\lambda T)(v)=\lambda\left(T(v)\right)$$
+\end{definition}\noindent
+事实上,在进行了上述定义(实际上也非常符合直觉)之后,我们可以知道$\mathcal{L}(V,W)$就是向量空间.\\
+我们还需要额外的定义线性映射的乘积(实际上此处称为复合可能更加符合直觉).
+\begin{definition}[3.2 定义:线性映射的乘积]
+    对于$T\in\mathcal{L}(U,V)$和$V\in\mathcal{L}(V,W)$,\tbf{乘积}$ST\in\mathcal{L}(U,W)$定义为
+    $$\forall u\in U,(ST)(u)=S\left(T(u)\right)$$
+\end{definition}\noindent
+由此可见$ST$实际上就是一般的函数复合$S\circ T$,写成$ST$实际上是因为当两个函数都是线性的时,这样看起来更自然一些,并且也会让下面的定理看起来更加符合直觉.
+事实上线性函数的乘积并不一定满足交换律,即$ST=TS$不一定成立,即使在两边都有定义的情况下.
+另外,不难验证$ST$的确是$U$到$W$的线性映射.
+\begin{formal}[3.3 线性映射乘积的代数性质]
+    \begin{enumerate}
+        \item \tbf{可结合性}\\
+            对于任意使乘积有意义的线性映射$T_1,T_2,T_3$有$(T_1T_2)T_3=T_1(T_2T_3)$.
+        \item \tbf{恒等元}\\
+            对于任意$T\in\mathcal{L}(V,W)$有$IT=TI=I$.前后两个$I$分别为$V$上和$W$上的恒等算子.
+        \item \tbf{分配性质}\\
+            对于任意的$T,T_1,T_2\in\mathcal{L}(U,V)$和$S,S_1,S_2\in\mathcal{L}(V,W)$有
+            $$(S_1+S_2)T=S_1T+S_2T,S(T_1+T_2)=ST_1+ST_2$$
+    \end{enumerate}
+\end{formal}\noindent
+我们还需额外说明一点.
+\begin{formal}[3.4 加法恒等元的映射]
+    假设$T\in\mathcal{L}(V,W)$,那么$T(\mbf{0})=\mbf{0}$.
+\end{formal}
+\begin{solution}[Proof.]
+    根据可加性,我们有$$T(\mbf{0})=T(\mbf{0}+\mbf{0})=T(\mbf{0})+T(\mbf{0})$$
+    等式两边同时加上$T(\mbf{0})$的加法逆元即可得$T(\mbf{0})=\mbf{0}$.
+\end{solution}\noindent
+这也说明了$f:\R\to\R,x\mapsto kx+b$在$b\neq0$时并非线性映射.换言之,我们所说的线性映射和线性函数是不同的.
+\ \\
+下面,我们来看一些例题.
+\begin{problem}[Example 1.]
+    设$T\in\mathcal{L}(\F^n,\F^m)$.证明:存在标量$A_{j,k}\in\F$,其中$j=1,\cdots,m$且$k=1,\cdots,n$使得
+    $$T(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n}A_{1,i}x_i,\cdots,\sum_{i=1}^{n}A_{m,i}x_i\right)$$
+    对任意$(x_1,\cdots,x_n)\in\F^n$均成立.
+\end{problem}
+\begin{solution}[Proof.]
+    考虑$\F^n$的标准基$(1,0,\cdots,0),\cdots,(0,\cdots,0,1)$,分别记为$v_1,\cdots,v_n$.
+    取标量$A_{j,k}$使得下面一组等式成立.
+    $$\left\{\begin{array}{l}
+        \displaystyle Tv_1=(A_{1,1},\cdots,A_{m,1})\in\F^m \\
+        \cdots\\
+        \displaystyle Tv_n=(A_{1,n},\cdots,A_{m,n})\in\F^m \\
+    \end{array}\right.$$
+    不难验证对于任意$v_k$均能满足题设的等式.
+    对于任意$(x_1,\cdots,x_n)\in\F^n$,我们有
+    $$\begin{aligned}
+        T(x_1,\cdots,x_n)
+        &= T(x_1,0,\cdots,0)+\cdots+T(0,\cdots,0,x_n) \\
+        &= x_1Tv_1+\cdots+x_nTv_n \\
+        &= x_1(A_{1,1},\cdots,A_{m,1})+\cdots+x_n(A_{1,n},\cdots,A_{m,n}) \\
+        &= \left(\sum_{i=1}^{n}A_{1,i}x_i,\cdots,\sum_{i=1}^{n}A_{m,i}x_i\right)
+    \end{aligned}$$
+    于是这样的一组$A$满足题设,命题得证.
+\end{solution}
+\begin{problem}[Example 2.]
+    设$T\in\mathcal{L}(V,W)$且$V$中的一组向量$v_1,\cdots,v_m$满足$Tv_1,\cdots,Tv_m$在$W$中线性无关.\\
+    试证明:$v_1,\cdots,v_m$线性无关.
+\end{problem}
+\begin{solution}[Proof.]
+    假定$v_1,\cdots,v_m$线性相关,那么存在一组不全为$0$的标量$a_1,\cdots,a_n$使得
+    $$\mbf{0}=a_1v_1+\cdots+a_nv_n$$
+    于是我们有
+    $$\begin{aligned}
+        T(\mbf{0})
+        &= T(a_1v_1+\cdots+a_nv_n) \\
+        &= a_1Tv_1+\cdots+a_nTv_n
+    \end{aligned}$$
+    又$T(\mbf{0})=\mbf{0}$,于是存在这样的不全为$0$的标量$a_1,\cdots,a_n$使得
+    $$\mbf{0}=a_1v_1+\cdots+a_nv_n$$
+    这与$Tv_1,\cdots,Tv_m$在$W$中线性无关矛盾.于是$v_1,\cdots,v_m$线性无关,命题得证.
+\end{solution}
+\begin{problem}[Example 3.]
+    若$U$是$V$的子空间,且$S\in\mathcal{L}(U,W)$,那么存在$T\in\mathcal{L}(V,W)$使得$\forall u\in U,Tu=Su$.
+\end{problem}
+\begin{solution}[Proof.]
+    设$u_1,\cdots,u_m$为$U$的一组基,它可以被扩充为$V$的一组基$u_1,\cdots,u_m,v_1,\cdots,v_n$.\\
+    设$T$满足$\forall 1\leqslant k\leqslant m,Tu_k=Su_k$且$\forall 1\leqslant j\leqslant n,Tv_j=\mbf{0}$.
+    对于任意$u\in U$,存在唯一一组标量$a_1,\cdots,a_m\in\F$使得
+    $$u=a_1u_1+\cdots+a_mu_m$$
+    于是$$\begin{aligned}
+        Tu
+        &= T\left(a_1u_1+\cdots+a_mu_m\right) \\
+        &= a_1Tu_1+\cdots+a_mTu_m \\
+        &= a_1Su_1+\cdots+a_mSu_m \\
+        &= S\left(a_1u_1+\cdots+a_mu_m\right) \\
+        &= Su
+    \end{aligned}$$
+    容易验证$T$是线性映射,于是命题成立.
+\end{solution}
+\begin{problem}[Example 4.]
+    设$V$是有限维的且$\dim V>1$,证明$\exists S,T\in\mathcal{L}(V)\st ST\neq TS$.
+\end{problem}
+\begin{solution}[Proof.]
+    设$V$的一个基为$v_1,v_2,\cdots,v_m(m\geqslant 2)$.\\
+    令$T$满足$$Tv_1=v_2,Tv_2=v_1,\forall k\geqslant 2,Tv_k=v_k$$
+    令$S$满足$$Sv_1=v_1,Sv_2=2v_2,\forall k\geqslant 2,Sv_k=v_k$$
+    于是$$STv_1=Sv_2=2v_2,TSv_1=Tv_1=v_2$$
+    于是$STv_1\neq TSv_1$,即存在这样的$S,T$使得$ST\neq TS$.
+\end{solution}
+\begin{problem}[Example 5.]
+    设$V$是有限维的,证明$\mathcal{L}(V)$仅有的双边理想是$\left\{\mbf{0}\right\}$和$\mathcal{L}(V)$.\\
+    \tbf{注}:$\mathcal{L}(V)$的子空间$\mathcal{E}$被称为$\mathcal{L}(V)$的\tbf{双边理想},
+    如果$TE\in\mathcal{E}$且$ET\in\mathcal{E}$对所有$E\in\mathcal{E}$和所有$T\in\mathcal{L}(V)$成立.
+\end{problem}
+\begin{solution}[Proof.]
+    若$\mathcal{E}=\left\{\mbf{0}\right\}$,则原命题成立.\\
+    若$\mathcal{E}\neq\left\{\mbf{0}\right\}$,则令$v_1,\cdots,v_n$是$V$的基.\\
+    于是存在$T\in\mathcal{E}$使得存在$1\leqslant j\leqslant n$使得$Tv_j\neq\left\{\mbf{0}\right\}$.\\
+    不妨设存在一组标量$a_1,\cdots,a_n$使得$Tv_j=a_1v_1+\cdots+a_nv_n$.\\
+    定义$S_{j,k}\in\mathcal{L}(V)$为
+    $$\left\{\begin{array}{l}
+        S_{j,k}v_k=v_j\\
+        S_{j,k}v_l=\mbf{0},l\in\left\{1,\cdots,n\right\}\backslash\left\{k\right\}
+    \end{array}\right.$$
+    于是
+    $$\begin{aligned}
+        (S_{k,l}TS_{j,k})(v_k)
+        &= S_{k,l}\left(T\left(S_{j,k}v_k\right)\right) \\
+        &= S_{k,l}T(v_j) \\
+        &= S_{k,l}\left(a_1v_1+\cdots+a_nv_n\right) \\
+        &= a_lS_{k,l}v_l=a_lv_k
+    \end{aligned}$$
+    又$S_{k,l}TS_{j,k}\in\mathcal{E}$,于是$S_{1,l}TS_{j,1}+\cdots+S_{n,l}TS_{j,n}\in\mathcal{E}$,且有
+    $$\forall k\in\left\{1,\cdots,n\right\},\left(S_{1,l}TS_{j,1}+\cdots+S_{n,l}TS_{j,n}\right)(v_k)=a_lv_k$$
+    于是$S_{1,l}TS_{j,1}+\cdots+S_{n,l}TS_{j,n}=a_lI\in\mathcal{E}$.\\
+    于是对于任意$S\in\mathcal{L}(V)$,都有$S=SI\in\mathcal{E}$,从而$\mathcal{L}(V)\subseteq\mathcal{E}$.
+    又$\mathcal{E}$是$\mathcal{L}(V)$的子空间,于是有$\mathcal{E}\subseteq\mathcal{L}(V)$.于是$\mathcal{E}=\mathcal{L}(V)$.\\
+    综上,命题得证.
+\end{solution}
+\end{document}

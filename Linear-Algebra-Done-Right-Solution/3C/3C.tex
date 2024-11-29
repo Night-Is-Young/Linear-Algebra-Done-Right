@@ -1,0 +1,96 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{problem}[1.]
+    设$T\in\mathcal{L}(V,W)$.证明:任取$V$和$W$的基,$T$对应的矩阵都至少有$\dim\range T$个非零元素.
+\end{problem}
+\begin{proof}
+    设选取$V$的基为$\li v,m$,选取$W$的基为$\li w,n$.
+    根据线性映射基本定理有$\dim V=\dim\range T+\dim\nul T=m$.\\
+    若矩阵中非零元素少于$\dim\range T$个,那么说明至少有$\dim\nul T+1$列全部由$0$构成.\\
+    假定这些列的列号为$k$,于是$v_k=\li {0w}+n=\mbf{0}$.\\
+    于是至少有$\dim\nul T+1$个$v_k$满足$Tv_k=\mbf{0}$,这与$\nul T$的定义不符.\\
+    从而命题得证.
+\end{proof}
+\begin{problem}[3.]
+    设$V$和$W$是有限维的,$T\in\mathcal{L}(V,W)$.证明:$\dim\range T=1$,当且仅当存在在$V$的一个基和$W$的一个基
+    使得关于这些基的$\mathcal{M}(T)$的所有元素都是$1$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:设$\li v,m$是$V$的一组基,$\li w,n$是$W$的一组基.依题设有
+    $$\forall k\in\left\{1,\cdots,m\right\},Tv_k=\li w+n$$
+    于是$\li {Tv}=m=\li w+n$.下面我们说明$w:=\li w+n$是$\range T$的基.\\
+    对于任意$v\in V$,存在唯一一组标量$\li a,m\in\F$使得$v=a_1v_1+\cdots+a_mv_m$.于是$\forall Tv\in\range T$都有
+    $$Tv=a_1Tv_1+\cdots+a_mTv_m=\left(\li a+m\right)w$$
+    从而$w$张成$\range T$,即$\dim\range T=1$.\\
+    $\Rightarrow$:由$\dim\range T=1$可知
+    $$\exists w\in W\st\forall v\in V,\exists a\in\F,Tv=aw$$
+    
+\end{proof}
+\begin{problem}[3.]
+    设$\li v,n$是$V$的基,$\li w,m$是$W$的基.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:如果$S,T\in\mathcal{L}(V,W)$,那么$\mathcal{M}(S+T)=\mathcal{M}(S)+\mathcal{M}(T)$.
+        \item 证明:如果$T\in\mathcal{L}(V,W)$,$\lambda\in\F$,那么$\mathcal{M}(\lambda T)=\lambda\mathcal{M}(T)$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 记$\mathcal{M}(S)=A,\mathcal{M}(T)=B,\mathcal{M}(S+T)=C$.于是对于任意$k\in\left\{1,\cdots,m\right\}$都有
+            $$Sv_k=A_{1,k}w_1+\cdots+A_{m,k}w_m$$
+            $$Tv_k=B_{1,k}w_1+\cdots+B_{m,k}w_m$$
+            两式相加可得
+            $$(S+T)v_k=Sv_k+Tv_k=\left(A_{1,k}+B_{1,k}\right)w_1+\cdots+\left(A_{m,k}+B_{m,k}\right)w_m$$
+            又$\li w,m$是$W$的基,于是表出$(S+T)v_k$的系数应是唯一的.将上式与$$(S+T)v_k=C_{1,k}w_1+\cdots+C_{m,k}w_m$$
+            比较系数可得
+            $$\forall j\in\left\{1,\cdots,m\right\},C_{j,k}=A_{j,k}+B_{j,k}$$
+            又因为上式对所有$k\in\left\{1,\cdots,m\right\}$成立,于是根据矩阵加法的定义可知$A+B=C$.命题得证.
+        \item 记$\mathcal{M}(T)=A,\mathcal{M}(\lambda T)=B$.
+            对于任意$k\in\left\{1,\cdots,n\right\}$有
+            $$\lambda Tv_k=\lambda\left(A_{1,k}w_1+\cdots+A_{m,k}w_m\right)$$
+            $$(\lambda T)v_k=B_{1,k}w_1+\cdots+B_{m,k}w_m$$
+            又$\li w,m$是$W$的基,于是表出$\lambda Tv_k$的系数应是唯一的.比较系数可得
+            $$\forall j\in\left\{1,\cdots,m\right\},B_{j,k}=\lambda A_{j,k}$$
+            又因为上式对所有$k\in\left\{1,\cdots,m\right\}$成立,于是根据矩阵标量乘法的定义可知$B=\lambda A$.命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[4.]
+    设$D\in\mathcal{L}\left(\mathcal{P}_3(\R),\mathcal{P}_2(\R)\right)$是微分映射,定义为$Dp=p'$.
+    求$\mathcal{P}_3(\R)$的一组基和$\mathcal{P}_2(\R)$的一组基使得$D$关于这些基的矩阵为
+    $$\begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0
+    \end{pmatrix}$$
+\end{problem}
+\begin{solution}[Solution.]
+    不妨选取$\mathcal{P}_2(\R)$的标准基$1,x,x^2$.根据矩阵的定义可知此时对应的$\mathcal{P}_{3}(\R)$的基为$x,\dfrac{1}{2}x^2,\dfrac{1}{3}x^3,1$
+\end{solution}
+\begin{problem}[5.]
+    设$V$和$W$是有限维的,$T\in\mathcal{L}(V,W)$.证明:存在$V$的一个基和$W$的一个基使得关于这些基的$\mathcal{M}(T)$%
+    满足除了在第$k$行第$k$列$(1\leqslant k\leqslant\dim\range T)$的元素为$1$之外其余元素均为$0$.
+\end{problem}
+\begin{proof}
+    设$\dim\range T$的一组基为$\li w,m$.于是存在$\li v,m$使得$\forall k\in\left\{1,\cdots,m\right\}$有$Tv_k=w_k$.\\
+    下面证明$\li v,m$线性无关.设一组标量$\li a,m$满足
+    $$\mbf{0}=a_1v_1+\cdots+a_mv_m$$
+    于是$T(\mbf{0})=a_1Tv_1+\cdots+a_mTv_m=a_1w_1+\cdots+a_mw_m=\mbf{0}$.\\
+    由于$\li w,m$线性无关,于是上式中各$a$均仅能为$0$,于是$\li v,m$线性无关.\\
+    如此,我们可以把$\li w,m$和$\li v,m$分别扩展为$W$和$V$的基,进而这个矩阵满足题意.
+\end{proof}
+\begin{problem}[6.]
+    设$\li v,m$是$V$的一组基,$W$是有限维的.设$T\in\mathcal{L}(V,W)$,%
+    试证明:存在$W$的一组基$\li w,n$使得$\mathcal{M}(T)$除了第一行第一列可能为$1$以外,第一列的所有元素均为$0$.
+\end{problem}
+\end{document}

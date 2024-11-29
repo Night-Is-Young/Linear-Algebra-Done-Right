@@ -1,0 +1,105 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 向量空间的基本定义\end{center}
+\tbf{1.向量空间}\\
+定义向量空间的动机源于$\F^n$中加法和标量乘法的性质:各种交换律,结合律,恒等元和逆元等.
+将向量空间定义为一个集合$V$,我们所说的加法和标量乘法应当有如下定义:
+\begin{definition}[1.1\ 定义:加法,标量乘法]
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \item 集合$V$上的加法是一个函数,它将每一对$u,v\in V$对应到一个元素$u+v\in V$.
+        \item 集合$V$上的标量乘法是一个函数,它将每个$\lambda\in\F$和每个$v\in V$对应到一个元素$\lambda v\in V$.
+    \end{enumerate}
+\end{definition}\noindent
+现在我们可以据此来定义向量空间.
+\begin{definition}[1.2\ 定义:向量空间]
+    一个\tbf{向量空间}是一个集合$V$,$V$上的加法和标量乘法满足下列性质.
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \item \tbf{\songti 可交换性}:对于任意$u,v\in V$,都有$u+v=v+u$.
+        \item \tbf{\songti 可结合性}:对于任意$u,v,w\in V$以及任意$a,b\in\F$,都有$(u+v)+w=u+(v+w)$以及$(ab)v=a(bv)$.
+        \item \tbf{\songti 加法恒等元}:对于任意$v\in V$,都存在$\mbf{0}\in V$使得$v+\mbf{0}=v$.
+        \item \tbf{\songti 加法逆元}:对于任意$v\in V$,都存在$w\in V$使得$v+w=\mbf{0}$.
+        \item \tbf{\songti 乘法恒等元}:对于任意$v\in V$,都有$1v=v$.
+        \item \tbf{\songti 分配性质}:对于任意$u,v\in V$以及任意$a,b\in\F$,都有$a(u+v)=au+av$以及$(a+b)v=av+bv$.
+    \end{enumerate}
+\end{definition}\noindent
+向量空间上的标量乘法依赖于$\F$的选取.因此我们需要更精确地描述时会说$V$是$\F$上的向量空间.
+例如,$\R^n$是$\R$上的向量空间,$\C^n$是$\C$上的向量空间.\\
+由向量空间的定义可以引出一些有关的性质.
+\begin{formal}[1.3.1 加法恒等元唯一]
+    一个向量空间有唯一的加法恒等元.
+\end{formal}
+\begin{solution}[1.3.1 Proof.]
+    假定$\mbf{0}$和$\mbf{0'}$是同一个向量空间$V$的加法恒等元,那么
+    $$\mbf{0'}=\mbf{0'}+\mbf{0}=\mbf{0}+\mbf{0'}=\mbf{0}$$
+    三个等号成立依次是因为:$\mbf{0}$是加法恒等元;可交换性;$\mbf{0'}$是加法恒等元.\\
+    于是$\mbf{0'}=\mbf{0}$,从而$V$中只有一个加法恒等元.
+\end{solution}
+\begin{formal}[1.3.2 加法逆元唯一]
+    一个向量空间有唯一的加法逆元.
+\end{formal}
+\begin{solution}[1.3.2 Proof.]
+    设向量空间$V$,令$v\in V$,假定$w$和$w'$均为$v$的加法逆元.于是
+    $$w=w+\mbf{0}=w+(v+w')=(w+v)+w'=\mbf{0}+w'=w'$$
+    于是$w=w'$,命题得证.
+\end{solution}\noindent
+由于加法逆元是唯一的,我们作如下定义.
+\begin{definition}[1.3.3 定义:$-v,w-v$]
+    令$v,w\in V$,那么
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \item $-v$表示$v$的加法逆元.
+        \item $w-v$表示$w+(-v)$.
+    \end{enumerate}
+\end{definition}
+\begin{formal}[1.3.4 向量与$0$进行标量乘法]
+    对于任意$v\in V$,都有$0v=\mbf{0}$.
+\end{formal}
+\begin{solution}[1.3.4 Proof.]
+    我们有$$0v=(0+0)v=0v+0v$$
+    在此式两边同时加上$-0v$即可得到$0v=\mbf{0}$.
+\end{solution}
+\begin{formal}[1.3.5 数与加法恒等元$\mbf{0}$相乘]
+    对于任意$a\in\F$,都有$a\mbf{0}=\mbf{0}$.
+\end{formal}
+\begin{solution}[1.3.5 Proof.]
+    我们有$$a\mbf{0}=a(\mbf{0}+\mbf{0})=a\mbf{0}+a\mbf{0}$$
+    两边同时加上$-a\mbf{0}$即可得到$a\mbf{0}=\mbf{0}$.
+\end{solution}\noindent
+向量空间中的元素并不一定是$n$元数组,它还可以是很多不同类型的对象.
+\begin{definition}[1.4 记号:$\F^S$]
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \item 如果$S$是一个集合,那么$\F^S$表示所有函数$f:S\to\F$构成的集合.
+        \item 对于$f,g\in\F^S$,它们的和$f+g\in\F^S$是由下式定义的函数:$$\forall x\in S,(f+g)(x)=f(x)+g(x)$$
+        \item 对于$\lambda\in\F$和$f\in\F^S$,它们的标量乘法所得的乘积$\lambda f\in\F^S$是由下式定义的函数:$$\forall x\in S,(\lambda f)(x)=\lambda f(x)$$
+    \end{enumerate}
+\end{definition}\noindent
+\begin{formal}[1.4.1]
+    试证明:$\F^S$是$\F$上的向量空间,其中$S$非空.
+\end{formal}
+\begin{solution}[1.4.1 Proof.]
+    我们一一验证\tbf{1.2}中的性质.
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \item 对于任意$f,g\in\F^S$,对于任意$x\in S$,总有$$(f+g)(x)=f(x)+g(x)=g(x)+f(x)=(g+f)(x)$$即$f+g=g+f$.
+        \item 对于任意$f,g,h\in\F^S$,对于任意$x\in S$,总有$$((f+g)+h)(x)=(f(x)+g(x))+h(x)=f(x)+(g(x)+h(x))=(f+(g+h))(x)$$即$(f+g)+h=f+(g+h)$.
+        \item 定义$\mbf{0}(x)=0,\forall x\in S$.于是,对于任意$f\in\F^S$,对于任意$x\in S$,总有$$(f+\mbf{0})(x)=f(x)+0=f(x)$$即$f+\mbf{0}=f$.
+        \item 对于任意$f\in\F^S$,总存在函数$g:S\to\F$满足$\forall x\in S,g(x)=-f(x)$.于是对于任意$x\in S$,总有$$(f+g)(x)=f(x)+g(x)=f(x)-f(x)=0=\mbf{0}(x)$$即$f+g=\mbf{0}$.
+    \end{enumerate}
+    同理,后面两条都是不难验证的,此处便略去证明过程.\\
+    从而$\F^S$是一个向量空间.
+\end{solution}\noindent
+不难发现,向量空间$\F^n$实际上是$\F^S$的一个特例,其中$S=\left\{1,2,\cdots,n\right\}$.
+对于每个$(x_1,x_2,\cdots,x_n)\in\F^n$,我们记函数$f(k)=x_k,k\in\left\{1,2,\cdots,n\right\}=S$,
+那么$f$自然满足$f\in\F^S$.
+\end{document}

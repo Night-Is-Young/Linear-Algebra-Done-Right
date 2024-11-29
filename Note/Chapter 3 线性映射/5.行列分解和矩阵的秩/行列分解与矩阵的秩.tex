@@ -1,0 +1,95 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+\usepackage{nicematrix}
+
+\allowdisplaybreaks
+\linespread{1.5}
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 行列分解和矩阵的秩\end{center}
+\tbf{1.行秩和列秩}\\
+我们从定义域每个矩阵都相关的两个非负整数开始.
+\begin{definition}[1.1 定义:行秩,列秩]
+    假定$A$是$m\times n$矩阵,其各元素属于$\F$.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $A$的\tbf{列秩}是$A$的各列在$\F^{m,1}$中的张成空间的维数.
+        \item $A$的\tbf{行秩}是$A$的各行在$\F^{1,n}$中的张成空间的维数.
+    \end{enumerate}
+\end{definition}\noindent
+如果$A$是$m\times n$矩阵,那么$A$的列秩不超过$n$(因为$A$有$n$列)也不超过$m$(因为$\dim\F^{m,1}=m$).同样地,$A$的行秩也不超过$\min\left\{m,n\right\}$.
+我们以下面这个简单的矩阵为例.
+$$A=\begin{pmatrix}
+    4 & 7 & 1 & 8 \\
+    3 & 5 & 2 & 9
+\end{pmatrix}$$
+于是$A$的列秩是$\F^{2,1}$中的
+$$\text{span}\left(
+\begin{pmatrix}4\\3\end{pmatrix},
+\begin{pmatrix}7\\5\end{pmatrix},
+\begin{pmatrix}1\\2\end{pmatrix},
+\begin{pmatrix}8\\9\end{pmatrix}
+\right)$$
+的维数.组中的各向量不成标量倍数关系,又$\dim\F^{2,1}=2$,于是上述张成空间的维数为$2$,因而$A$的列秩为$2$.\\
+同样的,$A$的行秩是$\F^{1,4}$中的
+$$\text{span}\left(
+\begin{pmatrix}4&7&1&8\end{pmatrix},
+\begin{pmatrix}3&5&2&9\end{pmatrix}
+\right)$$
+的维数.同样可以看出这个张成空间的维数是$2$,即$A$的行秩为$2$.\\
+\tbf{2.转置}\\
+我们现在来定义矩阵的转置.
+\begin{definition}[2.1 定义:转置]
+    矩阵$A$的转置记为$A^\text{t}$,是互换$A$的行和列所得的矩阵.
+    具体来说,如果$A$是$m\times n$矩阵,那么$A^\text{t}$是$n\times m$矩阵,
+    其中各元素由$$\left(A^\text{t}\right)_{k,j}=A_{j,k}$$给出.
+\end{definition}\noindent
+矩阵的转置具有很好的代数性质.
+\begin{formal}[2.2 转置矩阵的代数性质]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$m\times n$矩阵$A,B$,都有$(A+B)^{\text{t}}=A^\text{t}+B^\text{t}$.
+        \item 对于任意$m\times n$矩阵$A$和任意$\lambda\in\F$,都有$(\lambda A)^\text{t}=\lambda A^\text{t}$.
+        \item 对于任意$m\times n$矩阵$A$和$n\times p$矩阵$C$,都有$(AC)^\text{t}=C^\text{t}A^\text{t}$.
+    \end{enumerate}
+\end{formal}\noindent
+我们将在后面证明之.\\
+\tbf{3.行列分解与矩阵的秩}\\
+接下来的结果将是用于证明行秩等于列秩的主要工具.
+\begin{formal}[3.1 行列分解]
+    假设$A$是$m\times n$矩阵,其中各元素均在$\F$中且列秩$c\geqslant 1$.\\
+    那么存在各元素属于$\F$的$m\times c$矩阵$C$和$c\times n$矩阵$R$使得$A=CR$成立.
+\end{formal}
+\begin{solution}[Proof.]
+    $A$的各列都是$m\times 1$矩阵.于是由$A$的各列构成的组$A_{\cdot,1},\cdots,A_{\cdot,n}$可以被削减为$A$的各列的张成空间的一个基.
+    由列秩的定义,这个基的长度为$c$.将该基中的$c$个列向量合在一起就形成了$m\times c$矩阵$C$.\\
+    如果$k\in\left\{1,\cdots,n\right\}$,那么$A$的第$k$列是$C$的各列的线性组合,于是令该线性组合中的系数组成一个$c\times n$矩阵的第$k$列,
+    并记该矩阵为$R$.那么根据矩阵乘法可以视为列的线性组合的性质,我们知道$A=CR$.
+\end{solution}\noindent
+我们在之前给出的例子中,行秩恰好等于列秩.接下来的结论表明这一点对每个矩阵都成立.
+\begin{formal}[3.2 列秩等于行秩]
+    假设$A\in\F^{m,n}$,那么$A$的行秩与列秩相等.
+\end{formal}
+\begin{solution}[Proof.]
+    令$c$表示$A$的列秩.令$A=CR$是矩阵的行列分解,于是$A$的每一行都是$R$的各行的线性组合.
+    因为$R$有$c$行,于是$A$的行秩不大于$c$.\\
+    将上述论述应用于$A^{\text{t}}$,可以得出
+    \begin{center}$A$的列秩=$A^{\text{t}}$的行秩$\leqslant$$A^{\text{t}}$的列秩=$A$的行秩\end{center}
+    于是$A$的行秩等于列秩.
+\end{solution}\noindent
+于是我们知道列秩等于行秩,因而我们无需使用行秩或列秩这两个属于,用更简单的\tbf{秩}描述代替它们.
+\begin{definition}[3.3 定义:秩]
+    矩阵$A\in\F^{m,n}$的\tbf{秩}是$A$的列秩(或行秩).
+\end{definition}\ \\
+下面,我们来看一些例题.
+\begin{problem}[Example 1.]
+    设矩阵$A\in\F^{m,n}$是列满秩的.试证明:$AA^{\text{t}}$是列满秩的. 
+\end{problem}
+\end{document}

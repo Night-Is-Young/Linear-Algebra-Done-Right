@@ -1,0 +1,41 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{problem}[1.]
+    证明:$\R^2$的子空间恰有$\left\{\mbf{0}\right\}$,$\R^2$中所有过原点的直线,以及$\R^2$本身.
+\end{problem}
+\begin{proof}[Proof.]
+    设$U$为$\R^2$的子空间,那么$\dim U=0,1,2$.\\
+    若$\dim U=0$,那么显然有$U=\left\{\mbf{0}\right\}$.\\
+    若$\dim U=2$,又$\dim \R^2=2$,于是$U=\R^2$.\\
+    若$\dim U=1$,那么对于任意非零的$x\in U$都有$U=\left\{kx:k\in\R\right\}$,即过原点的直线.\\
+    综上,命题得证.
+\end{proof}
+\begin{problem}[2.]
+    证明:$\R^3$的子空间恰有$\left\{\mbf{0}\right\}$,$\R^3$中所有过原点的直线,$\R^3$中所有过原点的平面,以及$\R^3$本身.
+\end{problem}
+\begin{proof}[Proof.]
+    设$U$为$\R^2$的子空间,那么$\dim U=0,1,2,3$.\\
+    若$\dim U=0,1,3$,则情况与\tbf{1.}类似,不再赘述.\\
+    若$\dim U=2$,那么存在两个线性无关的$x,y\in U$使得$U=\left\{k_1x+k_2y:k_1,k_2\in\R\right\}$,即$\R^3$中过原点的平面.\\
+    综上,命题得证.
+\end{proof}
+\begin{problem}[3.]
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 令$U=\left\{p\in\mathcal{P}_4(\F):p(6)=0\right\}$,求$U$的一个基.
+        \item 将\tbf{(a)}中的基扩充为$\mathcal{P}_4(\F)$的一个基.
+        \item 求$\mathcal{P}_4(\F)$的一个子空间$W$使得$\mathcal{P}_4(\F)=U\oplus W$.
+    \end{enumerate}
+\end{problem}
+\end{document}

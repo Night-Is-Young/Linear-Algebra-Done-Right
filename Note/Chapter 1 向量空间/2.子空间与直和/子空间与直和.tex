@@ -1,0 +1,201 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 子空间与直和\end{center}
+\tbf{1.子空间}\\
+通过定义向量空间的子空间,我们可以大大扩充向量空间的例子.
+\begin{definition}[1.1 定义:子空间]
+    如果$V$的子集$U$是与$V$具有相同的加法恒等元,加法和标量乘法运算的向量空间,那么称$U$为$V$的\tbf{子空间}.
+\end{definition}\noindent
+下面给出了判断$V$的子集是否为子空间的方法.
+\begin{formal}[1.2 判断子空间的方法]
+    当且仅当$V$的子集$U$满足下面三个条件时,$U$是$V$的子空间.
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \item 加法恒等元$\mbf{0}\in U$.
+        \item \tbf{\songti 对加法封闭}:对于任意$u,v\in U$,都有$u+v\in U$.
+        \item \tbf{\songti 对标量乘法封闭}:对于任意$a\in\F,u\in U$,都有$au\in U$.
+    \end{enumerate}
+\end{formal}
+\begin{solution}[1.2 Proof.]
+    如果$U$是$V$的子空间,那么根据向量空间的定义,$U$必能满足上述条件.\\
+    如果$U$满足上述三个条件,那么\tbf{(1)}保证了$U$有加法恒等元,\tbf{(2)}和\tbf{(3)}保证了$U$上的加法和标量乘法有意义.\\
+    对于任意的$u\in U$,在\tbf{(3)}中取$a=-1$可知$-u\in U$,于是$U$满足具有加法逆元的条件.\\
+    向量空间定义的其余部分,如可交换性和可结合性,既然对于$V$满足,那么对它的子集$U$也一定满足.\\
+    进而$U$为向量空间,于是$U$为$V$的子空间.
+\end{solution}\noindent
+下面给出了一些子空间的例子.
+\begin{problem}[1.3.1 例:子空间]
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item 如果$b\in\F$,那么当且仅当$b=0$时,$\left\{(x_1,x_2,x_3,x_4)\in\F^4:x_3=5x_4+b\right\}$是$\F^4$的子空间.
+        \item 定义在$[0,1]$上的全体连续实值函数构成的集合是$\R^{[0,1]}$的子空间.
+        \item 定义在$\R$上的全体可微实值函数构成的集合是$\R^{\R}$的子空间.
+        \item 当且仅当$b=0$时,定义在开区间$(0,3)$上且满足$f'(2)=b$的全体可微实值函数$f$构成的集合是$\R^{(0,3)}$的子空间.
+        \item 所有满足$\displaystyle\lim_{n\to\infty}a_n=0$的实序列$\left\{a_n\right\}_{n=1}^{\infty}$构成的集合是$\R^{\infty}$的子空间.
+    \end{enumerate}
+\end{problem}\noindent
+需要注意的是,向量空间最小的子空间不是空集$\varnothing$而是$\left\{\mbf{0}\right\}$.
+这是因为向量空间必须包含加法恒等元$\mbf{0}$.对应的,$V$的最大的子空间显然是它本身.
+\begin{problem}[1.3.2 $\R^2$和$\R^3$的子空间]
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item $\R^2$的子空间有且仅有$\left\{\mbf{0}\right\}$,$\R^2$中所有过原点的直线,以及$\R^2$本身.
+        \item $\R^3$的子空间有且仅有$\left\{\mbf{0}\right\}$,$\R^3$中所有过原点的直线,$\R^3$中所有过原点的平面,以及$\R^3$本身.
+    \end{enumerate}
+\end{problem}\noindent
+证明上述命题是较为困难的.我们将它留待学习更多知识后来证明.\\
+讨论向量空间时,我们通常只对向量空间的子空间而非任意子集感兴趣.这时,子空间的和的概念将会很有用.
+\begin{definition}[1.4 定义:子空间的和]
+    假定$V_1,V_2,\cdots,V_m$是$V$的子空间,则$V_1,V_2,\cdots,V_m$的\tbf{和}是由$V_1,V_2,\cdots,V_m$中元素的所有可能的和构成的集合,记作$V_1+V_2+\cdots+V_m$,即
+    $$V_1+V_2+\cdots+V_m=\left\{v_1+v_2+\cdots+v_m:v_i\in V_i,i=1,2,\cdots,m\right\}$$
+\end{definition}\noindent
+我们可以来看一些子空间的和的例子.
+\begin{problem}[1.4.1 例:子空间的和]
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item 假定$$U=\left\{(x,0,0)\in\F^3:x\in\F\right\},W=\left\{(0,y,0)\in\F^3:y\in\F\right\}$$
+            那么$$U+W=\left\{(x,y,0)\in\F^3:x,y\in\F\right\}$$
+        \item 假定$$U=\left\{(x,x,y,y)\in\F^4:x,y\in\F\right\},W=\left\{(x,x,x,y)\in\F^4:x,y\in\F\right\}$$
+            那么$$U+W=\left\{(x,x,y,z)\in\F^4:x,y,z\in\F\right\}$$
+    \end{enumerate}
+\end{problem}\noindent
+我们来证明上述例子中的\tbf{(b)}.
+\begin{problem}[1.4.1(b) Proof.]
+    考虑$U$中的一个元素$(a,a,b,b)$和$W$中的一个元素$(c,c,c,d)$,于是
+    $$(a,a,b,b)+(c,c,c,d)=(a+c,a+c,b+c,b+d)$$
+    这表明$U+W$中的每个元素的前两个坐标相等,于是
+    $$U+V\subseteq\left\{(x,x,y,z)\in\F^4,x,y,z\in\F\right\}$$
+    而考虑$\left\{(x,x,y,z)\in\F^4,x,y,z\in\F\right\}$中的元素$(x,x,y,z)$,有
+    $$(x,x,y,z)=(x,x,y,y)+(0,0,0,z-y)$$
+    又$(x,x,y,y)\in U,(0,0,0,z-y)\in W$,于是$(x,x,y,z)\in U+W$,从而
+    $$\left\{(x,x,y,z)\in\F^4,x,y,z\in\F\right\}\subseteq U+W$$
+    从而$U+W=\left\{(x,x,y,z)\in\F^4,x,y,z\in\F\right\}$,证毕.
+\end{problem}\noindent
+接下来的结果表明,子空间的和还是子空间.并且,子空间的和是包含这些子空间的最小子空间;
+如果一个子空间包含某些子空间,那么它一定包含这些子空间的和.
+\begin{formal}[1.5]
+    假定$V_1,\cdots,V_m$是$V$的子空间,那么$V_1+\cdots+V_m$是最小的包含$V_1,\cdots,V_m$的子空间.
+\end{formal}
+\begin{solution}[1.5 Proof.]
+    验证$V_1+\cdots+V_m$是$V$的子空间并不困难.\\
+    对于任意$v\in V_i,1\leqslant i\leqslant m$,在剩余的子空间中取$\mbf{0}$,则有
+    $$\mbf{0}+\cdots+v+\cdots+\mbf{0}=v+(m-1)\mbf{0}=v\in V_1+\cdots+V_m$$
+    从而$\forall i\in[1,m]\cap\N,V_i\in V_1+\cdots+V_m$.\\
+    考虑所有包含$V_1,\cdots,V_m$的子空间,它必然包含$V_1+\cdots+V_m$.\\
+    从而$V_1+\cdots+V_m$是最小的包含$V_1,\cdots,V_m$的子空间.证毕.
+\end{solution}\noindent
+设$V_1,\cdots,V_m$是$V$的子空间,于是$V_1+\cdots+V_m$中的每个元素都可以写成
+$$v_1+\cdots+v_m$$其中每个$v_i\in V_i$.
+那么是否有一些时候,$V_1+\cdots+V_m$中的每个向量都能唯一地用上述形式表出?
+这种情况十分重要,所以它有专属的名字:直和.\\
+\tbf{2.直和}\\
+\begin{definition}[2.1 定义:直和]
+    设$V_1,\cdots,V_m$是$V$的子空间.
+    如果$V_1+\cdots+V_m$中的每个元素都能用$\sum_{i=1}^{m}v_i,v_i\in V_i$的形式进行唯一表出,
+    那么我们称$V_1+\cdots+V_m$为\tbf{直和},记作$V_1\oplus\cdots\oplus V_m$.
+\end{definition}\noindent
+下面给出了一些直和的例子.
+\begin{problem}[2.1.1 例:直和]
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item 假定$$U=\left\{(x,y,0)\in\F^3:x,y\in\F\right\},W=\left\{(0,0,z)\in\F^3:z\in\F\right\}$$
+            那么$U\oplus W=\F^3$.
+        \item 假定$$\forall i\in[1,n]\cap\N,V_i=\left\{(x_1,\cdots,x_n):x_i\in\F,\text{其余}x_j=0\right\}$$
+            那么$V_1\oplus\cdots\oplus V_n=\F^n$.
+    \end{enumerate}
+\end{problem}\noindent
+这两者的证明均不困难.下面我们给出判判断子空间的和是否是直和的条件.
+\begin{formal}[2.2.1 直和的条件]
+    假设$V_1,\cdots,V_m$是$V$的子空间,那么$V_1+\cdots+V_m$是直和当且仅当
+    用$v_1+\cdots+v_m$(其中$v_i\in V_i$)的方式表示$\mbf{0}$的唯一方式是将所有$v_i$取$\mbf{0}$.
+\end{formal}
+\begin{solution}[2.2.1 Proof.]
+    首先假定$V_1+\cdots+V_m$是直和,那么直和的定义就表明$v_1+\cdots+v_m=\mbf{0}$是唯一的.\\
+    又$\forall V_i,\mbf{0}\in V_i$,于是表出$\mbf{0}$仅当$v_1=\cdots=v_m=\mbf{0}$.\\
+    现在假定用$v_1+\cdots+v_m$(其中$v_i\in V_i$)的方式表示$\mbf{0}$的唯一方式是将所有$v_i$取$\mbf{0}$.
+    取$v\in V_1+\cdots+V_m$,不妨假定$v$可以由如下两种方式表出:
+    $$v=v_1+\cdots+v_i,v_i\in V_i$$
+    $$v=u_1+\cdots+u_1,u_i\in V_i$$
+    两式相减可得$\mbf{0}=(v_1-u_1)+\cdots+(v_m-u_m)$.又$v_i-u_i\in V_i$,
+    故该等式表明$v_i-u_i=\mbf{0}$,进而$v_1=u_1,\cdots,v_m=u_m$,所以表出方式是唯一的,从而$V_1+\cdots+V_m$为直和.
+\end{solution}\noindent
+从这个定理可以很容易推出两个子空间的和为直和的条件.
+\begin{formal}[2.2.2 两个子空间的直和]
+    假定$U$和$W$是$V$的子空间,那么$U+W$是直和当且仅当$U\cap W=\left\{\mbf{0}\right\}$.
+\end{formal}
+\begin{solution}[2.2.2 Proof.]
+    首先假定$U+V$是直和.如果$v\in U\cap W$,那么一定有$-v\in U\cap W$.而$\mbf{0}=v+(-v)=(-v)+v$.
+    由于$\mbf{0}$被唯一表出,故仅当$v=\mbf{0}$才可行,于是$\left\{\mbf{0}\right\}=U\cap W$.\\
+    另一方面,假设$U\cap W=\left\{\mbf{0}\right\}$,那么$\forall u\in U\backslash\left\{\mbf{0}\right\}$都有$-u\in U$,从而$-u\notin W$.
+    于是表出$\mbf{0}$的唯一方法是取$u=\mbf{0}\in U,w=\mbf{0}\in W$,从而根据\tbf{2.7.1}可以得知$U+W$为直和.
+\end{solution}\noindent
+需要注意的是,上面的定理并不能推广到两个子空间以上的情形.在这些情况下,只检验两两子空间仅交于$\mbf{0}$是不够的.
+\ \\
+下面我们来看一些例题和拓展的定理.
+\begin{problem}[Example 1.]
+    假定$U$是$\R^2$的非空子集,为以下的命题举出反例.
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item 若$U$满足对加法封闭和对取加法逆元封闭(即$\forall u\in U$有$-u\in U$),则$U$是$\R^2$的子空间.
+        \item 若$U$满足对标量乘法封闭,则$U$是$\R^2$的子空间.
+    \end{enumerate}
+\end{problem}
+\begin{solution}[Solution.]
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item 取$U=\left\{(x,y)\to\R^2:x,y\in\mathbb{Z}\right\}$,不难验证其符合题设.\\
+            然而,对于任意$u=(x_0,y_0)\in U\backslash\left\{(0,0)\right\}$和任意$a\in\R\backslash\mathbb{Q}$,都有$au=(ax_0,ay_0)\notin U$,
+            于是其对标量乘法不封闭,故$U$不一定是$\R^2$的子空间.
+        \item 取$U=\left\{(x,y)\to\R^2:xy=0\right\}$,不难验证其符合题设.\\
+            然而,取$u=(0,1),v=(1,0)\in U$,有$u+v=(0,1)+(1,0)=(1,1)\notin U$,、
+            进而$U$对加法不封闭,故$U$不一定是$\R^2$的子空间.
+    \end{enumerate}
+\end{solution}\noindent
+上述命题的否定告诉我们,$V$的子集$U$必须同时满足对加法和标量乘法封闭才可以得出$U$是$V$的子空间这一结论.
+\begin{problem}[Example 2.1]
+    若$V_1,V_2$是$V$的两个子空间,试证明:$V_1\cup V_2$是$V$的子空间,当且仅当$V_1\subseteq V_2$或$V_2\subseteq V_1$.
+\end{problem}
+\begin{solution}[Proof.]
+    若$V_1,V_2,V_1\cup V_2$均为$V$的子空间.\\
+    假定$\exists u\in V_1\backslash V_2,\exists v\in V_2\backslash V_1$,那么
+    $u+v\notin V_1$.若不然,根据$u+v\in V_1$可知$v\in V_1$,与上述假设不符.
+    同理也可以知道$u+v\notin V_2$,于是$u+v\notin V_1\cup V_2$.\\
+    这与$V_1\cup V_2$是$V$的子空间不符,因为由$u,v\in V_1\cup V_2$必然能推出$u+v\in V_1\cup V_2$.\\
+    于是我们知道我们的假设不符,即$V_1\backslash V_2$和$V_2\backslash V_1$中至少有一个为空集,从而$V_1\subseteq V_2$或$V_2\subseteq V_1$.\\
+    若$V_1\subseteq V_2$或$V_2\subseteq V_1$,那么显然有$V_1\cup V_2=V_1$或$V_1\cup V_2=V_2$.
+    既然$V_1,V_2$均为$V$的子空间,自然有$V_1\cup V_2$为$V$的子空间.\\
+    综上可得原命题成立.
+\end{solution}
+\begin{problem}[Example 2.2]
+    若$V_1,V_2,V_3$是$V$的子空间,试证明$V_1\cup V_2\cup V_3$为$V$的子空间,当且仅当其中一个子空间包含另外两个子空间.\\
+    \tbf{注意}:事实上该命题成立要求域$\F$的特征大于$2$.
+\end{problem}
+\begin{solution}[Proof.]
+    充分性是显然的.现在我们来证明其必要性.\\
+    即:若$V_1\cup V_2\cup V_3$为$V$的子空间,则其中一个子空间包含另外两个子空间.\\
+    假设命题不成立,那么必然三个空间互相不包含.
+    否则如果有$V_1\subseteq V_2\cup V_3$,则有
+    $$V_1\cup V_2\cup V_3=V_2\cup V_3$$
+    于是$V_2\cup V_3$为$V$的子空间.运用\tbf{Example 2.1}的结论可知$V_2\subseteq V_3$或$V_3\subseteq V_2$,这与反证法的假设不成立.\\
+    不失一般性地,假定$V_1\cap V_2\cap V_3=\left\{\mbf{0}\right\}$,令$u\in V_1\backslash(V_2\cup V_3),v\in V_2\backslash(V_1\cup V_3)$.\\
+    考虑$u+v$,根据定义,应当有$u+v\in V_1\cup V_2 \cup V_3$,于是只能有$u+v\in V_3\backslash(V_1\cup V_2)$.\\
+    考虑$u+(u+v)$,同理可知只能有$u+(u+v)\in V_1\backslash(V_2\cup V_3)$.\\
+    于是我们有$u+(u+v)+(-u)=2v\in V_1\backslash(V_2\cup V_3)$,即$v\in V_1\backslash(V_2\cup V_3)$.这与$v$的定义不符.\\
+    从而我们的假设不成立,因此原命题成立.\\
+    \tbf{注}:如果$\F$的特征为$2$,那么我们并不能从$2v\in V_1\backslash(V_2\cup V_3)$得出$v_2\in V_1\backslash(V_2\cup V_3)$,因为$2v$有可能等于$\mbf{0}$.
+\end{solution}
+\begin{problem}[Example 2.3]
+    若$V$是特征大于$n$的域$\F$上的向量空间,$U_1,\cdots,U_n$是$V$的子空间.\\
+    若$\displaystyle\bigoplus_{i=1}^{n}U_i=\bigcup_{i=1}^{n}U_i$,
+    则$\displaystyle\exists k\in[1,n]\st U_k=\bigcup_{i=1}^{n}U_i$.
+\end{problem}
+\begin{solution}
+    证明过程略.(我不会告诉你是因为我不会证所以不写的)
+\end{solution}
+\end{document}

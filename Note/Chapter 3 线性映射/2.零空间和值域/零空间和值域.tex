@@ -1,0 +1,147 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\linespread{1.5}
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 零空间和值域\end{center}
+\tbf{1.零空间和单射性}
+\begin{definition}[1.1 定义:零空间]
+    对于$T\in\mathcal{L}(V,W)$,$T$的零空间$\text{null }T$是$V$中所有被$T$映射到$\mbf{0}$的向量构成的集合,即
+    $$\text{null }T=\left\{v\in V:Tv=\mbf{0}\right\}$$
+\end{definition}\noindent
+接下来的结果说明,每个线性映射的子空间,都是其定义空间的子空间.特别的,任意线性映射的子空间均包含$\mbf{0}$.
+\begin{formal}[1.2 零空间是子空间]
+    假设$T\in\mathcal{L}(V,W)$,那么$\text{null }T$是$V$的子空间.
+\end{formal}
+\begin{solution}[Proof.]
+    因为$T$是线性映射,于是$T(\mbf{0})=\mbf{0}$,于是$\mbf{0}\in\text{null }T$.\\
+    对于任意$u,v\in\text{null }T$有$T(u+v)=Tu+Tv=\mbf{0}+\mbf{0}=\mbf{0}$,于是$u+v\in\text{null }T$,因而$\text{null }T$对加法封闭.\\
+    对于任意$v\in\text{null }T$和任意$\lambda\in\F$有$T(\lambda v)=\lambda Tv=\lambda\mbf{0}=\mbf{0}$,于是$\lambda v\in\text{null }T$,因而$\text{null }T$对标量乘法封闭.\\
+    于是我们可以得知$\text{null }T$为$V$的子空间.
+\end{solution}\noindent
+我们很快就会看到下面这条定义和零空间的紧密关系.
+\begin{definition}[1.3 定义:单射]
+    对于$T:V\to W$,若$Tu=Tv$当且仅当$u=v$,那么称$T$为单射.
+\end{definition}\noindent
+这里的单射指的就是一个函数值唯一对应一个自变量.我们也可以说单射$T$是\tbf{一对一的}.\\
+我们现在有如下定理表明单射和零空间之间的关系.
+\begin{formal}[1.4 单射与零空间]
+    对于$T\in\mathcal{L}(V,W)$,$T$是单射当且仅当$\text{null }T=\left\{\mbf{0}\right\}$.
+\end{formal}
+\begin{solution}[Proof.]
+    首先假设$T$是单射.由线性映射的定义可知$T(\mbf{0})=\mbf{0}$,于是$Tv=\mbf{0}$当且仅当$v=\mbf{0}$,于是$\text{null }T={\mbf{0}}$.\\
+    假设$\text{null }T=\left\{\mbf{0}\right\}$.对于$u,v\in V$且$Tu=Tv$,我们有
+    $$T(u-v)=Tu-Tv=\mbf{0}$$
+    于是$u-v=\mbf{0}$,即$u=v$.于是对于任意$u,v$,当且仅当$u=v$时$Tu=Tv$,从而$T$为单射.
+\end{solution}\noindent
+\tbf{2.值域和满射性}\\
+类比于一般的函数,线性映射也有值域的概念.
+\begin{definition}[2.1 定义:值域]
+    对于$T\in\mathcal{L}(V,W)$,T的\tbf{值域}$\range T$是$Tv$所有可能取值的集合,即
+    $$\range T=\left\{Tv:v\in V\right\}$$
+\end{definition}\noindent
+接下来的结果表明,每个线性映射的值域都是映射到的向量空间的子空间.
+\begin{formal}[2.2 值域是子空间]
+    对于$T\in\mathcal{L}(V,W)$,$\range T$是$W$的子空间.
+\end{formal}
+\begin{solution}
+    因为$T$是线性映射,于是$T(\mbf{0})=\mbf{0}$,于是$\mbf{0}\in\text{null }T$.\\
+    对于任意$w_1,w_2\in\range T$,都存在$v_1,v_2\in V$使得$Tv_1=w_1,Tv_2=w_2$,于是
+    $$w_1+w_2=Tv_1+Tv_2=T(v_1+v_2)\in\range T$$
+    从而$\range T$对加法封闭.\\
+    对于任意$w\in\range T$,都存在$v\in V$使得$Tv=w$.对于任意$\lambda\in\F$,总有
+    $$\lambda w=\lambda Tv=T(\lambda v)\in\range T$$
+    从而$\range T$对标量乘法封闭.\\
+    综上,$\range T$是$W$的子空间.
+\end{solution}\noindent
+有了单射的定义以及上面的定理,我们可以知道有一种特殊的单射:其值域恰好为映射到的子空间.
+\begin{definition}[2.3 定义:满射]
+    如果$T:V\to W$满足$\range T=W$,那么称$T$为满射.
+\end{definition}\noindent
+容易看出,是否为满射取决于映射的目标空间的选取.\\
+\tbf{3.线性映射基本定理}\\
+\begin{formal}[3.1 线性映射基本定理]
+    假定$V$是有限维的且$T\in\mathcal{L}(V,W)$,那么$\range{T}$是有限维的,且
+    $$\dim V=\dim\nul T+\dim\range T$$
+\end{formal}
+\begin{solution}[Proof.]
+    令$u_1,\cdots,u_m$是$\nul T$的一个基.
+    由于$\nul T$是$T$的子空间,于是$u_1,\cdots,u_m$在$V$中线性无关,因而可以被扩展为$V$的一个基
+    $$u_1,\cdots,u_m,v_1,\cdots,v_n$$
+    我们只需证明$\range T$是有限维的且$\dim\range T=n$.为此,我们证明$Tv_1,\cdots,Tv_n$为$\range T$的基.\\
+    对于任意$v\in V$,存在唯一的一组标量$a_1,\cdots,a_m,b_1,\cdots,b_n\in\F$使得
+    $$v=a_1u_1+\cdots+a_mu_m+b_1v_1+\cdots+b_nv_n$$
+    注意到$u_1,\cdots,u_m\in\nul T$,于是$a_kTu_k=\mbf{0},1\leqslant k\leqslant m$.于是
+    $$Tv=b_1Tv_1+\cdots+b_nTv_n$$
+    由于$v$的选取是任意的,于是我们知道$\range T=\span(Tv_1,\cdots,Tv_n)$,于是$\range T$是有限维的.\\
+    现在我们来证明$Tv_1,\cdots,Tv_n$线性无关.假定一组标量$c_1,\cdots,c_n\in\F$使得
+    $$c_1Tv_1+\cdots+c_nTv_n=\mbf{0}$$
+    于是$$T(c_1v_1+\cdots+c_nv_n)=\mbf{0}$$
+    于是$c_1v_1+\cdots+c_nv_n\in\nul T$.于是存在一组标量$d_1,\cdots,d_m$使得
+    $$c_1v_1+\cdots+c_nv_n=d_1u_1+\cdots+d_mu_m$$
+    注意到$u_1,\cdots,u_m,v_1,\cdots,v_n$线性无关,于是上式中各$c$和$d$均为$0$.\\
+    这样我们知道$Tv_1,\cdots,Tv_n$线性无关,因而为$\range T$的一组基.\\
+    于是$\dim V=m+n=\dim\nul T+\dim\range T$,命题得证.
+\end{solution}\noindent
+根据线性映射基本定理,我们可以知道维数和单射,满射的关系.
+\begin{formal}[3.2 映射到更低维空间上的线性映射不是单射]
+    假设$V$和$W$均为有限维向量空间且$\dim V>\dim W$,于是任意$T\in\mathcal{L}(V,W)$均不是单射.
+\end{formal}
+\begin{solution}[Proof.]
+    据线性映射基本定理有
+    $$\dim\nul T=\dim V-\dim\range T\geqslant\dim V-\dim W>0$$
+    这表明$\nul T$包含除了$\mbf{0}$之外的向量,于是$T$不是单射.
+\end{solution}
+\begin{formal}[3.3 映射到更高维空间上的线性映射不是满射]
+    假设$V$和$W$均为有限维向量空间且$\dim V<\dim W$,于是任意$T\in\mathcal{L}(V,W)$均不是满射.
+\end{formal}
+\begin{solution}[Proof.]
+    根据线性映射基本定理有
+    $$\dim\range T=\dim V-\dim\nul T\leqslant\dim V<\dim W$$
+    这表明$\dim\range T<\dim W$,这意味着$\range T\neq W$,于是$T$不是满射.
+\end{solution}\noindent
+应用这样的思想,我们可以给出关于线性方程组的推论.首先,我们将\tbf{齐次线性方程组}是否有非零解这一问题用线性映射的语言书写.\\
+固定正整数$m,n$,令$A_{j,k}\in\F(j\in\left\{1,\cdots,m\right\},k\in\left\{1,\cdots,n\right\})$.考虑齐次线性方程组
+$$\left\{\begin{array}{l}
+    \displaystyle\sum_{k=1}^{n}A_{1,k}x_k=0\\
+    \cdots\\
+    \displaystyle\sum_{k=1}^{n}A_{m,k}x_k=0\\
+\end{array}\right.$$
+这里的齐次指的是方程右端的常数项均为$0$.显然,$x_1=\cdots=x_n=0$是上述方程组的一个解.我们要考虑的是上述方程组的非零的解.\\
+观察这个式子,和我们证明$T:\F^n\to\F^m$具有一定形式所用到的方程组几乎一致.定义$T:\F^n\to\F^m$满足
+$$T(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n}A_{1,k}x_k,\cdots,\sum_{k=1}^{n}A_{m,k}x_k\right)$$
+于是上述方程等价于$T(x_1,\cdots,x_n)=\mbf{0}$,这个方程的解集显然是$\nul T$.
+当$T$不是单射时,意味着$\nul T>\left\{\mbf{0}\right\}$.接下来的定理给出了保证$T$不是单射的条件.
+\begin{formal}[3.4 齐次线性方程组具有非零解的条件]
+    未知数个数多于方程个数的齐次线性方程组具有非零解.
+\end{formal}\noindent
+在上面的方程中,未知数个数为$n$,方程个数为$m$.由\tbf{3.2}可知当$n>m$时$T$不是单射,于是命题成立.\\
+现在我们来考虑更一般的情况,即常数项不全为$0$的线性方程组.列出相似的方程组,有
+$$\left\{\begin{array}{l}
+    \displaystyle\sum_{k=1}^{n}A_{1,k}x_k=c_1\\
+    \cdots\\
+    \displaystyle\sum_{k=1}^{n}A_{m,k}x_k=c_m\\
+\end{array}\right.$$
+于是该方程组等价于$T(x_1,\cdots,x_n)=(c_1,\cdots,c_m)$.
+当常数项$c_1,\cdots,c_m$任意变化时,我们知道如果$T$是满射,那么将保证该方程组一定有解,否则可能出现无解的情况.\\
+\begin{formal}[3.4 齐次线性方程组具有非零解的条件]
+    方程数多于未知数个数的线性方程组并不一定有解.
+\end{formal}\noindent
+在上面的方程中,未知数个数为$n$,方程个数为$m$.由\tbf{3.2}可知当$n<m$时$T$不是满射,于是命题成立.\\
+\ \\
+现在,我们来看一些例题.
+\begin{problem}[Example 1.]
+    
+\end{problem}
+\end{document}
