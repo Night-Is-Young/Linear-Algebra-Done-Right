@@ -75,7 +75,7 @@
     \end{pmatrix}$$
 \end{problem}
 \begin{solution}[Solution.]
-    不妨选取$\mathcal{P}_2(\R)$的标准基$1,x,x^2$.根据矩阵的定义可知此时对应的$\mathcal{P}_{3}(\R)$的基为$x,\dfrac{1}{2}x^2,\dfrac{1}{3}x^3,1$
+    不妨选取$\mathcal{P}_2(\R)$的标准基$1,x,x^2$.根据矩阵的定义可知此时对应的$\mathcal{P}_{3}(\R)$的基为$x,\dfrac{1}{2}x^2,\dfrac{1}{3}x^3,1$.
 \end{solution}
 \begin{problem}[5.]
     设$V$和$W$是有限维的,$T\in\mathcal{L}(V,W)$.证明:存在$V$的一个基和$W$的一个基使得关于这些基的$\mathcal{M}(T)$%
@@ -106,6 +106,205 @@
 \begin{proof}
     我们首先任取$V$的一组$\li v,m$.\\
     若此时矩阵的第一行均为$0$或仅有第一列第一行为$1$,其余为$0$,那么命题得证.\\
-    否则,我们有
+    否则,我们对这组基做如下变换.
+    $$\begin{aligned}
+        v_1'=\dfrac{1}{A_{1,1}}v_1\\
+        v_2'=v_2-\dfrac{A_{1,2}}{A_{1,1}}v_1\\
+        \cdots
+        v_m'=v_m-\dfrac{A_{1,m}}{A_{1,1}}v_1
+    \end{aligned}$$
+    于是有
+    $$Tv_1'=1w_1+\sum_{j=2}^{n}A_{j,1}w_j$$
+    $$Tv_k'=0w_1+\sum_{j=2}^{n}A_{j,k}w_j$$
+    
+    如此,矩阵的第一行就满足了题设.现在我们证明变换后的$\li {v'},m$仍为$V$的基.
+    设一组标量$\li a,m$满足
+    $$\begin{aligned}
+        \mbf{0}
+        &= a_1v_1'+\cdots+a_mv_m'\\
+        &= \left(\dfrac{a_1}{A_{1,1}}-\sum_{j=2}^{m}\dfrac{a_jA_{1,j}}{A_{1,1}}\right)v_1+\sum_{j=2}^{m}a_mv_m
+    \end{aligned}$$
+    由于$\li v,m$是$V$的基,于是它们线性无关.于是上式成立当且仅当$\li a=m=0$.\\
+    于是$\li {v'},m$线性无关,又其长度为$\dim V$,于是它为$V$的基.命题得证.\\
+    \tbf{注:}这样的思想似乎与解线性方程组的消元方法是类似的.
+\end{proof}
+\begin{problem}[8.]
+    设$A$是$m\times n$矩阵,$B$是$n\times p$矩阵,证明
+    $$(AB)_{j,\cdot}=A_{j,\cdot}B$$
+    对$1\leqslant j\leqslant m$均成立.换言之,证明$AB$的第$j$行等于$A$的第$j$行乘$B$.
+\end{problem}
+\begin{proof}
+    矩阵乘法的定义表明,对于任意$1\leqslant j\leqslant m,1\leqslant k\leqslant n$有
+    $$(AB)_{j,k}=A_{j,\cdot}B_{\cdot,k}$$
+    如此,$A_{j,\cdot}B$的第$k$行的元素是上式的右端项,$(AB)_{j,\cdot}$的第$k$行的元素是上式的左端项.\\
+    于是命题得证.
+\end{proof}
+\begin{problem}[9.]
+    设$a=\begin{pmatrix}
+        a_1 & \cdots & a_n
+    \end{pmatrix}$是$1\times n$矩阵,$B$是$n\times p$矩阵,证明:
+    $$aB=a_1B_{1,\cdot}+\cdots+a_nB_{n,\cdot}$$
+    换言之,证明$aB$是$B$的各行的线性组合,各行所乘的标量来自$a$.
+\end{problem}
+\begin{proof}
+    根据矩阵乘法的定义,对于任意$1\leqslant k\leqslant p$有
+    $$(aB)_{1,k}=a_1B_{1,k}+\cdots+a_nB_{n,k}$$
+    而$a_1B_{1,\cdot}+\cdots+a_nB_{n,\cdot}$的第$k$列的元素也等于上面式子的值.\\
+    于是有$aB=a_1B_{1,\cdot}+\cdots+a_nB_{n,\cdot}$,命题得证.
+\end{proof}
+\begin{problem}[10.]
+    给出一例使得$AB\neq BA$的$2\times 2$矩阵$A$和$B$.
+\end{problem}
+\begin{solution}[Solution.]
+    不妨令
+    $A=\begin{pmatrix}1 & 1 \\ 0 & 0\end{pmatrix},
+    B=\begin{pmatrix}1 & 0 \\ 1 & 0\end{pmatrix}$.
+    于是$AB=\begin{pmatrix}2 & 0 \\ 0 & 0\end{pmatrix},
+    BA=\begin{pmatrix}1 & 1 \\ 1 & 1\end{pmatrix}$.
+\end{solution}
+\begin{problem}[11.]
+    证明分配性质对矩阵加法和矩阵乘法仍然成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 假设矩阵$A,B,C$的大小使$A(B+C)$有意义,试证明$A(B+C)=AB+AC$.
+        \item 假设矩阵$A,B,C$的大小使$(A+B)C$有意义,试证明$(A+B)C=AC+BC$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由题意不妨令$A$为$m\times n$矩阵,$B,C$均为$n\times p$矩阵.%
+            于是对于任意$1\leqslant j\leqslant m,1\leqslant k\leqslant p$都有
+            $$\begin{aligned}
+                \left(A(B+C)\right)_{j,k}
+                &= \sum_{i=1}^{n}A_{j,i}(B+C)_{i,k}\\
+                &= \sum_{i=1}^{n}A_{j,i}\left(B_{i,k}+C_{i,k}\right)\\
+                &= \sum_{i=1}^{n}A_{j,i}B_{i,k}+\sum_{i=1}^{n}A_{j,i}C_{i,k}\\
+                &= (AB)_{j,k}+(AC)_{j,k}\\
+                &= (AB+AC)_{j,k}
+            \end{aligned}$$
+            于是$A(B+C)$的第$j$行第$k$列的元素等于$(AB+AC)$的第$j$行第$k$列的元素.\\
+            于是$A(B+C)=AB+AC$,命题得证.
+        \item 证明与\tbf{(1)}类似,在此不再赘述.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[12.]
+    证明矩阵乘法是可结合的.换言之,假设矩阵$A,B,C$的大小使得$(AB)C$有意义,证明$(AB)C=A(BC)$.
+\end{problem}
+\begin{proof}
+    \tbf{Method I.}\\
+    设$A$是$m\times n$矩阵,$B$是$n\times p$矩阵,$C$是$p\times q$矩阵.
+    根据矩阵乘法的定义,$A(BC)$和$(AB)C$都是$m\times q$矩阵.\\
+    于是对于任意$1\leqslant j\leqslant m,1\leqslant k\leqslant q$有
+    $$\begin{aligned}
+        (A(BC))_{j,k}
+        &= \sum_{i=1}^{n}A_{j,i}(BC)_{i,k} \\
+        &= \sum_{i=1}^{n}\left(A_{j,i}\sum_{r=1}^{p}B_{i,r}C_{r,k}\right) \\
+        &= \sum_{i=1}^{n}\sum_{r=1}^{p}A_{j,i}B_{i,r}C_{r,k}
+    \end{aligned}$$
+    又$$\begin{aligned}
+        ((AB)C)_{j,k}
+        &= \sum_{r=1}^{p}(AB)_{j,r}C_{r,k} \\
+        &= \sum_{r=1}^{p}\left(\sum_{i=1}^{n}A_{j,i}B_{i,r}\right)C_{r,k} \\
+        &= \sum_{i=1}^{n}\sum_{r=1}^{p}A_{j,i}B_{i,r}C_{r,k}
+    \end{aligned}$$
+    于是$(AB)C$和$A(BC)$的对应位置的元素均相等.从而$(AB)C=A(BC)$,命题得证.\\
+    \tbf{Method II.}\\
+    设矩阵$A,B,C$分别对应线性映射$T\in\mathcal{L}(U,V),S\in\mathcal{L}(V,W),R\in\mathcal{L}(W,X)$,即$A=\mathcal{M}(T),B=\mathcal{M}(S),C=\mathcal{M}(R)$.
+    于是我们有
+    $$\begin{aligned}
+        A(BC)
+        &= \mathcal{M}(T)\mathcal{M}(SR) \\
+        &= \mathcal{M}(T)\mathcal{M}(S)\mathcal{M}(R) \\
+        &= \mathcal{M}(TS)\mathcal{M}(R) \\
+        &= (AB)C
+    \end{aligned}$$
+    于是命题得证.
+\end{proof}
+\begin{problem}[13.]
+    设$A$是$n\times n$矩阵.试证明$A^3$的第$j$行第$k$列的元素为
+    $$\sum_{p=1}^{n}\sum_{r=1}^{n}A_{j,p}A_{p,r}A_{r,k}$$
+\end{problem}
+\begin{proof}
+    根据矩阵乘法的定义有
+    $$\begin{aligned}
+        A^3_{j,k}
+        &= \sum_{p=1}^{n}A_{j,p}\left(A^2_{p,k}\right) \\
+        &= \sum_{p=1}^{n}A_{j,p}\left(\sum_{r=1}^{n}A_{p,r}A_{r,k}\right) \\
+        &= \sum_{p=1}^{n}\sum_{r=1}^{n}A_{j,p}A_{p,r}A_{r,k}
+    \end{aligned}$$
+    于是命题得证.
+\end{proof}
+\begin{problem}[14.]
+    设$m,n\in\N^*$.证明函数$A\mapsto A^\text{t}$是从$\F^{m,n}$到$\F^{n,m}$的线性映射.
+\end{problem}
+\begin{proof}
+    设$A,B\in\F^{m,n}$.对于任意$1\leqslant j\leqslant m,1\leqslant k\leqslant n$有
+    $$(A+B)^{\text{t}}_{k,j}=(A+B)_{j,k}=A_{j,k}+B_{j,k}=A^\text{t}_{k,j}+B^\text{t}_{k,j}$$
+    即$(A+B)^\text{t}=A^\text{t}+B^\text{t}$,从而该映射满足可加性.\\
+    设$A\in\F^{m,n},\lambda\in\F$.对于任意$1\leqslant j\leqslant m,1\leqslant k\leqslant n$有
+    $$(\lambda A)^\text{t}_{k,j}=(\lambda A)_{j,k}=\lambda(A_{j,k})=\lambda(A^\text{t}_{k,j})$$
+    从而$(\lambda A)^\text{t}=\lambda (A^\text{t})$,从而该映射满足齐次性.\\
+    于是该映射是线性映射,命题得证.
+\end{proof}
+\begin{problem}[15.]
+    试证明:如果$A$是$m\times n$矩阵,$C$是$n\times p$矩阵,那么$(AC)^\text{t}=C^\text{t}A^\text{t}$.
+\end{problem}
+\begin{proof}
+    根据矩阵乘法和转置矩阵的定义,对于任意$1\leqslant j\leqslant p,1\leqslant k\leqslant m$有
+    $$\begin{aligned}
+        (AC)^\text{t}_{j,k}
+        &= AC_{k,j} \\
+        &= \sum_{i=1}^{n}A_{k,i}C_{i,j} \\
+        &= \sum_{i=1}^{n}C^\text{t}_{j,i}A^\text{t}_{i,k} \\
+        &= (C^\text{t}A^\text{t})_{j,k}
+    \end{aligned}$$
+    于是命题得证.
+\end{proof}
+\begin{problem}[16.]
+    设$A$是$m\times n$矩阵$(A\neq\mbf{0})$,证明:$A$的秩为$1$,当且仅当存在
+    $\left(\li c,m\right)\in\F^m$和$\left(\li d,n\right)\in\F^n$使得$A_{j,k}=c_jd_k$对任意$1\leqslant j\leqslant m,1\leqslant k\leqslant n$成立.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:由题意可知$\dim\span(A_{\cdot,1},\cdots,A_{\cdot,n})=1$,于是各$A_{\cdot,k}$互相成标量倍关系.\\
+    不妨设$A_{\cdot,k}=a_kA_{\cdot,1}$,令$c_j=A_{j,1}(1\leqslant j\leqslant m),d_k=a_k(1\leqslant k\leqslant n)$.于是
+    $$A_{j,k}=a_kA_{j,1}=c_jd_k$$
+    这就证明了$\left(\li c,m\right)$和$\left(\li d,n\right)$的存在性.\\
+    $\Leftarrow$:对于任意第$k$列中的第$j$行的元素有
+    $$A_{j,k}=c_jd_k=c_jd_1\cdot\dfrac{d_k}{d_1}=\dfrac{d_k}{d_1}A_{j,1}$$
+    从而$A_{\cdot,k}=\dfrac{d_k}{d_1}A_{\cdot,1}$.这表明$A$的各列都是第一列的标量倍,从而$A$的秩为$1$.命题得证.
+\end{proof}
+\begin{problem}[17.]
+    设$T\in\mathcal{L}(V)$,$\li u,n$和$\li v,n$是$V$的两组基.证明下列五个命题等价.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T$是单射.
+        \item $\mathcal{M}(T)$的列在$\F^{n,1}$中线性无关.
+        \item $\mathcal{M}(T)$的列张成$\F^{n,1}$.
+        \item $\mathcal{M}(T)$的行张成$\F^{1,n}$.
+        \item $\mathcal{M}(T)$的行在$\F^{1,n}$中线性无关.
+    \end{enumerate}
+    这里的$\mathcal{M}(T)$即表示$\mathcal{M}(T,\left(\li u,n\right),\left(\li v,n\right))$.
+\end{problem}
+\begin{proof}
+    记$\mathcal{M}(T)=A$.\\
+    \tbf{(1)}$\Rightarrow$\tbf{(2)}:设$u\in V$和一组标量$\li a,n$满足$u=a_1u_1+\cdots+a_nu_n$.于是
+    $$Tu=a_1Tu_1+\cdots+a_nTu_n$$
+    由于$T$是单射,即$\nul T=\mbf{0}$,于是$Tu=\mbf{0}$当且仅当$u=\mbf{0}$,即各$a_k=0$.这表明各$Tu_k$线性无关.\\
+    若$A$的列线性相关,那么存在$A_{\cdot,k}\in\text{span}\left(A_{\cdot,1},\cdots,A_{\cdot,k-1}\right)$.于是存在一组标量$\li b,{k-1}$使得
+    $$\forall 1\leqslant j\leqslant n,A_{j,k}=b_1A_{j,1}+\cdots+b_{k-1}A_{j,k-1}$$
+    即$$\forall 1\leqslant j\leqslant n,A_{j,k}v_j=b_1A_{j,1}v_j+\cdots+b_{k-1}A_{j,k-1}v_j$$
+    将上式求和即可得$$Tu_k=b_1Tu_1+\cdots+b_{k-1}Tu_{k-1}$$
+    这与各$Tu_k$线性无关矛盾,进而$A$的各列线性无关.\\
+    \tbf{(2)}$\Rightarrow$\tbf{(1)}:只需证明$\nul T=\mbf{0}$即可.为此,我们设$u:=a_1u_1+\cdots+a_nu_n\in V$.\\
+    于是
+    $$\begin{aligned}
+        Tu
+        &= a_1Tu_1+\cdots+a_nTu_n \\
+        &= a_1\sum_{j=1}^{n}A_{j,1}v_j+\cdots+a_n\sum_{j=1}^{n}A_{j,n}v_j \\
+        &= \sum_{k=1}^{n}a_kA_{1,k}v_1+\cdots+\sum_{k=1}^{n}a_kA_{n,k}v_n 
+    \end{aligned}$$
+    由于$\li v,n$是$V$的一组基,于是$Tu=\mbf{0}$当且仅当各$\displaystyle\sum_{k=1}^{n}a_kA_{j,k}=0$.这等价于$\displaystyle\sum_{k=1}^{n}a_kA_{\cdot,k}=\mbf{0}$.\\
+    由于$A$的各列线性无关,于是$a_1A_{\cdot,1}+\cdots+a_nA_{\cdot,n}=\mbf{0}$当且仅当各$a_k=0$.\\
+    于是$Tu=\mbf{0}$当且仅当各$a_k=0$,即$u=\mbf{0}$.于是$T$是单射.\\
+    \tbf{(2)}$\Leftrightarrow$\tbf{(3)}:由于列构成的组的长度恰为$\dim\F^{n,1}=n$,于是这两者均等价于$A$的各列张成$\F^{1,m}$,于是两者等价.\\
+    \tbf{(1)},\tbf{(4)}和\tbf{(5)}之间的推导是类似的,在此不再赘述.
 \end{proof}
 \end{document}

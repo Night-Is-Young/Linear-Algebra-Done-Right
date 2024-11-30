@@ -1,0 +1,26 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{problem}[1.]
+    设$T\in\mathcal{L}(V,W)$可逆,证明$T^{-1}$可逆,且有$\left(T^{-1}\right)^{-1}=T$.
+\end{problem}
+\begin{proof}
+    假设$v_1,v_2\in V$且$Tv_1=w_1,Tv_2=w_2$.于是$T^{-1}w_1=v_1,T^{-1}w_2=v_2$.\\
+    从而$T^{-1}w_1=T^{-1}w_2$必有$v_1=v_2$,于是必有$w_1=Tv_1=Tv_2=w_2$,即$T^{-1}$是单射.\\
+    对于任意$v\in V$都有$T^{-1}(Tv)=v$,于是$\range T^{-1}=V$,进而$T^{-1}$是满射.\\
+    综上,$T^{-1}$可逆.下面证明$\left(T^{-1}\right)^{-1}=T$.注意到$T^{-1}T=I,TT^{-1}=I$.\\
+    于是根据定义可知$T$是$T^{-1}$的逆,进而$T=\left(T^{-1}\right)^{-1}$.\\
+    命题得证.
+\end{proof}
+\end{document}
