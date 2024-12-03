@@ -23,4 +23,389 @@
     于是根据定义可知$T$是$T^{-1}$的逆,进而$T=\left(T^{-1}\right)^{-1}$.\\
     命题得证.
 \end{proof}
+\begin{problem}[2.]
+    设$T\in\mathcal{L}(U,V)$和$S\in\mathcal{L}(V,W)$可逆,试证明:$ST\in\mathcal{L}(U,W)$可逆,且$(ST)^{-1}=T^{-1}S^{-1}$.
+\end{problem}
+\begin{proof}
+    我们有$$(T^{-1}S^{-1})(ST)=T^{-1}S^{-1}ST=T^{-1}T=I$$
+    又有$$(ST)(T^{-1}S^{-1})=STT^{-1}S^{-1}=SS^{-1}=I$$
+    于是$ST$是可逆的且$(ST)^{-1}=T^{-1}S^{-1}$.命题得证.
+\end{proof}
+\begin{problem}[3.]
+    设$V$是有限维的,$T\in\mathcal{L}(V)$.证明下列命题是等价的.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T$是可逆的.
+        \item 对于$V$的任意一组基$\li v,n$,$\li {Tv},n$是$V$的基.
+        \item 存在$V$的一组基$\li v,n$使得$\li {Tv},n$是$V$的基.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \tbf{(1)}$\Rightarrow$\tbf{(2)}:由于$T$可逆,于是$T$既是单射又是满射.令$v:=a_1v_1+\cdots+a_nv_n\in V$,于是有
+    $$Tv=a_1Tv_1+\cdots+a_nTv_n$$
+    由$T$是单射可知$\nul T=\mbf{0}$.$Tv=\mbf{0}$当且仅当$v=\mbf{0}$,即$\li a=n=0$.于是$\li {Tv},n$线性无关.又其长度为$\dim V$,于是$\li {Tv},n$是$V$的基.\\
+    \tbf{(2)}$\Rightarrow$\tbf{(3)}:这是显然成立的.\\
+    \tbf{(3)}$\Rightarrow$\tbf{(1)}:我们只需证明$T$是单射,即$\nul T=\mbf{0}$.令$v:=a_1v_1+\cdots+a_nv_n\in V$,于是
+    $$Tv=a_1Tv_1+\cdots+a_nTv_n$$
+    由于$\li {Tv},n$是$V$的一组基,于是$Tv=\mbf{0}$当且仅当$\li a=n=0$,即$v=\mbf{0}$.\\
+    于是$\nul T=\mbf{0}$,于是$T$是单射,进而$T$可逆.\\
+    如此,这三个命题便等价.
+\end{proof}
+\begin{problem}[4.]
+    设$V$是有限维的且$\dim V>1$.试证明:从$V$到自身的不可逆线性映射构成的集合不是$\mathcal{L}(V)$的子空间.
+\end{problem}
+\begin{proof}
+    假定$V$的一组基为$\li v,n$.构造线性映射$T_1,T_2\in\mathcal{L}(V)$如下
+    $$\left\{\begin{array}{l}
+        T_1v_1=\mbf{0} \\
+        T_1v_k=v_k,2\leqslant k\leqslant n
+    \end{array}\right.\text{与}
+    \left\{\begin{array}{l}
+        T_2v_n=\mbf{0} \\
+        T_2v_k=v_k,1\leqslant k<n
+    \end{array}\right.$$
+    于是$T_1,T_2$均是不可逆的.然而,对于任意$v:=a_1v_1+\cdots+a_nv_n$有
+    $$\begin{aligned}
+        (T_1+T_2)v
+        &= (T_1+T_2)(a_1v_1+\cdots+a_nv_n) \\
+        &= a_1v_1+2a_2v_2+\cdots+2a_{n-1}v_{n-1}+a_nv_n
+    \end{aligned}$$
+    可知$(T_1+T_2)v=\mbf{0}$当且仅当$\li a=n=0$,即$v=\mbf{0}$.\\
+    于是$T_1+T_2$是单射,进而它可逆,因而这个集合对加法不封闭,不是$\mathcal{L}(V)$的子空间.\\
+    命题得证.
+\end{proof}
+\begin{problem}[5.]
+    设$V$是有限维的,$U$是$V$的子空间,$S\in\mathcal{L}(U,V)$.试证明:存在可逆的$T\in\mathcal{L}(V)$使得$\forall u\in U,Tu=Su$,当且仅当$S$是单射.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对于$u\in U\subseteq V$,$Su=\mbf{0}$当且仅当$Tu=\mbf{0}$.\\
+    由于$T$是单射,于是$\nul T=\mbf{0}$,进而$\nul S=\mbf{0}$,于是$S$也是单射.\\
+    $\Leftarrow$:设$\li u,m$是$U$的一组基,将其扩展为$V$的一组基$\li u,m,\li v,n$.\\
+    因为$S$是单射,于是$\li {Su},m$线性无关.将其扩展为$V$的一组基$\li {Su},m,\li w,n$.\\
+    令$T$满足$\displaystyle\left\{\begin{array}{l}
+        Tu_k=Su_k,1\leqslant k\leqslant m\\
+        Tv_j=w_j,1\leqslant j\leqslant n
+    \end{array}\right.$.于是$T$是满射,进而$T$可逆.\\
+    命题得证.
+\end{proof}
+\begin{problem}[6.]
+    设$W$是有限维的,$S,T\in\mathcal{L}(V,W)$.试证明:$\nul S=\nul T$,当且仅当存在可逆的$E\in\mathcal{L}(W)$使得$S=ET$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:因为$W$是有限维的,不妨设$\range T$的一组基为$\li w,m$.\\
+    于是存在线性无关的$\li v,m$使得$\forall 1\leqslant k\leqslant m,Tv_m=w_m$.\\
+    现在证明$V=\nul T\oplus\text{span}(\li v,m)$.对于任意$v\in V$,都存在$\li a,m\in\F$使得
+    $$Tv=a_1w_1+\cdots+a_mw_m$$
+    于是$T(v-a_1v_1-\cdots-a_mv_m)=\mbf{0}$,即$(v-a_1v_1-\cdots-a_mv_m)\in\nul T$.\\
+    于是$v=(v-a_1v_1-\cdots-a_mv_m)+(a_1v_1+\cdots+a_mv_m)$.又因为$v$的任意性,因而$V=\nul T+\text{span}(\li v,m)$.\\
+    现在我们证明直和的条件成立,即$\nul T\cap\text{span}(\li v,m)=\left\{\mbf{0}\right\}$.\\
+    假定$v:=a_1v_1+\cdots+a_mv_m\in\nul T$,于是
+    $$Tv=a_1Tv_1+\cdots+a_mTv_m=a_1w_1+\cdots+a_mw_m=\mbf{0}$$
+    由于$\li w,m$是$W$的基,于是上式成立当且仅当$\li a=m=0$,即$v=\mbf{0}$,即$\nul T\cap\text{span}(\li v,m)=\left\{\mbf{0}\right\}$.%
+    从而$V=\nul T\oplus\text{span}(\li v,m)$.\\
+    由于$\li v,m$线性无关,于是$\li {Sv},m$也是线性无关的.\\
+    现在我们扩展$\li w,m,\li e,n$为$W$的一组基,扩展$\li{Sv},m$为$\li{Sv},m,\li f,n$为$W$的另一组基.定义$E\in\mathcal{L}(W)$满足
+    $$\left\{\begin{array}{l}
+        Ew_k=Sv_k,1\leqslant k\leqslant m\\
+        Ee_j=f_j,1\leqslant j\leqslant n
+    \end{array}\right.$$
+    我们已经证明了$V=\nul T\oplus\text{span}(\li v,m)$,又$\nul T=\nul S$,于是对于任意$v\in V$都可将其表示为$v=v_{null}+a_1v_1+\cdots+a_nv_n$.于是
+    $$\begin{aligned}
+        (ET)v
+        &= E(Tv) \\
+        &= E(Tv_{null}+a_1Tv_1+\cdots+a_mTv_m) \\
+        &= E(a_1w_1+\cdots+a_mw_m) \\
+        &= \mbf{0}+a_1Sv_1+\cdots+a_mSv_m \\
+        &= S(v_{null}+a_1v_1+\cdots+a_mv_m) \\
+        &= Sv
+    \end{aligned}$$
+    又$E$是满射,于是$E$可逆.\\
+    $\Leftarrow$:假定$\nul S\neq\nul T$.\\
+    若$\exists v\in V\st Sv\neq\mbf{0},Tv=\mbf{0}$,则有$(ET)v=E(Tv)=E(\mbf{0})\neq\mbf{0}$,这与$E$是线性映射矛盾.\\
+    若$\exists v\in V\st Sv=\mbf{0},Tv\neq\mbf{0}$,则有$(ET)v=E(Tv)=\mbf{0}$,这与$E$可逆矛盾(此时$E$不是单射).\\
+    于是$\nul S=\nul T$.
+\end{proof}
+\begin{problem}[7.]
+    设$V$是有限维的,$S,T\in\mathcal{L}(V,W)$.证明:$\range S=\range T$当且仅当存在可逆的$E\in\mathcal{L}(V)$使得$S=TE$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$\range T$(即$\range S$)的一组基为$\li w,m$.\\
+    于是根据线性映射引理,存在一组线性无关的$\li v,m\in V$使得$\forall 1\leqslant k\leqslant m,Tv_k=w_k$.\\
+    也存在一组线性无关的$\li u,m\in V$使得$\forall 1\leqslant k\leqslant m,Su_k=w_k$.\\
+    将$\li v,m$扩展为$V$的一组基$\li v,m,\li e,n$.\\
+    将$\li u,m$扩展为$V$的另一组基$\li u,m,\li f,n$.\\
+    令$E\in\mathcal{L}(V)$满足
+    $$\left\{\begin{array}{l}
+        Eu_k=v_k,1\leqslant k\leqslant m\\
+        Ef_j=e_j,1\leqslant j\leqslant n
+    \end{array}\right.$$
+    于是对于任意$v:=a_1u_1+\cdots+a_mu_m+b_1f_1+\cdots+b_nf_n\in V$有
+    $$\begin{aligned}
+        (TE)v
+        &= T(Ev) \\
+        &= T(a_1Eu_1+\cdots+a_mEu_m+b_1Ef_1+\cdots+b_nEf_n) \\
+        &= T(a_1v_1+\cdots+a_nv_n+b_1e_1+\cdots+b_ne_n) \\
+        &= a_1w_1+\cdots+a_nw_n \\
+        &= S(a_1u_1+\cdots+a_mu_m+b_1f_1+\cdots+b_nf_n) \\
+        &= Sv
+    \end{aligned}$$
+    于是$S=TE$.又$E$是满射,于是$E$可逆.\\
+    $\Leftarrow$:对于任意$v\in V$都有$Ev\in V$,又$Sv=T(Ev)$,这表明$\range S\subseteq\range T$.\\
+    又对于任意$Ev\in V$都有对应的$v\in V$,又$Sv=T(Ev)$,这表明$\range T\subseteq\range S$.\\
+    于是$\range T=\range S$.
+\end{proof}
+\begin{problem}[8.]
+    设$V$和$W$都是有限维的,且$S,T\in\mathcal{L}(V,W)$.证明:存在可逆的$E_1\in\mathcal{L}(V)$和$E_2\in\mathcal{L}(W)$使得$S=E_2TE_1$,当且仅当$\dim\nul S=\dim\nul T$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:因为$S=E_2TE_1$,又$E_2$可逆,于是$(E_2)^{-1}S=TE_1$.\\
+    根据\tbf{6.}可得$\nul S=\nul TE_1$.又$\dim\range TE_1=\dim\range T$,于是
+    $$\dim\nul S=\dim\nul TE_1=\dim V-\dim\range TE_1=\dim V-\dim\range T=\dim\nul T$$
+    这就证明了$\dim\nul S=\dim\nul T$.\\
+    $\Leftarrow$:设$\nul S$的一组基为$\li u,m$,$\nul T$的一组基为$\li v,m$.\\
+    将它们分别扩展为$V$的基$\li u,m$,$\li e,n$和$\li v,m$,$\li f,n$.\\
+    而$\li {Se},n$在$W$中线性无关(若否,则存在$e\in\text{span}(\li e,n)\neq\mbf{0}$使得$Se=\mbf{0}$,于是$e\in\nul S$,这与各$u$与各$e$线性无关相悖).%
+    于是将$\li {Se},n$扩展为$W$的一组基$\li{Se},n,\li x,p$.\\
+    同理将$\li {Tf},n$扩展为$W$的一组基$\li{Tf},n,\li y,p$.\\
+    构造$E_1,E_2$满足
+    $$\left\{\begin{array}{l}
+        E_1u_k=v_k,1\leqslant k\leqslant m\\
+        E_1e_j=f_j,1\leqslant j\leqslant n
+    \end{array}\right.\text{与}
+    \left\{\begin{array}{l}
+        E_2(Tf_j)=Se_j,1\leqslant j\leqslant n\\
+        E_1x_i=y_i,1\leqslant i\leqslant p
+    \end{array}\right.$$
+    于是对于任意$v:=a_1e_1+\cdots+a_ne_n+b_1u_1+\cdots+b_mu_m\in V$有
+    $$\begin{aligned}
+        (E_2TE_1)v
+        &= E_2T(E_1v) \\
+        &= E_2T(a_1f_1+\cdots+a_nf_n+b_1v_1+\cdots+b_nv_n) \\
+        &= E_2(a_1Tf_1+\cdots+a_nTf_n) \\
+        &= a_1Se_1+\cdots+a_nSe_n+\mbf{0} \\
+        &= S(a_1e_1+\cdots+a_ne_n+b_1u_1+\cdots+b_mu_m) \\
+        &= Sv
+    \end{aligned}$$
+    从而$S=E_2TE_1$.又因为$E_1,E_2$都是基到基的映射,于是它们都可逆.
+\end{proof}
+\begin{problem}[9.]
+    设$V$是有限维的,且$T\in\mathcal{L}(V,W)$是满射.试证明:存在$V$的子空间$U$使得$T\vert_{U}$是由$U$映成$W$的同构.
+\end{problem}
+\begin{proof}
+    取$W$的一组基$\li w,n$.由于$T$是满射,于是存在$\li v,n\in V$使得$\forall 1\leqslant k\leqslant n,Tv_k=w_k$.\\
+    下面证明$\li v,n$线性无关.设$v:=a_1v_1+\cdots+a_nv_n\in V$,于是
+    $$Tv=a_1Tv_1+\cdots+a_nTv_n=a_1w_1+\cdots+a_nw_n$$
+    由于$\li w,n$是$W$的基,于是$Tv=\mbf{0}$(即$v=\mbf{0}$)当且仅当$\li a=n=0$,于是$\li v,n$线性无关.\\
+    令$U=\text{span}(\li v,n)$.下面证明$T\vert_{U}:U\to W$是同构.\\
+    我们已经知道$\nul T\vert_U=\mbf{0}$,即$T\vert_U$是单射.又$\dim U=\dim W$,于是$T\vert_U$可逆,进而它是$U$到$W$的同构.\\
+    如此,命题得证.
+\end{proof}
+\begin{problem}[10.]
+    设$V$和$W$是有限维的,且$U$是$V$的子空间.令$\mathcal{E}=\left\{T\in\mathcal{L}(V,W):U\subseteq\nul T\right\}$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明$\mathcal{E}$是$\mathcal{L}(V,W)$的子空间.
+        \item 求$\dim\mathcal{E}$关于$\dim U,\dim V,\dim W$的表达式.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item \tbf{Proof.}\\
+            对于任意$T_1,T_2\in\mathcal{E}$和任意$u\in U$都有
+            $$(T_1+T_2)u=T_1u+T_2u=\mbf{0}+\mbf{0}=\mbf{0}$$
+            这表明$T_1+T_2\in\mathcal{E}$,于是$\mathcal{E}$对加法封闭.\\
+            对于任意$T=\in\mathcal{E}$,$\lambda\in\F$和任意$u\in U$都有
+            $$(\lambda T)u=\lambda(Tu)=\lambda\mbf{0}=\mbf{0}$$
+            这表明$\lambda T\in\mathcal{E}$,于是$\mathcal{E}$对标量乘法封闭.\\
+            于是$\mathcal{E}$是$\mathcal{L}(V,W)$的子空间,命题得证.
+        \item \tbf{Proof.}\\
+            设$U$的一组基$\li u,m$,将其扩展为$V$的一组基$\li u,m,\li v,n$.\\
+            不妨记$\dim W=p$,取$W$的一组基$\li w,p$.考虑$p\times (m+n)$矩阵$A=\mathcal{M}(T)$.\\
+            于是$T\in\mathcal{E}$表明各$Tu_k=\mbf{0}$,即$A$的前$m$列均为$0$,而后$n$列的元素不定.\\
+            注意到$\mathcal{M}$是$\mathcal{E}$到$\mathcal{M}(T)$的同构.如此,我们有
+            $$\dim\mathcal{E}=\dim\F^{p,n}=pn=(\dim V-\dim U)\cdot\dim W$$
+    \end{enumerate}
+\end{solution}
+\begin{problem}[11.]
+    设$V$是有限维的,$S,T\in\mathcal{L}(V)$.试证明:$ST$可逆,当且仅当$S$和$T$都可逆.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:不妨记$(ST)^{-1}=R$.对于任意$v\in V$都有$v=Iv=R(ST)v=RS(Tv)$.\\
+    令$Tv=\mbf{0}$.则$v=RS(\mbf{0})=\mbf{0}$,这表明$\nul T=\left\{\mbf{0}\right\}$,于是$T$是单射,即$T$是可逆的.\\
+    对于任意$v\in V$,又有$v=Iv=(STR)v=S(TRv)$.\\
+    这表明$\forall v\in V,\exists u:=TRv\in V\st Su=v$,即$\range S=V$,于是$S$是满射,即$S$是可逆的.\\
+    $\Leftarrow$:在\tbf{2.}中令各向量空间均为$V$即可得证.
+\end{proof}
+\begin{problem}[12.]
+    设$V$是有限维的,且$S,T,U\in\mathcal{L}(V)$,且$STU=I$.试证明:$T$可逆,且$T^{-1}=US$.
+\end{problem}
+\begin{proof}
+    对于任意$v\in V$都有$STUv=ST(Uv)=v$.\\
+    令$Uv=\mbf{0}$,于是$v=ST(\mbf{0})=\mbf{0}$,于是$\nul U=\left\{\mbf{0}\right\}$,进而$U$可逆($U$是单射).\\
+    又$STUv=S(TUv)=v$,于是$\range S=V$,即$S$也可逆($S$是满射).\\
+    由$STU=I$且$S,U$均可逆可知$TU=S^{-1},ST=U^{-1}$.于是
+    $$T(US)=(TU)S=S^{-1}S=I,(US)T=U(ST)=UU_{-1}=I$$
+    于是$T$可逆,并且$T^{-1}=US$.\\
+    命题得证.
+\end{proof}
+\begin{problem}[13.]
+    若\tbf{12.}中$V$不一定是有限维的,试证明其结论不一定成立.
+\end{problem}
+\begin{proof}
+    不妨令
+    $$\begin{aligned}
+        S(x_1,x_2,x_3,\cdots) &= (x_1,x_2,x_3,\cdots)\\
+        T(x_1,x_2,x_3,\cdots) &= (0,x_1,x_2,\cdots) \\
+        U(x_1,x_2,x_3,\cdots) &= (x_2,x_3,x_4,\cdots)
+    \end{aligned}$$
+    此时仍有$STU=I$,然而$T$不是满射,因而也就不是可逆的.
+\end{proof}
+\begin{problem}[14.]
+    证明或给出一反例:如果$V$是有限维向量空间且$R,S,T\in\mathcal{L}(V)$使得$RST$是满射,那么$S$是单射.
+\end{problem}
+\begin{proof}
+    由于$RST\in\mathcal{L}(V)$,又其为满射,于是$RST$可逆.据$\tbf{12.}$,$S$也是可逆的,于是$S$为单射.
+\end{proof}
+\begin{problem}[15.]
+    设$T\in\mathcal{L}(V)$,且$\li v,m\in V$使得$\li {Tv},m$张成$V$.试证明$\li v,m$张成$V$.
+\end{problem}
+\begin{proof}
+    由$V=\text{span}(\li{Tv},m)$可知$\range T=V$,于是$T$是满射,进而$T$可逆.\\
+    对于任意$v\in V$,都有一组标量$\li a,m$满足$Tv=a_1(Tv_1)+\cdots+a_m(Tv_m)$.\\
+    两边取逆即有$v=a_1v_1+\cdots+a_mv_m$,即$V=\text{span}(\li v,m)$.\\
+    命题得证.
+\end{proof}
+\begin{problem}[16.]
+    试证明:从$\F^{n,1}$到$\F^{m,1}$的每个线性映射都能由一个矩阵乘法给出.%
+    换言之,证明:如果$T\in\mathcal{L}(\F^{n,1},\F^{m,1})$,那么存在$m\times n$矩阵$A$使得$Tx=Ax$对任意$x\in\F^{n,1}$成立.
+\end{problem}
+\begin{proof}
+    
+\end{proof}
+\begin{problem}[17.]
+    设$V$是有限维的,且$S\in\mathcal{L}(V)$.定义$\mathcal{A}\in\mathcal{L}(\mathcal{L}(V))$如下
+    $$\mathcal{A}(T)=ST$$
+    对任意$T\in\mathcal{L}(V)$成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$\dim\nul\mathcal{A}=(\dim V)(\dim\nul S)$.
+        \item 证明$\dim\range\mathcal{A}=(\dim V)(\dim\range S)$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\nul S$的一组基为$\li u,m$,将其扩展为$V$的一组基$\li v,n$(其中前$m$项即为$\li u,m$).\\
+            对于任意$T\in\nul\mathcal{A}$,只需$\range T\subseteq\nul S$,即$\nul\mathcal{A}=\mathcal{L}(V,\nul S)$\\
+            于是$\dim\nul\mathcal{A}=(\dim V)(\dim \nul S)$.命题得证.
+        \item 我们知道$\dim \mathcal{L}(V)=\left(\dim V\right)^2$.\\
+            又$\dim\range S+\dim\nul S=\dim V$,$\dim\range\mathcal{A}+\dim\nul\mathcal{A}=\dim(\mathcal{L}(V))=(\dim V)^2$.\\
+            于是$\dim\range\mathcal{A}=(\dim V)^2-\dim\nul\mathcal{A}=(\dim V)(\dim V-\dim\nul S)=(\dim V)(\dim\range S)$.\\
+            命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[18.]
+    证明$V$和$\mathcal{L}(\F,V)$是同构的.
+\end{problem}
+\begin{proof}
+    我们有
+    $$\dim(\mathcal{L}(\F,V))=(\dim(\F))(\dim V)=\dim V$$
+    于是$V$和$\mathcal{L}(\F,V)$同构.
+\end{proof}
+\begin{problem}[19.]
+    设$V$是有限维的,且$T\in\mathcal{L}(V)$.证明:$T$关于$V$的任意基的矩阵相同,当且仅当$T$是恒等算子的标量倍.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$\li v,n$是$V$的一组基.\\
+    设$A=\mathcal{M}(T,(v_1,v_2,\cdots,v_n)),B=\mathcal{M}(T,(v_2,v_1,\cdots,v_n))$.\\
+    设$Tv_1=A_{1,1}v_1+\cdots+A_{n,1}v_n$,$Tv_2=A_{1,2}v_1+\cdots+A_{n,2}v_n$.\\
+    由于$A=B$,于是$Tv_2=A_{1,1}v_2+A_{2,1}v_1+\cdots+A_{n,1}v_n$,$Tv_1=A_{1,2}v_2+A_{2,2}v_1+\cdots+A_{n,2}v_n$.\\
+    比较参数可得$$\left\{\begin{array}{l}
+        A_{1,1}=A_{2,2} \\
+        A_{2,1}=A_{1,2} 
+    \end{array}\right.$$
+    同样地令$C=\mathcal{M}(T,(v_1,2v_2,\cdots,v_n))$,则有$Tv_1=A_{1,1}v_1+2A_{2,1}v_2+\cdots+A_{n,1}v_n$.比较参数可得
+    $$A_{2,1}=2A_{2,1}$$
+    于是$A_{2,1}=A_{1,2}=0$.将这样的操作应用于任意的$v_j,v_k(1\leqslant j,k\leqslant n)$可知
+    $$\left\{\begin{array}{l}
+        A_{k,k}=A_{1,1},1\leqslant k\leqslant n\\
+        A_{j,k}=A_{j,k}=0,1\leqslant j<k\leqslant n
+    \end{array}\right.$$
+    这表明$\mathcal{T}$除对角线的元素相同且不一定为$0$外,其余元素均为$0$.这自然是恒等矩阵$I$的标量倍.\\
+    进而我们知道$T$是恒等算子的标量倍.\\
+    $\Leftarrow$:对于任意$V$的一组基$\li v,n$,记$T=\lambda I$,有
+    $$Tv_k=\lambda v_k$$
+    这表明$\mathcal{T}$的第$k$列除了第$k$行的元素为$\lambda$以外其余元素均为$0$.自然我们知道$\mathcal{M}(T)$是$I$的标量倍.
+\end{proof}
+\begin{problem}[20.]
+    设$q\in\mathcal{P}(\R)$.试证明存在$p\in\mathcal{P}(\R)$使得
+    $$\forall x\in\R,q(x)=(x^2+x)p''(x)+2xp'(x)+p(3)$$
+\end{problem}
+\begin{proof}
+    设$q$的次数为$m$.定义线性映射$T:p(x)\mapsto (x^2+x)p''(x)+2xp'(x)+p(3)$.\\
+    假定$r\in\R^m$使得$Tr=\mbf{0}$.那么一定有$r''(x)=0,r'(x)=0,r(3)=0$.这表明当且仅当$r=\mbf{0}$时$Tr=\mbf{0}$.\\
+    于是$T\in\mathcal{L}(\R^m)$是单射,进而它可逆并且是满射.于是对于任意$q\in\R^m$,都存在$p\in\R^m$使得$Tp=q$,于是命题得证.
+\end{proof}
+\begin{problem}[21.]
+    设$n\in\N^*$,且$A_{j,k}\in\F(j,k=1,\cdots,n)$.证明下面两个命题等价.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 平凡解$\li x=n=0$是下面的齐次方程组的唯一解.
+            $$\left\{\begin{array}{c}
+                \displaystyle\sum_{k=1}^{n}A_{1,k}x_k=0\\
+                \vdots\\
+                \displaystyle\sum_{k=1}^{n}A_{n,k}x_k=0
+            \end{array}\right.$$
+        \item 对于任意$\li c,n\in\F$,下列方程组都有解.
+            $$\left\{\begin{array}{c}
+                \displaystyle\sum_{k=1}^{n}A_{1,k}x_k=c_1\\
+                \vdots\\
+                \displaystyle\sum_{k=1}^{n}A_{n,k}x_k=c_n
+            \end{array}\right.$$
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    设$\F^{n}$的标准基$\li v,n$.记$n\times n$矩阵$A$的第$j$行第$k$列元素由题设的$A_{j,k}$确定,代表了线性映射$T\in\mathcal{L}(\R^n)$.\\
+    假设向量$u:=x_1v_1+\cdots+x_nv_n\in\R^n$.于是
+    $$\begin{aligned}
+        Tu
+        &= x_1Tv_1+\cdots+x_nTv_n \\
+        &= x_1\sum_{j=1}^{n}A_{j,1}v_j+\cdots+x_n\sum_{j=1}^{n}A_{j,n} \\
+        &= \left(\sum_{k=1}^{n}A_{1,k}x_1\right)v_1+\cdots+\left(\sum_{k=1}^{n}A_{n,k}x_n\right)v_n
+    \end{aligned}$$
+    于是\tbf{(1)}中的方程等价于$Tu=\mbf{0}$.由\tbf{(1)}的题设可知$Tu=\mbf{0}$当且仅当$\li x=n=0$,即$u=\mbf{0}$.\\
+    于是$\nul T=\left\{\mbf{0}\right\}$,即$T$是单射.\\
+    \tbf{(2)}中的方程等价于对于任意$v:=c_1v_1+\cdots+c_nv_n\in V$,都存在$u\in V$使得$Tu=v$,即$T$是满射.\\
+    由于$T\in\mathcal{L}(\R^n,\R^n)$,于是$T$的单射性和满射性等价.从而\tbf{(1)}和\tbf{(2)}等价.
+\end{proof}
+\begin{problem}[22.]
+    设$T\in\mathcal{L}(V)$且$\li v,n$是$V$的一组基.试证明:$\mathcal{M}(T,(\li v,n))$可逆当且仅当$T$可逆.
+\end{problem}
+\begin{proof}
+    设$A=\mathcal{M}(T,(\li v,n))$.\\
+    $\Rightarrow$:设$B=\mathcal{M}(S)$满足$AB=BA=I$.
+    自然有$\mathcal{M}(I,(\li v,n))=\mathcal{M}(T,(\li v,n))\mathcal{M}(S,(\li v,n))$.\\
+    即$TS=I$,同理$ST=I$.于是$T$可逆.\\
+    $\Leftarrow$:设$B=\mathcal{M}(T^{-1},(\li v,n))$.同理不难得出$AB=BA=I$,于是$\mathcal{M}(T,(\li v,n))$可逆.
+\end{proof}
+\begin{problem}[23.]
+    设$\li u,n$和$\li v,n$是$V$的两组基.令$T\in\mathcal{L}(V)$使得$\forall 1\leqslant k\leqslant n,Tv_k=u_k$.试证明
+    $$\mathcal{M}(T,(\li v,n))=\mathcal{M}(I,(\li u,n),(\li v,n))$$
+\end{problem}
+\begin{proof}
+    设$A=\mathcal{M}(T,(\li v,n)),B=\mathcal{M}(T,(\li u,n)),C=\mathcal{M}(I,(\li v,n),(\li u,n))$.\\
+    由于$T$是基到基的映射,于是$T$是可逆的.\\
+    由题意$\mathcal{M}(T,(\li v,n),(\li u,n))=I$.\\
+    又$\mathcal{M}(T,(\li v,n),(\li u,n))\mathcal{M}(T^{-1},(\li u,n),(\li v,n))=I$.\\
+    于是$\mathcal{M}(T^{-1},(\li u,n),(\li v,n))=I$.于是
+    $$\begin{aligned}
+        \mathcal{M}(T,(\li v,n))
+        &= I\mathcal{M}(T,(\li v,n))\\
+        &= \mathcal{M}(T^{-1},(\li u,n),(\li v,n))\mathcal{M}(T,(\li v,n))\\
+        &= \mathcal{M}(I,(\li u,n),(\li v,n))
+    \end{aligned}$$
+    命题得证.
+\end{proof}
+\begin{problem}[24.]
+    设$A$和$B$是相同大小的方阵且$AB=I$.试证明$BA=I$.
+\end{problem}
+\begin{proof}
+    我们有$(BA)B=B(AB)=BI=B$,又有$A(BA)=(AB)A=IA=I$.\\
+    于是$BA=I$.
+\end{proof}
 \end{document}
