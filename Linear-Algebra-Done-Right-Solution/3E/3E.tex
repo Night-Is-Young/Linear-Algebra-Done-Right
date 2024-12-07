@@ -104,8 +104,181 @@
     \begin{enumerate}[label=\tbf{(\arabic*)}]
         \item 若$T$是单射,那么存在唯一$v\in V$使得$Tv=c$.这时$\left\{x\in V:Tx=c\right\}=v+\varnothing$.\\
             若$T$不是单射,假定某一$v\in V$满足$Tv=c$,那么对于任意$u\in\nul T$都有$T(u+v)=Tu+Tv=c$.\\
-            又对于任意$u\in V$满足$Tu=c$,总有$T(u-v)=Tu-Tv=\mbf{0}$.于是$u-v\in\nul T$.\\
+            又对于任意$u\in V$满足$Tu=c$,总有$T(u-v)=Tu-Tv=\mbf{0}$.于是总有$u-v\in\nul T$.\\
             综上可知$\left\{x\in V:Tx=c\right\}=v+\nul T$.
+        \item 考虑一个有$n$个方程和$m$个未知数的线性方程组.\\
+            对于$T\in\mathcal{L}(\F^m,\F^n)$和$c\in\F^n$,解集为$\left\{x\in\F^m:Tx=c\right\}$.\\
+            于是该解集要么为空集的平移,要么为$\F^m$的子空间的平移.
     \end{enumerate}
+\end{proof}
+\begin{problem}[9.]
+    证明:$V$的一非空子集$A$是$V$的某个子空间的平移，当且仅当$\lambda v+(1-\lambda)w\in A$对所有$v,w\in A$和所有$\lambda\in\F$成立.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$V=x+U$,其中$x\in V$,$U$是$V$的子空间.\\
+    对于任意$v,w\in A$,都存在$u_1,u_2\in U$使得$x+u_1=v,x+u_2=w$.于是
+    $$\lambda v+(1-\lambda)w=\lambda(x+u_1)+(1-\lambda)(x+u_2)=x+\lambda u_1+(1-\lambda)u_2$$
+    而$\lambda u_1+(1-\lambda)u_2\in U$,于是$x+\lambda u_1+(1-\lambda)u_2\in A$,命题得证.\\
+    $\Leftarrow$:我们只需证明$\exists v\in A$使得$-v+A$是子空间.\\
+    首先,由于$v\in A$,于是$v-v=\mbf{0}\in -v+A$.\\
+    设$x\in -v+A$,于是存在$u\in A$使得$x=u-v$.对于任意$\lambda\in\F$有
+    $$\lambda u+(1-\lambda)v=\lambda(u-v)+v=\lambda x+v\in A$$
+    于是$\lambda x\in -v+A$,即$-v+A$对标量乘法封闭.\\
+    对于任意$x_1,x_2\in -v+A$,总存在$u_1,u_2\in A$使得$x_1=u_1-v,x_2=u_2-v$.令$\lambda=\dfrac{1}{2}$,于是
+    $$\dfrac{1}{2}u_1+\dfrac{1}{2}u_2=\dfrac{1}{2}(x_1+v)+\dfrac{1}{2}(x_2+v)=\left(\dfrac{1}{2}x_1+\dfrac{1}{2}x_2\right)+v\in A$$
+    于是$\dfrac{1}{2}x_1+\dfrac{1}{2}x_2\in -v+A$.由于$-v+A$对标量乘法封闭,于是$x_1+x_2\in -v+A$,于是$-v+A$对加法封闭.\\
+    综上可知$-v+A$是子空间,从而$A=v+(-v+A)$是子空间的平移.
+\end{proof}
+\begin{problem}[10.]
+    设$A_1=v+U_1$且$A_2=w+U_2$,其中$v,w\in V$,$U_1,U_2$是$V$的子空间.试证明:$A_1\cap A_2$是$V$的某个子空间的平移或空集.
+\end{problem}
+\begin{proof}
+    若$v-w\in U_1\cap U_2$,则$A_1\cap A_2=v+(U_1\cap U_2)=w+(U_1\cap U_2)$,自然是子空间的平移.\\
+    若$v-w\notin U_1\cap U_2$,则$A_1\cap A_2=\varnothing$.
+\end{proof}
+\begin{problem}[11.]
+    设$U=\left\{(x_1,x_2,\cdots)\in\F^{\infty}:x_k\neq 0\text{仅对有限多个}k\text{成立}\right\}$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明$U$是$\F^\infty$的子空间.
+        \item 试证明$\F^{\infty}/U$是无限维的.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 首先有$\mbf{0}=(0,0,\cdots)\in U$.\\
+            对于任意$v,u\in U$,假设$v,u$中的非零元素分别有$m,n$个.那么$v+u$中的非零元素数目必然不超过$m+n$个,于是$u+v\in U$.\\
+            对于任意$v\in U$和任意$\lambda\in\F$,$\lambda v$中的非零元素要么有$m$个,要么没有非零元素.于是$\lambda v\in U$.\\
+            综上,$U$对加法和标量乘法封闭且有加法恒等元,于是$U$是$\F^{\infty}$的子空间.
+        \item 考虑一组向量$(0,1,1,\cdots),(1,0,1,\cdots),\cdots$.各$v_k$的第$k$个元素为$0$,其余均为$1$.\\
+            显然$v_1,\cdots\notin V$且线性无关.于是$v_1+U,\cdots$可以作为$\F^\infty/U$的一组基.这基的长度是无限的,于是$\F^\infty/U$自然是无限维的.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[12.]
+    设$\li v,m\in V$.令$$A=\left\{\lambda_1v_1+\cdots+\lambda_mv_m:\li \lambda,m\in\F\text{且}\li \lambda+m=1\right\}$$
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$A$是$V$的某个子空间的平移.
+        \item 证明:如果$B$是$V$的某个子空间的平移且$\left\{\li v,m\right\}\subseteq B$,那么$A\subseteq B$.
+        \item 证明:$A$是$V$的某个子空间的平移,且该子空间的维数小于$m$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们可以利用\tbf{(9)}的结论证明之.\\
+            设$u_1=\alpha_1v_1+\cdots+\alpha_mv_m,u_2=\beta_1v_1+\cdots+\beta_mv_m$,其中$\displaystyle\sum_{i=1}^{m}\alpha_i=\sum_{i=1}^{n}\beta_i=1$.于是$u_1,u_2\in A$.\\
+            我们有$\displaystyle\lambda u_1+(1-\lambda)u_2=\sum_{i=1}^{m}\left(\lambda\alpha_i+(1-\lambda)\beta_i\right)v_i$.\\
+            又$\displaystyle\sum_{i=1}^{m}\lambda\alpha_i+(1-\lambda)\beta_i=\lambda\sum_{i=1}^{m}\alpha_i+(1-\lambda)\sum_{i=1}^{m}\beta_i=\lambda+(1-\lambda)=1$,于是$\lambda u_1+(1-\lambda)u_2\in A$.\\
+            根据\tbf{(9)}可知$A$是$V$中某个子空间的平移.
+        \item 假定$B=v+U$,记$u_k=v_k-v\in U,1\leqslant k\leqslant m$.\\
+            现在,对于任意$\displaystyle w:=\sum_{i=1}^{m}\lambda_iv_i\in A$,都有
+            $$w=\sum_{i=1}^{m}\lambda_i(v+u_i)=v+\sum_{i=1}^{m}u_i$$
+            又$\sum_{i=1}^{m}u_i\in U$,于是$w\in B$,进而$A\subseteq B$.
+        \item 注意到$v_m\in A$.设$U$满足$U+v_m=A$,即$U=A-v_m$,于是对于任意$\displaystyle u:=\sum_{i=1}^{m}\lambda_iv_i-v_m\in U$有
+            $$u=\sum_{i=1}^{m}\lambda_iv_i-v_m=\sum_{i=1}^{m}\lambda_iv_i-\sum_{i=1}^{m}\lambda_iv_m=\sum_{i=1}^{m-1}\lambda_i(v_i-v_m)$$
+            其中$\li \lambda,{m-1}\in\F$.这表明$U=\text{span}(\li v,{m-1})$,于是$\dim U\leqslant m-1<m$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[13.]
+    设$U$是$V$的子空间,使得$V/U$是有限维的.证明$V$和$U\times (V/U)$同构.
+\end{problem}
+\begin{proof}
+    假定$v_1+U,\cdots,v_m+U$是$V/U$的一组基.于是$\li v,m$线性无关且均不属于$U$.\\
+    考虑$\displaystyle x:=\sum_{i=1}^{m}c_iv_i$.假定$x\in U$,那么$x+U=U=\mbf{0}_{V/U}$.\\
+    又$\displaystyle x+U=\sum_{i=1}^{m}c_i(v_i+U)=\mbf{0}_{V/U}$当且仅当$\li c=m=0$.于是当且仅当$\li c=m=0$时$x\in U$.\\
+    现在,对于任意$v\in V$,我们证明存在$u\in U$和$\li a,m\in\F$使得$\displaystyle v=u+\sum_{i=1}^{m}a_iv_i$.\\
+    假定$u_0\in U$,于是$v+u_0\in v+U$.\\
+    又知存在$\li a,m\in\F$使得$\displaystyle v+U=\sum_{i=1}^{m}a_i(v_i+U)=\sum_{i=1}^{m}a_iv_i+U$.\\
+    于是存在$u_1\in U$使得$\displaystyle v+u_0=\sum_{i=1}^{m}a_iv_i+u_1$.\\
+    于是存在$u:=u_1-u_0\in U$使得$\displaystyle v=u+\sum_{i=1}^{n}a_iv_i$.\\
+    现在我们证明上述表示方法是唯一的.设$v\in V$使得$\displaystyle v=u_1+\sum_{i=1}^{m}a_iv_i=u_2+\sum_{i=1}^{m}b_iv_i$.\\
+    两式相减有$\displaystyle u_2-u_1=\sum_{i=1}^{m}(a_i-b_i)v_i$.而$u_2-u_1\in U$,于是$\displaystyle\sum_{i=1}^{m}(a_i-b_i)v_i=\mbf{0}$.\\
+    从而只能有各$a_k=b_k$,$u_1=u_2$,于是上述表示方法是唯一的.\\
+    现在,我们证明映射$\displaystyle T:v:=u+\sum_{i=1}^{m}a_iv_i\mapsto \left(u,\sum_{i=1}^{m}a_i(v_i+U)\right)$是线性的.\\
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T\mbf{0}=(\mbf{0}_U,\mbf{0}_{V/U})=\mbf{0}_{U\times(V/U)}$.
+        \item 对于任意$\displaystyle v_1:=u_1+\sum_{i=1}^{m}a_iv_i,v_2:=u_2+\sum_{i=1}^{m}b_iv_i\in V$有
+            $$\begin{aligned}
+                T(v_1+v_2)
+                &= T((u_1+u_2)+\sum_{i=1}^m(a_i+b_i)v_i) \\
+                &= \left(u_1+u_2,\sum_{i=1}^{m}(a_i+b_i)(v_i+U)\right) \\
+                &= \left(u_1,\sum_{i=1}^{m}a_i(v_i+U)\right)+\left(u_2,\sum_{i=1}^{m}b_i(v_i+U)\right) \\
+                &= Tv_1+Tv_2
+            \end{aligned}$$
+            于是$T$具有可加性.
+        \item 证明$T$具有齐次性的过程是类似的,在此便不再赘述.
+    \end{enumerate}
+    于是$T$是$V$到$U\times(V/U)$的线性映射.\\
+    观察$T$的定义,可知$T$既是单射又是满射.于是$T$是这两个空间的一个同构,即$V$和$U\times(V/U)$是同构的.
+\end{proof}
+\begin{problem}[14.]
+    设$U$和$W$是$V$的子空间,且$V=U\oplus W$.设$\li w,m$是$W$的基,证明$w_1+U,\cdots,w_m+U$是$V/U$的基.
+\end{problem}
+\begin{proof}
+    对于任意$v\in V$,由于$V=U\oplus W$,于是存在唯一的$w\in W$和$u\in U$使得$v=w+u$.\\
+    于是$v+U=w+u+U=w+U$.对于任意$v+U\in V/U$,设此$v$对应的$w:=a_1w_1+\cdots+a_mw_m\in W$,则
+    $$v+U=w+U=(a_1w_1+\cdots+a_mw_m)+U=\sum_{i=1}^{m}a_i(w_i+U)$$
+    下面证明$w_1+U,\cdots,w_i+U$线性无关.在上式中令$v=\mbf{0}$,则
+    $$\mbf{0}+U=\mbf{0}_{V/U}=\sum_{i=1}^{m}a_i(w_i+U)$$
+    当且仅当$\li a=m=0$成立,于是$w_1+U,\cdots,w_m+U$线性无关.\\
+    综上可知$w_1+U,\cdots,w_m+U$是$V/U$的基.命题得证.
+\end{proof}
+\begin{problem}[15.]
+    设$U$是$V$的子空间,$v_1+U,\cdots,v_m+U$是$V/U$的基,$\li u,n$是$U$的基.试证明$\li v,m\li u,n$是$V$的基.
+\end{problem}
+\begin{proof}
+    不难得知$\li v,m,\li u,n$线性无关.我们只需证明这向量组张成$V$即可.\\
+    对于任意$v\in V$,设$\displaystyle v+U=\sum_{i=1}^{m}a_i(v_i+U)=\sum_{i=1}^ma_iv_i+U$.\\
+    于是$u:=\displaystyle v-\sum_{i=1}^ma_iv_i\in U$.设$u=\sum_{j=1}^{n}b_ju_j$,则有
+    $$v=\sum_{i=1}^ma_iv_i+\sum_{j=1}^nb_ju_j$$
+    于是$V=\text{span}\left(\li v,m,\li u,n\right)$,进而这向量组是$V$的基.\\
+\end{proof}
+\begin{problem}[16.]
+    设$\varphi\in\mathcal{L}(V,\F)$,$\varphi\neq\mbf{0}$.证明$\dim V/(\nul\varphi)=1$.
+\end{problem}
+\begin{proof}
+    考虑$\tilde{\varphi}:V/(\nul\varphi)\to W$满足$\tilde{\varphi}(v+\nul\varphi)=\varphi v$.\\
+    根据前面的定理可知$\tilde{\varphi}$是单射且$\range\varphi=\range\tilde{\varphi}$.\\
+    这表明$\tilde{\varphi}$是将$V/(\nul\varphi)$映射成$\range\varphi$的同构.又$\dim\range\varphi=\dim\F=1$,于是$\dim V/(\nul\varphi)=1$.
+\end{proof}
+\begin{problem}[17.]
+    设$U$是$V$的子空间,使得$\dim V/U=1$.证明:存在$\varphi\in\mathcal{L}(V,\F)$使得$\nul\varphi=U$.
+\end{problem}
+\begin{proof}
+    设$V/U$的基为$v+U$.对于任意$w\in V$,都有$w+U=a(v+U)=av+U$.令$\varphi$满足
+    $$\varphi w=a:w+U=av+U$$
+    于是$\varphi w=\mbf{0}$当且仅当$w+U=U$,即$w\in U$.于是$\nul\varphi=U$.命题得证.
+\end{proof}
+\begin{problem}[18.]
+    设$U$是$V$的子空间,使得$V/U$是有限维的.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:若$W$是$V$的有限维子空间使得$V=U+W$,那么$\dim W\geqslant\dim V/U$.
+        \item 证明:存在$V$的有限维子空间$W$使得$\dim W=\dim V/U$且$V=U\oplus W$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$v\in V$都存在$w\in W,u\in U$使得$v=w+u$.\\
+            不妨设$V/U$的一组基为$v_1+U,\cdots,v_m+U$.\\
+            由于$V=U+W$,于是对于任意$1\leqslant k\leqslant m$,都存在$w_k\in W,u_k\in U$使得$v_k=w_k+u_k$.\\
+            即$v_k+U=(w_k+u_k)+U=w_k+U$.对于任意$v+U\in V/U$有
+            $$v+U=\sum_{i=1}^{m}a_i(v_i+U)=\sum_{i=1}^{m}a_i(w_i+U)=\left(\sum_{i=1}^{m}a_iw_i\right)+U$$
+            于是$\li w,m$线性无关,否则表出$\mbf{0}_{V/U}$的标量$\li a,m$将不唯一.\\
+            于是$\li w,m$是$W$中长度为$m$的线性无关组,因而$\dim W\geqslant m=\dim V/U$.
+        \item 在\tbf{(1)}中令$W=\text{span}(\li w,m)$即可.\\
+            如此,对于任意$v\in V$,都有$\displaystyle v+U=\left(\sum_{i=1}^{m}a_iw_i\right)+U$,即$\displaystyle v-\sum_{i=1}^{m}w_k\in U$.\\
+            又$v=\mbf0$当且仅当$\li a=m=0$,这表明$U+W$是直和.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[19.]
+    设$T\in\mathcal{L}(V,W)$且$U$是$V$的子空间.令$\pi$表示$V$到$V/U$的商映射.证明:存在$S\in\mathcal{L}(V/U,W)$使得$T=S\circ\pi$当且仅当$U\subseteq\nul T$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对于任意$u\in U$,都有$Tu=S(\pi u)=S\mbf{0}=\mbf{0}$.于是$u\in\nul T$,这表明$U\subseteq\nul T$.\\
+    $\Leftarrow$:设对于任意$v\in V$都有$S(v+U)=Tv$.我们现在证明$S$是线性映射.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $S\mbf{0}_{V/U}=S(\mbf{0}_V+U)=T\mbf{0}_V=\mbf{0}_W$.于是$S\mbf{0}=\mbf{0}$.
+        \item 对于任意$v,w\in V$,都有$S((v+w)+U)=T(v+w)=Tv+Tw=S(v+U)+T(w+U)$,于是$S$满足可加性.
+        \item 对于任意$v\in V$和任意$\lambda\in\F$,都有$S(\lambda v+U)=T(\lambda v)=\lambda Tv=\lambda S(v+U)$,于是$S$满足齐次性.
+    \end{enumerate}
+    这样的$S$自然是线性映射.
 \end{proof}
 \end{document}
