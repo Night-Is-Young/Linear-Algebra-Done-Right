@@ -1,0 +1,198 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 5A}
+\end{center}
+\begin{problem}[1.]
+    设$T\in\mathcal{L}(V)$且$U$是$V$的子空间.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:如果$U\subseteq\nul T$,那么$U$在$T$下不变.
+        \item 证明:如果$\range T\subseteq U$,那么$U$在$T$下不变.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$u\in U\subseteq\nul T$,都有$Tu=\mbf{0}\in U$,于是$U$在$T$下不变.
+        \item 对于任意$u\in U\subseteq V$,都有$Tu\in\range T\subseteq U$,于是$U$在$T$下不变.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[2.]
+    设$T\in\mathcal{L}(V)$且$\li V,m$是$V$在$T$下的不变子空间.证明$\li V+m$在$T$下不变.
+\end{problem}
+\begin{proof}
+    对于任意$v=\li v+m,v_k\in V_k$有
+    $$Tv=T\left(\li v+m\right)=\li {Tv}+m$$
+    而$Tv_k\in V_k$,于是$\li {Tv}+m\in\li V+m$.于是$\li V+m$在$T$下不变.
+\end{proof}
+\begin{problem}[3.]
+    设$T\in\mathcal{L}(V)$.证明$V$的任意一族$T$下的不变子空间的交集在$T$下不变.
+\end{problem}
+\begin{proof}
+    设$\li V,m$在$T$下不变.\\
+    对于任意$\displaystyle v\in\bigcap_{j=1}^{m}V_j$和任意$1\leqslant k\leqslant m$有$v\in V_k$,于是$Tv\in V_k$.\\
+    这表明$\displaystyle Tv\in\bigcap_{j=1}^{m}V_j$,从而$\displaystyle \bigcap_{j=1}^{m}V_j$在$T$下不变.
+\end{proof}
+\begin{problem}[4.]
+    证明或给出一反例:若$V$是有限维的,其子空间$U$在$V$上任意算子下均不变,那么$U=\left\{\mbf{0}\right\}\text{或}V$.
+\end{problem}
+\begin{proof}
+    当$U=\left\{\mbf{0}\right\}\text{或}V$,不难验证它们在任意算子下不变.\\
+    若$U\neq\left\{\mbf{0}\right\}\text{或}V$,那么假定$U$的基为$\li u,m$,将其扩展为$V$的一组基$\li u,m,\li v,n$.\\
+    根据上面的假设,$m\geqslant 1$且$n\geqslant 1$.定义$T\in\mathcal{L}(V)$为
+    $$\left\{\begin{array}{l}
+        Tu_1=v_1\\
+        Tv_1=u_1\\
+        Tu_k=u_k,2\leqslant k\leqslant m \\
+        Tv_j=v_j,2\leqslant j\leqslant n
+    \end{array}\right.$$
+    于是$Tu_1=v_1\notin U$,从而这样的$U$不能在任意$T$下不变.\\
+    于是命题得证.
+\end{proof}
+\begin{problem}[5.]
+    设$T\in\mathcal{L}(\R^2)$定义为$T(x,y)=(-3y,x)$,求$T$的特征值.
+\end{problem}
+\begin{solution}[Solution.]
+    设$(x,y)\neq(0,0)$满足$T(x,y)=\lambda(x,y)$,即
+    $$\left\{\begin{array}{l}
+        -3y=\lambda x\\
+        x=\lambda y
+    \end{array}\right.$$
+    变形可得$\lambda^2+3=0$.这方程没有实根,于是$T$不存在实特征值.
+\end{solution}
+\begin{problem}[6.]
+    定义$T\in\mathcal{L}(\F^2)$为$T(w,z)=(z,w)$.求$T$的所有特征值和对应的特征向量.
+\end{problem}
+\begin{solution}[Solution.]
+    设$(w,z)\neq(0,0)$满足$T(w,z)=\lambda(z,w)$,即
+    $$\left\{\begin{array}{l}
+        z=\lambda w\\
+        w=\lambda z
+    \end{array}\right.$$
+    变形可得$\lambda^2-1=0$,即$\lambda=\pm 1$.\\
+    于是$T$的特征值为$1$和$-1$,对应的特征向量为$(w,w)$和$(w,-w)$,其中$w\neq 0\in\F$.
+\end{solution}
+\begin{problem}[7.]
+    定义$T\in\mathcal{L}(\F^3)$为$T(z_1,z_2,z_3)=(2z_2,0,5z_3)$.求$T$的所有特征值和对应的特征向量.
+\end{problem}
+\begin{solution}[Solution.]
+    设$(z_1,z_2,z_3)\neq(0,0,0)\in\F^3$满足$T(z_1,z_2,z_3)=\lambda(z_1,z_2,z_3)$,即
+    $$\left\{\begin{array}{l}
+        \lambda z_1=2z_2 \\
+        \lambda z_2=0 \\
+        \lambda z_3=5z_3
+    \end{array}\right.$$
+    这方程组的解为$z_1=z_2=0,\lambda=5$.于是$T$的特征值为$5$,特征向量为$(0,0,z_3)$,其中$z_3\in\F$.
+\end{solution}
+\begin{problem}[8.]
+    设$P\in\mathcal{L}(V)$且$P^2=P$.证明:若$\lambda$是$P$的特征值,那么$\lambda=0\text{或}1$.
+\end{problem}
+\begin{proof}
+    设$v\neq\mbf{0}\in V$使得$Pv=\lambda v$.于是$(P^2)(v)=P(P(v))=P(\lambda v)=\lambda Pv=\lambda^2 v$.\\
+    由$P=P^2$可知$\lambda v=\lambda^2 v$,又$v\neq\mbf{0}$,于是$\lambda^2-\lambda=0$,即$\lambda=0\text{或}1$.
+\end{proof}
+\begin{problem}[9.]
+    定义$T:\mathcal{P}(\R)\to\mathcal{P}(\R)$为$Tp=p'$.求出$T$的所有特征值和对应的特征向量.
+\end{problem}
+\begin{proof}
+    设$T$的特征值为$\lambda$,特征向量为$p$,于是$Tp=\lambda p=p'$.\\
+    设$p=a_0+a_1x+\cdots+a_mx^m$,其中$a_m\neq 0$.于是$p'=a_1+2a_2x+\cdots+ma_mx^{m-1}$.\\
+    若$\lambda=0$,则$p'=\mbf{0}$,这要求$p$为任意常值函数.\\
+    若$\lambda\neq 0$且$m\geqslant 1$,那么$\deg(\lambda p)=m>m-1=\deg p'$,于是不存在这样的$p$使得式子成立.\\
+    综上可知$T$的特征值为$0$,特征向量为常值多项式$t$,$t\in\F$.
+\end{proof}
+\begin{problem}[10.]
+    定义$T\in\mathcal{L}(\mathcal{P}_4(\R))$为$(Tp)(x)=xp'(x)$对所有$x\in\R$成立.求出$T$的所有特征值和对应的特征向量.
+\end{problem}
+\begin{proof}
+    设$T$的特征值为$\lambda$,特征向量为$p\neq\mbf{0}$.于是对于任意$x\in\R$有$(Tp)(x)=(\lambda p)(x)=xp'(x)$.\\
+    即$\lambda p(x)=xp'(x)$对所有$x\in\R$成立.设$p=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4$,其中各$a$不全为$0$.\\
+    于是我们有$$\lambda\left(a_0+a_1x+a_2x^2+a_3x^3+a_4x^4\right)=a_1x+2a_2x^2+3a_3x^3+4a_4x^4$$
+    于是$$\left\{\begin{array}{l}
+        \lambda a_0=0\\
+        \lambda a_1=a_1\\
+        \lambda a_2=2a_2\\
+        \lambda a_3=3a_3\\
+        \lambda a_4=4a_4
+    \end{array}\right.$$
+    于是$\lambda=1,2,3,4$.\\
+    综上可知$T$的特征值为$1,2,3$和$4$,对应的特征向量分别为$a_1x,a_2x^2,a_3x^3$和$a_4x^4$,其中各$a_k\neq0\in\F$.
+\end{proof}
+\begin{problem}[11.]
+    设$V$是有限维的,$T\in\mathcal{L}(V)$且$\alpha\in\F$.证明:存在$\delta>0$使得对所有满足$0<\left|\alpha-\lambda\right|<\delta$的$\lambda\in\F$,都有$T-\lambda I$可逆.
+\end{problem}
+\begin{proof}
+    若$T$没有特征值,那么对于任意$\lambda\in\F$,$T-\lambda I$都是可逆的,这时任取$\delta>0$即可.\\
+    若$T$有特征值,不妨设为$\li\lambda,m$,其中$m\leqslant \dim V$.\\
+    令$\displaystyle\delta=\min_{1\leqslant k\leqslant m,\lambda_k\neq\alpha}\left|\alpha-\lambda_k\right|$.于是对于任意$\lambda\in(\alpha-\delta,\alpha)\cup(\alpha,\alpha+\delta)$,都有$\lambda\neq\lambda_k$.\\
+    这就表明$\lambda$不是$T$的特征值,于是$T-\lambda I$可逆.
+\end{proof}
+\begin{problem}[12.]
+    设$V=U\oplus W$,其中$U$和$W$都是$V$的非零子空间.定义$P\in\L(V)$为,对任意$u\in U$和$w\in W$都有$P(u+w)=u$.求出$P$的所有特征值和对应的特征向量.
+\end{problem}
+\begin{proof}
+    设$P$的特征值为$\lambda$.设$v:=u+w\in V$且$v\neq\mbf{0}$是对应的特征向量,于是$Pv=\lambda v$.\\
+    因此$P(u+w)=\lambda(u+w)=u$,即$(1-\lambda)u=\lambda w$.\\
+    注意到$U+W$是直和,于是上式成立当且仅当$(1-\lambda)u=\lambda w=\mbf{0}$.\\
+    于是$P$的特征值为$0,1$对应的特征向量为$w,u$,其中$w\in W,u\in U$且$w,u\neq\mbf{0}$.
+\end{proof}
+\begin{problem}[13.]
+    设$T\in\L(V)$,并设$S\in\L(V)$可逆.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$T$和$S^{-1}TS$具有相同的特征值.
+        \item 说明$T$和$S^{-1}TS$的特征向量间的关系.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$T$的特征值为$\lambda$,对应的特征向量为$v$.由于$S$可逆,不妨设$u\in V$使得$Su=v$.\\
+            于是$(S^{-1}TS)u=S^{-1}T(Su)=S^{-1}(Tv)=S^{-1}(\lambda v)=\lambda(S^{-1}v)=\lambda u$.\\
+            这表明$S^{-1}TS$也有特征值$\lambda$,对应的特征向量为$S^{-1}v$.
+        \item 见\tbf{(1)}的论述.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[14.]
+    给出一例$\R^4$上没有实特征值的算子.
+\end{problem}
+\begin{solution}[Solution.]
+    定义$T\in\L(\R^4):(a,b,c,d)\mapsto(-b,a,c,d)$.这$T$就没有实特征值.
+\end{solution}
+\begin{problem}[15.]
+    设$V$是有限维的,$T\in\L(V),\lambda\in\F$.证明$\lambda$是$T$的特征值当且仅当$\lambda$是对偶算子$T'\in\L(V')$的特征值.
+\end{problem}
+\begin{proof}
+    $$\begin{aligned}
+        T\text{有特征值}\lambda
+        &\Leftrightarrow (T-\lambda I)\text{不可逆} \\
+        &\Leftrightarrow (T-\lambda I)'\text{不可逆} \\
+        &\Leftrightarrow T'-\lambda I'\text{不可逆} \\
+        &\Leftrightarrow T'\text{有特征值}\lambda
+    \end{aligned}$$
+\end{proof}
+\begin{problem}[16.]
+    设$\li v,n$是$V$的基,$T\in\L(V)$.证明:如果$\lambda$是$T$的特征值,那么
+    $$\left|\lambda\right|\leqslant n\max_{1\leqslant j,k\leqslant n}\left|\mathcal{M}(T)_{j,k}\right|$$
+\end{problem}
+\begin{proof}
+    记$\mathcal{M}(T)=A$.设$v:=a_1v_1+\cdots+a_nv_n\in V$是$T$对应$\lambda$的特征向量.\\
+    于是$$Tv=\sum_{k=1}^{n}a_kTv_k=\sum_{k=1}^{n}\left(a_k\sum_{j=1}^{n}A_{j,k}v_j\right)=\sum_{j=1}^{n}\left(\sum_{k=1}^{n}a_kA_{j,k}\right)v_j=\sum_{j=1}^{n}\lambda a_jv_j$$
+    即$\lambda=\dfrac{\displaystyle\sum_{k=1}^{n}a_kA_{j,k}}{a_j}$对任意$1\leqslant j\leqslant n$都成立.%
+    于是$\displaystyle\left|\lambda\right|\left|a_j\right|\leqslant\sum_{k=1}^{n}\left|A_{j,k}\right|\left|a_k\right|$.
+    取$a_j$使得$\displaystyle\left|a_j\right|=\max_{1\leqslant j\leqslant n}\left|b_j\right|$.于是
+    $$|\lambda|\leqslant\sum_{k=1}^{n}\left|A_{j,k}\right|\left|\dfrac{a_k}{a_j}\right|\leqslant\sum_{k=1}^{n}\left|A_{j,k}\right|\leqslant n\max_{1\leqslant j,k\leqslant n}\left|\mathcal{M}(T)_{j,k}\right|$$
+\end{proof}
+\begin{problem}[17.]
+    设$\F=\R$.
+\end{problem}
+\end{document}

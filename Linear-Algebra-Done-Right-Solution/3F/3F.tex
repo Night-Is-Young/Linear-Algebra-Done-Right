@@ -1,0 +1,490 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 3F}
+\end{center}
+\begin{problem}[1.]
+    证明:线性泛函不是满射就是零映射.
+\end{problem}
+\begin{proof}
+    设$\phi\in\mathcal{L}(V,\F)$.\\
+    若存在$v\in V$使得$\phi(v)\neq 0$,那么对于任意$f\in\F$都有存在$\lambda:=\dfrac{f}{\phi(v)}\in\F$使得$\phi(\lambda v)=f$,于是$\phi$是满射.\\
+    若对于任意$v\in V$都有$\phi(v)=0$,那么显然$\phi$是零映射.
+\end{proof}
+\begin{problem}[2.]
+    给出$\R^{[0,1]}$上的三个不同的线性泛函.
+\end{problem}
+\begin{solution}[Solution.]
+    $\phi_1:\forall f\in\R^{[0,1]},\phi_1(f)=0$.\\
+    $\phi_2:\forall f\in\R^{[0,1]},\phi_2(f)=f(0).$\\
+    $\phi_3:\forall f\in\R^{[0,1]},\phi_3(f)=f(1).$
+\end{solution}
+\begin{problem}[3.]
+    设$V$是有限维的,且$v\in V(v\neq\mbf{0})$.证明:存在$\phi\in V'$使得$\phi(v)=1$.
+\end{problem}
+\begin{proof}
+    将$v$扩展为$V$的一组基$\li v,m$,其中$v_1=v$.这基的对偶基$\li \phi,m$就满足$\phi_1(v)=1$.
+\end{proof}
+\begin{problem}[4.]
+    设$V$是有限维的,且$U$是$V$的子空间,$U\neq V$.证明:存在$\phi\in V'$使得$\phi(u)=0$对任意$u\in U$成立且$\phi\neq\mbf{0}$.
+\end{problem}
+\begin{proof}
+    设$U$的一组基$\li u,m$,将其扩展为$V$的一组基$\li u,m,\li v,n$.由于$U\neq V$,于是$n\geqslant 1$.\\
+    选取这组基的对偶基$\li\phi,{m+n}$.令$\phi=\phi_{m+1}$,于是对于任意$u\in U$都有
+    $$\phi(u)=\phi(a_1u_1+\cdots+a_mu_m)=0$$
+    这$\phi$即符合题设.
+\end{proof}
+\begin{problem}[5.]
+    设$T\in\mathcal{L}(V,W),\li w,m$是$\range T$的基.于是对于任意$v\in V$,都存在唯一的$\phi_1(v),\cdots,\phi_m(v)$使得
+    $$Tv=\phi_1(v)w_1+\cdots+\phi_m(v)w_m$$
+    从而定义了从$V$到$\F$的函数$\phi_1,\cdots,\phi_m$.证明函数$\li\phi,m$中的每个都是$V$上的线性泛函.
+\end{problem}
+\begin{proof}
+    我们只需证明$\li\phi,m$是$V$到$\F$的线性映射.\\
+    首先,$T(\mbf{0})=\mbf{0}$,又$\li w,m$线性无关,于是$\phi_k(\mbf{0})=0$对于任意$1\leqslant k\leqslant m$均成立.\\
+    考虑$Tv_k=w_k,1\leqslant k\leqslant m$,各$v_k$自然是线性无关的.根据题设,$\phi_k(v_k)=1$,其余$\phi_j(v_k)=0$.\\
+    对于任意$u,v\in V$有$T(u+v)=Tu+Tv$.两边展开有
+    $$\sum_{k=1}^{m}\phi_k(u+v)w_k=\sum_{k=1}^{m}\phi_k(u)w_k+\sum_{k=1}^{m}\phi_k(v)w_k=\sum_{k=1}^{m}\left(\phi_k(u)+\phi_k(v)\right)w_k$$
+    由于$\li w,m$线性无关,因此表出$T(u+v)$的方式是唯一的.对比系数可得$\phi_k(u+v)=\phi_k(u)+\phi_k(v)$,于是各$\phi_k$满足可加性.\\
+    对于任意$v\in V$和任意$\lambda\in\F$都有$T(\lambda v)=\lambda Tv$.两边展开有
+    $$\sum_{k=1}^{m}\phi_k(\lambda v)w_k=\lambda\sum_{k=1}^{m}\phi_k(v)w_k$$
+    同理,对比系数可知$\phi_k(\lambda v)=\lambda\phi_k(v)$,于是各$\phi_k$满足齐次性.\\
+    综上可知$\li\phi,m$是$V$上的线性泛函,命题得证.
+\end{proof}
+\begin{problem}[6.]
+    设$\phi,\beta\in V'$.证明:$\nul\phi\subseteq\nul\beta$当且仅当存在$c\in\F$使得$\beta=c\phi$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:令$c=0$即可.此时$\beta=\mbf{0}$,$\nul\beta=V$,必然有$\nul\phi\subseteq\nul\beta$.\\
+    $\Leftarrow$:对于任意$v\in\nul\phi$,都有$\beta(v)=c\phi(v)=c\cdot0=0$,于是$v\in\nul\beta$,因此$\nul\phi\subseteq\nul\beta$.
+\end{proof}
+\begin{problem}[7.]
+    设$\li V,m$是向量空间.证明$\left(\li V\times m\right)'$与$V_1'\times\cdots\times V_m'$同构.
+\end{problem}
+\begin{proof}
+    在\tbf{3E.3.}中令$W=\F$即得证.
+\end{proof}
+\begin{problem}[8.]
+    设$\li v,n$是$V$的基,$\li\phi,n$是$V'$的对偶基.定义$\Gamma:V\to\F^n$和$\Lambda:\F^n\to V$为
+    $$\Gamma(v)=\left(\phi_1(v),\cdots,\phi_n(v)\right)\text{ 和 }\Lambda(\li a,n)=a_1v_1+\cdots+a_nv_n$$
+    试证明$\Gamma$和$\Lambda$互为彼此的逆.
+\end{problem}
+\begin{proof}
+    对于任意$v\in V$有
+    $$(\Lambda\circ\Gamma)(v)=\Lambda(\Gamma(v))=\phi_1(v)v_1+\cdots+\phi_n(v)v_n=v$$
+    于是$\Lambda\Gamma=I$.对于任意$(\li c,n)\in\F^n$有
+    $$(\Gamma\circ\Lambda)(\li c,n)=\Gamma(\Lambda(\li c,n))=\Gamma(c_1v_1+\cdots+c_nv_n)=(\li c,n)$$
+    于是$\Gamma\Lambda=I$.于是两者互为对方的逆.
+\end{proof}
+\begin{problem}[9.]
+    设$m\in\N^*$,证明$\mathcal{P}_m(\R)$的基$1,x,\cdots,x^m$的对偶基是$\phi_0,\cdots,\phi_m$.\\
+    其中对任意$0\leqslant k\leqslant m$和任意$p\in\mathcal{P}_m(\R)$有$\phi_k(p)=\dfrac{p^{(k)}(0)}{k!}$.
+\end{problem}
+\begin{proof}
+    考虑$p\in\mathcal{P}_m(\R)$在$x=0$处的$m$阶泰勒多项式和其Lagrange余项.
+    $$p(x)=\sum_{k=0}^{m}\dfrac{p^{(k)}(0)x^k}{k!}+\dfrac{p^{(m+1)}(\xi)x^{m+1}}{(m+1)!}$$
+    考虑到$p$的次数最高为$m$,于是必然有$p^{(k+1)}(\xi)=0$.于是上式可以写为
+    $$p(x)=\sum_{k=0}^{m}\dfrac{p^{(k)}(0)x^k}{k!}$$
+    令$\phi_k(p)=\dfrac{p^{(k)}(0)}{k!}$,即有
+    $$p(x)=\phi_0(p)p_0+\cdots+\phi_m(p)p_m$$
+    于是命题得证.
+\end{proof}
+\begin{problem}[10.]
+    设$m\in\N^*$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$1,x-5,\cdots,(x-5)^m$是$\mathcal{P}_m(\R)$的一组基.
+        \item 写出上面这组基的对偶基.
+    \end{enumerate}
+\end{problem}
+\begin{solution}[Solution.]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 记$p_k=(x-5)^k,0\leqslant k\leqslant m$.设一组标量$c_0,\cdots,c_m$使得
+            $$\mbf{0}=c_0p_0+\cdots+c_mp_m$$
+            当且仅当$c_0=\cdots=c_m=0$时上式成立.否则,根据代数基本定理,至多存在$m$个根使得右边为$0$,这并不是零映射.\\
+            于是$p_0,\cdots,p_m$是长度为$m+1$的线性无关组.\\
+            又$\mathcal{P}_m(\R)$的标准基$1,x,\cdots,x^m$长度为$m+1$.于是$p_0,\cdots,p_m$是$\mathcal{P}_m(\R)$的一组基.
+        \item 这基的对偶基为$\phi_0,\cdots,\phi_m$,满足$\phi_k(p)=\dfrac{p^{(k)}(5)}{k!}$.\\
+            证明方法与\tbf{9.}类似.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[11.]
+    设$\li v,n$是$V$的基,$\li\phi,m$是$V'$的相应的对偶基.设$\psi\in V'$,证明
+    $$\psi=\psi(v_1)\phi_1+\cdots+\psi(v_n)\phi_n$$
+\end{problem}
+\begin{proof}
+    对于任意$v:=b_1v_1+\cdots+b_nv_n\in V$有$\phi_k(v)=b_k$.于是
+    $$\begin{aligned}
+        \psi(v)
+        &= \psi(b_1v_1+\cdots+b_nv_n) \\
+        &= b_1\psi(v_1)+\cdots+b_n\psi(v_n) \\
+        &= \psi(v_1)\phi_1(v)+\cdots+\psi(v_n)\phi_n(v) \\
+        &= (\psi(v_1)\phi_1+\cdots+\psi(v_n)\phi_n)(v)
+    \end{aligned}$$
+    于是$\psi=\psi(v_1)\phi_1+\cdots+\psi(v_n)\phi_n$,命题得证.
+\end{proof}
+\begin{problem}[12.]
+    设$S,T\in\mathcal{L}(V,W)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$(S+T)'=S'+T'$.
+        \item 证明$(\lambda T)'=\lambda T'$对任意$\lambda\in\F$都成立.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对任意$\phi\in W'$,有
+            $$(S+T)'(\phi)=\phi\circ(S+T)=\phi\circ S+\phi\circ T=S'(\phi)+T'(\phi)=(S'+T')(\phi)$$
+            于是$(S+T)'=S'+T'$.
+        \item 对任意$\phi\in W'$和任意$\lambda\in\F$有
+            $$(\lambda T)'(\phi)=\phi\circ(\lambda T)=\lambda(\phi\circ T)=\lambda T'(\phi)$$
+            于是$(\lambda T)'=\lambda T'$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[13.]
+    证明$V$上的恒等算子的对偶映射是$V'$上的恒等算子.
+\end{problem}
+\begin{proof}
+    设$I\in\mathcal{L}(V)$是$V$上的恒等映射.\\
+    对于任意$\phi\in V'$和任意$v\in V$,都有
+    $$(I'(\phi))(v)=(\phi\circ I)(v)=\phi(I(v))=\phi(v)$$
+    这表明$I'(\phi)=\phi$,于是$I'$是$V'$上的恒等映射.命题得证.
+\end{proof}
+\begin{problem}[14.]
+    定义$T:\R^3\to\R^2$为$T(x,y,z)=(4z+5y+6z,7x+8y+9z)$.\\
+    设$\phi_1,\phi_2$为$\R^2$的标准基的对偶基,$\psi_1,\psi_2,\psi_3$为$\R^3$的标准基的对偶基.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 描述$T'(\phi_1),T'(\phi_2)$这两个线性泛函.
+        \item 将$T'(\phi_1),T'(\phi_2)$分别写成$\psi_1,\psi_2,\psi_3$的线性组合.
+    \end{enumerate}
+\end{problem}
+\begin{solution}[Solution.]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T'(\phi_1):(x,y,z)\mapsto 4x+5y+6z$,$T'(\phi_2):(x,y,z)\mapsto 7x+8y+9z$.
+        \item $T'(\phi_1)=4\psi_1+5\psi_2+6\psi_3,T'(\phi_2)=7\psi_1+8\psi_2+9\psi_3$.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[15.]
+    定义$T:\mathcal{P}(\R)\to\mathcal{P}(\R)$为$(Tp)(x)=x^2p(x)+p''(x)$对任意$x\in\R$成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\phi\in\mathcal{P}(\R)'$定义为$\phi(p)=p'(4)$.描述$\mathcal{P}(\R)$上的线性泛函$T'(\phi)$.
+        \item 设$\phi\in\mathcal{P}(\R)'$定义为$\phi(p)=\displaystyle\int_{0}^{1}p\dx$.计算$(T'(\phi))(x^3)$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}[Solution.]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对任意$p(x)\in\mathcal{P}(\R)$有
+            $$(T'(\phi))(p(x))=(\phi\circ T)(p(x))=\phi(x^2p(x)+p''(x))=(x^2p+p'')'(4)=8p(4)+16p'(4)+p'''(4)$$
+            于是$T'(\phi)$就将任意的$p$映射到$8p(4)+16p'(4)+p'''(4)$.
+        \item 我们有
+            $$(T'(\phi))(x^3)=\phi(T(x^3))=\int_0^1(x^5+6x)\dx=\dfrac{19}{6}$$
+    \end{enumerate}
+\end{solution}
+\begin{problem}[16.]
+    设$W$是有限维的,$T\in\mathcal{L}(V,W)$.证明$T=\mbf{0}$当且仅当$T'=\mbf{0}$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对任意$\phi\in W'$和任意$v\in V$,有$(T'(\phi))(v)=(\phi\circ T)(v)=\phi(\mbf{0})=\mbf{0}$,于是$T'=\mbf{0}$.\\
+    $\Leftarrow$:对任意$\phi\in W'$和任意$v\in V$,有$\phi(T(v))=(T'(\phi))(v)=\mbf{0}(v)=\mbf{0}$,于是$Tv=\mbf{0}$,即$T=\mbf{0}$.
+\end{proof}
+\begin{problem}[17.]
+    设$V$和$W$是有限维的,$T\in\mathcal{L}(V,W)$.证明$T$可逆当且仅当$T'$可逆.
+\end{problem}
+\begin{proof}
+    由于$T$可逆,于是$\dim V=\dim W=\dim V'=\dim W'$.从而
+    $$T\text{可逆}\Leftrightarrow T\text{是单射}\Leftrightarrow T'\text{是满射}\Leftrightarrow T'\text{可逆}$$
+\end{proof}
+\begin{problem}[18.]
+    设$V$和$W$是有限维的,证明:将$T\in\mathcal{L}(V,W)$映射到$T'\in\mathcal{L}(W',V')$的映射是$\mathcal{L}(V,W)$到$\mathcal{L}(W',V')$的同构.
+\end{problem}
+\begin{proof}
+    设$\Phi:T\mapsto T'$.据\tbf{12.}可知$\Phi$是线性的,据\tbf{16.}可知$\nul\Phi=\mbf{0}$,故$\Phi$是单射.\\
+    又$\dim\mathcal{L}(V,W)=(\dim V)(\dim W)=(\dim W')(\dim V')=\dim\mathcal{L}(W',V')$,于是$\Phi$是这两个空间的同构映射.
+\end{proof}
+\begin{problem}[19.]
+    设$U\subseteq V$,解释为何$U^0=\left\{\phi\in V':U\subseteq\nul\phi\right\}$.
+\end{problem}
+\begin{proof}
+    我们知道$U^0$的定义是$\phi(u)=\mbf{0}$对所有$u\in U$成立.这只要使$U\subseteq\nul\phi$即可.
+\end{proof}
+\begin{problem}[20.]
+    设$V$是有限维的,且$U$是$V$的子空间.证明:$U=\left\{v\in V:\phi(v)=0\text{对任意}\phi\in U^0\text{都成立}\right\}$.
+\end{problem}
+\begin{proof}
+    设$W=\left\{v\in V:\phi(v)=0\text{对任意}\phi\in U^0\text{都成立}\right\}$.\\
+    我们知道对任意$\phi\in U^0$和任意$u\in U$有$\phi(u)=0$,于是$U\subseteq W$.\\
+    设$\li u,m$是$U$的一组基,将其扩展为$V$的一组基$\li u,m,\li v,n$.令$\phi\in V'$满足
+    $$\phi(u_1)=\cdots=\phi(u_m)=0,\phi(v_1)=\cdots=\phi(v_n)=1$$
+    于是对于任意$u\in U$有$\phi(u)=0$,即$\phi\in U^0$.\\
+    而对于任意$v:a_1u_1+\cdots+a_mu_m+b_1v_1+\cdots+b_nv_n\in V$且$v\notin U$有
+    $$\phi(v)=\sum_{i=1}^{n}b_n\neq 0$$
+    即$v\notin W$,从而$W\subseteq U$.综上可知$U=W$.
+\end{proof}
+\begin{problem}[21.]
+    设$V$是有限维的,且$U$和$W$是$V$的子空间.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$W^0\subseteq U^0$当且仅当$U\subseteq W$.
+        \item 证明:$W^0=U^0$当且仅当$U=W$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    设$A_U=\left\{v\in V:\phi(v)=\mbf{0}\text{对任意}\phi\in U^0\text{都成立}\right\}$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\Rightarrow$:$W^0\subseteq U^0$即任意$\phi\in W^0$有$\phi\in U^0$,于是任意$v\in A_U$有$\phi(v)=\mbf{0}$,即$\phi\in A_W$.\\
+            这表明$A_U\subseteq A_W$,结合\tbf{20.}即$U\subseteq W$.\\
+            $\Leftarrow$:对于任意$\phi\in W^0$和任意$v\in U\subseteq W$有$\phi(v)=\mbf{0}$,即$\phi\in U^0$.于是$W^0\subseteq U^0$.
+        \item 我们有$$W^0=U^0\Leftrightarrow W^0\subseteq U^0,U^0\subseteq W^0\Leftrightarrow U\subseteq W,W\subseteq U\Leftrightarrow U=W$$
+    \end{enumerate}
+\end{proof}
+\begin{problem}[22.]
+    设$V$是有限维的,且$U$和$W$是$V$的子空间.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$(U+W)^0=U^0\cap W^0$.
+        \item 证明:$(U\cap W)^0=U^0+W^0$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 假定$\phi\in(U+W)^0$,于是对于任意$u\in U,w\in W$有
+            $$\phi(u+w)=\phi(u)+\phi(w)=0$$
+            于是对任意$u\in U,w\in W$有$\phi(u)=\phi(w)=0$,即$\phi\in U^0$且$\phi\in W^0$,即$(U+W)^0\in U^0\cap W^0$.\\
+            对于任意$\psi\in V'$满足$\psi\in U^0$且$\psi\in W^0$.对于任意$v\in U+W$,可写作$v=u+w$,其中$u\in U,w\in W$.于是
+            $$\psi(v)=\psi(u+w)=\psi(u)+\psi(w)=0+0=0$$
+            即$\psi\in(U+W)^0$,从而$U^0+W^0\subseteq (U+W)^0$.\\
+            综上可知$(U+W)^0=U^0\cap W^0$.
+        \item 假定$\phi\in(U\cap W)^0$.设$\alpha\in U^0,\beta\in W^0$满足
+    \end{enumerate}
+\end{proof}
+\begin{problem}[23.]
+    设$V$是有限维的,$\li \phi,m\in V'$.证明下面三个集合彼此相等.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\text{span}(\li \phi,m)$.
+        \item $\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)^0$.
+        \item $\left\{\phi\in V':(\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\subseteq\nul\phi\right\}$
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    据\tbf{19.}可知\tbf{(2)}与\tbf{(3)}相等.\\
+    根据\tbf{22.}可知
+    $$\begin{aligned}
+        \left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)^0
+        &= (\nul\phi_1)^0+\left((\nul\phi_2)\cap\cdots\cap(\nul\phi_m)\right)^0 \\
+        &= \text{span}(\phi_1)+\left((\nul\phi_2)\cap\cdots\cap(\nul\phi_m)\right)^0
+    \end{aligned}$$
+    反复递推可知$$\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)^0=\text{span}(\phi_1)+\cdots+\text{span}(\phi_m)=\text{span}(\li\phi,m)$$
+    即\tbf{(1)}与\tbf{(2)}相等.于是题中的三个集合相等.
+\end{proof}
+\begin{problem}[24.]
+    设$V$是有限维的,且$\li v,m\in V$.定义$\Gamma\in\mathcal{L}(V',\F^m)$为$\Gamma(\phi)=\left(\phi(v_1),\cdots,\phi(v_m)\right)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$\li v,m$张成$V$当且仅当$\Gamma$是单射.
+        \item 证明$\li v,m$线性无关当且仅当$\Gamma$是满射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    令$\li e,m$是$\F^m$的标准基,令$\li\psi,m$是这标准基的对偶基.\\
+    令$\Psi\in\mathcal{L}(\F^m,(\F^m)')$为$\Psi(e_k)=\psi_k$.令$T\in\mathcal{L}(\F^m,V)$为$Te_k=v_k$.\\
+    对于任意$\phi\in V'$和任意$1\leqslant k\leqslant m$有
+    $$\begin{aligned}
+        (T'(\phi))(e_k)
+        &= \phi(Te_k)=\phi(v_k)\\
+        &= \sum_{j=1}^{m}\phi(v_j)\psi_j(e_k) \\
+        &= \left[\Psi\left(\phi(v_1),\cdots,\phi(v_m)\right)\right](e_k) \\
+        &= \left[\Psi(\Gamma(\phi))\right](e_k)
+    \end{aligned}$$
+    于是$\Psi\circ\Gamma=T'$.由于$\Psi$是可逆的,于是$T'$和$\Gamma$的单射和满射性互相等价.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有$$V=\text{span}(\li v,m)\Leftrightarrow T\text{是满射}\Leftrightarrow T'\text{是单射}\Leftrightarrow \Gamma\text{是单射}$$
+        \item 我们有$$\li v,m\text{线性无关}\Leftrightarrow T\text{是单射}\Leftrightarrow T'\text{是满射}\Leftrightarrow \Gamma\text{是满射}$$
+    \end{enumerate}
+\end{proof}
+\begin{problem}[25.]
+    设$V$是有限维的,且$\li\phi,m\in V'$.定义$\Gamma\in\mathcal{L}(V,\F^{m})$为$\Gamma(v)=\left(\phi_1(v),\cdots,\phi_m(v)\right)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$\li \phi,m$张成$V'$当且仅当$\Gamma$是单射.
+        \item 证明$\li \phi,m$线性无关当且仅当$\Gamma$是满射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    令$\li e,m$是$\F^m$的标准基,令$\li\psi,m$是这标准基的对偶基.令$\Psi\in\mathcal{L}(\F^m,(\F^m)')$为$\Psi(e_k)=\psi_k$.\\
+    对于任意$(\li x,m)\in\F^m$和任意$v\in V$有
+    $$\begin{aligned}
+        \left[\Gamma'(\Psi(\li x,m))\right](v)
+        &= \Psi(\li x,m)\circ\Gamma(v) \\
+        &= (x_1\psi_1+\cdots+x_m\psi_m)(\phi_1(v),\cdots,\phi_m(v)) \\
+        &= x_1\phi_1(v)+\cdots+x_m\phi_m(v) \\
+        &= (x_1\phi_1+\cdots+x_m\phi_m)(v)
+    \end{aligned}$$    
+    这表明$\Gamma'\circ\Psi:\F^m\to V'$由上式给出.由于$\Psi$是可逆的,于是$\Gamma'\circ\Psi$和$\Gamma'$的单射和满射性互相等价.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有$$V'=\text{span}(\li \phi,m)\Leftrightarrow \Gamma'\circ\Psi\text{是满射}\Leftrightarrow \Gamma'\text{是单射}\Leftrightarrow \Gamma\text{是单射}$$
+        \item 我们有$$\li \phi,m\text{线性无关}\Leftrightarrow \Gamma'\circ\Psi\text{是单射}\Leftrightarrow \Gamma'\text{是满射}\Leftrightarrow \Gamma\text{是满射}$$
+    \end{enumerate}
+\end{proof}
+\begin{problem}[26.]
+    设$V$是有限维的,且$\Omega$是$V'$的子空间.证明:$\Omega=\left\{v\in V:\phi(v)=0\text{对任意}\phi\in\Omega\text{成立}\right\}^0$.
+\end{problem}
+\begin{proof}
+    设$U=\left\{v\in V:\phi(v)=0\text{对任意}\phi\in\Omega\text{成立}\right\}$.设$\li\phi,m$为$\Omega$的一组基.\\
+    根据$U$的定义可知$U\subseteq\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)$.\\
+    现在,对于任意$v\in\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)$和给定的$\phi\in\Omega$有
+    $$\phi(v)=(a_1\phi_1+\cdots+a_m\phi_m)(v)=a_1\phi_1(v)+\cdots+a_m\phi_m(v)=0$$
+    这表明$v\in U$.于是$\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)\subseteq U$.根据\tbf{23.}可知
+    $$U^0=\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)^0=\text{span}(\phi_1,\cdots,\phi_m)=\Omega$$
+    命题得证.
+\end{proof}
+\begin{problem}[27.]
+    设$T\in\mathcal{L}\left(\mathcal{P}_5(\R)\right)$且$\nul T'=\text{span}(\phi)$,其中$\phi\in(\mathcal{P}(\R))'$,定义为$\phi(p)=p(8)$.试证明
+    $$\range T=\left\{p\in\mathcal{P}_5(\R):p(8)=0\right\}$$
+\end{problem}
+\begin{proof}
+    据\tbf{20.}有$\range T=\left\{p\in\mathcal{P}_5(\R):\psi(p)=0\text{对任意}\psi\in(\range T)^0\text{成立}\right\}$.\\
+    又$(\range T)^0=\nul T'=\text{span}(\phi)$,于是
+    $$\begin{aligned}
+        \psi(p)=0\text{对任意}\psi\in(\range T)^0\text{成立}
+        &\Leftrightarrow \psi(p)=0\text{对任意}\psi\in\text{span}(\phi)\text{成立} \\
+        &\Leftrightarrow \lambda\phi(p)=0\text{对任意}\lambda\in\F\text{成立} \\
+        &\Leftrightarrow \phi(p)=0 \Leftrightarrow p(8)=0
+    \end{aligned}$$
+    于是$\range T=\left\{p\in\mathcal{P}_5(\R):p(8)=0\right\}$.命题得证.
+\end{proof}
+\begin{problem}[28.]
+    设$V$是有限维的,且$\li\phi,m\in V'$线性无关.证明$\dim\left((\nul\phi_1)\cap\cdots\cap(\nul\phi_m)\right)=(\dim V)-m$.
+\end{problem}
+\begin{proof}
+    令$U=(\nul\phi_1)\cap\cdots\cap(\nul\phi_m)$.\\
+    据\tbf{23.}可知$\text{span}(\li\phi,m)=U^0$.又有$\dim V=\dim U+\dim U^0$.于是
+    $$\begin{aligned}
+        \dim U
+        &= \dim V-\dim U^0 \\
+        &= \dim V-\dim\left(\text{span}(\li\phi,m)\right) \\
+        &= \dim V-m
+    \end{aligned}$$
+    于是命题得证.
+\end{proof}
+\begin{problem}[29.]
+    设$V$和$W$是有限维的,且$T\in\mathcal{L}(V,W)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:如果$\phi\in W'$且$\nul T'=\text{span}(\phi)$,那么$\range T=\nul\phi$.
+        \item 证明:如果$\psi\in V'$且$\range T'=\span(\psi)$,那么$\nul T=\nul\psi$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 据\tbf{20.}有$\range T=\left\{w\in W:\psi(w)=0\text{对任意}\psi\in(\range T)^0\text{成立}\right\}$.\\
+            又$(\range T)^0=\nul T'=\text{span}(\phi)$,于是
+            $$\begin{aligned}
+                \psi(w)=0\text{对任意}\psi\in(\range T)^0\text{成立}
+                &\Leftrightarrow \psi(w)=0\text{对任意}\psi\in\text{span}(\phi)\text{成立} \\
+                &\Leftrightarrow \lambda\phi(w)=0\text{对任意}\lambda\in\F\text{成立} \\
+                &\Leftrightarrow \phi(w)=0 \Leftrightarrow w\in\nul\phi
+            \end{aligned}$$
+            于是$\range T=\nul\phi$,命题得证.
+        \item 据\tbf{20.}有$\nul T=\left\{v\in V:\phi(v)=0\text{对任意}\phi\in(\nul T)^0\text{成立}\right\}$.\\
+            又$(\nul T)^0=\range T'=\span(\psi)$,于是
+            $$\begin{aligned}
+                \psi(v)=0\text{对任意}\phi\in(\nul T)^0\text{成立}
+                &\Leftrightarrow \phi(v)=0\text{对任意}\phi\in\text{span}(\psi)\text{成立} \\
+                &\Leftrightarrow \lambda\psi(v)=0\text{对任意}\lambda\in\F\text{成立} \\
+                &\Leftrightarrow \psi(v)=0 \Leftrightarrow v\in\nul\psi
+            \end{aligned}$$
+            于是$\nul T=\nul\psi$,命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[30.]
+    设$V$是有限维的,且$\li\phi,m$是$V'$的一个基.试证明存在$V$的基使得其对偶基为$\li\phi,m$.
+\end{problem}
+\begin{proof}
+    令$\displaystyle U_k=\bigcap_{j\in\left\{1,\cdots,m\right\}\backslash \left\{k\right\}}\left(\nul\phi_j\right)$.\\
+    据\tbf{28.}可知$\dim U_k=\dim V-(m-1)=1$.又$\displaystyle\bigcap_{j=1}^{m}\left(\nul\phi_j\right)=\left\{\mbf{0}\right\}$.\\
+    于是一定存在$u_k\in U_k$使得$u_k\notin\nul\phi_k$,即$\phi_k(u_k)\neq 0$.定义$v_k=\dfrac{u_k}{\phi_k(u_k)}$,显然$v_k$可以作为$U_k$的基.\\
+    设$v=a_1v_1+\cdots+a_mv_m\in V$,于是$\phi_k(v)=a_k$.\\
+    这表明$v=\mbf{0}$当且仅当$\li a=m=0$,于是$\li v,m$线性无关,又其长度为$m$,于是这向量组是$V$的基.\\
+    对于任意$1\leqslant j\leqslant m$且$j\neq m$有
+    $$\left\{\begin{array}{l}
+        \phi_k(v_k)=1\\
+        \phi_j(v_k)=0,\forall j\neq k
+    \end{array}\right.$$
+    于是$\li\phi,m$是$\li v,m$的对偶基.命题得证.
+\end{proof}
+\begin{problem}[31.]
+    设$U$是$V$的子空间,令$i:U\to V$为包含映射.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$\nul i'=U^0$.
+        \item 证明:如果$V$是有限维的,那么$\range i'=U'$.
+        \item 证明:如果$V$是有限维的,那么$\tilde{i'}$是$V'/U^0$映到$U'$的同构映射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有$\nul i'=(\range i)^0=U^0$.
+        \item 对于任意$\phi\in U'$,都可以被扩充为$V$上的线性泛函$\psi$.\\
+            $i'$的定义表明$i'(\psi)=\psi\circ i=\phi$,由此$\phi\in\range i'$,于是$\range i'=U'$.
+        \item 我们有$\dim\left(V'/U^0\right)=\dim V'-(\dim V-\dim U)=\dim U=\dim U'$.只需证明$\tilde{i'}$是单射即可.\\
+            对任意$\phi+U^0\in V'/U^0$有$$\tilde{i'}\left(\phi+U^0\right)=i'(\phi)=\phi\circ i$$
+            由于$i\neq\mbf{0}$,于是$\tilde{i'}\left(\phi+U^0\right)=\mbf{0}_{U'}$当且仅当$\phi=\mbf{0}_{V'}$,即$\phi+U^0=\mbf{0}_{V'/U^0}$.于是$\tilde{i'}$是单射.\\
+            综上可知$\tilde{i'}$是$V'/U^0$映到$U'$的同构映射.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[32.]
+    $V$的\tbf{双重对偶空间}记为$V''$,定义为$V'$的对偶空间.定义$\Lambda:V\to V''$为
+    $$(\Lambda v)(\phi)=\phi(v)$$对任意$v\in V$和$\phi\in V'$都成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$\Lambda$是$V$到$V''$的线性映射.
+        \item 证明:如果$T\in\mathcal{L}(V)$,那么$T''\circ\Lambda=\Lambda\circ T$.
+        \item 证明:如果$V$是有限维的,那么$\Lambda$是$V$到$V''$的同构映射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 以下的$\phi\in V'$是任意选取的.\\
+            $(\Lambda(\mbf{0})_V)(\phi)=\phi(\mbf{0}_V)=0$,于是$\Lambda(\mbf{0}_V)=\mbf{0}_{V''}$.\\
+            对于任意$u,v\in V$有
+            $$(\Lambda(u+v))(\phi)=\phi(u+v)=\phi(u)+\phi(v)=(\Lambda(u))(\phi)+(\Lambda(v))(\phi)=(\Lambda(u)+\Lambda(v))(\phi)$$
+            于是$\Lambda(u+v)=\Lambda(u)+\Lambda(v)$,这表明$\Lambda$满足可加性.\\
+            对于任意$v\in V$和$\lambda\in\F$有
+            $$(\Lambda(\lambda v))(\phi)=\phi(\lambda v)=\lambda\phi(v)=\lambda\cdot(\Lambda(v))(\phi)=(\lambda\Lambda(v))(\phi)$$
+            于是$\Lambda(\lambda v)=\lambda(\Lambda(v))$,这表明$\Lambda$满足齐次性.\\
+            于是$\Lambda$是$V$到$V''$的线性映射.
+        \item 对于任意$v\in V$和任意$\phi\in V'$有
+            $$\begin{aligned}
+                \left[(T''\circ\Lambda)(v)\right](\phi)
+                &= \left[T''(\Lambda(v))\right](\phi) = [(\Lambda(v))\circ T'](\phi) = (\Lambda(v))(T'(\phi)) \\
+                &= (T'(\phi))(v) = (\phi\circ T)(v) = \phi(Tv) = [\Lambda(Tv)](\phi) \\
+                &= [(\Lambda\circ T)(v)](\phi)
+            \end{aligned}$$
+            这表明$T''\circ\Lambda=\Lambda\circ T$,命题得证.
+        \item 首先有$\dim V=\dim V'=\dim V''$.\\
+            设$\li v,m$是$V$的一组基,$\li\phi,m$是其对偶基.令$v:=a_1v_1+\cdots+a_nv_n\in V$使得$\Lambda v=\mbf{0}_{V''}$.\\
+            即对于任意$\phi\in V'$,$\phi(v)=0$.而对于任意$1\leqslant k\leqslant m$有
+            $$\phi_k(v)=\phi_k(a_1v_1+\cdots+a_nv_n)=a_k$$
+            于是$\li a=m=0$.这表明$\Lambda v=\mbf{0}$当且仅当$v=\mbf{0}$,即$\nul\Lambda=\left\{\mbf{0}\right\}$.于是$\Lambda$是单射.\\
+            综上可知$\Lambda$是$V$到$V''$的同构.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[33.]
+    设$U$是$V$的子空间.令$\pi:V\to V/U$是商映射.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$\pi'$是单射.
+        \item 证明:$\range\pi'=U^0$.
+        \item 证明:$\pi'$是$(V/U)'$映到$U^0$的同构映射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 根据商映射的定义,对于任意$v+U\in V/U$都存在$v\in V$使得$\pi(v)=v+U$.于是$\pi$是满射,进而$\pi'$是单射.
+        \item 对于任意$u\in U$有$u+U=\mbf{0}_{V}+U=\mbf{0}_{V/U}$,即$\nul\pi=U$.于是$\range \pi'=(\nul\pi)^0=U^0$.
+        \item 由\tbf{(1)}可知$\pi'$是单射,由\tbf{(2)}可知$\pi'$是满射.于是$\pi'$是$(V/U)'$映到$U^0$的同构映射.
+    \end{enumerate}
+\end{proof}
+\end{document}

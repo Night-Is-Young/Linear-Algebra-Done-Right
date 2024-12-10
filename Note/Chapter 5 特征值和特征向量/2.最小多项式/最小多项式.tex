@@ -1,0 +1,154 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 最小多项式\end{center}
+\tbf{1.复空间上特征值的存在性}\\
+现在我们给出关于有限维复向量空间上算子的一个核心结论.
+\begin{formal}[1.1 特征值的存在性]
+    非零有限维复向量空间上的每个算子都有特征值.
+\end{formal}
+\begin{proof}
+    设$V$是有限维复向量空间,置$n=\dim V>0$.对于$T\in\mathcal{L}(V)$取$v\neq\mbf{0}\in V$,于是
+    $$v,Tv,T^2v,\cdots,T^nv$$
+    不是线性无关的,因为这组的长度为$n+1$.于是存在次数最小的多项式$p\in\P(\C)$使得$(p(T))(v)=\mbf{0}$.\\
+    根据代数基本定理,存在$\lambda\in\C$使得$p(\lambda)=0$,因此存在多项式$q\in\P(\C)$使得$$p(z)=(z-\lambda)q(z)$$
+    由此可得$\mbf{0}=p(T)(v)=(T-\lambda I)\left(q(T)(v)\right)$.\\
+    由于$p$是次数最小的使得$p(T)(v)=\mbf{0}$的多项式,又$\deg q<\deg p$,于是$q(T)(v)\neq\mbf{0}$.这表明$T$的特征值为$\lambda$,特征向量为$q(T)(v)$.
+\end{proof}\noindent
+上述结论中的数域不能替换为$\R$,且要求必须是有限维.你可以自行举出反例印证之.\\
+\tbf{2.特征值与最小多项式}\\
+我们先引入首一多项式的定义.
+\begin{definition}[2.1 定义:首一多项式]
+    \tbf{首一多项式}是最高次项系数为$1$的多项式.
+\end{definition}\noindent
+例如,多项式$z^7-7z^5+2$就是次数为$7$的首一多项式.
+\begin{formal}[2.2 最小多项式的存在唯一性和次数]
+    设$V$是有限维的,$T\in\L(V)$,则存在唯一的次数最小的首一多项式$p\in\P(\F)$使得$p(T)=\mbf{0}$,且$\deg p\leqslant \dim V$.
+\end{formal}
+\begin{proof}
+    若$\dim V=0$,那么$I$就是$V$上的零算子,取$p$为常值$1$即可.\\
+    现在对$\dim V$采用归纳法.假设$\dim V>0$,且欲证结论对所有维数小于$\dim V$的空间和其上所有算子都成立.\\
+    设$u\in V$,于是$u,Tu,\cdots,T^{\dim V}u$的长度为$\dim V+1$,因而这组线性相关.\\
+    据线性相关性引理,存在$m\leqslant\dim V$使得$T^mu$是$u,Tu,\cdots,T^{m-1}u$的线性组合.\\
+    于是存在$c_0,\cdots,c_{m-1}\in\F$使得
+    $$c_0u+c_1Tu+\cdots+c_{m-1}T^{m-1}u+T^mu=\mbf{0}$$
+    定义首一多项式$q\in\P_m(\F)$为$q(z)=c_0+c_1z+\cdots+c_{m-1}z^{m-1}+z^{m}$,那么上式表明$q(T)(u)=\mbf{0}$.\\
+    对于任意$k\in\N$,有$q(T)(T^ku)=T^k(q(T)(u))=T^k(\mbf{0})=\mbf{0}$.\\
+    线性相关性引理表明$u,Tu,\cdots,T^{m-1}u$线性无关,于是$\dim\nul q(T)\geqslant m$.因此
+    $$\dim\range q(T)=\dim V-\dim\nul q(T)\leqslant \dim V-m$$
+    由于$\range q(T)$在$T$下不变,从而我们可将归纳假设应用于$\range q(T)$上的算子$T\vert_{\range q(T)}$,从而亦存在首一多项式$s\in\P(\F)$使得
+    $$\deg s\leqslant\dim V-m\text{  且  }s\left(T\vert_{\range q(T)}\right)=\mbf{0}$$
+    因此对于所有$v\in V$都有
+    $$\left((sq)(T)\right)(v)=s(T)(q(T)(v))=\mbf{0}$$
+    于是$sq$是满足$\deg sq\leqslant\dim V$且$(sq)(T)=\mbf{0}$的首一多项式.\\
+    由上面的归纳证明可知存在性的成立.\\
+    令$p,r\in\P(\F)$是使得$p(T)=r(T)=\mbf{0}$成立的次数最小的首一多项式.于是有$(p-r)(T)=\mbf{0}$.\\
+    若$p-r\neq\mbf{0}$,那么$0<\deg (p-r)<\deg p$,将上式除以$p-r$的最高次项系数将得到一个次数更低的首一多项式使得其作用于$T$后得到零算子.这与我们假设$p$的次数最小矛盾,于是必然有$p-r=\mbf{0}$,即$p=r$.从而这多项式唯一存在.\\
+    综合上述证明,可知原命题成立.
+\end{proof}\noindent
+既然我们证明了这样的多项式唯一存在,我们便可以对其进行定义.
+\begin{definition}[2.3 定义:最小多项式]
+    设$V$是有限维的,且$T\in\L(V)$,那么$T$的\tbf{最小多项式}是唯一使得$p(T)=\mbf{0}$成立的次数最小的首一多项式$p\in\P(\F)$.
+\end{definition}\noindent
+于是我们可以知道特征值和最小多项式之间的联系.
+\begin{formal}[2.4 特征值即最小多项式的零点]
+    设$V$是有限维的,$T\in\L(V)$.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$的最小多项式的零点即$T$的特征值.
+        \item 若$V$是复向量空间,那么$T$的最小多项式具有如下形式
+            $$\left(z-\lambda_1\right)\cdots\left(z-\lambda_m\right)$$
+            其中$\li\lambda,m$是$T$的所有特征值(可能有重复).
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    令$p$是$T$的最小多项式.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 假设$\lambda\in\F$使得$p(\lambda)=0$.那么存在首一多项式$q\in\P(\F)$使得$p(z)=(z-\lambda)q(z)$.\\
+            由于$p(T)=\mbf{0}$,于是对于任意$v\in V$都有
+            $$\mbf{0}=p(T)v=(T-\lambda I)(q(T)v)$$
+            由于$p$是最小多项式,又$\deg q<\deg p$,于是$q(T)\neq\mbf{0}$.因而存在$v\in V$使得$q(T)v\neq\mbf{0}$.\\
+            于是$\lambda$是$T$的特征值,特征向量为$q(T)v$.\\
+            现在证明$T$的每个特征值都是$p$的零点.设$\lambda\in\F$是$T$的一个特征值,于是存在$v\neq\mbf{0}\in V$使得$Tv=\lambda v$.\\
+            将$T$反复作用于上式两端可知对于任意$k\in\N$,$T^kv=\lambda^kv$,于是
+            $$\mbf{0}=p(T)v=p(\lambda)v$$
+            由于$v\neq\mbf{0}$,于是$p(\lambda)=0$,这表明$\lambda$是$p$的零点.
+        \item 利用\tbf{(a)}和代数基本定理即可证明之.
+    \end{enumerate}
+\end{proof}\noindent
+根据代数基本定理,我们也可以根据上面的定理得知$T$的特征值数目不超过$\dim V$.\\
+下面的定理完整地刻画了所有作用于$T$得到零算子的多项式.
+\begin{formal}[2.5 得到零算子的多项式]
+    设$V$是有限维的,$T\in\L(V)$,且$q\in\P(\F)$,那么$q(T)=\mbf{0}$当且仅当$q$是$T$的最小多项式的多项式倍.
+\end{formal}
+\begin{proof}
+    令$p$为$T$的最小多项式.\\
+    $\Rightarrow$:若$q(T)=\mbf{0}$.根据多项式的带余除法,存在$s,r\in\P(\F)$使得$q=ps+r$且$\deg r<\deg p$.\\
+    我们有$\mbf{0}=q(T)=p(T)s(T)+r(T)=r(T)$.若$r\neq\mbf{0}$,那么将$r$除以其最高次项系数就将得到一个次数更低的最小多项式,这与$p$是$T$的最小多项式不符.于是必然有$q=ps$.\\
+    $\Leftarrow$:设$q=ps$,其中$s\in\P(\F)$.于是$q(T)=p(T)s(T)=\mbf{0}s(T)=\mbf{0}$.
+\end{proof}\noindent
+上面的结论有一个很漂亮的推论.
+\begin{formal}[2.6 受限算子的最小多项式]
+    设$V$是有限维的,$T\in\L(V)$,且$U$是$V$在$T$下不变的子空间.那么$T$的最小多项式是$T\vert_U$的最小多项式的多项式倍.
+\end{formal}
+\begin{proof}
+    设$p$是$T$的最小多项式,可知对于任意$v\in V$有$p(T)v=\mbf{0}$.特别地,对任意$u\in U$有$p(T)u=\mbf{0}$,即$p(T\vert_U)=\mbf{0}$.\\
+    将\tbf{2.5}的结论应用于此,可知$p$是$T\vert_U$的最小多项式的多项式倍.
+\end{proof}\noindent
+下面的结论表明,最小多项式的常数项决定了这个算子是否可逆.
+\begin{formal}[2.7 $T$的可逆性与其最小多项式的常数项]
+    设$V$是有限维的,$T\in\L(V)$.那么$T$不可逆当且仅当$T$的最小多项式的常数项为$0$.
+\end{formal}
+\begin{proof}
+    设$p$是$T$的最小多项式,那么
+    $$T\text{不可逆}\Leftrightarrow0\text{是}T\text{的特征值}\Leftrightarrow0\text{是}p\text{的零点}\Leftrightarrow p\text{的常数项为}0$$
+\end{proof}\noindent
+\tbf{3.奇数维实向量空间上的特征值}\\
+下面的结论将是我们证明奇数维实向量空间上的算子都有特征值的关键工具.
+\begin{formal}[3.1 偶数维的零空间]
+    设$\F=\R$且$V$是有限维的,并设$T\in\L(V)$,$b,c\in\R$使得$b^2<4c$.那么$\dim\nul(T^2+bT+cI)$是偶数.
+\end{formal}
+\begin{proof}
+    由不变子空间的知识可得$\nul(T^2+bT+cI)$在$T$下不变.令$U=\nul(T^2+bT+cI)$且$S=T|_U$,我们只需证明$\dim U$为偶数.\\
+    设$\lambda\in\R$及$u\in U$使得$Su=\lambda u$.那么
+    $$\mbf{0}=(T^2+bT+cI)u=(\lambda^2+b\lambda+c)u$$
+    而$\lambda^2+b\lambda+c>0$,于是上式成立当且仅当$v=\mbf{0}$.于是$S$没有特征向量.\\
+    令$W$是$U$在$S$下的不变子空间,并且在所有在$S$下不变的维数为偶数的子空间中$W$的维数最大.\\
+    若$W=U$,那么命题得证.否则,设存在$x\in U$使得$x\notin W$.令$X=\span(x,Tx)$.\\
+    对于任意$\alpha x+\beta Tx\in X$有$T(\alpha x+\beta Tx)=\beta T^2x+\alpha Tx=(\alpha-b\beta)Tx-c\beta x\in X$.于是$X$在$S$下不变.\\
+    我们有$\dim X=2$,否则$x$将成为$S$的特征向量.于是
+    $$\dim(W+X)=\dim W+\dim X-\dim(W\cap X)=\dim W+2$$
+    其中$W\cap X=\left\{\mbf{0}\right\}$,否则$\dim(W\cap X)=1$表明$W\cap X$在$S$下不变.\\
+    由于$W+X$在$S$下不变,于是存在比$W$更大的子空间使得其维数为偶数,这与我们假设$W$是这样的子空间中维数最大的不符.\\
+    于是只能有$U=W$,从而$\dim U$为偶数.
+\end{proof}\noindent
+于是我们便可以证明以下命题.
+\begin{formal}[3.2 奇数维向量空间上的算子]
+    奇数维向量空间上的每个算子都有特征值.
+\end{formal}
+\begin{proof}
+    设$\F=\R$且$V$是有限维的.令$n=\dim V$,并设$n$为奇数.令$T\in\L(V)$.\\
+    为证明$T$有特征值,对$n$采取步长为$2$的归纳法.\\
+    首先,$n=1$时命题显然成立,此时$V$中的任意非零向量都是$T$的特征向量.\\
+    当$n\geqslant 3$时,假定上述命题对所有小于$n$的奇数均成立.令$p$为$T$的最小多项式.\\
+    若存在$\lambda\in\R,r\in\P(\R)$使得$p(x)=(x-\lambda)r(x)$,那么$\lambda$自然是$T$的特征值,这就证明完成.\\
+    若不存在这样的$\lambda$和$r$,那么必然存在$b,c\in\R$且$b^2<4c$和$r\in\P(\R)$使得$p(x)=(x^2+bx+c)r(x)$.\\
+    于是有$$\mbf{0}=p(T)=(q(T))(T^2+bT+cI)$$
+    由此,$q(T)=\mbf{0}_{\range(T^2+bT+cI)}$.由于$\deg q<\deg p$,于是$\range(T^2+bT+cI)\neq V$(否则$q$是$T$的最小多项式).\\
+    由线性映射基本定理有
+    $$\dim V=\dim\nul(T^2+bT+cI)+\dim\range(T^2+bT+cI)$$
+    由于$\dim V$是奇数,$\dim\nul(T^2+bT+cI)$是偶数,于是$\dim\range(T^2+bT+cI)$是奇数.\\
+    根据我们的归纳假设,$T\vert_{\range(T^2+bT+cI)}$具有特征值,于是$T|_V$具有特征值.
+\end{proof}
+\end{document}

@@ -1,0 +1,114 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 不变子空间\end{center}
+\tbf{1.特征值}\\
+我们从算子开始本章的叙述.
+\begin{definition}[1.1 定义:算子]
+    称从一个向量空间到其本身的线性映射为\tbf{算子}.
+\end{definition}\noindent
+当一个空间$V$较为复杂的时候,研究它的算子$T$时我们可能会想到将它分解为$V=\li V\oplus m$,然后研究各$T\vert_{V_k}$.%
+这通常会使得问题简单些.然而有时候我们会遇到一个问题:$T$可能并不是$V_k$上的算子,它可以将$V_k$中的元素映到其它子空间中.%
+因此我们在研究问题时,总是选取这样的子空间,使得$T$也是这些子空间上的算子.我们做如下定义.
+\begin{definition}[1.2 定义:不变子空间]
+    设$U$是$V$的子空间.对于$T\in\mathcal{L}(V)$,若对任意$u\in U$均有$Tu\in U$,则称$U$在$T$下是\tbf{不变的}.
+\end{definition}\noindent
+例如,对于$T\in\mathcal{L}$,可以验证$\nul T,\range T,\left\{\mbf{0}\right\}$和$V$本身均为在$T$下的不变子空间.\\
+现在,我们先来研究最简单的非平凡不变子空间,即维数为$1$的不变子空间.设$v\neq\mbf{0}\in V$,令$U=\span(v)$.\\
+那么$U$即$V$的一维子空间.我们假定$U$在$T$下不变,那么对于任意$u\in U$都有$Tu\in U$,即存在$\lambda\in F$使得$Tu=\lambda u$.\\
+在下面的定义中,我们将反复地运用$Tv=\lambda v$这一条件.
+\begin{definition}[1.3 定义:特征值]
+    设$T\in\mathcal{L}(V)$.对于标量$\lambda\in\F$,若存在$v\neq\mbf{0}\in V$使得$Tv=\lambda v$,则称$\lambda$为$T$的\tbf{特征值}.
+\end{definition}\noindent
+下面的定理揭示了存在特征值的等价条件.
+\begin{formal}[1.4 成为特征值的等价条件]
+    设$V$是有限维的,$T\in\mathcal{L}(V)$且$\lambda\in\F$,那么如下几个命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $\lambda$是$T$的特征值.
+        \item $T-\lambda I$不是单射.
+        \item $T-\lambda I$不是满射.
+        \item $T-\lambda I$不可逆.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \tbf{(a)}与\tbf{(b)}等价是因为$Tv=\lambda v\Leftrightarrow (T-\lambda I)(v)=\mbf{0}$.\\
+    后面三者的等价性在线性映射的可逆一节已经说明.
+\end{proof}
+\begin{definition}[1.5 定义:特征向量]
+    设$T\in\mathcal{L}(V)$且$\lambda\in\F$是$T$的特征值.若向量$v\in V$满足$v\neq\mbf{0}$且$Tv=\lambda v$,那么称$v$是$T$对应于$\lambda$的\tbf{特征向量}.
+\end{definition}\noindent
+我们给出一个例子.设$T\in\mathcal{L}(\F^2):(w,z)\mapsto(-z,w)$.\\
+若$\F=\R$,那么$T$有特征值$\lambda\in\R$即存在$w,z\in\R$使得
+$$-z=\lambda w,w=\lambda z$$
+即$\lambda^2=-1$.这方程在$\R$上无解,也即$T$没有特征值和特征向量.\\
+从几何上理解,$T$即将向量$(w,z)$逆时针旋转90°.没有任何一个非零向量在这样的旋转操作后还能与原来共线的,于是$T$也就没有特征向量和特征值.\\
+若$\F=\C$,那么同理可知$\lambda=\i\text{或}-\i$.\\
+于是$T$有特征值$\i$和$-\i$,对应的特征向量分别为$(w,-w\i)$和$(w,w\i)$,其中$w\neq 0$.\\
+上面的例子告诉我们,在本章的研究中数域$\F$的选取是重要的.
+\begin{formal}[1.6 线性无关的特征向量]
+    设$T\in\mathcal{L}(V)$,那么分别对应于$T$的不同特征值的特征向量构成的每个组都线性无关.
+\end{formal}
+\begin{proof}
+    假定欲证明的结论错误,那么存在最小的$m\in\N^*$使得$T$对应于其互异的特征值$\li\lambda,m$的特征向量$\li v,m$线性相关.于是存在$\li a,m\in\F$,其中各数均非零(根据$m$的最小性),使得
+    $$a_1v_1+\cdots+a_mv_m=\mbf{0}$$
+    将$T-\lambda_mI$作用于上式的两端可知
+    $$a_1\left(\lambda-\lambda_m\right)v_1+\cdots+a_{m-1}\left(\lambda_{m-1}-\lambda_m\right)=\mbf{0}$$
+    由于$a_1,\cdots,a_{m-1}$均非零,而$\li\lambda,m$各不相同,于是上式中各$v_k$的系数均非零.\\
+    这表明$\li v,{m-1}$线性相关,而这与线性相关组最小长度为$m$不符.于是命题得证.
+\end{proof}\noindent
+我们可以根据上面的证明得出下面的结论.
+\begin{formal}[1.7 算子的特征值数目]
+    设$V$是有限维的,那么$V$上的算子至多有$\dim V$个互异特征值.
+\end{formal}\noindent
+这是容易说明的,因为互异的特征值对应了相同数目的线性无关向量,这向量组的长度必然不大于$V$的维数.\\
+\tbf{2.将多项式作用于算子}\\
+算子的理论比一般的线性映射更丰富的原因在于算子可以自乘为幂.本小节将给出算子的幂和将多项式作用于算子的定义.
+\begin{definition}[2.1 定义:算子的幂]
+    设$T\in\mathcal{L}(V)$,$m\in\N^*$.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 定义$T^m\in\mathcal{L}(V)$为$T^m=\underbrace{T\cdots T}_{m\text{个}T}$.
+        \item 定义$T^0$为$V$上的恒等算子$I$.
+        \item 若$T$是可逆的,记$T$的逆为$T^{-1}$,定义$T^{-m}\in\mathcal{L}(V)$为$T^{-m}=\left(T^{-1}\right)^m$.
+    \end{enumerate}
+\end{definition}\noindent
+于是线性映射的整数幂次有了定义.我们自然地想到多项式的定义,并把它们联系起来.
+\begin{definition}[2.2 定义:算子的多项式]
+    设$T\in\mathcal{L}(V)$且$p\in\mathcal{P}(\F)$是由下式给出的多项式:对于任意$z\in\F$有
+    $$p(z)=a_0+a_1z+a_2z^2+\cdots+a_mz^m$$
+    那么$p(T)$是$V$上的算子,定义为
+    $$p(T)=a_0I+a_1T+a_2T^2+\cdots+a_mT^m$$
+\end{definition}\noindent
+算子的多项式自然可以进行相应的加法和乘法.现在我们定义其乘积.
+\begin{definition}[2.3 定义:多项式的乘积]
+    对于$p,q\in\in\mathcal{P}(\F)$,那么$p$与$q$的乘积$pq$是按$\forall z\in\F,(pq)(z)=p(z)q(z)$定义的多项式.
+\end{definition}\noindent
+以及,自然地,我们有如下性质.
+\begin{formal}[2.4 乘积的性质]
+    设$p,q\in\in\mathcal{P}(\F)$且$T\in\mathcal{L}(V)$.那么$(pq)(T)=p(T)q(T)=q(T)p(T)$.
+\end{formal}\noindent
+证明这一点也是容易的,只需展开即可.\\
+之前我们已经看到了不变子空间的例子,例如$\range T$和$\nul T$均在$T$下不变.我们接下来将看到这两个空间在$T$的任意多项式下均不变.
+\begin{formal}[2.5 $p(T)$的值域和零空间在$T$下不变]
+    设$\mathcal{L}(V)$和$p\in\mathcal{P}(\F)$,那么$\nul p(T)$和$\range p(T)$在$T$下不变.
+\end{formal}
+\begin{proof}
+    设$u\in\nul p(T)$,那么$(p(T))(u)=\mbf{0}$.于是
+    $$(p(T))(Tu)=(p(T)T)(u)=(Tp(T))(u)=T((p(T))(u))=T(\mbf{0})=\mbf{0}$$
+    从而$Tu\in\nul p(T)$,即$\nul p(T)$在$T$下不变.\\
+    设$u\in\range p(T)$,于是存在$v\in V$使得$u=(p(T))(v)$.于是
+    $$Tu=T((p(T))(v))=(p(T))(Tv)$$
+    因此$Tu\in\range p(T)$,即$\range p(T)$在$T$下不变.
+\end{proof}
+\end{document}

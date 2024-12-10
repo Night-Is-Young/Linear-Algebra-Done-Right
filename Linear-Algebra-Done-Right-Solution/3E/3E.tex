@@ -12,6 +12,9 @@
 \geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
 
 \begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 3E}
+\end{center}
 \begin{problem}[1.]
     设$T$是$V$到$W$的函数.$T$的\tbf{图(Graph)}是$V\times W$的子集,定义为
     $$\mathcal{G}(T)=\left\{(v,Tv)\in V\times W:v\in V\right\}$$
@@ -37,18 +40,28 @@
     设$\li V,m$是向量空间.证明$\mathcal{L}(\li V\times m,W)$和$\mathcal{L}(V_1,W)\times\cdots\times\mathcal{L}(V_m,W)$是同构向量空间.
 \end{problem}
 \begin{proof}
-    我们有$$\begin{aligned}
-        \dim(\mathcal{L}(\li V\times m),W)
-        &= \dim(\li V\times m)\cdot(\dim W) \\
-        &= (\li {\dim V}+m)(\dim W)
+    设$\Phi:\mathcal{L}(V_1,W)\times\cdots\times\mathcal{L}(V_m,W)\to\mathcal{L}(\li V\times m,W)$.\\
+    其中$\Phi(\li T,m):\left(\li V\times m\right)\to W$满足$\Phi(\li T,m)(\li v,m)=T_1v_1+\cdots+T_mv_m$.\\
+    不难验证$\Phi$是线性映射.\\
+    再定义$\iota_k:V_k\to\li V\times m$,使得对于任意$v_k\in V_k$有$\iota_k(v_k)=(\mbf{0},\cdots,v_k,\cdots,\mbf{0})$.其中$v_k$出现在第$k$个位置.\\
+    不难验证各$\iota_k$也是线性映射.\\
+    再设$\Psi:\mathcal{L}(\li V\times m,W)\to\mathcal{L}(V_1,W)\times\cdots\times\mathcal{L}(V_m,W)$.\\
+    其中,对于任意$T\in\mathcal{L}(\li V\times m,W)$有$\Psi(T)=\left(T\circ\iota_1,\cdots,T\circ\iota_m\right)$.\\
+    现在,对于任意$\left(\li T,m\right)\in\mathcal{L}(V_1,W)\times\cdots\times\mathcal{L}(V_m,W)$都有
+    $$\Psi\left(\Phi(\li T,m)\right)=(\Phi(\li T,m)\circ\iota_1,\cdots,\Phi(\li T,m)\circ\iota_m)$$
+    对于任意$1\leqslant k\leqslant m$和任意$v_k\in V_k$有
+    $$\left(\Phi(\li T,m)\circ\iota_k\right)(v_k)=T_1(\mbf{0})+\cdots+T_k(v_k)+\cdots+T_m(\mbf{0})=T_k(v_k)$$
+    于是$\Phi(\li T,m)\circ\iota_k=T_k$,从而$\Psi\Phi=I$.\\
+    现在,对于任意$T\in\mathcal{L}(\li V\times m,W)$和任意$(\li v,m)\in\li V\times m$有
+    $$\begin{aligned}
+        \Phi\left(\Psi(T)\right)(\li v,m)
+        &= \Phi\left(T\circ\iota_1,\cdots,T\circ\iota_m\right)(\li v,m) \\
+        &= (T\circ\iota_1)(v_1)+\cdots+(T\circ\iota_m)(v_m) \\
+        &= T(v_1,\cdots,\mbf{0})+\cdots+T(\mbf{0},\cdots,v_m) \\
+        &= T(\li v,m)
     \end{aligned}$$
-    又有$$\begin{aligned}
-        \dim\left(\mathcal{L}(V_1,W)\times\cdots\times\mathcal{L}(V_m,W)\right)
-        &= \dim(\mathcal{L}(V_1,W))+\cdots+\dim(\mathcal{L}(V_m,W)) \\
-        &= (\dim V_1)(\dim W)+\cdots+(\dim V_m)(\dim W) \\
-        &= (\li {\dim V}+m)(\dim W)
-    \end{aligned}$$
-    于是两者维数相同,因而它们同构.
+    于是$(\Phi\Psi)(T)=T$,即$\Phi\Psi=I$.\\
+    综上可知$\Phi$是可逆的,它的逆是$\Psi$.于是题中的两个向量空间同构.
 \end{proof}
 \begin{problem}[4.]
     设$\li W,m$是向量空间.证明$\mathcal{L}(V,\li W\times m)$和$\mathcal{L}(V,W_1)\times\cdots\times\mathcal{L}(V,W_m)$是同构向量空间.
@@ -192,7 +205,7 @@
     现在我们证明上述表示方法是唯一的.设$v\in V$使得$\displaystyle v=u_1+\sum_{i=1}^{m}a_iv_i=u_2+\sum_{i=1}^{m}b_iv_i$.\\
     两式相减有$\displaystyle u_2-u_1=\sum_{i=1}^{m}(a_i-b_i)v_i$.而$u_2-u_1\in U$,于是$\displaystyle\sum_{i=1}^{m}(a_i-b_i)v_i=\mbf{0}$.\\
     从而只能有各$a_k=b_k$,$u_1=u_2$,于是上述表示方法是唯一的.\\
-    现在,我们证明映射$\displaystyle T:v:=u+\sum_{i=1}^{m}a_iv_i\mapsto \left(u,\sum_{i=1}^{m}a_i(v_i+U)\right)$是线性的.\\
+    现在,我们证明映射$\displaystyle T:v:=u+\sum_{i=1}^{m}a_iv_i\mapsto \left(u,\sum_{i=1}^{m}a_i(v_i+U)\right)$是线性的.
     \begin{enumerate}[label=\tbf{(\alph*)}]
         \item $T\mbf{0}=(\mbf{0}_U,\mbf{0}_{V/U})=\mbf{0}_{U\times(V/U)}$.
         \item 对于任意$\displaystyle v_1:=u_1+\sum_{i=1}^{m}a_iv_i,v_2:=u_2+\sum_{i=1}^{m}b_iv_i\in V$有
@@ -229,7 +242,7 @@
     对于任意$v\in V$,设$\displaystyle v+U=\sum_{i=1}^{m}a_i(v_i+U)=\sum_{i=1}^ma_iv_i+U$.\\
     于是$u:=\displaystyle v-\sum_{i=1}^ma_iv_i\in U$.设$u=\sum_{j=1}^{n}b_ju_j$,则有
     $$v=\sum_{i=1}^ma_iv_i+\sum_{j=1}^nb_ju_j$$
-    于是$V=\text{span}\left(\li v,m,\li u,n\right)$,进而这向量组是$V$的基.\\
+    于是$V=\text{span}\left(\li v,m,\li u,n\right)$,进而这向量组是$V$的基.
 \end{proof}
 \begin{problem}[16.]
     设$\varphi\in\mathcal{L}(V,\F)$,$\varphi\neq\mbf{0}$.证明$\dim V/(\nul\varphi)=1$.

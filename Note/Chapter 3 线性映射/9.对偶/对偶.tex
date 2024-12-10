@@ -67,5 +67,120 @@
         \item 对于所有$\lambda\in\F$,都有$(\lambda T)'=\lambda T'$.
         \item 对于所有$S\in\mathcal{L}(W,U)$,都有$(ST)'=T'S'$.
     \end{enumerate}
+\end{formal}\noindent
+\tbf{(1)}和\tbf{(2)}的证明留给读者.我们接下来证明\tbf{(3)}.
+\begin{solution}[Proof.]
+    设$\phi\in U'$,那么
+    $$(ST)'(\phi)=\phi\circ(ST)=(\phi\circ S)\circ T=T'(\phi\circ S)=T'(S'(\phi))=(T'S')(\phi)$$
+    上式表明对于任意$\phi\in U'$都有$(ST)(\phi)=(T'S')(\phi)$,于是$ST=T'S'$.
+\end{solution}\noindent
+\tbf{2.对偶的零空间和值域}\\
+我们将用$\range T,\nul T$来刻画$\range T',\nul T'$.我们首先给出如下定义.
+\begin{definition}[2.1 定义:零化子]
+    对于$U\subseteq V$,$U$的\tbf{零化子}$U^{0}$定义为
+    $$U^0=\left\{\phi\in V':\forall u\in U,\phi(u)=0\right\}$$
+\end{definition}
+\begin{formal}[2.2 零化子是子空间]
+    设$U\subseteq V$,那么$U^0$是$V'$的子空间.
 \end{formal}
+\begin{solution}[Proof.]
+    注意到$\mbf{0}\in U^0$.\\
+    设$\phi,\psi\in U^0$,那么$\phi,\psi\in V'$且对于任意$u\in U$都有$\phi(u)=\psi(u)=0$.于是
+    $$(\phi+\psi)(u)=\phi(u)+\psi(u)=0+0=0$$
+    这表明$\phi+\psi\in U^0$,于是$U^0$对加法封闭.\\
+    类似地可以证明$U^0$对标量乘法封闭.
+\end{solution}
+\begin{formal}[2.3 零化子的维数]
+    设$V$是有限维的且$U$是$V$的一个子空间,那么$\dim U^0=\dim V-\dim U$.
+\end{formal}
+\begin{solution}[Proof.]
+    当然可以采取选取$U$的基然后扩充的方式进行证明.这里我们给出另外的一种做法.\\
+    令$i\in\mathcal{L}(U,V)$是包含映射,满足对于任意$u\in U,i(u)=u$.\\
+    于是$i'$是$V'$到$U'$的线性映射.由线性映射基本定理可知
+    $$\dim\range i'+\dim\nul i'=\dim V'$$
+    根据定义可知$\nul i'=U^0$,又$\dim V'=\dim V$,于是$$\dim\range i'=\dim V-\dim U^0$$
+    对于任意$\phi\in U'$,都可以被扩充为$V$上的线性泛函$\psi$满足$i'(\psi)=\phi$,于是$\phi\in\range i'$.\\
+    由此$\range i'=U'$.又$\dim U'=\dim U$,代入上式可得
+    $$\dim U+\dim U^0=\dim V$$
+\end{solution}\noindent
+有了上面的命题,我们就可以用零化子的大小衡量子空间的大小.
+\begin{formal}[2.4 零化子等于$\left\{\mbf{0}\right\}$或整个空间的条件]
+    设$V$是有限维的,且$U$是$V$的一个子空间.那么
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $U^0=\left\{\mbf{0}\right\}\Leftrightarrow U=V$.
+        \item $U^0=V'\Leftrightarrow U=\left\{\mbf{0}\right\}$.
+    \end{enumerate}
+\end{formal}\noindent
+上述命题的证明是容易的.我们现在来看$T'$的零空间.
+\begin{formal}[2.5 对偶映射的零空间]
+    设$V$和$W$是有限维的且$T\in\mathcal{L}(V,W)$.那么
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\nul T'=(\range T)^0$.
+        \item $\dim\nul T'=\dim\nul T+\dim W-\dim V$.
+    \end{enumerate}
+\end{formal}
+\begin{solution}[Proof.]
+    设$\phi\in\nul T'$.于是$\mbf{0}=T'(\phi)=\phi\circ T$.于是对任意$v\in V$都有$0=(\phi\circ T)(v)=\phi(Tv)$.\\
+    于是$\phi\in(\range T)^0$.这意味着$\nul T'\subseteq(\range T)^0$.\\
+    现在设$\phi\in(\range T)^0$.于是对于每个$v\in V$都有$\phi(Tv)=0$.\\
+    于是$\mbf{0}=T'(\phi)$,即$\phi\in\nul T'$.这表明$(\range T)^{0}\subseteq\nul T$.\\
+    综上可知$\nul T=(\range T)^0$.并且由此可以推出上面所示的等式.
+\end{solution}
+\begin{formal}[2.6 $T$是满射等价于$T'$是单射]
+    设$V$和$W$是有限维的且$T\in\mathcal{L}(V,W)$,那么$T$是满射等价于$T'$是单射.
+\end{formal}
+\begin{solution}[Proof.]
+    我们有
+    $$T\text{是满射}\Leftrightarrow \range T=W\Leftrightarrow(\range T)^0=\left\{\mbf{0}\right\}\Leftrightarrow\nul T'=\left\{\mbf{0}\right\}\Leftrightarrow T'\text{是单射}$$
+\end{solution}
+\begin{formal}[2.7 $T'$的值域]
+    设$V$和$W$是有限维的且$T\in\mathcal{L}(V,W)$.那么
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\dim\range T'=\dim\range T$.
+        \item $\range T'=(\nul T)^0$.
+    \end{enumerate}
+\end{formal}
+\begin{solution}[Proof.]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有$\dim\range T'=\dim W'-\dim\nul T'=\dim W-\dim(\range T)^{0}=\dim\range T$.
+        \item 先设$\phi\in\range T'$.于是存在$\psi\in W'$使得$\phi=T'(\psi)$成立.对于任意$v\in\nul T$,都有
+            $$\phi(v)=(T'(\psi))(v)=(\psi\circ T)(v)=\psi(Tv)=\psi(\mbf{0})=\mbf{0}$$
+            于是$\phi\in(\nul T)^0$,即$\range T'\in(\nul T)^0$.而
+            $$\dim\range T'=\dim\range T=\dim V-\dim\nul T=\dim(\nul T)^0$$
+            于是$\range T'$与$(\nul T)^0$的维数相同.这表明$\range T'=(\nul T)^{0}$.
+    \end{enumerate}
+\end{solution}\noindent
+于是我们有如下与\tbf{2.6}相似的命题.
+\begin{formal}[2.8 $T$是单射等价于$T'$是满射]
+    设$V$和$W$是有限维的且$T\in\mathcal{L}(V,W)$,那么$T$是单射等价于$T'$是满射.
+\end{formal}
+\begin{solution}[Proof.]
+    我们有
+    $$T\text{是单射}\Leftrightarrow \nul T=\left\{\mbf{0}\right\}\Leftrightarrow(\nul T)^0=V'\Leftrightarrow\range T'=V'\Leftrightarrow T'\text{是满射}$$
+\end{solution}\noindent
+\tbf{3.线性映射的对偶的矩阵}\\
+下面的结论告诉了我们线性映射的对偶和矩阵的转置之间的关系.
+\begin{formal}[3.1 $T'$的矩阵是$T$的矩阵的转置]
+    设$V$和$W$是有限维的且$T\in\mathcal{L}(V,W)$,那么$\mathcal{M}(T')=\left(\mathcal{M}(T)\right)^{\text{t}}$
+\end{formal}
+\begin{solution}[Proof.]
+    令$A=\mathcal{M}(T),C=\mathcal{M}(T')$.设$1\leqslant j\leqslant m$且$1\leqslant k\leqslant n$.
+    由$\mathcal{M}(T')$定义可知
+    $$T'(\psi_j)=\sum_{r=1}^nC_{r,j}\phi_r$$
+    将上式作用于$v_k$有$(\psi_j\circ T)(v_k)=\sum_{r=1}^nC_{r,j}\phi_r(v_k)=C_{k,j}$.\\
+    我们还可以写出$$\begin{aligned}
+        (\psi_j\circ T)(v_k)
+        &= \psi_j(Tv_k) \\
+        &= \psi_j\left(\sum_{r=1}^mA_{r,k}w_r\right) \\
+        &= \sum_{r=1}^mA_{r,k}\psi_j(w_r) \\
+        &= A_{j,k}
+    \end{aligned}$$
+    于是$C_{k,j}=A_{j,k}$,从而$C=A^{\text{t}}$.
+\end{solution}\noindent
+现在,我们给出另一种证明矩阵的列秩等于行秩的方法.之前我们已经用行与列的线性组合的知识说明了这一点.
+\begin{solution}[Proof.]
+    记目标矩阵为$A$.定义$T:\F^{n,1}\to\F^{m,1}$为$Tx=Ax$.于是$\mathcal{M}(T)=A$,于是
+    $$A\text{的列秩}=\dim\range T=\dim\range T'=\mathcal{M}(T')\text{的列秩}=A^{\text{t}}\text{的列秩}=A\text{的行秩}$$
+    于是命题就得证.
+\end{solution}
 \end{document}

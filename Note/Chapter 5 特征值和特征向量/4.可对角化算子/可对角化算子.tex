@@ -1,0 +1,148 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 可对角化算子\end{center}
+\tbf{1.对角矩阵}
+\begin{definition}[1.1 定义:对角矩阵和可对角化]
+    \tbf{对角矩阵}是除对角线外其余元素均为$0$的矩阵.\\
+    若$T\in\L(V)$关于$V$的某个基具有对角矩阵,那么称$T$是\tbf{可对角化}的.
+\end{definition}\noindent
+不难证明,如果$T\in\L(V)$关于$V$的一组基$\li v,m$的矩阵是对角矩阵,那么对角线上的元素$\lambda_k$均为$T$的特征值,对应的特征向量就是$v_k$.
+假定$T$具有特征值$\lambda$,那么自然地可以想到对应的特征向量构成一个向量空间.我们为此定义特征空间.
+\begin{definition}[1.2 定义:特征空间]
+    设$T\in\L(V)$且$\lambda\in\F$.$T$对应于$\lambda$的一组基\tbf{特征空间}$E(\lambda,T)$是定义如下的$V$的子空间.
+    $$E(\lambda,T)=\nul(T-\lambda I)=\left\{v\in V:Tv=\lambda v\right\}$$
+    因此,$E(\lambda,T)$是$T$对应$\lambda$的所有特征向量和$\mbf{0}$的子空间.
+\end{definition}\noindent
+由定义可知,$\lambda$是$T$的特征值当且仅当$E(\lambda,T)\neq\left\{\mbf{0}\right\}$;亦可知$T|_{E(\lambda,T)}$就是将向量乘以$\lambda$的算子.\\
+我们知道对应于不同特征值的特征向量是线性无关的.于是特征空间的和也应当是直和.
+\begin{formal}[1.3 特征空间之和是直和]
+    设$T\in\L(V)$且$\li\lambda,m$是$T$的互异特征值.那么
+    $$E(\lambda_1,T)+\cdots+E(\lambda_m,T)$$
+    是直和.此外若$V$是有限维的,那么
+    $$\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)\leqslant \dim V$$
+\end{formal}\noindent
+证明是简单的,在此不再赘述.\\
+\tbf{2.可对角化的条件}\\
+\begin{formal}[2.1 可对角化的等价条件]
+    设$V$是有限维的,$T\in\L(V)$.令$\li\lambda,m$表示$T$的互异特征值,那么下面各命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$是可对角化的.
+        \item $V$有$T$的特征向量构成的基.
+        \item $V=E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T)$.
+        \item $\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)=\dim V$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    $T$关于$V$的某个基$\li v,n$具有对角矩阵当且仅当对任意$1\leqslant k\leqslant n$有$Tv_k=\lambda_kv_k$.于是\tbf{(a)}和\tbf{(b)}等价.\\
+    假定\tbf{(b)}成立,于是$V$中每个向量都可以表示为$T$的特征向量的线性组合,即
+    $$V=E(\lambda_1,T)+\cdots+E(\lambda_m,T)$$
+    据\tbf{1.3}可知这与$V=E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T)$等价,于是\tbf{(c)}成立.\\
+    假定\tbf{(c)}成立,于是
+    $$\dim V=\dim(E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T))=\dim E(\lambda_1,T)+\cdots+\dim E(\lambda_m,T)$$
+    于是\tbf{(d)}成立.\\
+    假定\tbf{(d)}成立,为每个$E(\lambda_k,T)$选取一个基后组合,于是这构成了$V$中长度为$\dim V$的向量组$\li v,m$.\\
+    又各$v_k$对应的特征值不同,于是它们线性无关.于是\tbf{(b)}成立.
+\end{proof}\noindent
+下面的结论给出了算子特征值数目和能否对角化的关系.
+\begin{formal}[2.2 特征值数目与对角化]
+    设$V$是有限维的且$T\in\L(V)$有$\dim V$个互异特征值,那么$T$是可对角化的.
+\end{formal}\noindent
+我们可以用\tbf{2.1}方便地证明之.需要说明的是上面只给出了能对角化的充分条件,而有些时候即使$T$的互异特征值数目少于$\dim V$,它仍可能是对角化的.%
+事实上这是由于$E(\lambda,T)$的维数可能高于一.\\
+我们可以用矩阵对角化方便的计算矩阵的高次幂.例如下面的例子.
+\begin{problem}[2.3 矩阵高次幂的计算]
+    定义$T\in\L(\F^3):(x,y,z)\mapsto(2x+y,5y+3z,8z)$.求$\mathcal{M}\left(T^{100}\right)$(基向量选取标准基).
+\end{problem}
+\begin{solution}[Solution.]
+    $T$关于$\F^3$的标准基$e_1,e_2,e_3$的矩阵为
+    $$\begin{pmatrix}
+        2&1&0\\0&5&3\\0&0&8
+    \end{pmatrix}$$
+    这是一个上三角矩阵,于是$T$具有特征值$2,5,8$.因而,$T$关于$\F^3$的某个基具有对角矩阵
+    $$\begin{pmatrix}
+        2&0&0\\0&5&0\\0&0&8
+    \end{pmatrix}$$
+    为了求解这组基,令$T(x,y,z)=\lambda(x,y,z)$,然后分别令$\lambda=2,5,8$即可.解得这组基为
+    $$v_1=(1,0,0),v_2=(1,3,0),v_3=(1,6,6)$$
+    熟知对任意$k\in\N$有$T^kv_j=\lambda_j^kv_j$.\\
+    下面我们以$T^{100}e_3$说明如何计算$T^{100}$中的元素.易知$e_3=\dfrac{1}{6}v_1-\dfrac{1}{3}v_2+\dfrac{1}{6}v_3$.于是
+    $$\begin{aligned}
+        T^{100}e_3
+        &= T^{100}\left(\dfrac{1}{6}v_1-\dfrac{1}{3}v_2+\dfrac{1}{6}v_3\right) \\
+        &= \dfrac{1}{6}T^{100}v_1-\dfrac{1}{3}T^{100}v_2+\dfrac{1}{6}T^{100}v_3 \\
+        &= \dfrac{1}{6}\cdot 2^{100}v_1-\dfrac{1}{3}\cdot 5^{100}v_2+\dfrac{1}{6}\cdot 8^{100}v_3 \\
+        &= \left(\dfrac{2^{100}-2\cdot 5^{100}+8^{100}}{6},8^{100}-5^{100},8^{100}\right)
+    \end{aligned}$$
+    我们将在之后的习题中用类似的方法推知斐波那契数列的通项公式.
+\end{solution}\noindent
+现在,我们把目光回到最小多项式上.之前我们已经说过$T$是可对角化的当且仅当$T$的最小多项式是若干一次项的乘积.这个结论对复向量空间的算子总是成立.\\
+现在我们要说明如何通过相似的方式得出$T$是否可对角化.
+\begin{formal}[2.4 可对角化的充要条件]
+    设$V$是有限维的,且$T\in\L(V)$,那么$T$是可对角化的当且仅当$T$的最小多项式等于$(z-\lambda_1)\cdots(z-\lambda_m)$,其中$\li\lambda,m$互异.%
+    也即,$T$的最小多项式的根的数目等于其次数而没有重根.
+\end{formal}\noindent
+\begin{proof}
+    $\Rightarrow$:设$T$是可对角化的,那么存在由$T$的特征向量$\li v,n$构成的$V$的基.令$\li\lambda,m$是$V$的互异特征值.\\
+    那么对于任意$1\leqslant j\leqslant n$,存在$1\leqslant k\leqslant m$使得$Tv_j=\lambda_kv_j$,即$(T-\lambda_kI)v_j=\mbf{0}$.于是
+    $$(T-\lambda_1I)\cdots(T-\lambda_mI)v_j=\mbf{0}$$
+    于是$T$的最小多项式为$(z-\lambda_1)\cdots(z-\lambda_m)$.\\
+    $\Leftarrow$:设$T$的最小多项式为$(z-\lambda_1)\cdots(z-\lambda_m)$,其中$\li\lambda,m\in\F$互异.于是
+    $$(T-\lambda_1I)\cdots(T-\lambda_mI)=\mbf{0}$$
+    我们将对$m$用归纳法以证明$T$是可对角化的.\\
+    $m=1$时,$T-\lambda_1I=\mbf{0}$,这表明$T$是恒等算子的标量倍,于是$T$是可对角化的.\\
+    现在设$m>1$且欲证结论在$m$更小时的所有情况均成立.记$U=\range T-\lambda_mI$.\\
+    我们知道$U$在$T$下是不变的,于是$T|_{U}$是$U$的算子.对任意$u\in U$,总存在$v\in V$使得$(T-\lambda_mI)v=u$.由前面的定义可知
+    $$(T-\lambda_1I)\cdots(T-\lambda_{m-1}I)u=(T-\lambda_1I)\cdots(T-\lambda_mI)v=\mbf{0}v=\mbf{0}$$
+    于是$(z-\lambda_1)\cdots(z-\lambda_{m-1})$是$T|_U$的最小多项式的多项式倍.\\
+    由归纳假设,$T|_U$的对角矩阵存在,设对应的基为$\li u,M$,各$u_k$均为$T$的特征向量.\\
+    设$u\in\range(T-\lambda_mI)\cap\nul(T-\lambda_mI)$,那么$(T-\lambda_mI)u=\mbf{0}$,即$Tu=\lambda_mu$.\\
+    于是$$\mbf{0}=(T-\lambda_1)\cdots(T-\lambda_{m-1}I)u=(\lambda_m-\lambda_1)\cdots(\lambda_m-\lambda_{m-1})u$$
+    由于$\li\lambda,m$互异,于是上式成立当且仅当$u=\mbf{0}$.\\
+    于是$U+\nul(T-\lambda_mI)$是直和,且据线性映射基本定理有$\dim U+\dim\nul(T-\lambda_mI)=\dim V$.\\
+    因此$U\oplus\nul(T-\lambda_mI)=V$.而$\nul(T-\lambda_mI)$中的所有向量都是对应于$\lambda_m$的特征向量,取其基为$\li v,N$.\\
+    于是$\li u,M,\li v,N$是$V$的一组基,且各基向量均为$T$的特征向量.$T$关于这基的矩阵即为对角矩阵.
+\end{proof}\noindent
+我们可以将可对角化算子限制于不变子空间上.
+\begin{formal}[2.5 作用于不变子空间上的可对角化算子]
+    设$T\in\L(V)$可对角化,$U$是$V$在$T$下的不变子空间,那么$T|_U$是$U$上的可对角化算子.
+\end{formal}
+\begin{proof}
+    由\tbf{2.4},$T$的最小多项式应具有$(z-\lambda_1)\cdots(z-\lambda_m)$的形式,其中$\li\lambda,m$互异.%
+    该多项式是$T|_U$的最小多项式的多项式倍,因而$T|_U$的最小多项式也具有类似的形式,因而$T|_U$是可对角化的.
+\end{proof}\noindent
+\tbf{3.格什戈林圆盘定理}\\
+\begin{definition}[3.1 定义:格什戈林圆盘]
+    设$T\in\L(V)$且$\li v,n$是$V$的一个基.令$A=\mathcal{M}(T,(\li v,n))$.$T$关于该基的\tbf{格什戈林圆盘}是形如
+    $$\left\{z\in\F:\left|z-A_{j,j}\right|\leqslant\sum_{k\in\left\{1,\cdots,n\right\}\backslash\left\{j\right\}}\left|A_{j,k}\right|\right\}$$
+    的集合,其中$1\leqslant j\leqslant n$.
+\end{definition}\noindent
+因为$j$有$n$种取值,所以$T$相对应的也有$n$个格什戈林圆盘.\\
+当$\F=\C$时,每个圆盘是$\C$中以$A_{j,j}$为圆心的圆盘,半径为这行上除了$A_{j,j}$的所有元素的绝对值之和.\\
+当$\F=\R$是,每个圆盘是$\R$中以$A_{j,j}$为中心的闭区间,闭区间的半径即上面提到的半径.\\
+特别地,当非对角线元素均为$0$时,每个圆盘都退化为一个点,这点也是$T$的特征值(这是由于对角矩阵的性质).%
+而格什戈林圆盘定理告诉我们,$T$的每个特征值都包含于$T$的格什戈林圆盘中.
+\begin{formal}[3.2 格什戈林圆盘定理]
+    设$T\in\L(V)$且$\li v,n$是$V$的一个基,那么$T$的每个特征值都包含于$T$关于$\li v,n$的某个格什戈林圆盘中.
+\end{formal}
+\begin{proof}
+    设$\lambda\in\F$是$T$的一个特征值,令$w$是与之对应的特征向量.于是存在$\li a,n\in\F$使得$w=a_1v_1+\cdots+a_nv_n$.\\
+    令$A=\mathcal{M}(T,(\li v,n))$,将$T$作用于上式两侧有
+    $$\lambda w=\sum_{k=1}^{n}a_kTv_k=\sum_{j=1}^{n}\left(\sum_{k=1}^{n}a_kA_{j,k}\right)v_j$$
+    于是我们有$\displaystyle\lambda a_j=\sum_{k=1}^{n}a_kA_{j,k}$对任意$1\leqslant j\leqslant n$成立.取$j\in\left\{1,\cdots,n\right\}$使得$\left|c_j\right|=\displaystyle\max_{1\leqslant i\leqslant n}\left|c_i\right|$.变形可得
+    $$\left|\lambda-A_{j,j}\right|=\left|\sum_{k\in\left\{1,\cdots,n\right\}\backslash\left\{j\right\}}A_{j,k}\dfrac{a_k}{a_j}\right|\leqslant\sum_{k\in\left\{1,\cdots,n\right\}\backslash\left\{j\right\}}\left|A_{j,k}\right|$$
+    于是$\lambda$在关于$\li v,n$的第$j$个格什戈林圆盘中.
+\end{proof}
+\end{document}

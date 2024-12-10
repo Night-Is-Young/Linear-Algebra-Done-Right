@@ -1,0 +1,114 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 上三角矩阵\end{center}
+\tbf{1.上三角矩阵}\\
+我们在之前对矩阵的研究中着重强调了基的选取.现在在研究算子时,我们着重考虑仅用一个基来描述它.
+\begin{definition}[1.1 定义:算子的矩阵]
+    设$T\in\L(V)$.$T$关于$V$的基$\li v,m$的矩阵是$n\times n$矩阵
+    $$\mathcal{M}(T)=\begin{pmatrix}
+        A_{1,1} & \cdots & A_{1,n} \\
+        \vdots  & \ddots & \vdots  \\
+        A_{n,1} & \cdots & A_{n,n}
+    \end{pmatrix}$$
+    其中的元素$A_{j,k}$由$Tv_k=A_{1,k}v_1+\cdots+A_{n,k}v_n$定义.
+\end{definition}\noindent
+我们约定,在未说明选取的基时,默认采取标准基.\\
+为了使矩阵的研究变得简单,我们总是希望一个矩阵有尽可能多的$0$.我们已经知道存在$V$的一组基使得$\mathcal{M}(T)$的第一列除第一个元素一定为$0$.%
+那么是否能重复这样的操作使得这个矩阵的某一部分都是$0$呢?为此,我们定义上三角矩阵.
+\begin{definition}[1.2 定义:上三角矩阵]
+    称一个方阵为\tbf{上三角矩阵},若其中所有位于对角线以下的元素为$0$.\\
+    形象地说,上三角矩阵应具有如下形式.
+    $$\begin{pmatrix}
+        \lambda_1&&*\\
+        &\ddots&\\
+        0&&\lambda_n
+    \end{pmatrix}$$
+\end{definition}\noindent
+我们马上就会看到将对角线上的元素记为$\lambda_k$的合理性.
+\begin{formal}[1.3 上三角矩阵的条件]
+    设$T\in\L(V)$且$\li v,n$是$V$的一个基.那么以下几条结论等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$关于$\li v,n$的矩阵是上三角矩阵.
+        \item 对任意$1\leqslant k\leqslant n$,都有$\span(\li v,k)$在$T$下不变.
+        \item 对任意$1\leqslant k\leqslant n$,都有$Tv_k\in\span(\li v,k)$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    先假设\tbf{(a)}成立.根据上三角矩阵的定义,$Tv_k=A_{1,k}v_1+\cdots+A_{k,k}v_k\in\span(\li v,k)$,于是\tbf{(c)}成立.\\
+    假设\tbf{(c)}成立,那么必然有$Tv_k=a_1v_1+\cdots+a_kv_k$,从而$\mathcal{M}(T)$第$k$列在第$k$行后均为$0$,于是\tbf{(a)}成立.\\
+    而根据不变的定义,\tbf{(b)}与\tbf{(c)}是等价的.\\
+    综上可知\tbf{(a)}\tbf{(b)}和\tbf{(c)}等价.
+\end{proof}\noindent
+于是我们可以得出一个有关上三角矩阵的简单等式.
+\begin{formal}[1.4 具有上三角矩阵的算子的等式]
+    设$T\in\L(V)$且存在$V$的一组基使得$T$关于该基有上三角矩阵.设矩阵的对角线元素为$\li\lambda,n$,则有
+    $$\left(T-\lambda_1I\right)\cdots\left(T-\lambda_nI\right)=\mbf{0}$$
+\end{formal}
+\begin{proof}
+    令$\li v,n$为$V$的一个基,且$T$关于该基有上三角矩阵,其对角线上的元素为$\li\lambda,n$.\\
+    于是$Tv_1=\lambda_1v_1$,即$(T-\lambda_1I)v_1=\mbf{0}$.因此对于任意$1\leqslant k\leqslant n$有$(T-\lambda_1I)\cdots(T-\lambda_kI)v_1=\mbf{0}$.\\
+    注意到$(T_2-\lambda_2I)v_2\in\span(v_1)$,于是$(T-\lambda_1I)(T-\lambda_2I)v_2=\mbf{0}$.进一步地,对于任意$2\leqslant k\leqslant n$有$(T-\lambda_1I)\cdots(T-\lambda_kI)v_2=\mbf{0}$.\\
+    重复上面的操作,我们知道对于任意$1\leqslant k\leqslant n$有$\left(T-\lambda_1I\right)\cdots\left(T-\lambda_nI\right)v_k=\mbf{0}$.\\
+    因为这算子把每个基向量都映到零向量,于是这算子是零映射.
+\end{proof}\noindent
+由算子的矩阵找到算子的特征值是困难的.然而根据上述定理,我们可以根据上三角矩阵简单地找到特征值.
+\begin{formal}[1.5 由上三角矩阵确定特征值]
+    设$T\in\L(V)$关于$V$的某个基具有上三角矩阵,那么$T$的特征值恰为该矩阵对角线的各元素.
+\end{formal}
+\begin{proof}
+    令$\li v,n$为$V$的一个基,且$T$关于该基有上三角矩阵,其对角线上的元素为$\li\lambda,n$.\\
+    首先$Tv_1=\lambda_1v_1$,于是$\lambda_1$是$T$的特征值.\\
+    对于任意$2\leqslant k\leqslant n$,我们有$(T-\lambda_kI)v_k\in\span(\li v,{k-1})$.\\
+    于是$T-\lambda_kI$将$\span(\li v,k)$映成$\span(\li v,{k-1})$.于是限制于$\span(\li v,k)$的算子$T-\lambda_kI$不是单射.\\
+    于是存在$v\in\span(\li v,k)$且$v\neq\mbf{0}$使得$(T-\lambda_kI)v=0$,从而$\lambda_k$是$T$的特征值.\\
+    我们已经证明了各$\lambda_k$均为$T$的特征值.现在我们证明$T$没有其余特征值.\\
+    令$q=(z-\lambda_1)\cdots(z-\lambda_n)$,于是根据\tbf{1.4}可知$q(T)=\mbf{0}$.于是$q$是$T$的最小多项式的多项式倍,因而它包含$T$的最小多项式的所有零点.%
+    即$q$的零点包含所有$T$的特征值.
+\end{proof}\noindent
+\begin{formal}[1.6 存在上三角矩阵的充要条件]
+    设$V$是有限维的,$T\in\L(V)$.那么$T$关于$V$的某个基具有上三角矩阵,当且仅当$T$的最小多项式等于$(z-\lambda_1)\cdots(z-\lambda_m)$,其中$\li\lambda,m\in\F$.
+\end{formal}
+\begin{proof}
+    $\Rightarrow$:设$T$关于$V$的某个基具有上三角矩阵,令$\li\alpha,n$代表该矩阵对角线上的元素.定义多项式$q\in\P(\F)$为
+    $$q(z)=(z-\alpha_1)\cdots(z-\alpha_n)$$
+    于是$q$是$T$的最小多项式$p$的多项式倍,因而$T$的最小多项式$p\in\P(\F)$一定具有$p(z)=(z-\lambda_1)\cdots(z-\lambda_m)$的形式,%
+    其中$\left\{\lambda_1,\cdots,\lambda_m\right\}\subseteq\left\{\li\alpha,n\right\}$.\\
+    $\Leftarrow$:设$T$的最小多项式$p\in\P(\F)$为$p(z)=(z-\lambda_1)\cdots(z-\lambda_m)$.我们对$m$进行归纳法.\\
+    若$m=1$,那么$T-\lambda_1I=\mbf{0}$,于是$T=\lambda_1I$.这表明$T$关于$V$的任意基的矩阵都是上三角矩阵.\\
+    当$m>1$时,设欲证结论对所有$k<m$都成立.令
+    $$U=\range(T-\lambda_mI)$$
+    那么$U$在$T$下是不变的.那么$T|_U$是$U$上的算子.\\
+    对于任意$u\in U$,存在$v\in V$使得$u=(T-\lambda_mI)v$,并且
+    $$(T-\lambda_1I)\cdots(T-\lambda_{m-1}I)u=(T-\lambda_1)\cdots(T-\lambda_m)v=\mbf{0}$$
+    由此,$(z-\lambda_1)\cdots(z-\lambda_{m-1})$是$T|_U$的最小多项式的多项式倍.\\
+    于是$T|_U$的最小多项式为至多$m-1$个形如$z-\lambda_k$的一次项乘积.\\
+    由归纳假设,存在$U$的基$\li u,M$使得$T|_U$关于该基有上三角矩阵.于是对于任意$1\leqslant k\leqslant M$,据\tbf{1.3}有
+    $$Tu_k=(T|_U)(u_k)\in\span(\li u,k)$$
+    将$\li u,M$扩展为$V$的一组基$\li u,M,\li v,N$.对于任意$1\leqslant k\leqslant N$有
+    $$Tv_k=(T-\lambda_mI)v_k+\lambda_mv_k$$
+    由$U$的定义可知$(T-\lambda_mI)v_k\in U=\span(\li u,M)$,于是上式表明
+    $$Tv_k\in\span(\li u,M,\li v,k)$$
+    再次根据\tbf{1.3}可知$T$关于$\li u,M,\li v,N$的矩阵是上三角矩阵.
+\end{proof}\noindent
+在上面的证明中,$\li\lambda,m$即为$T$的上三角矩阵的对角线元素(尽管可能有重复).于是我们可以得出复空间上的算子总有上三角矩阵.
+\begin{formal}[1.7 复空间上的算子都有上三角矩阵]
+    设$V$是有限维复向量空间且$T\in\L(V)$,那么$T$关于$V$的某个基具有上三角矩阵.
+\end{formal}
+\begin{proof}
+    根据代数基本定理,$T$的最小多项式总能写作\tbf{1.6}要求的形式,于是$T$具有上三角矩阵.
+\end{proof}\noindent
+我们需要注意的是,尽管如果$T$关于$V$的基$\li v,n$具有上三角矩阵,但我们只能确保$v_1$是$T$的特征向量.至于后面的$v_k$,我们需要除了对角线上的元素外其余元素均为$0$才可以.
+\end{document}
