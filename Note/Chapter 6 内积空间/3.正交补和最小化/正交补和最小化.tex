@@ -1,0 +1,165 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 正交补和最小化\end{center}
+\tbf{1.正交补}
+\begin{definition}[1.1 定义:正交补]
+    若$U$是$V$的子集,那么$U$的\tbf{正交补},记作$U^{\bot}$,是与$U$中每个向量都正交的向量构成的集合.即
+    $$U^{\bot}=\left\{v\in V:\forall u\in U,\langle u,v\rangle=0\right\}$$
+\end{definition}
+\begin{formal}[1.2 正交补的性质]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 若$U$是$V$的子集,那么$U^{\bot}$是$V$的子空间.
+        \item $\left\{\mbf{0}\right\}^{\bot}=V,V^{\bot}=\mbf{0}$.
+        \item 若$U$是$V$的子集,那么$U\cap U^{\bot}\subseteq\left\{\mbf{0}\right\}$.
+        \item 若$U,W$是$V$的子集且$U\subseteq W$,那么$W^{\bot}\subseteq U^\bot$.
+    \end{enumerate}
+\end{formal}\noindent
+下面的结论表明,$V$的每个有限维子空间都能引出$V$的一个很自然的直和分解.
+\begin{formal}[1.3 子空间及其正交补的直和]
+    若$U$是$V$的有限维子空间,那么$V=U\oplus U^\bot$.
+\end{formal}
+\begin{proof}
+    首先我们证明$V=U+U^\bot$.\\
+    为此,设$v\in V$,令$\li e,n$是$U$的规范正交基.在Bessel不等式的证明中我们曾做过如下分解
+    $$v=\underbrace{\sum_{k=1}^{n}|\langle v,e_k\rangle|e_k}_{u}+\underbrace{v-\sum_{k=1}^{n}|\langle v,e_k\rangle|e_k}_w$$
+    于是$u\in U$.又对于任意$1\leqslant k\leqslant n$有
+    $$\langle w,e_k\rangle=\langle v,e_k\rangle-\langle v,e_k\rangle=0$$
+    从而$w$与$\span(\li e,n)=U$中的每个向量都正交,这表明$w\in U^\bot$.于是$V=U+U^\bot$.\\
+    由\tbf{1.2}又可知$U\cap U^\bot=\left\{\mbf{0}\right\}$,于是$V=U\oplus U^\bot$.
+\end{proof}\noindent
+由上式可得$U^\bot$的维数.
+\begin{formal}[1.4 正交补的维数]
+    设$V$是有限维的,$U$是$V$的子空间,那么$\dim U^\bot=\dim V-\dim U$.
+\end{formal}\noindent
+这由\tbf{1.3}可以很快地得到.以下结论是\tbf{1.3}的另一重要推论.
+\begin{formal}[1.5 正交补的正交补]
+    设$U$是$V$的一个有限维子空间,那么$U=\left(U^\bot\right)^\bot$.
+\end{formal}
+\begin{proof}
+    对于任意$u\in U$和任意$v\in U^\bot$,都有$\langle u,v\rangle=0$.于是$\langle v,u\rangle=0$,进而$u\in\left(U^\bot\right)^\bot$.于是$U\subseteq\left(U^\bot\right)^\bot$.\\
+    对于任意$v\in\left(U^\bot\right)^\bot\subseteq V$,由\tbf{1.3}可知存在唯一$u\in U,w\in U^\bot$使得$v=u+w$.于是$v-u=w\in U^\bot$.\\
+    由于$v,u\in\left(U^\bot\right)^\bot$,于是$v-u\in\left(U^\bot\right)^\bot$.于是$v-u\in U^\bot\cap\left(U^\bot\right)^\bot$,这表明$v-u=\mbf{0}$,从而$v=u \in U$.因此$\left(U^\bot\right)^\bot\subseteq U$.\\
+    结合可知$U=\left(U^\bot\right)^\bot$.
+\end{proof}\noindent
+以及我们可以通过正交补的性质反推子空间的性质.
+\begin{formal}[1.6 子空间和其正交补的关联]
+    设$U$是$V$的有限维子空间,那么$U^\bot=\left\{\mbf{0}\right\}\Leftrightarrow U=V$.
+\end{formal}\noindent
+我们现在引入一个重要的算子:正交投影.
+\begin{definition}[1.7 定义:正交投影]
+    设$U$是$V$的一个有限维子空间,将$V$映成$U$的正交投影是定义如下的算子$P_U\in\L(V)$:\\
+    对于任意$v\in V$,将其写为$v=u+w$的形式,其中$u\in U,w\in U^\bot$,定义$P_U v=u$.
+\end{definition}\noindent
+根据它的名字,应该能想到这与高中所说的投影向量的关系.正交投影具有如下性质.
+\begin{formal}[1.8 正交投影的性质]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $P_U\in\L(V)$.
+        \item 对任意$u\in U$,都有$P_Uu=u$.
+        \item 对任意$w\in U^\bot$,都有$P_Uw=\mbf{0}$.
+        \item $\range P_U=U,\nul P_U=U^\bot$.
+        \item 对任意$v\in V$都有$v-P_Uv\in U^\bot$.
+        \item 对任意$k\in\N$,都有$P^k_U=P_U$.
+        \item 对于任意$v\in V$都有$||P_Uv||\leqslant ||v||$.
+        \item 若$\li e,m$是$U$的规范正交基,那么对于任意$v\in V$有$P_Uv=\langle v,e_1\rangle e_1+\cdots+\langle v,e_m\rangle e_m$.
+    \end{enumerate}
+\end{formal}\noindent
+你应当自行验证上面所说的每一条性质.我们将用正交投影再次证明Riesz定理.
+\begin{formal}[2.1 Riesz定理]
+    设$V$是有限维的.对于任意$v\in V$,定义$\phi_v\in V'$为:$\forall u\in V,\phi_v(u)=\langle u,v\rangle$.那么$v\mapsto\phi_v$是满射.
+\end{formal}
+\begin{proof}
+    设$\phi\in V'$.若$\phi=\mbf{0}$,那么$\phi=\phi_{\mbf{0}}$,从而假设$\phi\neq\mbf{0}$.\\
+    于是$\nul\phi\neq V$,这表明$(\nul\phi)^{\bot}\neq\left\{\mbf{0}\right\}$.\\
+    令$w\in(\nul\phi)^\bot$且$w\neq\mbf{0}$,令$v=\dfrac{\overline{\phi(w)}}{||w||^w}w$,那么$v\in\left(\nul\phi\right)^\bot$.\\
+    在$v$的定义两侧取范数可得$||v||=\dfrac{|\phi(w)|}{||w||}$.\\
+    在$v$的定义两侧作用$\phi$可得$\phi(v)=\dfrac{\overline{\phi(w)}}{||w||^w}\phi(w)=\dfrac{|\phi(w)|^2}{||w||^2}=||v||^2$.\\
+    现在设$u\in V$.利用上式可得$u=\left(u-\dfrac{\phi(u)}{\phi(v)}v\right)+\dfrac{\phi(u)}{||v||^2}v$.\\
+    上式中括号内的向量属于$\nul\phi$,于是与$v$正交.于是将此式两边与$v$作内积可得
+    $$\langle u,v\rangle=\dfrac{\phi(u)}{||v||^2}\langle v,v\rangle=\phi(u)$$
+    因此$\phi=\phi_v$,从而$v\mapsto\phi_v$是满射,因此命题得证.
+\end{proof}\noindent
+\tbf{2.最小化问题}\\
+在学习初等的几何时我们就知道点到直线(或平面)上最短的距离是垂线段的长度.我们将在向量空间中扩展这一结论.
+\begin{formal}[2.1 到子空间的最短距离]
+    设$U$是$V$的有限维子空间,$v\in V$且$u\in U$.那么$||v-P_Uv||\leqslant ||v-u||$,当且仅当$u=P_Uv$时等号成立.
+\end{formal}
+\begin{proof}
+    我们有一个简洁的证明方法.
+    $$\begin{aligned}
+        ||v-P_Uv||^2
+        &\leqslant ||v-P_Uv||^2+||P_Uv-u||^2 \\
+        &= ||(v-P_Uv)+(P_Uv-u)||^2 \\
+        &= ||v-u||^2
+    \end{aligned}$$
+    你可以在二维或三维的欧几里得空间中通过几何直观更清晰地理解上述不等式的证明.
+\end{proof}\noindent
+例如,我们可以用这样的方法来逼近正弦函数.假如我们想要求出次数不高于$5$的实系数多项式$u$使得在$[-\pi,\pi]$上逼近$\sin x$.这里的逼近是指令$\displaystyle\int_{-\pi}^{\pi}\left|\sin x-u(x)\right|^2\dx$尽可能小.\\
+令$C[-\pi,\pi]$表示定义在$[-\pi,\pi]$上的全体连续实值函数构成的实内积空间,其上内积定义为
+$$\langle f,g\rangle=\int_{-\pi}^\pi fg$$
+令$v(x)=\sin x$是$C[-\pi,\pi]$上的函数,令$U$表示由次数不高于$5$的所有实系数多项式构成的$C[-\pi,\pi]$的子空间.现在我们只需求出$u\in U$使得$||v-u||$尽可能小.\\
+这样,我们将$U$的标准基$1,x,\cdots,x^5$应用Gram-Schmidt过程改写为$U$的规范正交基$e_1,\cdots,e_6$.接着利用\tbf{1.3}的\tbf{(8)}计算$P_Uv$,即可得到近似结果$u(x)$.这结果比同样次数的Taylor多项式在稍远处要精确的多.\\
+\tbf{3.伪逆}\\
+设$T\in\L(V,W)$且$w\in W$.考虑这样一个问题:求出$v\in V$使得$Tv=w$.\\
+如果$T$是可逆的,那么这样的$v$唯一存在.否则,对于特定的$w$很可能是无解或者有无穷多个解.\\
+当$T$不可逆时,我们仍期望对上述方程给出一个较为精确的答案.例如,如果$Tv=w$无解,就找出使得$||Tv-w||$尽可能小的$v$;%
+如果$Tv=w$有无穷多个解,就找出使得$||v||$最小的那个解.如此,我们将开始伪逆的定义.
+\begin{formal}[3.1 限制线性映射以获得既单又满的映射]
+    设$V$是有限维的,且$T\in\L(V,W)$.那么$T|_{\left(\nul T\right)^\bot}$是将$(\nul T)^\bot$映成$\range T$的单射.
+\end{formal}
+\begin{proof}
+    设$v\in(\nul T)^\bot$且$T|_{\left(\nul T\right)^\bot}v=\mbf{0}$,进而$Tv=\mbf{0}$.于是$v\in\nul T$.\\
+    又$(\nul T)\cap(\nul T)^\bot=\left\{\mbf{0}\right\}$,于是$v=\mbf{0}$.进而$\nul T|_{\left(\nul T\right)^\bot}=\left\{\mbf{0}\right\}$,这表明$T|_{\left(\nul T\right)^\bot}$是单射.\\
+    显然$\range T|_{\left(\nul T\right)^\bot}\subseteq\range T$.\\
+    设$w\in\range T$,于是存在$v\in V$使得$Tv=w$.于是存在$u\in\nul T$和$x\in(\nul T)^\bot$使得$v=u+x$.于是
+    $$T|_{\left(\nul T\right)^\bot}x=Tx=Tv-Tu=w-\mbf{0}=w$$
+    这表明$w\in\range T|_{\left(\nul T\right)^\bot}$,因此$\range T\subseteq T|_{\left(\nul T\right)^\bot}$.\\
+    于是$\range T|_{\left(\nul T\right)^\bot}=\range T$.
+\end{proof}\noindent
+现在,我们可以定义伪逆了.
+\begin{definition}[3.2 定义:伪逆]
+    设$V$是有限维的,$T\in\L(V,W)$.$T$的\tbf{伪逆}$T^\dagger\in\L(W,V)$是如下定义的线性映射:
+    $$\forall w\in W,T^\dagger w=\left(T|_{\left(\nul T\right)^\bot}\right)^{-1}P_{\range T}w$$
+\end{definition}\noindent
+伪逆具有如下的性质.
+\begin{formal}[3.3 伪逆的性质]
+    设$V$是有限维的且$T\in\L(V,W)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 若$T$可逆,那么$T^\dagger=T^{-1}$.
+        \item $TT^\dagger=P_{\range T}$是将$W$映成$\range T$的正交投影.
+        \item $T^\dagger T=P_{(\nul T)^\bot}$是将$V$映成$(\nul T)^\bot$的正交投影.
+    \end{enumerate}
+\end{formal}\noindent
+由伪逆出发,我们就可以给出开头所讲的求得线性映射方程的近似解.
+\begin{formal}[3.4 伪逆可给出最佳近似解或最优解]
+    设$V$是有限维的,$T\in\L(V,W)$且$w\in W$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 若$v\in V$,那么$$||T(T^\dagger w)-w||\leqslant||Tv-w||$$
+            当且仅当$v\in T^\dagger w+\nul T$时等号成立.
+        \item 若$v\in T^\dagger w+\nul T$,那么
+            $$||T^\dagger w||\leqslant ||v||$$当且仅当$v=T^\dagger w$时上式成立.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$v\in V$,那么$$Tv-w=\underbrace{(Tv-TT^\dagger w)}_x+\underbrace{(TT^\dagger w-w)}_y$$
+            上式中$x\in\range T$.因为$TT^\dagger$将$W$映成$\range T$的正交投影,于是$y\in(\range T)^{-1}$.\\
+            于是$\langle x,y\rangle=0$.于是根据勾股定理$||Tv-w||^2=||x||^2+||y||^2\geqslant||y||^2$,当且仅当$x=\mbf{0}$时等号成立.\\
+            此时$T(v-T^\dagger w)=\mbf{0}$,于是$v-T^\dagger w\in\nul T$,即$v\in T^\dagger w+\nul T$.
+        \item 设$v\in T^\dagger w+\nul T$,那么$v=(v-T^\dagger w)+T^\dagger w$.\\
+            而$T^\dagger w\in(\nul T)^\bot,v-T^\dagger w\in\nul T$.根据勾股定理可知$||T^\dagger w||\leqslant||v||$,当且仅当$v=T^\dagger w$时等号成立.
+    \end{enumerate}
+\end{proof}
+\end{document}

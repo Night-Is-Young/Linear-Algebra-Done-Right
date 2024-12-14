@@ -1,0 +1,119 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 规范正交基\end{center}
+\tbf{1.规范正交组和Gram-Schmidt过程}
+\begin{definition}[1.1 定义:规范正交]
+    如果一个向量组中所有向量的范数均为$1$,且它们两两正交,那么称该向量组是\tbf{规范正交的}.\\
+    换言之,$V$中向量组$\li e,n$是规范正交的,若对于任意$1\leqslant j,k\leqslant n$都有
+    $$\langle e_j,e_k\rangle=\left\{\begin{array}{l}
+        1,j=k\\0,j\neq k
+    \end{array}\right.$$
+\end{definition}
+\begin{formal}[1.2 规范正交组线性组合的范数]
+    设$\li e,n$是$V$中的规范正交向量组,那么对于任意一组标量$\li a,n\in\F$有
+    $$||a_1e_1+\cdots+a_ne_n||^2=|a_1|^2+\cdots+|a_n|^2$$
+\end{formal}\noindent
+上述等式的证明只需反复使用勾股定理即可.并且我们有以下推论.
+\begin{formal}[1.3 规范正交组线性无关]
+    每个规范正交向量组都是线性无关的.
+\end{formal}
+\begin{proof}
+    设$\li e,n$是$V$中的规范正交向量组,且$\li a,n\in\F$使得
+    $$a_1e_1+\cdots+a_ne_n=\mbf{0}$$
+    根据\tbf{1.2},当且仅当$|a_1|^2+\cdots+|a_n|^2=0$时上式成立,于是$\li a=n=0$,于是$\li e,n$线性无关.
+\end{proof}\noindent
+现在我们给出一个重要的不等式.
+\begin{formal}[1.4 Bessel不等式]
+    设$\li e,n$是$V$中的规范正交向量组.若$v\in V$,那么
+    $$\sum_{k=1}^{n}|\langle v,e_k\rangle|^2\leqslant||v||^2$$
+\end{formal}
+\begin{proof}
+    设$v\in V$.于是
+    $$v=\underbrace{\sum_{k=1}^{n}|\langle v,e_k\rangle|e_k}_{u}+\underbrace{v-\sum_{k=1}^{n}|\langle v,e_k\rangle|e_k}_w$$
+    对于任意$1\leqslant k\leqslant n$都有$\langle w,e_k\rangle=\langle v,e_k\rangle-\langle v,e_k\rangle\langle e_k,e_k\rangle=0$.于是$\langle w,u\rangle=0$.现由勾股定理可知
+    $$||v||^2=||u^2||+||w^2||\geqslant||u||^2=\sum_{k=1}^{n}|\langle v,e_k\rangle|^2$$
+\end{proof}\noindent
+由规范正交组线性无关自然可以想到它在长度合适时能构成一组基.
+\begin{definition}[1.5 定义:规范正交基]
+    $V$的一个规范正交基就是$V$中既是规范正交组又是基的向量组.\\
+    特别地,当$V$是有限维的时,若规范正交组的长度为$\dim V$,那么这向量组是规范正交基.
+\end{definition}\noindent
+一般来说将一个平凡的向量用基线性表出时计算系数是困难的.然而下面的结论提供了一种简单的方法.
+\begin{formal}[1.6 用规范正交基表示向量]
+    设$\li e,n$是$V$的规范正交基且$u,v\in V$.那么
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $v=\langle v,e_1\rangle e_1+\cdots+\langle v,e_n\rangle e_n$.
+        \item $||v||^2=|\langle v,e_1\rangle|^2+\cdots+|\langle v,e_n\rangle|^2$.
+        \item $\langle u,v\rangle=\langle u,e_1\rangle\overline{\langle v,e_1\rangle}+\cdots_+\langle u,e_n\rangle\overline{\langle v,e_n\rangle}$.
+    \end{enumerate}
+\end{formal}\noindent
+我们已经知道了规范正交基的重要作用,那么如何求得规范正交基呢?Gram-Schmidt过程给出了方法.
+\begin{formal}[1.7 Gram-Schmidt过程]
+    设$\li v,m$是$V$中的线性无关向量组.令$f_1=v_1$,对于$k\in\{2,\cdots,m\}$,依次定义$f_k$为
+    $$f_k=v_k-\dfrac{\langle v_k,f_1\rangle}{||f_1||^2}f_1-\cdots-\dfrac{\langle v_k,f_{k-1}\rangle}{||f_{k-1}||^2}f_{k-1}$$
+    对每个$k\in\{1,\cdots,m\}$,令$e_k=\dfrac{f_k}{||f_k||}$,那么$\li e,m$是$V$中的规范正交向量组,且对于任意$1\leqslant k\leqslant m$有
+    $$\span(\li v,k)=\span(\li e,k)$$
+\end{formal}
+\begin{proof}
+    我们通过对$k$用归纳法来证明结论成立.\\
+    当$k=1$时,$e_1=\dfrac{f_1}{||f_1||}=\dfrac{v_1}{||v_1||}$,于是$||e_1||=1$,并且$\span(e_1)=\span(v_1)$.\\
+    设$1<k\leqslant m$并且欲证结论对小于$k$的所有情况成立.\\
+    因为$\li v,m$线性无关,于是$v_k\notin\span(\li v,{k-1})$,于是$v_k\notin\span(\li f,{k-1})$.这表明$f_k\neq\mbf{0}$,因此在定义$e_k$时不会出现$||f_k||=0$的情况,因而$||e_k||=1$..
+    令$1\leqslant j\leqslant k-1$,那么
+    $$\begin{aligned}
+        \langle e_j,e_k\rangle
+        &= \dfrac{\langle f_j,f_k\rangle}{||f_j||||f_k||}\\
+        &= \dfrac{1}{||f_j||||f_k||}\left\langle v_k-\dfrac{\langle v_k,f_1\rangle}{||f_1||^2}f_1-\cdots-\dfrac{\langle v_k,f_{k-1}\rangle}{||f_{k-1}||^2}f_{k-1},f_j\right\rangle \\
+        &= \dfrac{1}{||f_j||||f_k||}\left(\langle v_k,f_j\rangle-\langle v_k,f_j\rangle\right) \\
+        &= 0
+    \end{aligned}$$
+    于是$\li e,k$是规范正交组.\\
+    由该过程给出的定义可知$v_k\in\span(\li v,k)$,于是$\span(\li v,k)\subseteq\span(\li e,k)$.又因为这两个子空间维数相同,于是$\span(\li v,k)=\span(\li e,k)$.\\
+    这就完成了归纳证明.
+\end{proof}\noindent
+观察这个过程,实际上就是把新的向量扣除在已经得到的规范正交组中的各向量上的投影以得到一个新的方向上的向量的过程.你可以将其与上一节提到的正交分解做对比.
+\begin{formal}[1.8 规范正交基的存在性]
+    每个有限维内积空间都有规范正交基.每个规范正交组都能被扩展为该空间的一个规范正交基.
+\end{formal}\noindent
+上面两条结论的证明是容易的.\\
+回忆一下,我们已经知道一个算子具有上三角矩阵的充要条件.现在我们想知道是否存在一个规范正交基使得该算子关于其存在上三角矩阵.
+\begin{formal}[1.9 关于规范正交基有上三角矩阵]
+    设$V$是有限维的,$T\in\L(V)$.那么$T$关于$V$的某个规范正交基具有上三角矩阵,当且仅当$T$的最小多项式等于$(z-\lambda_1)\cdots(z-\lambda_m)$,其中$\li\lambda,m\in\F$.
+\end{formal}\noindent
+应用Gram-Schmidt过程就可以得到上述结论.下面的结论是上述结论在复向量空间中的重要应用.
+\begin{formal}[1.10 Schur定理]
+    有限维复内积空间上的每个算子都关于某个规范正交基有上三角矩阵.
+\end{formal}\noindent
+由代数基本定理和\tbf{1.9}即可得到上述结论.\\
+\tbf{2.内积空间上的线性泛函}\\
+在内积空间中,对偶一节讲述的定义仍然成立.我们现在来看线性泛函的另外一种表现形式.
+\begin{formal}[2.1 Riesz定理]
+    设$V$是有限维的,$\phi\in V'$.那么存在唯一的$v\in V$使得对任意$u\in V$有$\phi(u)=\langle u,v\rangle$.
+\end{formal}
+\begin{proof}
+    存在性:设$\li e,n$是$V$的规范正交基.那么对于任意$u\in V$有
+    $$\begin{aligned}
+        \phi(u)
+        &= \phi\left(\langle u,e_1\rangle e_1+\cdots+\langle u,e_n\rangle e_n\right) \\
+        &= \langle u,e_1\rangle \phi(e_1)+\cdots+\langle u,e_n\rangle\phi(e_n) \\
+        &= \langle u,\overline{\phi(e_1)}e_1+\cdots+\overline{\phi(e_n)}e_n\rangle
+    \end{aligned}$$
+    于是令$v=\overline{\phi(e_1)}e_1+\cdots+\overline{\phi(e_n)}e_n$即可满足题设.\\
+    唯一性:设$v_1,v_2\in V$使得对任意$u\in U$有$\phi(u)=\langle u,v_1\rangle=\langle u,v_2\rangle$.\\
+    于是对于任意$u\in V$有$0=\langle u,v_1\rangle-\langle u,v_2\rangle=\langle u,v_1-v_2\rangle$.\\
+    取$u=v_1-v_2$可知$||v_1-v_2||^2=0$,于是$v_1=v_2$.从而这样的$v$唯一.
+\end{proof}
+\end{document}
