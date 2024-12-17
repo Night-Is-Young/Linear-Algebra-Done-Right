@@ -193,6 +193,288 @@
     $$|\lambda|\leqslant\sum_{k=1}^{n}\left|A_{j,k}\right|\left|\dfrac{a_k}{a_j}\right|\leqslant\sum_{k=1}^{n}\left|A_{j,k}\right|\leqslant n\max_{1\leqslant j,k\leqslant n}\left|\mathcal{M}(T)_{j,k}\right|$$
 \end{proof}
 \begin{problem}[17.]
-    设$\F=\R$.
+    设$\F=\R$,$T\in\L(V)$,$\lambda\in\R$.证明:$\lambda$是$T$的特征值,当且仅当$\lambda$是复化$T_\C$的特征值.
 \end{problem}
+\begin{proof}
+    $\Rightarrow$:设$v\in V$是对应$\lambda$的特征向量.存在$v+v\i\in V_\C$使得
+    $$T(v+v\i)=Tv+Tv\i=\lambda v+\lambda v\i=\lambda(v+v\i)$$
+    于是$\lambda$为$T_\C$的特征值.\\
+    $\Leftarrow$:设$v+u\i\in V_\C$是对应$\lambda$的特征向量.于是存在$u,v\in V$使得
+    $$T(v+u\i)=Tv+Tu\i=\lambda(v+u\i)$$
+    于是$Tv=\lambda v,Tu=\lambda u$,即$\lambda$是$T$的特征值.
+\end{proof}
+\begin{problem}[18.]
+    设$\F=\R$,$T\in\L(V)$,$\lambda\in\C$.证明:$\lambda$是$T_\C$的特征值,当且仅当$\overline{\lambda}$是$T_\C$的特征值.
+\end{problem}
+\begin{proof}
+    设$v+u\i$是$T_\C$对应$\lambda$的特征向量.不妨设$\lambda=a+b\i$.
+    $$T(v+u\i)=Tv+Tu\i=\lambda(v+u\i)=(a+b\i)(v+u\i)=(av-bu)+(au+bv)i$$
+    于是$Tv=av-bu,Tu=au+bv$.因此有
+    $$T(u+v\i)=Tu+Tv\i=(au+bv)+(av-bu)\i=(a-b\i)(u+v\i)=\overline{\lambda}(u+v\i)$$
+    于是$\overline{\lambda}$为$T_\C$的特征值.反之亦同理.
+\end{proof}
+\begin{problem}[19.]
+    证明:定义为$T(z_1,z_2,\cdots)=(0,z_1,z_2,\cdots)$的前向位移算子$T\in\L(\F^\infty)$没有特征值.
+\end{problem}
+\begin{proof}
+    假定$T$有特征值$\lambda\in\F$,对应的特征向量为$v$.那么有$Tz_1=0=\lambda z_1,Tz_k=z_{k-1}=\lambda z_k(\forall k\geqslant 2)$.\\
+    若$z_1=0$,则对任意$k\in\N^*$都有$z_k=0$,于是$v=\mbf{0}$,舍去.\\
+    若$\lambda=0$,则对于任意$k\in\N^*$有$z_k=\lambda z_{k+1}=0$,于是$v=\mbf{0}$,舍去.\\
+    综上可知$T$没有特征值.
+\end{proof}
+\begin{problem}[20.]
+    定义后向位移算子$S\in\L(\F^\infty)$为$S(z_1,z_2,z_3,\cdots)=(z_2,z_3,\cdots)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明$\F$的任意元素均为$S$的特征值.
+        \item 求出$S$的所有特征向量.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对任意$\lambda\in\F$,都有$v=(1,\lambda,\lambda^2,\cdots)$满足
+            $$Tv=(\lambda,\lambda^2,\cdots)=\lambda v$$
+            于是命题得证.
+        \item 对于任意$c\in\F$且$c\neq 0$和任意$k\in\mathbf{Z}$,$v=(c\lambda^k,c\lambda^{k+1},\cdots)$均为$S$对应$\lambda$的特征向量.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[21.]
+    设$T\in\L(V)$可逆.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\lambda\in\F$且$\lambda\neq0$.证明:$\lambda$是$T$的特征值当且仅当$\dfrac{1}{\lambda}$是$T^{-1}$的特征值.
+        \item 证明:$T$和$T^{-1}$的特征向量相同.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$v$是$T$对应$\lambda$的特征向量,即$Tv=\lambda v$.于是
+            $$T^{-1}v=\dfrac{1}{\lambda}T^{-1}(\lambda v)=\dfrac{1}{\lambda}T^{-1}Tv=\dfrac{1}{\lambda}v$$
+            于是$\dfrac{1}{\lambda}$是$T^{-1}$的特征值,特征向量为$v$.\\
+            至于另一方向的蕴含关系,注意到$\dfrac{1}{\frac{1}{\lambda}}=\lambda,\left(T^{-1}\right)^{-1}=T$即可得证.
+        \item 见\tbf{(1)}.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[22.]
+    设$T\in\L(V)$且存在$u,w\in V(v,w\neq\mbf{0})$使得$Tu=3w,Tw=3u$.证明$3$或$-3$是$T$的特征值.
+\end{problem}
+\begin{proof}
+    由题意$Tu+Tw=T(u+w)=3(u+w)$.\\
+    若$u+w\neq\mbf{0}$,那么$T$的特征值为$3$,对应的特征向量为$u+w$.\\
+    若$u+w=\mbf{0}$,那么$Tu=3w=-3u$,从而$T$的特征值为$-3$,对应的特征向量为$u$和$w$.
+\end{proof}
+\begin{problem}[23.]
+    设$V$是有限维的,$S,T\in\L(V)$.证明:$ST$与$TS$的特征值相同.
+\end{problem}
+\begin{proof}
+    设$\lambda$为$ST$的特征值,对应的特征向量为$v$.于是$STv=\lambda v$.\\
+    于是$TS(Tv)=T(STv)=T(\lambda v)=\lambda Tv$.于是$TS$的特征值为$\lambda$,对应的特征向量为$Tv$.
+\end{proof}
+\begin{problem}[24.]
+    设$A\in\F^{n,n}$,定义$T\in\L(\F^{n,1})$为$Tx=Ax$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$A$的每一行元素之和均为$1$.证明:$1$是$T$的特征值.
+        \item 设$A$的每一列元素之和均为$1$.证明:$1$是$T$的特征值.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 取$v=\begin{pmatrix}1\\\vdots\\1\end{pmatrix}\in\F^{n,1}$.于是
+            \[Tv=Av=\begin{pmatrix}
+                \displaystyle\sum_{k=1}^{n}A_{1,k}\\
+                \vdots\\
+                \displaystyle\sum_{k=1}^{n}A_{n,k}
+            \end{pmatrix}
+            =\begin{pmatrix}
+                1\\\vdots\\1
+            \end{pmatrix}
+            =v\]
+            于是$1$是$T$的特征值.
+        \item 记$B=\mathcal{M}(T')=A^\text{t}$.根据\tbf{(1)}可知$T'$有特征值$1$,根据\tbf{15.}可知$T$有特征值$1$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[25.]
+    设$T\in\L(V)$,$u,w$是$T$的特征向量且$u+w$也是$T$的特征向量.证明:$u,w$是$T$对应于同一特征值的特征向量.
+\end{problem}
+\begin{proof}
+    假设$u,w,u+w$对应的特征值为$\lambda,\mu,\xi$.于是$Tu=\lambda u,Tw=\mu w$.\\
+    于是$T(u+w)=\lambda u+\mu w=\xi(u+w)$,即$(\lambda-\xi)u=(\xi-\mu)w$.\\
+    又$u,w\neq\mbf{0}$.若$\lambda-\xi,\xi-\mu\neq0$,那么有$w=\dfrac{\lambda-\xi}{\xi-\mu}u$.于是
+    $$Tw=\mu w=\mu\cdot\dfrac{\lambda-\xi}{\xi-\mu}u=T\left(\dfrac{\lambda-\xi}{\xi-\mu}u\right)=\lambda\cdot\dfrac{\lambda-\xi}{\xi-\mu}u$$
+    于是$\lambda=\mu$,从而$u,w$对应于同一特征值.\\
+    若$\lambda-\xi=\xi-\mu=0$,即$\lambda=\xi=\mu$,于是$u,w$对应于同一特征值.\\
+    命题得证.
+\end{proof}
+\begin{problem}[26.]
+    设$T\in\L(V)$使得$V$中任意非零向量都是$T$的特征向量.证明:$T$是恒等算子的标量倍.
+\end{problem}
+\begin{proof}
+    任取$u,w\neq\mbf{0}\in V$且$u+w\neq\mbf{0}$.则$u+w$也是$T$的特征向量.据\tbf{25.}可知$u,w$对应于同一特征值$\lambda$.\\
+    于是对于任意$v\in V$有$Tv=\lambda v$,从而$(T-\lambda I)v=\mbf{0}$,于是$T=\lambda I$.命题得证.
+\end{proof}
+\begin{problem}[27.]
+    设$V$是有限维的,且$k\in\left\{1,\cdots,\dim V-1\right\}$.设$T\in\L(V)$使得$V$的任意$k$维子空间都在$T$下不变.证明:$T$是恒等算子的标量倍.
+\end{problem}
+\begin{proof}
+    
+\end{proof}
+\begin{problem}[28.]
+    设$V$是有限维的,$T\in\L(V)$.证明:$T$最多有$1+\dim\range T$个不同的特征值.
+\end{problem}
+\begin{proof}
+    设$T$的特征值为$\li \lambda,n$.设$\li v,n$满足$Tv_k=\lambda_kv_k$.\\
+    由于不同特征值对应的向量组线性无关,于是$\li v,k$线性无关.\\
+    由于至多存在一个$1\leqslant k\leqslant n$使得$\lambda_k=0$,于是$\span(\lambda_1v_1,\cdots,\lambda_nv_n)$至少是维度为$n-1$的空间.\\
+    于是$n-1\leqslant\dim\range T$,即$n\leqslant1+\dim\range T$.
+\end{proof}
+\begin{problem}[29.]
+    设$T\in\L(\R^3)$,且有特征值$-4,5,\sqrt{7}$.证明:存在$x\in\R^3$使得$Tx-9x=(-4,5\sqrt{7})$.
+\end{problem}
+\begin{proof}
+    由于$T\in\L(\R^3)$最多有$\dim\R^3=3$个不同的特征值,于是$9$不是$T$的特征值.\\
+    这等价于$T-9I$可逆,于是一定存在$x\in\R^3$使得$(T-9I)x=(-4,5,\sqrt{7})$.
+\end{proof}
+\begin{problem}[30.]
+    设$T\in\L(V)$,且$(T-2I)(T-3I)(T-4I)=\mbf{0}$.设$\lambda$为$T$的特征值,证明:$\lambda=2,3\text{或}4$.
+\end{problem}
+\begin{proof}
+    由$(T-2I)(T-3I)(T-4I)=\mbf{0}$可知对于任意$v\in V$有$(T-2I)(T-3I)(T-4I)v=\mbf{0}$.\\
+    若$(T-4I)v=\mbf{0}$,则$\lambda=4$为$T$的特征值,对应的特征向量为$v$.\\
+    若$(T-4I)v\neq\mbf{0}$,不妨令$u=(T-4I)v$.\\
+    若$(T-3I)u=\mbf{0}$,则$\lambda=3$为$T$的特征值,对应的特征向量为$u$.\\
+    若$(T-3I)u\neq\mbf{0}$,则$\lambda=2$为$T$的特征值,对应的特征向量为$(T-3I)u=(T-3I)(T-2I)v$.\\
+    综上,命题得证.
+\end{proof}
+\begin{problem}[31.]
+    给出一例$T\in\L(\R^2)$使得$T^4=-I$.
+\end{problem}
+\begin{solution}[Solution.]
+    令$T$满足对任意$(x,y)\in\R^2$有$T(x,y)=\left(\dfrac{x-y}{\sqrt{2}},\dfrac{x+y}{\sqrt{2}}\right)$即可.这实际上是将向量逆时针旋转$\dfrac{\pi}{4}$.
+\end{solution}
+\begin{problem}[32.]
+    设$T\in\L(V)$没有特征值且$T^4=I$.证明$T^2=-I$.
+\end{problem}
+\begin{proof}
+    由题意$T^4-I=(T^2+I)(T+I)(T-I)=\mbf{0}$.\\
+    由于$T$没有特征值,于是$T+I,T-I$均为可逆算子.于是$T^2+I=\mbf{0}$,即$T^2=-I$.
+\end{proof}
+\begin{problem}[33.]
+    设$T\in\L(V)$且$m\in\N^*$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$T$是单射,当且仅当$T^m$是单射.
+        \item 证明:$T$是满射,当且仅当$T^m$是满射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\Rightarrow$:由于$T$是单射,于是$\nul T=\{\mbf0\}$.于是$T^2v=T(Tv)=\mbf{0}$当且仅当$Tv=\mbf0$,即$v=\mbf{0}$.这表明$T^2$是单射.依次类推可知$T^m$是单射.\\
+            $\Leftarrow$:若$T$不是单射,于是存在$v\neq\mbf0$使得$Tv=\mbf0$,即$T^mv=T^{m-1}(Tv)=T^{m-1}\mbf0=\mbf0$,进而$T^m$不是单射,这与假设不符,于是$T$是单射.
+        \item $T\text{是满射}\Leftrightarrow T\text{是单射}\Leftrightarrow T^m\text{是单射}\Leftrightarrow T^m\text{是满射}$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[34.]
+    设$V$是有限维的,$\li v,m\in V$.证明:$\li v,m$线性无关当且仅当存在$T\in\L(V)$使得$\li v,m$是$T$对应于不同特征值的特征向量.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$\li\lambda,m$满足$Tv_k=\lambda_kv_k$,各$\lambda_k$不相同.\\
+    将$\li v,m$扩展为$V$的一组基$\li v,m,\li u,n$,令任意$1\leqslant j\leqslant n$有$Tu_j=\mbf0$.\\
+    这就定义了$T\in\L(V)$满足题意.\\
+    $\Leftarrow$:我们已经证明了不同特征值对应的特征向量构成的组线性无关.
+\end{proof}
+\begin{problem}[35.]
+    设$\li\lambda,n$是一组相异实数.证明:$\e^{\lambda_1 x},\cdots,\e^{\lambda_n x}$在由$\R$上的实值函数构成的向量空间中线性无关.
+\end{problem}
+\begin{proof}
+    令$V=\span(\e^{\lambda_1 x},\cdots,\e^{\lambda_n x})$.定义$D\in\L(V)$为$Df=f'$.\\
+    于是对于任意$1\leqslant k\leqslant n$有$D\e^{\lambda_k x}=\lambda_k\e^{\lambda_k x}$.故$\lambda_k$是$T$的特征值,特征向量为$\e^{\lambda_k x}$.\\
+    又$\li\lambda,n$相异,于是$\e^{\lambda_1 x},\cdots,\e^{\lambda_n x}$线性无关.
+\end{proof}
+\begin{problem}[36.]
+    设$\li\lambda,n$是一组相异正数.证明:$\cos{\lambda_1 x},\cdots,\cos{\lambda_n x}$在由$\R$上的实值函数构成的向量空间中线性无关.
+\end{problem}
+\begin{proof}
+    令$V=\span(\cos{\lambda_1 x},\cdots,\cos{\lambda_n x})$.定义$D\in\L(V)$为$Df=f''$.\\
+    于是对于任意$1\leqslant k\leqslant n$有$D\cos{\lambda_k x}=-\lambda_k^2\cos{\lambda_k x}$.故$-\lambda_k^2$是$T$的特征值,特征向量为$\cos{\lambda_k x}$.\\
+    又$\li\lambda,n$是相异的正数,于是$-\lambda_1^2,\cdots,-\lambda_n^2$相异,于是$\cos{\lambda_1 x},\cdots,\cos{\lambda_n x}$线性无关.
+\end{proof}
+\begin{problem}[37.]
+    设$V$是有限维的,$T\in\L(V)$.定义$\mathcal{A}\in\L(\L(V))$为$\mathcal{A}(S)=TS$对任意$S\in\L(V)$都成立.证明:$T$与$\mathcal{A}$的特征值相同.
+\end{problem}
+\begin{proof}
+    设$\lambda$是$T$的特征值,对应的特征向量为$v$.于是存在$S\in\L(V)$使得对任意$u\in V,Su=v$.\\
+    于是对于任意$u\in V$有$(\mathcal{A}(S))u=TSu=Tv=\lambda v=\lambda Su=(\lambda S)u$.\\
+    于是$\lambda$是$\mathcal{A}$的特征值,对应的特征向量$S$如上定义.
+\end{proof}
+\begin{problem}[38.]
+    设$V$是有限维的,$T\in\L(V)$,且$U$是$V$在$T$下的不变子空间.\tbf{商算子}$T/U\in\L(V/U)$定义为$(T/U)(v+U)=Tv+U$对任意$v\in V$成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$T/U$的定义是有意义的,并且$T/U$是$V/U$上的算子.
+        \item 证明:$T/U$的每个特征值都是$T$的特征值.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$v,w\in V$使得$v+U=w+U$,于是$v-w\in U$.由于$U$在$T$下不变,于是$T(v-w)=Tv-Tw\in U$.\\
+            于是$(T/U)(v+U)=Tv+U=Tw+U=(T/U)(w+U)$,因而$T/U$的定义是有意义的.\\
+            考虑$v+U,w+U\in V/U$,则有$$(T/U)(v+w+U)=T(v+w)+U=Tv+Tw+U=(Tv+U)+(Tw+U)=(T/U)(v+U)+(T/U)(w+U)$$
+            又$v+w+U=(v+U)+(w+U)$,于是$T/U$满足可加性.齐次性的证明亦同理,不再赘述.\\
+            于是$T/U$是$V/U$上的算子.
+        \item 考虑$T/U$的特征值$\lambda$和对应的特征向量$v+U$,显然$v\notin U$.于是
+            $$(T/U)(v+U)=Tv+U=\lambda(v+U)=\lambda v+U$$
+            于是$Tv-\lambda v\in U$.设$Tv-\lambda v=u\in U$.考虑$R:=(T-\lambda I)|_U$.\\
+            若$\nul R\neq\{\mbf0\}$,则存在$w\in U$使得$(T-\lambda I)w=\mbf0$,于是$\lambda$为$T$的特征值,对应的特征向量为$w$.\\
+            若$\nul R=\{\mbf0\}$,则$R$是单射,于是$R$可逆.设$w\in U$满足$Rw=-u$,即$Tw=\lambda w-u$,于是
+            $$T(v+w)=Tv+Tw=\lambda v+u+Tw=\lambda v+\lambda w=\lambda(v+w)$$
+            于是$\lambda$为$T$的特征值,对应的特征向量为$v+w$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[39.]
+    设$V$是有限维的,$T\in\L(V)$.证明:$T$有特征值,当且仅当存在$V$的$\dim-1$维子空间在$T$下不变.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$T$的特征值为$\lambda$,对应的特征向量为$v_1$.将其扩展为$V$的一组基$\li v,n$.\\
+    不难得出$\dim\nul(T-\lambda I)\geqslant 1$而$\dim\range(T-\lambda I)\leqslant\dim V-1$.
+    设$\range(T-\lambda I)$的一组基$\li v,m$,将其扩展为线性无关组$\li v,m,\li u,{\dim V-1-m}$,令$n=\dim V-1-m$,记$U=\span(\li v,m,\li u,n)$.\\
+    于是对于任意$w:=a_1v_1+\cdots+a_mv_m+b_1u_1+\cdots+b_nu_n\in U$有
+    $$Tw=\sum_{k=1}^{m}a_kTv_k\in\range(T-\lambda I)\subseteq U$$
+    于是$U$在$(T-\lambda I)$下不变.对于任意$u\in U$有$Tu=(T-\lambda I)u+\lambda u\in U$,于是$U$在$T$下不变.\\
+    $\Leftarrow$:设$U$在$T$下不变且$\dim U=\dim V-1$.考虑$T/U\in\L(V/U)$.\\
+    由于$\dim\L(V/U)=\dim V-\dim U=1$,于是据\tbf{3A.7.}可知$T/U=\lambda I$.据\tbf{38.}可知$T$的特征值为$\lambda$.
+\end{proof}
+\begin{problem}[40.]
+    设$S,T\in\L(V)$且$S$可逆.设$p\in\P(\F)$.证明:$p(STS^{-1})=Sp(T)S^{-1}$.
+\end{problem}
+\begin{proof}
+    设$p(z)=\displaystyle\sum_{k=0}^{m}c_kz^k$.于是$\displaystyle p(STS^{-1})=\sum_{k=0}^{m}c_k(STS^{-1})^k$.\\
+    注意到$(STS^{-1})^{0}=I=SS^{-1}=ST^0S^{-1}$.假定$(STS^{-1})^k=ST^kS^{-1}$,那么
+    $$(STS^{-1})^{k+1}=(STS^{-1})^k(STS^{-1})=ST^{k}S^{-1}STS^{-1}=ST^{k}ITS^{-1}=ST^{k+1}S^{-1}$$
+    于是对任意$k\in\N$有$(STS^{-1})^k=ST^kS^{-1}$.\\
+    于是$\displaystyle p(STS^{-1})=\sum_{k=0}^{m}c_k(STS^{-1})^k=\sum_{k=0}^mc_kST^{k}S^{-1}=Sp(T)S^{-1}$.
+\end{proof}
+\begin{problem}[41.]
+    设$T\in\L(V)$且$U$是$V$在$T$下的不变子空间.证明:对任意$p\in\P(\F)$,均有$U$在$p(T)$下不变.
+\end{problem}
+\begin{proof}
+    首先$T^0u=Iu=u\in U$.若$T^ku\in U$,那么$T^{k+1}u=T(T^k u)\in U$.\\
+    于是对于任意$k\in\N$有$T^ku\in U$,即$U$在$T^k$下不变.\\
+    于是$\displaystyle p(T)u=\sum_{k=0}^{m}c_kT^ku\in U$,于是$U$在$p(T)$下不变.
+\end{proof}
+\begin{problem}[42.]
+    定义$T\in\L(\F^n)$为$T(\li x,n)=(x_1,2x_2,\cdots,nx_n)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 求出$T$的所有特征值和对应的特征向量.
+        \item 求出$\F^n$的所有在$T$下不变的子空间.
+    \end{enumerate}
+\end{problem}
+\begin{solution}[Solution.]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 观察可得$T$的特征值为$1,2,\cdots,n$,对应的特征向量为$\F^n$的标准基.
+        \item 设$\F^n$的标准基为$\li e,n$.$\F^n$的所有在$T$下不变的子空间为任意选取这些标准基构成的向量组张成的空间.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[43.]
+    设$V$是有限维的,$\dim V>1$,且$T\in\L(V)$.证明:$\left\{p(T):p\in\P(\F)\right\}\neq\L(V)$.
+\end{problem}
+\begin{proof}
+    对于任意$p,q\in\P(\F)$,都有$p(T)q(T)=q(T)p(T)$,于是$\left\{p(T):p\in\P(\F)\right\}$中的任意两个算子都是可交换的.\\
+    然而\tbf{3A.16.}表明$\L(V)$中存在两个不可交换的算子,于是$\left\{p(T):p\in\P(\F)\right\}\neq\L(V)$.
+\end{proof}
 \end{document}
