@@ -1,0 +1,164 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 5C}
+\end{center}
+\begin{problem}[1.]
+    证明或给出一反例:如果$T\in\L(V)$且$T^2$关于$V$的某个基有上三角矩阵,那么$T$关于$V$的某个基有上三角矩阵.
+\end{problem}
+\begin{solution}
+    令$V=\R^2$,$T:(x,y)\mapsto(-y,x)$.于是$T^2+I=\mbf0$,因而$T^2$关于标准基有上三角矩阵
+    \[\begin{pmatrix}
+        -1&0\\0&-1
+    \end{pmatrix}\]
+    然而$T$没有特征值,因而不存在关于$T$的上三角矩阵.
+\end{solution}
+\begin{problem}[2.]
+    设$A,B$是$n\times n$的上三角矩阵,$A$的对角线元素为$\li\alpha,n$,$B$的对角线元素为$\li\beta,n$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$A+B$是上三角矩阵,其对角线元素为$\alpha_1+\beta_1,\cdots,\alpha_n+\beta_n$.
+        \item 证明:$AB$是上三角矩阵,其对角线元素为$\alpha_1\beta_1,\cdots,\alpha_n\beta_n$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 根据矩阵加法的知识易知.
+        \item 对于任意$1\leqslant k<j\leqslant n$有
+            \[(AB)_{j,k}=\sum_{r=1}^{n}A_{j,r}B_{r,k}\]
+            由于任意$1\leqslant r\leqslant n$必然满足$j>r$或$r>k$,于是$A_{j,r},B_{r,k}$中至少有一个为$0$,于是$(AB)_{j,k}=0$,因而$AB$是上三角矩阵.%
+            对于对角线上的元素,有
+            \[(AB)_{k,k}=\sum_{r=1}^nA_{k,r}B_{r,k}\]
+            当且仅当$r=k$时$A_{k,r}B_{r,k}=\alpha_k\beta_k$,否则$A_{k,r}B_{r,k}=0$.于是$AB$的对角线上的元素为$\alpha_1\beta_1,\cdots,\alpha_n\beta_n$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[3.]
+    设$T\in\L(V)$可逆,且$T$关于$V$的一组基$\li v,n$的矩阵是上三角矩阵,其对角线上元素为$\li\lambda,n$.证明:$T^{-1}$关于这基的矩阵也是上三角矩阵,其对角线上元素为$\dfrac{1}{\lambda_1},\cdots,\dfrac1{\lambda_n}$.
+\end{problem}
+\begin{proof}
+    由题意对任意$1\leqslant k\leqslant n$有$Tv_k\in\span(\li v,k)$.\\
+    对$Tv_1=\lambda_1 v_1$两边作用$T^{-1}$,整理可得$T^{-1}v_1=\lambda_1^{-1}v$.\\
+    对$Tv_2=A_{1,2}v_1+\lambda v_2$两边作用$T^{-1}$,同理可得$T^{-1}v_2=\lambda_2^{-1}v_2+A_{1,1}^{-1}v_1$.\\
+    依次同理对式子变形可知对任意$1\leqslant k\leqslant n$有$T^{-1}v_k\in\span(\li v,k)$.\\
+    于是$T^{-1}$关于$\li v,n$的矩阵是上三角矩阵,其对角线上元素为$\li\lambda,n$.证明:$T^{-1}$关于这基的矩阵也是上三角矩阵,其对角线上元素为$\dfrac{1}{\lambda_1},\cdots,\dfrac1{\lambda_n}$.
+\end{proof}
+\begin{problem}[4.]
+    给出一例:一个算子关于某个基的对角线上只有$0$,但是可逆.
+\end{problem}
+\begin{solution}
+    令$T\in\L(\F^2)$关于其标准基的矩阵为$\begin{pmatrix}
+        0&1\\1&0
+    \end{pmatrix}$,则$T$可逆.
+\end{solution}
+\begin{problem}[5.]
+    给出一例:一个算子关于某个基的对角线上均为非零元素,但是不可逆.
+\end{problem}
+\begin{solution}
+    令$T\in\L(\F^2)$关于其标准基的矩阵为$\begin{pmatrix}
+        1&1\\1&1
+    \end{pmatrix}$,则$T$不可逆.例如,$T(-1,-1)=(0,0)$.
+\end{solution}
+\begin{problem}[6.]
+    设$\F=\C$,$V$是有限维的,且$T\in\L(V)$.证明:如果$1\leqslant k\leqslant \dim V$,那么$V$有在$T$下不变的$k$维子空间.
+\end{problem}
+\begin{proof}
+    考虑到$T$关于$V$的某个基$\li v,{\dim V}$具有上三角矩阵.\\
+    于是对于任意$1\leqslant k\leqslant \dim V$都有$\span(\li v,k)$在$T$下不变.
+\end{proof}
+\begin{problem}[7.]
+    设$V$是有限维的,$T\in\L(V)$且$v\in V$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 存在唯一的最低次首一多项式$p_v$使得$p_v(T)v=\mbf0$.
+        \item $T$的最小多项式是$p_v$的多项式倍.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于$V$中的向量组$v,Tv,\cdots,T^{\dim V}v$,由于其长度为$\dim V+1$,于是这向量组线性相关.
+            根据线性相关性引理可知,存在最小的$m$使得$T^{m}v\in\span(v,Tv,\cdots,T^{m-1}v)$.\\
+            于是设$T^{m}v=a_0v+a_1Tv_1+\cdots+a_{m-1}T^{m-1}v$.令$\displaystyle p_v(z)=-\sum_{i=0}^{m-1}a_iz^i+z^m$,于是$p_v$是使得$p_v(T)v=\mbf0$的次数最低的首一多项式.\\
+            现在设首一多项式$q\in\P(\F)$满足$q(T)v=\mbf0$,且$\deg q=\deg p_v$.于是$(p_v-q)(T)v=\mbf0$.\\
+            若$q\neq p_v$,则整理系数后$p_v-q$是次数更低的满足$(p_v-q)(T)v=\mbf0$的多项式,这与$p_v$次数最低不符.于是$q=p_v$,因而这样的首一多项式是唯一的.
+        \item 设$U=\span(v,Tv,\cdots,T^{\deg p-1}v)$,则$U$在$T$下不变.于是$p_v$是限制于$U$上的算子$T|_U$的最小多项式.
+            于是$T$的最小多项式是$T|_U$的最小多项式$p_v$的多项式倍.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[8.]
+    设$V$是有限维的,$T\in\L(V)$,且存在$v\in V(v\neq\mbf0)$使得$T^2v+2Tv+2v=\mbf0$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:如果$\F=\R$,那么$T$关于任意$V$的基都没有上三角矩阵.
+        \item 证明:如果$\F=\C$,那么$T$关于某个$V$的基的上三角矩阵的对角线上有$-1\pm\i$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由\tbf{5C.8}可知$T$的最小多项式是$z^2+2z+2$的多项式倍.\\
+            如果$T$关于$V$的某个基具有上三角矩阵,那么它的最小多项式必然可以分解为一次项之积.然而$z^2+2z+2$在$\R$上不能被继续分解,于是$T$关于任意基都不存在上三角矩阵.
+        \item 由\tbf{5C.8}可知$T$的最小多项式是$z^2+2z+2$的多项式倍.\\
+            这多项式的零点为$-1\pm\i$,因此$T$的特征值包括$-1\pm\i$.自然,这上三角矩阵的对角线上有$-1\pm\i$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[9.]
+    设$B$是方阵,其元素为复数.证明:存在元素为复数的可逆方阵$A$使得$A^{-1}BA$是上三角矩阵.
+\end{problem}
+\begin{proof}
+    设$B$是$T$关于$V$的一组基$\li v,n$的矩阵.\\
+    由于复向量空间的线性映射一定存在上三角矩阵,于是设$T$关于$V$的另一组基$\li u,n$具有上三角矩阵$C$.\\
+    令$A=\mathcal{M}(I,(\li u,n),(\li v,n))$,据换基公式有$C=A^{-1}BA$,因而$A^{-1}BA$是上三角矩阵.
+\end{proof}
+\begin{problem}[10.]
+    设$T\in\L(V)$且$\li v,n$是$V$的基.证明下列命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$关于$\li v,n$的矩阵是下三角的.
+        \item 对任意$1\leqslant k\leqslant n$,都有$\span(v_k,\cdots,v_n)$在$T$下不变.
+        \item 对任意$1\leqslant k\leqslant n$,都有$Tv_k\in\span(v_k,\cdots,v_n)$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    令$u_k=v_{n+1-k}$.将$T$和$\li u,n$视为对象,于是这与我们证明上三角矩阵的条件中的三个命题等价.
+\end{proof}
+\begin{problem}[11.]
+    设$\F=\C$,且$V$是有限维的.证明:对任意$T\in\L(V)$,都存在$V$的一组基使得$T$关于该基有下三角矩阵.
+\end{problem}
+\begin{proof}
+    存在$V$的一组基$\li v,n$使得$T$关于该基有上三角矩阵.令$u_k=v_{n+1-k}$,则$T$关于$\li u,n$的矩阵即为下三角矩阵.
+\end{proof}
+\begin{problem}[12.]
+    设$V$是有限维的,$T\in\L(V)$关于$V$的某个基具有上三角矩阵,且$U$是$V$的在$T$下不变的子空间.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$T|_U$关于$U$的某个基具有上三角矩阵.
+        \item 证明:$T/U$关于$V/U$的某个基具有上三角矩阵.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由于$T$具有上三角矩阵,于是$T$的最小多项式$p$应为$(z-\lambda_1)\cdots(z-\lambda_n)$的形式.\\
+            由于$U$在$T$下不变,于是$p$是$T|_U$的最小多项式$q$的多项式倍,因而$q$也具有上面的形式,因而$T|_U$也有上三角矩阵.
+        \item 据\tbf{5B.25}可知$T$的最小多项式是$T/U$的最小多项式的多项式倍.于是,出于与\tbf{(1)}相同的原因,$T/U$也有上三角矩阵.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[13.]
+    设$V$是有限维的,且$T\in\L(V)$.设存在$V$的在$T$下不变的子空间$U$,使得$T|_U,T/U$分别关于$U,V/U$的某个基具有上三角矩阵.证明:$T$关于$V$的某组基具有上三角矩阵.
+\end{problem}
+\begin{proof}
+    设$p,q$分别为$T|_U,T/U$的最小多项式.由题意,$p,q$都具有$(z-\lambda_1)\cdots(z-\lambda_n)$的形式.\\
+    由\tbf{5B.25}可知$pq$是$T$的最小多项式$r$的多项式倍,因而$r$也具有上述形式,于是$T$关于$V$的某组基具有上三角矩阵.
+\end{proof}
+\begin{problem}[14.]
+    设$V$是有限维的,且$T\in\L(V)$.证明:$T$关于$V$的某个基具有上三角矩阵,当且仅当$T'$关于$V'$的某个基具有上三角矩阵.
+\end{problem}
+\begin{proof}
+    由\tbf{5B.28}可知$T$,$T'$的最小多项式相同,因而如果其中一者具有上三角矩阵,必然具有$(z-\lambda_1)\cdots(z-\lambda_n)$的形式,于是两者均关于各自空间的某组基具有上三角矩阵.
+\end{proof}
+\end{document}
