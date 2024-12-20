@@ -1,0 +1,348 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 5B}
+\end{center}
+\begin{problem}[1.]
+    设$T\in\L(V)$.证明:$9$是$T^2$的特征值,当且仅当$3$或$-3$是$T$的特征值.
+\end{problem}
+\begin{proof}
+    \begin{center}
+        $9$是$T^2$的特征值$\Leftrightarrow T^2-9I=\mbf0\Leftrightarrow (T-3I)(T+3I)=\mbf0\Leftrightarrow 3$或$-3$是$T$的特征值
+    \end{center}
+\end{proof}
+\begin{problem}[2.]
+    设$V$是一复向量空间,且$T\in\L(V)$没有特征值.证明:$V$的每个在$T$下不变的子空间不是$\{\mbf0\}$就是无限维的.
+\end{problem}
+\begin{proof}
+    首先易知$T\mbf0=\mbf0$,于是$\{\mbf0\}$在$T$下不变.\\
+    设$U$为$V$的一有限维子空间.若$U$在$T$下不变,则将$T$限制在$U$上的$T|_U$是$U$上的算子.\\
+    根据\tbf{5.19}可知$T|_U$存在特征值,于是$T$存在特征值,这与题意不符.于是不存在有限维的$U$使得$U$在$T$下不变.\\
+    由题意,$T$的不变子空间不是$\{\mbf0\}$就是无限维的.
+\end{proof}
+\begin{problem}[3.]
+    设$n\in\N*$,且$T\in\L(\F^n)$定义为$\displaystyle T(\li x,n)=\left(\sum_{k=1}^{n}x_k,\cdots,\sum_{k=1}^{n}x_k\right)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 求出$T$的所有特征值和特征向量.
+        \item 求出$T$的最小多项式.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T$的特征值为$1,\cdots,n$.其中$k$对应的特征向量是这样的向量:其中有$k$个相同的非零元素,其余位置均为$0$.
+        \item $p(x)=(x-1)\cdots(x-n)$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[4.]
+    设$\F=\C$,$T\in\L(V)$,$p\in\P(\C)$,$\alpha\in\C$.证明:$\alpha$是$p(T)$的特征值,当且仅当$\alpha=p(\lambda)$对$T$的某个特征值$\lambda$成立.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:令$q=p-\alpha\in\P(\C)$,于是$q(T)=p(T)-\lambda I=\mbf0$.\\
+    于是$q(T)$是$T$的最小多项式的多项式倍.因此,$q(\lambda)=0$,于是$\alpha=p(\lambda)$.\\
+    $\Leftarrow$:由题意$T-\lambda I=\mbf0$,于是$p(T-\lambda I)=p(T)-p(\lambda)I=\mbf0$,于是$\alpha=p(\lambda)$是$p(T)$的特征值.
+\end{proof}
+\begin{problem}[5.]
+    给出一例$\R^2$上的算子用以说明将\tbf{5B.4}的$\C$替换为$\R$后结论将不再成立.
+\end{problem}
+\begin{solution}
+    令$T\in\L(\R^2)$为$T(x,y)=(-y,x)$,令$p(x)=x^2$.于是$p(T)=-I$,其特征值为$-1$.而$T$没有特征值.
+\end{solution}
+\begin{problem}[6.]
+    设$T\in\L(\F^2)$定义为$T(w,z)=(-z,w)$,求$T$的特征值.
+\end{problem}
+\begin{solution}
+    注意到$T^2=-I$,于是$T$的最小多项式为$p(z)=z^2+1$.\\
+    若$\F=\C$,则$T$的特征值为$\pm\i$.若$\F=\R$,则$T$没有特征值.
+\end{solution}
+\begin{problem}[7.]
+    回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 给出一例$S,T\in\L(\F^2)$使得$ST$和$TS$的最小多项式不同.
+        \item 设$V$是有限维的,且$S,T\in\L(V)$.证明:如果$S,T$中至少有一个可逆,那么$ST$和$TS$的最小多项式相同.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 令$S(x,y)=(x,0),T(x,y)=(0,x)$.于是$ST(x,y)=(0,0),TS(x,y)=(0,x)$.\\
+            于是$ST=\mbf{0}$,其最小多项式为$p(x)=x$.而$p(TS)=TS\neq\mbf{0}$,于是$ST$和$TS$的最小多项式不同.
+        \item 不妨设$S$可逆.首先,$(TS)^0=I=SIS^{-1}=S^{-1}(ST)^0S$.
+            假定$(TS)^k=S^{-1}(ST)^kS$,那么
+            $$(TS)^{k+1}=(TS)^k(TS)=S^{-1}(ST)^kS(TS)=S^{-1}(ST)^k(ST)S=S^{-1}(ST)^{k+1}S$$
+            于是对于任意$k\in\N$都有$(TS)^k=S^{-1}(ST)^kS$.于是对于任意$p\in\P(\F)$有$p(TS)=S^{-1}p(ST)S$.\\
+            设$p,q\in\P(\F)$分别是$ST,TS$的最小多项式.\\
+            于是$p(TS)=S^{-1}p(ST)S=\mbf{0}$,且$\mbf0=q(TS)=S^{-1}q(ST)S$,即$q(ST)=\mbf0$.\\
+            于是$ST$和$TS$的最小多项式相同.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[8.]
+    设$T\in\L(\R^2)$是"逆时针旋转$1$度"这一算子,求$T$的最小多项式.
+\end{problem}
+\begin{solution}
+    考虑$v:=(x,y)\in\R^2$且$v\neq(0,0)$.根据$T$的几何意义有
+    $$Tv=\dfrac{1}{2\cos\frac{\pi}{180}}(T^2v+v)$$
+    于是$(T^2-2\cos\dfrac{\pi}{180}T+I)v=\mbf{0}$对任意$v\in V$成立.\\
+    即$T$的最小多项式为$p(x)=x^2-2\cos\dfrac{\pi}{180}x+1$.
+\end{solution}
+\begin{problem}[9.]
+    设$T\in\L(V)$使得关于$V$的某个基的$T$的矩阵的所有元素都是有理数.解释为什么$T$的最小多项式的所有系数都是有理数.
+\end{problem}
+\begin{proof}
+    设$T$的最小多项式为$\displaystyle p:=\sum_{i=0}^{m}a_ix_i$,其中$a_m=1$.记$T$关于$V$的基$\li v,n$的矩阵$A=\mathcal{M}(T)$,于是$p(A)=\mbf{0}$.\\
+    因此我们有$\displaystyle\sum_{i=0}^{m-1}a_i(A^i)_{j,k}=-(A^m)_{j,k}$对所有$1\leqslant j,k\leqslant n$成立.\\
+    由于$\mathbb{Q}$对四则运算封闭,于是对于任意$i\in\N$,矩阵$A^i$的各元素均为有理数.\\
+    根据Gaussion消元法,如果这关于$a_0,\cdots,a_{m-1}$有解,那么它们必然是有理数.而最小多项式的存在保证了这方程组有解.\\
+    于是$T$的最小多项式的所有系数都是有理数.
+\end{proof}
+\begin{problem}[10.]
+    设$V$是有限维的,$T\in\L(V)$,且$v\in V$.证明:
+    \[\span(v,Tv,\cdots,T^mv)=\span(v,Tv,\cdots,T^{\dim-1}v)\]
+    对任意$m\geqslant\dim V-1$成立.
+\end{problem}
+\begin{proof}
+    考虑$T$的最小多项式$p\in\P(\F)$,那么$\deg p\leqslant\dim V$.不妨令$\displaystyle\deg p=n,p(z)=\sum_{i=0}^na_iz^i$.\\
+    当$m=\dim V-1$时命题显然成立.对于$m\geqslant\dim V$,假定命题对所有更小的$m$都成立.\\
+    设$q(z)=z^{m-n}\in\P(\F)$,于是$qp$仍为首一多项式,且满足$\displaystyle (qp(T))v=\mbf{0}=\sum_{i=m-n}^{m}a_iT^iv$.\\
+    于是$\displaystyle T^mv=-\sum_{i=m-n}^{m-1}a_iT^iv$,这表明$T^mv\in\span(T^{m-n}v,\cdots,T^{m-1}v)\subseteq\span(v,Tv,\cdots,T^{m-1},v)$.\\
+    于是$\span(v,Tv,\cdots,T^mv)=\span(v,Tv,\cdots,T^{m-1}v)=\span(v,Tv,\cdots,T^{\dim V-1}v)$.归纳可知命题对所有$m$均成立.
+\end{proof}
+\begin{problem}[11.]
+    设$V$是二维向量空间,$T\in\L(V)$,且$T$关于$V$的某个基的矩阵是$\begin{pmatrix}a&c\\b&d\end{pmatrix}$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$T^2-(a+d)T+(ad-bc)I=\mbf0$.
+        \item 证明:$T$的最小多项式为
+            \[\left\{\begin{array}{l}
+                z-a,\text{若}b=c=0\text{且}a=d\\
+                z^2-(a+d)z+(ad-bc),\text{其它}
+            \end{array}\right.\]
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$A=\mathcal{M}(T)$,于是$A^2=\begin{pmatrix}a^2+bc&ac+cd\\ab+bd&bc+d^2\end{pmatrix}$.于是
+            \[\begin{aligned}
+                &\ A^2-(a+d)A+(ad-bc)I\\
+                &= \begin{pmatrix}a^2+bc&ac+cd\\ab+bd&bc+d^2\end{pmatrix}-\begin{pmatrix}a^2+ad&ac+cd\\ab+bd&ad+d^2\end{pmatrix}+\begin{pmatrix}ad-bc&0\\0&ad-bc\end{pmatrix} \\
+                &= \begin{pmatrix}0&0\\0&0\end{pmatrix}
+            \end{aligned}\]
+            于是$T^2-(a+d)T+(ad-bc)I=\mbf{0}$.
+        \item 由\tbf{(1)}可知$q(z)=z^2-(a+d)z+(ad-bc)\in\P(\F)$满足$q(T)=\mbf0$.于是$q$是$T$的最小多项式的多项式倍.\\
+            若$b=c=0$且$a=d$,则有$q(z)=z^2-2az+a^2=(z-a)^2$.\\
+            于是$q(T)=(T-aI)^2=\mbf{0}$当且仅当$T-aI=\mbf0$,于是此时$T$的最小多项式为$p(z)=z-a$.\\
+            否则,$T$必然不是恒等算子$I$的标量倍,因而$T-xI=\mbf{0}$对任意$x\in\F$都不成立.于是$T$的最小多项式至少是二次的.又因为最小多项式的存在唯一性,于是$q$必然是$T$的最小多项式.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[12.]
+    定义$T\in\L(\F^n)$为$T(\li x,n)=(x_1,2x_2,\cdots,nx_n)$.求$n$的最小多项式.
+\end{problem}
+\begin{solution}
+    由\tbf{5A.42}可知$T$的特征值为$1,2,\cdots,n$.于是$T$的最小多项式为$p(z)=(z-1)\cdots(z-n)$.
+\end{solution}
+\begin{problem}[13.]
+    设$T\in\L(V)$且$p\in\P(\F)$.证明:存在唯一的$r\in\P(\F)$使得$p(T)=r(T)$且$\deg r<\deg q$,其中$q$为$T$的最小多项式.
+\end{problem}
+\begin{proof}
+    多项式的带余除法表明存在唯一的$s,r\in\P(\F)$且$\deg r<\deg q$使得$p=sq+r$.\\
+    此时$(p-r)(T)=(sq)(T)=\mbf0$,即$p(T)=r(T).$
+\end{proof}
+\begin{problem}[14.]
+    设$V$是有限维的,且$T\in\L(V)$有最小多项式$4+5z-6z^2-7z^3+2z^4+z^5$.求$T^{-1}$的最小多项式.
+\end{problem}
+\begin{solution}
+    设$p(z):=4+5z-6z^2-7z^3+2z^4+z^5\in\P(\F)$.于是$p(T)=\mbf{0}$.\\
+    另一方面有$p(T)(T^{-1})^5=4T^{-5}+5T^{-4}-6T^{-3}-7T^{-2}+2T^{-1}+I=\mbf{0}$.\\
+    于是$T^{-1}$的最小多项式为$q(z)=z^5+\dfrac54z^4-\dfrac32z^3-\dfrac74z^2+\dfrac12z+\dfrac14$.
+\end{solution}
+\begin{problem}[15.]
+    设$V$是一有限维复向量空间($\dim V>0$),且$T\in\L(V)$.定义$f:\C\to\R$为$f(\lambda)=\dim\range(T-\lambda I)$.试证明:$f$不是连续函数.
+\end{problem}
+\begin{proof}
+    首先,由于$V$是一复向量空间,于是$T$必然存在特征值.不妨设其中一个特征值为$\lambda_0$.\\
+    由\tbf{5A.11}可知存在$\delta>0$使得对任意满足$0<|\lambda_0-\lambda|<\delta$的$\lambda\in\F$都有$T-\lambda I$可逆,即$f(\lambda)=\dim\range(T-\lambda I)=\dim V$.\\
+    而$f(\lambda_0)=\dim\range(T-\lambda_0 I)<\dim V$,于是$f(x)$在$x=\lambda$处不连续.
+\end{proof}
+\begin{problem}[16.]
+    设$\li a,{n-1}\in\F$.令$T$为$\F^n$上的算子,$T$关于标准基的矩阵为
+    \[\begin{pmatrix}
+        0&&&&&&-a_0\\
+        1&0&&&&&-a_1\\
+        &1&\ddots&&&&-a_2\\
+        &&\ddots&&&&\vdots\\
+        &&&&&0&-a_{n-2}\\
+        &&&&&1&-a_{n-1}
+    \end{pmatrix}\]
+    该矩阵除了对角线下方那条线(其中都是$1$)和最后一列(其中有些也可能是$0$)以外的所有元素均为$0$.\\
+    证明:$T$的最小多项式为$a_0+a_1z+\cdots+a_{n-1}z^{n-1}+z^n$.
+\end{problem}
+\begin{proof}
+    设$\F^n$的标准基为$\li e,n$.\\
+    由题意可知对于任意$1\leqslant k<n$有$Te_k=e_{k+1}$,即$T^{k}e_1=e_{k+1}$.\\
+    而$Te_n=-a_0e_1+\cdots-a_{n-1}e_n$.于是
+    \[T^{n}e_1=-\sum_{k=0}^{n-1}a_kT^ke_1\]
+    即\[\left(T^n+\sum_{k=0}^{n-1}a_kT^k\right)e_1=\mbf0\]
+    将此式两边作用$T$可知
+    \[T\left(T^n+\sum_{k=0}^{n-1}a_kT^k\right)e_1=\left(T^n+\sum_{k=0}^{n-1}a_kT^k\right)(Te_1)=\left(T^n+\sum_{k=0}^{n-1}a_kT^k\right)e_2=\mbf0\]
+    于是对于任意$1\leqslant j\leqslant n$都有$\displaystyle\left(T^n+\sum_{k=0}^{n-1}a_kT^k\right)e_j=\mbf0$.\\
+    于是$\displaystyle T^n+\sum_{k=0}^{n-1}a_kT^k=\mbf0$.于是$T$的最小多项式为$\displaystyle z^n+\sum_{k=0}^{n-1}a_kz^k$.
+\end{proof}
+\begin{problem}[17.]
+    设$V$是有限维的,$T\in\L(V)$,且$p$是$T$的最小多项式.设$\lambda\in\F$,证明:$T-\lambda I$的最小多项式是定义为$q(z)=p(z+\lambda)$的多项式$q$.
+\end{problem}
+\begin{proof}
+    首先有$q(T-\lambda I)=p(T-\lambda I+\lambda I)=p(T)=\mbf 0$.\\
+    不妨令$s$为$T-\lambda I$的最小多项式,易知$\deg s\leqslant\deg q=\deg p$.\\
+    定义$r\in\P(\F)$满足$r(z)=s(z-\lambda)$.于是$r(T)=s(T-\lambda I)=\mbf0$.于是$\deg r\leqslant\deg p=\deg s$.\\
+    综上可知$\deg q=\deg s$.又因为$q$是首一的且是$s$的多项式倍,于是$q=s$,即$q$是$T-\lambda I$的最小多项式.
+\end{proof}
+\begin{problem}[18.]
+    设$V$是有限维的,$T\in\L(V)$,且$p$是$T$的最小多项式.设$\lambda\in\F$且$\lambda\neq0$,证明:$\lambda T$的最小多项式是定义为$q(z)=\lambda^{\deg p}p\left(\dfrac z\lambda\right)$的多项式$q$.
+\end{problem}
+\begin{proof}
+    设$\lambda T$的最小多项式为$s$.由$q(\lambda T)=\lambda^{\deg p}p(T)=\mbf0$可知$q$是$s$的多项式倍,且$\deg s\leqslant\deg q=\deg p$.\\
+    设$r(z)=\lambda^{-\deg p}s(z\lambda)$,于是$r(T)=\lambda^{-\deg p}s(\lambda T)=\mbf0$.于是$\deg r\leqslant\deg p=\deg s$.\\
+    综上可知$\deg q=\deg s$.又因为$q$是首一的且是$s$的多项式倍,于是$q=s$,即$q$是$\lambda T$的最小多项式.
+\end{proof}
+\begin{problem}[19.]
+    设$V$是有限维的,且$T\in\L(V)$.令$\mathcal{E}$为$V$的子空间,满足$\mathcal{E}=\left\{q(T):q\in\P(\F)\right\}$.证明:$\dim\mathcal{E}$等于$T$的最小多项式的次数.
+\end{problem}
+\begin{proof}
+    设$T$的最小多项式为$p(z)=a_0+a_1z+\cdots+a_{m-1}z^{m-1}+z^m$.令$q(z)=z^m-p(z)$,则$T^{m}=q(T)-p(T)=q(T)$.\\
+    设$I,T,\cdots,T^{m-1}$是$\mathcal{E}$中的向量组.于是
+    \[c_0I+c_1T+\cdots+c_{m-1}T^{m-1}=\mbf{0}\]
+    当且仅当$c_0=\cdots=c_{m-1}=0$.否则这将构成$T$的一个次数小于$m$的最小多项式,这与我们的假设不符.\\
+    于是$I,T,\cdots,T^{m-1}$线性无关.又对于任意$k\geqslant m$都有
+    \[T^{k}=T^{k-m}T^m=T^{k-m}q(T)\]
+    每次做上述代换均可将次数降低$1$.反复递降,可知对任意$k\geqslant m$都有$T^k\in\span(I,T,\cdots,T^{m-1})$.\\
+    于是$I,T,\cdots,T^{m-1}$是$\mathcal{E}$的一组基,进而$\dim\mathcal{E}=m$.
+\end{proof}
+\begin{problem}[20.]
+    设$T\in\L(\F^4)$,其特征值为$3,5,8$.证明:$(T-3I)^2(T-5I)^2(T-8I)^2=\mbf{0}$.
+\end{problem}
+\begin{proof}
+    记$q(z)=(z-3)^2(z-5)^2(z-8)^2$.设$p$是$T$的最小多项式且$s\in\P(\F)$满足
+    \[p(z)=s(z)(z-3)(z-5)(z-8)\]
+    其中$\deg\leqslant 1$.\\
+    由于$3,5,8$是$T$仅有的特征值,于是$s$要么没有零点,要么零点是$T$的特征值,于是$s\in\left\{1,z-3,z-5,z-8\right\}$.\\
+    于是$q$一定是$p$的多项式倍,因而$q(T)=\mbf0$.
+\end{proof}
+\begin{problem}[21.]
+    设$V$是有限维的,且$T\in\L(V)$.证明:$T$的最小多项式的次数最高为$1+\dim\range T$.
+\end{problem}
+\begin{proof}
+    设$p$是$T$的最小多项式,$q$是$T|_{\range T}$的最小多项式.\\
+    对于任意$v\in V$有$q(T)(Tv)=q(T|_{\range T})(Tv)=\mbf0$.这表明$q(T)T=\mbf0$,因而
+    \[\deg p\leqslant\deg(zq(z))=1+\deg q\leqslant 1+\dim\range T\]
+\end{proof}
+\begin{problem}[22.]
+    设$V$是有限维的,且$T\in\L(V)$,证明:$T$可逆当且仅当$I\in\span(T,T^2,\cdots,T^{\dim V})$.
+\end{problem}
+\begin{proof}
+    设$T$的最小多项式为$p:=z^m+c_{m-1}z^{m-1}+\cdots+c_1z+c_0$,其中$m\leqslant\dim V$.于是
+    \[T\text{可逆}\Leftrightarrow p\text{的常数项不为}0\Leftrightarrow I=-\dfrac{c_1T+\cdots+c^{m-1}T^{m-1}+T^m}{c_0}\Leftrightarrow I\in\span(T,\cdots,T^{\dim V})\]
+\end{proof}
+\begin{problem}[23.]
+    设$V$是有限维的,且$T\in\L(V)$.证明:对任意$v\in V$都有$\span(v,Tv,\cdots,T^{\dim V-1}v)$在$T$下不变.
+\end{problem}
+\begin{proof}
+    设$T$的最小多项式为$p(z):=a_0+a_1z+\cdots+a_{m-1}z^{m-1}+z^m$.\\
+    于是对于任意$v\in V$都有$T^m v=-\left(a_0v+\cdots+a_{m-1}T^{m-1}v\right)\in\span(v,Tv,\cdots,T^{m-1}v)$.\\
+    而对于任意$k\geqslant m$有$T^{k+1}v=T^{k-m}T^mv=-T^{k-m}\left(a_0v+\cdots+a_{m-1}T^{m-1}v\right)\in\span(v,Tv,\cdots,T^kv)$.\\
+    归纳可得对任意$k\geqslant m$有$T^kv\in\span(v,Tv,\cdots,T^m v)$.\\
+    特别地,由于$m\leqslant\dim V$,于是$\span(v,Tv,\cdots,T^{\dim V-1})=\span(v,Tv,\cdots,T^{m-1}v)$.\\
+    于是对于任意$u\in\span(v,Tv,\cdots,T^{\dim V-1}v)$都有$Tu\in\span(v,Tv,\cdots,T^{\dim V-1}v)$,故这空间在$T$下不变.
+\end{proof}
+\begin{problem}[24.]
+    设$V$是一有限维复向量空间.设$T\in\L(V)$,使得$T$的特征值有且仅有$5$和$6$.证明
+    \[(T-5I)^{\dim V-1}(T-6I)^{\dim V-1}=\mbf0\]
+\end{problem}
+\begin{proof}
+    设$p$是$T$的最小多项式.由于$p$的零点一定是$T$的特征值,于是$p(z)=0$当且仅当$z=5$或$6$.\\
+    于是$p(z)$只能为形如$p(z)=(z-5)^\alpha(z-6)^\beta$的形式,其中$\alpha,\beta\geqslant1$且$\alpha+\beta\leqslant\dim V$.\\
+    于是$1\leqslant\alpha,\beta\leqslant\dim V-1$,因而题设的多项式是$p$的多项式倍,命题得证.
+\end{proof}
+\begin{problem}[25.]
+    设$V$是有限维的,$T\in\L(V)$,且$U$是$V$的在$T$下的不变子空间.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$T$的最小多项式是$T/U$的最小多项式的多项式倍.
+        \item 设$p,q\in\P(\F)$分别是$T|_U$和$T/U$的最小多项式.证明:$pq$是$T$的最小多项式的多项式倍.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$s,r\in\P(\F)$分别为$T,T/U$的最小多项式.考虑商映射$\pi:v\mapsto v+U\in\L(V,V/U)$.
+            对于任意$k\in\N$,都有$\pi(T^kv)=T^kv+U=(T/U)^k(v+U)=(T/U)^k(\pi v)$.于是
+            \[s(T/U)(v+U)=s(T/U)(\pi v)=\pi(s(T)v)=\pi(\mbf0)=\mbf0\]
+            于是$s(T/U)=\mbf0$,因而$s$是$r$的多项式倍.
+        \item 设$V$的子空间$W$使得$V=W\oplus U$.对于任意$u\in U$有$p(T|_U)u=\mbf0$.\\
+            于是对于任意$w\in W$有\[\pi(q(T)w)=q(T/U)(w+U)=\mbf0\]
+            即$q(T)w\in U$,于是$p(T)q(T)w=\mbf0$.\\
+            对于任意$u\in U$,亦有$q(T)p(T)u=q(T)\mbf0=\mbf0$.\\
+            于是对于任意$v:=w+u\in V$有$pq(T)v=p(T)q(T)w+q(T)p(T)u=\mbf0+\mbf0=\mbf0$,即$pq(T)=\mbf0$.\\
+            因此$pq$是$T$的最小多项式的多项式倍.命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[26.]
+    设$V$是有限维的,$T\in\L(V)$,且$U$是$V$的在$T$下的不变子空间.证明:$T$的特征值构成的集合$A$等于$T|_U$的特征值构成的集合$B$与$T/U$的特征值构成的集合$C$的并集.
+\end{problem}
+\begin{proof}
+    由\tbf{5B.25}可知,若令$p,q$和$r$分别为$T|_U,T/U$和$T$的最小多项式,那么$pq$是$r$的多项式倍.\\
+    于是$r$的零点一定是$pq$的零点,因此$A\subseteq B\cup C$.\\
+    假定$T|_U$有一特征值$\lambda$和对应的特征向量$u\in U$,则有$Tu=\lambda u$.\\
+    由于$U\subseteq V$,于是$T$自然也有$\lambda$这一特征值,于是$B\subseteq A$.\\
+    由\tbf{5A.38}可知$T/U$的每个特征值都是$T$的特征值,于是$C\subseteq A$.\\
+    于是$A=B\cup C$,命题得证.
+\end{proof}
+\begin{problem}[27.]
+    设$\F=\R$,$V$是有限维的,且$T\in\L(V)$.证明:$T_\C$的最小多项式等于$T$的最小多项式.
+\end{problem}
+\begin{proof}
+    首先有$(T_\C)^k(u+\i v)=(T_\C)^{k-1}(Tu+\i Tv)=(T_\C)^{k-2}(T^2u+\i T^2v)=\cdots=T^ku+\i T^kv$.\\
+    设$p,q$分别是$T,T_\C$的最小多项式.\\
+    对于任意$u+\i v\in V_\C$,都有$q(T_\C)(u+\i v)=q(T)u+\i q(T)v=\mbf0$.\\
+    于是$q(T)=\mbf0$,因而$q$是$p$的多项式倍.\\
+    对于任意$u,v\in V$,都有$p(T)u+\i pT(v)=p(T_\C)(u+\i v)=\mbf0$.\\
+    于是$p(T_\C)=\mbf0$,因而$p$是$q$的多项式倍.\\
+    于是$p=q$,因而两者的最小多项式相同.
+\end{proof}
+\begin{problem}[28.]
+    设$V$是有限维的,且$T\in\L(V)$.证明:$T'$的最小多项式与$T$的最小多项式相同.
+\end{problem}
+\begin{proof}
+    设$V$的一组基$\li v,m$与其对偶基$\li\phi,m$.设$T,T'$的最小多项式分别为$p,q$.\\
+    对于任意$\phi\in V'$和任意$k\in\N$有$(T')^k(\phi)=(T')^{k-1}(\phi)T=(T')^{k-2}(\phi)T^2=\cdots=\phi\circ T^k$.\\
+    于是对任意$r\in\P(\F)$有$r(T')(\phi)=\phi\circ r(T)$.因此,对于任意$\phi\in V'$有
+    \[p(T')(\phi)=\phi\circ p(T)=\phi\circ\mbf0=\mbf0\]
+    于是$p$是$q$的多项式倍.对于任意$v\in V$和$\phi\in V'$有
+    \[\phi\circ q(T)v=(q(T')\phi)v=\mbf0 v=\mbf0\]
+    由于$\phi$的选取是任意的,于是$q(T)v=\mbf0$,于是$q$是$p$的多项式倍.\\
+    于是$p=q$,因而两者的最小多项式相同.
+\end{proof}
+\begin{problem}[29.]
+    若$V$是一有限维向量空间,且$\dim V\geqslant2$,证明:$T$上的每个算子都有二维的不变子空间.
+\end{problem}
+\begin{proof}
+    我们对结论进行归纳证明.\\
+    当$\dim V=2$时,可以将$V$视为这一不变子空间,于是命题成立.\\
+    现在假设命题对所有维数不大于$k$的向量空间都成立.对于$V$满足$\dim V=k+1$,设$T\in\L(V)$.\\
+    不妨令$p$是$T$的最小多项式,于是$1\leqslant \deg p\leqslant k+1$.\\
+    如果$p$有零点,即$T$有特征值,根据\tbf{5A.39}可知存在$V$的在$T$下不变的子空间$U$使得$\dim U=k$.\\
+    根据归纳假设,存在$U$的在$T|_U$下不变的二维子空间,于是$V$存在$T$下的不变的二维子空间.\\
+    如果$p$没有零点,那么$T$没有特征值,即$\F=\R$.于是根据代数基本定理可知$p$可以写作一系列二次项的乘积,即
+    \[p(z)=(z^2+b_1z+c_1)\cdots(z^2+b_nz+c_n)\]
+    由于$p(T)=\mbf0$,于是必然存在$k\in\{1,\cdots,n\}$使得$T^2+b_kT+c_kI$不是单射.\\
+    于是存在$v\in V$使得$Tv^2+b_kTv+c_k v=\mbf0$,即$Tv^2\in\span(v,Tv)$.\\
+    又$T$没有特征值,于是$v$和$Tv$线性无关,因而$\dim(v,Tv)=2$.这就表明$\span(v,Tv)$是$T$下不变的二维子空间.\\
+    归纳可知命题对所有$k\geqslant 2$成立.
+\end{proof}
+\end{document}
