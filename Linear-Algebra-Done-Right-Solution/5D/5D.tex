@@ -16,6 +16,21 @@
     \large\tbf{Linear Algebra Done Right 5D}
 \end{center}
 \begin{problem}[1.]
-    设$V$是有限维复向量空间,且1
+    设$V$是有限维复向量空间,且$T\in\L(V)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:如果$T^4=I$,那么$T$可对角化.
+        \item 证明:如果$T^4=T$,那么$T$可对角化.
+        \item 给出一例$T\in\L(\C^2)$,使得$T^4=T^2$且$T$不可对角化.
+    \end{enumerate}
 \end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 因为$T^4=I$,于是存在$p(z)=z^4-1=(z+1)(z-1)(z+\i)(z-\i)$使得$p(T)=\mbf0$.\\
+            于是$p$是$T$的最小多项式$q$的多项式倍,因而$q$也具有$(z-\lambda_1)\cdots(z-\lambda_m)$的形式,其中各$\lambda$互异.\\
+            因而$T$是可对角化的.
+        \item 因为$T^4=T$,于是存在$p(z)=z^4-z=z(z-1)(z+\i)(z-\i)$使得$p(T)=\mbf0$.\\
+            于是$p$是$T$的最小多项式$q$的多项式倍,因而$q$也具有$(z-\lambda_1)\cdots(z-\lambda_m)$的形式,其中各$\lambda$互异.\\
+            因而$T$是可对角化的.
+    \end{enumerate}
+\end{proof}
 \end{document}
