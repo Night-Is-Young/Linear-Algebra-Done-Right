@@ -464,6 +464,23 @@
         \item 求出$\F^n$的所有在$T$下不变的子空间.
     \end{enumerate}
 \end{problem}
+\begin{lemma}[Lemma.L.4]
+    设$T\in\L(V)$,且$U$是$V$在$T$下的不变子空间.若$\li\lambda,m$是$T$的互异特征值且对应特征向量为$\li v,m$,那么%
+    $\li v+m\in U$当且仅当$v_k\in U$对任意$k\in\{1,\cdots,m\}$成立.
+\end{lemma}
+\begin{proof}
+    $\Leftarrow$:由于$v_k\in U$对所有$k$成立,又因为$U$是子空间,于是$\li v+m\in U$.\\
+    $\Rightarrow$:我们采取归纳证明的方式.当$m=1$时,结论是显然的.\\
+    若结论对于某个$m\in\N^*$时成立,那么取$T$的互异特征值$\li\lambda,{m+1}$和对应的特征向量$\li v,{m+1}$.\\
+    令$v=\li v+{m+1}\in U$,则有
+    \[Tv=T(\li v+{m=1})=\lambda_1v_1+\cdots+\lambda_{m+1}v_{m+1}\in U\]
+    于是
+    \[Tv-\lambda_{m+1}v_{m+1}=(\lambda_1-\lambda_{m+1})v_1+\cdots+(\lambda_m-\lambda_{m+1})v_m\in U\]
+    由于$\li\lambda,{m+1}$互异,因而对于所有$k\in\{1,\cdots,m\}$都有$\lambda_k-\lambda_{m+1}\neq0$.\\
+    于是$(\lambda_k-\lambda_{m+1})v_k$是$T$对应$\lambda_k$的特征向量.\\
+    我们的假设表明$(\lambda_k-\lambda_{m+1})v_k\in U$,于是$v_k\in U$.又因为$v=\li v+{m+1}\in U$,于是$v_{m+1}\in U$.\\
+    归纳可知命题成立.
+\end{proof}
 \begin{solution}[Solution.]
     \begin{enumerate}[label=\tbf{(\arabic*)}]
         \item 观察可得$T$的特征值为$1,2,\cdots,n$,对应的特征向量为$\F^n$的标准基.

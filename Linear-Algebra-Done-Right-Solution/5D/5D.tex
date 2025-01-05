@@ -140,6 +140,137 @@
     于是$R=S^{-1}TS$.
 \end{proof}
 \begin{problem}[10.]
-    
+    给出一例$R,T\in\L(\F^4)$都有且仅有特征值$2,6,7$,同时不存在可逆算子$S\in\L(\F^4)$使得$R=S^{-1}TS$.
 \end{problem}
+\begin{solution}
+    设$R,T$对应$\F^4$的标准基$\li e,4$的矩阵为
+    \[\mathcal{M}(R)=\begin{pmatrix}
+        2&0&0&0\\0&6&0&0\\0&0&6&0\\0&0&0&7
+    \end{pmatrix}\ \ \ \ \ 
+    \mathcal{M}(T)=\begin{pmatrix}
+        2&0&0&0\\0&2&0&0\\0&0&6&0\\0&0&0&7
+    \end{pmatrix}\]
+    假定存在$S\in\L(\F^4)$使得$R=S^{-1}TS$.设$v_1=S^{-1}e_1,v_2=S^{-1}e_2$,于是
+    \[S^{-1}TSv_1=S^{-1}Te_1=2S^{-1}e_1=2v_1\]
+    同理有
+    \[S^{-1}TSv_2=2v_2\]
+    若$v_1,v_2$线性相关,则存在$\lambda\in\F$使得$v_2=\lambda v_1$.又因为$S$可逆,于是$\nul S^{-1}=\{\mbf0\}$,于是
+    \[v_2=\lambda v_1\Leftrightarrow S^{-1}e_2=\lambda S^{-1}e_1 \Leftrightarrow S^{-1}\left(e_2-\lambda e_1\right)=\mbf0\Leftrightarrow e_2-\lambda e_1=\mbf0\]
+    于是$e_1,e_2$线性相关,这与$\li e,4$是$\F^4$的标准基不符.于是$\dim\span(v_1,v_2)=2$.\\
+    即$\dim E(2,S^{-1}TS)=\span(v_1,v_2)=2$.而$\dim E(2,R)=1$,于是一定有$R\neq S^{-1}TS$.\\
+    于是不存在可逆的$S\in\L(\F^4)$使得$R=S^{-1}TS$.
+\end{solution}
+\begin{problem}[11.]
+    给出一例$T\in\L(\C^3)$使得$6$和$7$是$T$的特征值,且$T$不可对角化.
+\end{problem}
+\begin{solution}
+    设$T$关于$\C^3$的标准基$\li e,3$的矩阵为
+    \[\mathcal{M}(T)=\begin{pmatrix}
+        6&0&7\\0&7&0\\0&0&6
+    \end{pmatrix}\]
+    这是一个上三角矩阵,因而$6$和$7$是$T$的特征值.然而
+    \[\mathcal{M}(T-6I)=\begin{pmatrix}
+        0&0&7\\0&1&0\\0&0&0
+    \end{pmatrix}\ \ \ \ \ 
+    \mathcal{M}(T-7I)=\begin{pmatrix}
+        -1&0&7\\0&0&0\\0&0&-1
+    \end{pmatrix}\]
+    于是$\dim E(6,T)+\dim E(7,T)=1+1<\dim\C^3$,于是$T$不可对角化.
+\end{solution}
+\begin{problem}[12.]
+    设$T\in\L(\C^3)$使得$6$和$7$是$T$的特征值,且$T$不可对角化.试证明:存在$(z_1,z_2,z_3)\in\C^3$使得
+    \[T(z_1,z_2,z_3)=(6+8z_1,7+8z_2,13+8z_3)\]
+\end{problem}
+\begin{proof}
+    由于$8$不是$T$的特征值,于是$T-8I$可逆,于是存在$(z_1,z_2,z_3)\in\C^3$使得
+    \[(T-8I)(z_1,z_2,z_3)=(6,7,13)\]
+    即
+    \[T(z_1,z_2,z_3)=(6+8z_1,7+8z_2,13+8z_3)\]
+    于是命题得证.
+\end{proof}
+\begin{problem}[13.]
+    设$A$是对角线上元素互异的对角矩阵,$B$是与$A$大小相同的方阵.试证明:$AB=BA$当且仅当$B$是对角矩阵.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$A$的对角线上元素为$\li\lambda,m$.若$B$不是对角矩阵,那么不妨假定存在$B_{i,j}\neq0$,其中$i\neq j$.于是
+    \[(AB)_{i,j}=\sum_{k=1}^{m}A_{i,k}B_{k,j}=A_{i,i}B_{i,j}=\lambda_iB_{i,j}\]
+    \[(BA)_{i,j}=\sum_{k=1}^{m}B_{i,k}A_{k,j}=B_{i,j}A_{j,j}=\lambda_jB_{i,j}\]
+    因为$\lambda_i\neq\lambda_j$,于是$(AB)_{i,j}\neq(BA)_{i,j}$,即$AB\neq BA$.这与题设不符,于是$B$是对角矩阵.\\
+    $\Leftarrow$:设$B$的对角线元素为$\li\mu,m$.于是
+    \[(AB)_{i,j}=0=(BA)_{i,j}\]
+    \[(AB)_{i,i}=\lambda_i\mu_i=(BA)_{i,i}\]
+    即$AB=BA$.
+\end{proof}
+\begin{problem}[14.]
+    回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 给出一例有限维复向量空间$V$和$T\in\L(V)$使得$T^2$可对角化但$T$不可对角化.
+        \item 设$\F=\C$,$k\in\N^*$,且$T\in\L(V)$可逆.试证明:$T$可对角化当且仅当$T^k$可对角化.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$V=\C^2,T(x,y)=(y,0)$.$T$关于$\C^2$的标准基的矩阵为
+            \[\mathcal{M}(T)=\begin{pmatrix}
+                0&1\\0&0
+            \end{pmatrix}\]
+            于是$T$有且仅有特征值$0$.而$\dim E(0,T)=1<\dim\C^2$,于是$T$不可对角化.\\
+            然而$T^2=\mbf0$,于是$T^2$可对角化,其关于任意$\C^2$的基的矩阵都是元素均为$0$的对角矩阵.
+        \item $\Rightarrow$:设$T$关于$V$的某组基具有对角矩阵
+            \[\mathcal{M}(T)=\begin{pmatrix}
+                \lambda_1&&0\\&\ddots&\\0&&\lambda_n
+            \end{pmatrix}\]
+            那么有
+            \[\mathcal{M}(T^k)=\left(\mathcal{M}(T)\right)^k=\begin{pmatrix}
+                \lambda_1^k&&0\\&\ddots&\\0&&\lambda_n^k
+            \end{pmatrix}\]
+            因而$T^k$关于$V$的这组基也具有对角矩阵,从而$T^k$可对角化.\\
+            $\Leftarrow$:设$T^k$的最小多项式为$p(z)=(z-\lambda_1)\cdots(z-\lambda_m)$,则$\li\lambda,m$互异且非零(否则$T^k$不可逆).\\
+            根据代数基本定理,$z^k-\lambda_j=0$有$k$重根,不妨记为$\mu_{j,1},\cdots,\mu_{j,k}$,这$k$个根各不相同.\\
+            对于任意$a,b\in\{1,\cdots,m\},c,d\in\{1,\cdots,k\}$有
+            \[\mu_{a,c}=\mu_{b,d}\Rightarrow \mu_{a,c}^k=\mu_{b,d}^k\Rightarrow \lambda_a=\lambda_b\]
+            于是$\mu_{a,c}=\mu_{b,d}$当且仅当$a=b,c=d$.这表明$\mu_{1,1},\cdots,\mu_{m,k}$互异.令$q(z)=p\left(z^k\right)\in\P(\C)$,则
+            \[q(z)=p\left(z^k\right)=\prod_{j=1}^{m}\left(z^k-\lambda_j\right)=\prod_{j=1}^{m}\prod_{i=1}^{k}\left(z-\mu_{j,i}\right)\]
+            而$q(T)=p(T^k)=\mbf0$,于是$q$是$T$的最小多项式$r$的多项式倍.于是
+            \[r(z)=(z-\xi_1)\cdots(z-\xi_n)\]
+            其中各$\xi$均为$\mu_{1,1},\cdots,\mu_{m,k}$中的某个且互异.于是$T$是可对角化的.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[15.]
+    设$V$是有限维复向量空间,$T\in\L(V)$,且$p$是$T$的最小多项式.证明下列命题相互等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$可对角化.
+        \item 不存在$\lambda\in\C$使得$p$是$(z-\lambda)^2$的多项式倍.
+        \item $p$和其导函数$p'$没有公共零点.
+        \item $p$和其导函数$p'$的最大公因式是常数多项式$1$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \tbf{(a)}$\Leftrightarrow$\tbf{(b)}:我们有
+    \[T\text{可对角化}\Leftrightarrow p=(z-\lambda_1)\cdots(z-\lambda_m),\text{其中各}\lambda_k\text{不相同}\Leftrightarrow\text{不存在}\lambda\in\C\text{使}p\text{是}(z-\lambda)^2\text{的多项式倍}\]
+    \tbf{(b)}$\Rightarrow$\tbf{(c)}:若存在$\lambda\in\C$使得$p(\lambda)=p'(\lambda)=0$,不妨令$p(z)=(z-\lambda)^kq(z)$,其中$k\geqslant1,q(\lambda)\neq0$.于是
+    \[p'(z)=(z-\lambda)^kq'(z)+k(z-\lambda)^{k-1}q(z)=(z-\lambda)^{k-1}\left((z-\lambda)q'(z)+kq(z)\right)\]
+    当$k=1$时,$p'(\lambda)=q(\lambda)\neq0$.\\
+    当$k\geqslant2$时,$p'(\lambda)=0^{k-1}kq(\lambda)=0$.\\
+    于是$k\geqslant2$.因而$p$是$(z-\lambda)^2$的$(z-\lambda)^{k-2}q$倍,与条件矛盾.因而$p$与$p'$没有公共零点.\\
+    \tbf{(c)}$\Rightarrow$\tbf{(b)}:若存在$\lambda\in\C$使得$p=(z-\lambda)^2q$,其中$q\in\P(\C)$,那么
+    \[p'(z)=2(z-\lambda)q(z)+(z-\lambda)^2q'(z)\]
+    于是$p(\lambda)=p'(\lambda)=0$,与条件矛盾,因而不存在$\lambda\in\C$使得$p$是$(z-\lambda)^2$的多项式倍.\\
+    \tbf{(c)}和\tbf{(d)}的等价性是显然的.
+\end{proof}
+\begin{problem}[16.]
+    设$T\in\L(V)$可对角化,令$\li\lambda,m$表示$T$的互异特征值.证明:$V$的子空间$U$在$T$下不变,当且仅当存在$V$的子空间$\li U,m$使得$U_k\subseteq E(\lambda_k,T)$对每个$k$成立且$U=\li U\oplus m$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:假定存在这样的子空间$\li U,m$.对于任意$u\in U$,设$u=\li u+m$,其中$u_k\in U_k$对每个$k$都成立.\\
+    那么我们有
+    \[Tu=T(\li u+m)=\li{Tu}+m=\lambda_1u_1+\cdots+\lambda_mu_m\in\li U\oplus m\]
+    于是$U=\li U\oplus m$在$T$下不变.\\
+    $\Rightarrow$:令$U_k=U\cap E(\lambda_k,T)$对每个$k$成立,则$U_k\subseteq E(\lambda_k,T)$.\\
+    由于$V=E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T)$,于是$\li U+m$是直和.\\
+    对于任意$\li u,m$满足$u_k\in U_k$,由于$u_k\in U$对所有$k$成立,于是$\li u+m\in U$,即$\li U\oplus m\subseteq U$.\\
+    另一方面,对于任意$u\in U$,都有
+    \[u=\li v+m,v_k\in E(\lambda_k,T)\]
+    
+\end{proof}
 \end{document}
