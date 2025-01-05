@@ -271,6 +271,109 @@
     对于任意$\li u,m$满足$u_k\in U_k$,由于$u_k\in U$对所有$k$成立,于是$\li u+m\in U$,即$\li U\oplus m\subseteq U$.\\
     另一方面,对于任意$u\in U$,都有
     \[u=\li v+m,v_k\in E(\lambda_k,T)\]
-    
+    根据\tbf{5A}中的\tbf{Lemma.L.4}可知$v_k\in U$,于是$v_k\in U_k$.这表明$U\subseteq\li U\oplus m$.\\
+    于是$U=\li U\oplus m$,命题得证.
+\end{proof}
+\begin{problem}[17.]
+    设$V$是有限维的.试证明:存在$\L(V)$的一组基,使得其中所有基向量都是可对角化算子.
+\end{problem}
+\begin{proof}
+    设$V$的一组基$\li v,m$.对于$i,j\in\{1,\cdots,m\}$且$i\neq j$,定义$T_{i,j}$满足
+    \[T_{i,j}v_k=\left\{\begin{array}{l}
+        kv_k,k\neq j\\
+        kv_k+v_i,k=j
+    \end{array}\right.\]
+    于是$\mathcal{M}(T_{i,j})$是上三角或下三角矩阵,对角线上的元素为$1,\cdots,m$.因而$T_{i,j}$恰有$m$个特征值,于是$T_{i,j}$是可对角化的.\\
+    对于$j\in\{1,\cdots,m\}$,定义$S_j$满足
+    \[S_jv_k=\left\{\begin{array}{l}
+        \mbf0,k\neq j\\
+        v_j,k=j
+    \end{array}\right.\]
+    于是$\mathcal{M}(S_j)$仅有第$j$行第$j$列的元素为$1$,其余元素均为$0$.自然,$S_j$也是可对角化的.\\
+    现在,令所有$T_{i,j}$和$S_j$共同构成$\L(V)$上的长度为$m^2$的向量组.这些算子对应的矩阵中,仅有$T_{i,j}$满足第$i$行第$j$列为$1$,仅有$S_j$满足第$j$行第$j$列元素为$1$,其余所有算子在这个位置上均为$0$.因此
+    \[\mbf0=a_{1,2}T_{1,2}+\cdots+a_{m,m-1}T_{m,m-1}+a_1S_1+\cdots+a_mS_m\]
+    当且仅当所有$a=0$.于是这向量组在$\L(V)$中线性无关.又因为$\dim\L(V)=m^2$,于是这向量组构成$\L(V)$的基.
+\end{proof}
+\begin{problem}[18.]
+    设$T\in\L(V)$可对角化,且$U$是$V$在$T$下不变的子空间.试证明:商算子$T/U$是$V/U$上的可对角化算子.
+\end{problem}
+\begin{proof}
+    根据\tbf{5B.25(1)}可知$T$的最小多项式是$T/U$的最小多项式的多项式倍.因而$T/U$的最小多项式也是若干互异一次项之积,因而$T/U$是可对角化算子.
+\end{proof}
+\begin{problem}[19.]
+    证明或给出一反例:若$T\in\L(V)$且存在$V$的在$T$下不变的子空间$U$,使得$T|_U$和$T/U$均可对角化,那么$T$可对角化.
+\end{problem}
+\begin{proof}
+    令$V=\F^2$,$T(x,y)=(y,0)$.我们在\tbf{5D.1(3)}中已经知道$T$不可对角化.\\
+    令$U=\{(x,0)\in\F^2:x\in\F\}$,于是$U$在$T$下不变.\\
+    由于$T|_U$和$T/U$都是一维向量空间上的算子,于是它们可对角化.这就找到了一个反例.
+\end{proof}
+\begin{problem}[20.]
+    设$V$是有限维的,且$T\in\L(V)$.试证明:$T$可对角化,当且仅当对偶算子$T'$可对角化.
+\end{problem}
+\begin{proof}
+    我们知道在选取$V$的基$\li v,m$和其对偶基$\li\phi,m$后
+    \[\mathcal{M}(T')=\left(\mathcal{M}(T)\right)^{\text{t}}\]
+    若$T$可对角化,那么$\mathcal{M}(T)$是对角矩阵,转置后依然是对角矩阵,那么$T'$可对角化.\\
+    同理,若$T'$可对角化,那么$\mathcal{M}(T')$也是对角矩阵,于是$\mathcal{M}(T)$也是对角矩阵,因此$T$可对角化.\\
+    于是命题得证.
+\end{proof}
+\begin{problem}[21.]
+    斐波那契数列$\{F_i\}_{i=1}^{\infty}$定义为$F_0=0,F_1=1,F_n=F_{n-2}+F_{n-1}$对所有$n\geqslant 2$成立.\\定义$T\in\L(\R^2)$为$T(x,y)=(y,x+y)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$T^{n}(0,1)=(F_n,F_{n+1})$对任意$n\in\N$都成立.
+        \item 求$T$的特征值.
+        \item 求$\R^2$的一个由$T$的特征向量组成的基.
+        \item 试证明:对于任意$n\in\N$,都有
+            \[F_n=\dfrac{1}{\sqrt{5}}\left[\left(\dfrac{1+\sqrt5}{2}\right)^n-\left(\dfrac{1-\sqrt5}{2}\right)^n\right]\]
+        \item 试证明:对于任意$n\in\N$,$F_n$是最接近$\dfrac{1}{\sqrt5}\left(\dfrac{1+\sqrt5}{2}\right)^n$的整数.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 首先有$T^0(0,1)=I(0,1)=(0,1)=(F_0,F_1)$成立.\\
+            若$T^{n}(0,1)=(F_n,F_{n+1})$成立,则有
+            \[T^{n+1}(0,1)=TT^n(0,1)=T(F_n,F_{n+1})=(F_{n+1},F_n+F_{n+1})=(F_{n+1},F_{n+2})\]
+            归纳可得$T^{n}(0,1)=(F_n,F_{n+1})$对任意$n\in\N$成立.
+        \item 令$T(x,y)=\lambda(x,y)$,则有
+            \[\left\{\begin{array}{l}
+                \lambda x=y\\
+                \lambda y=x+y
+            \end{array}\right.\]
+            即$(\lambda^2-\lambda-1)x=0$.若$x=0$,则$y=\lambda x=0$,舍去.\\
+            于是$\lambda^2-\lambda-1=0$.于是$T$的特征值为$\dfrac{1\pm\sqrt5}{2}$.
+        \item 由\tbf{(2)}的结论不难得出$V$的一组由$T$的特征向量组成的基$\left(1,\dfrac{1+\sqrt5}{2}\right),\left(1,\dfrac{1-\sqrt5}{2}\right)$.
+        \item 令$e_1=\left(1,\dfrac{1+\sqrt5}{2}\right),e_2=\left(1,\dfrac{1-\sqrt5}{2}\right)$.$T$关于$e_1,e_2$的矩阵为
+            \[\mathcal{M}(T)=\begin{pmatrix}
+                \dfrac{1+\sqrt5}{2}&0\\0&\dfrac{1-\sqrt5}{2}
+            \end{pmatrix}\]
+            这是一个对角矩阵.于是$T^{n}(0,1)=T^{n}\left(\dfrac{1}{\sqrt5}(e_1-e_2)\right)=\dfrac{1}{\sqrt5}\left(T^ne_1-T^ne_2\right)$.\\
+            于是$F_n=\dfrac{1}{\sqrt{5}}\left[\left(\dfrac{1+\sqrt5}{2}\right)^n-\left(\dfrac{1-\sqrt5}{2}\right)^n\right]$,命题得证.
+        \item 根据$F_n$的定义可知$F_n\in\N$.而
+            \[\left|\dfrac{1}{\sqrt5}\left(\dfrac{1-\sqrt5}{2}\right)^n\right|<\dfrac{1}{\sqrt5}<\dfrac12\]
+            于是$F_n$是最接近$\dfrac{1}{\sqrt5}\left(\dfrac{1+\sqrt5}{2}\right)^n$的整数.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[22.]
+   设$T\in\L(V)$且$n\times n$矩阵$A$事是$T$关于$V$的某个基的矩阵.试证明:如果
+   \[\left|A_{j,j}\right|>\sum_{k=1,k\neq j}^n\left|A_{j,k}\right|\]
+   对每个$j\in\{1,\cdots,n\}$成立,那么$T$可逆.
+\end{problem}
+\begin{proof}
+    如果$T$不可逆,那么$0$是$T$的特征值.根据格什戈林圆盘定理,存在$j\in\{1,\cdots,n\}$使得
+    \[\left|0-A_{j,j}\right|\leqslant\sum_{k=1,k\neq j}^n\left|A_{j,k}\right|\]
+    这与题设不符.于是$T$可逆.
+\end{proof}
+\begin{problem}[23.]
+    假设格什戈林圆盘的定义被替换为:第$k$个圆盘的半径为$A$的第$k$列(而不是行)元素的绝对值之和,格什戈林圆盘定理依然成立.
+\end{problem}
+\begin{proof}
+    令$T\in\L(V)$,选取$V$的一组基$\li v,n$.我们需要证明$T$的特征值$\lambda$满足存在$j\in\{1,\cdots,n\}$使得
+    \[\left|\lambda-A_{j,j}\right|\leqslant\sum_{k=1,k\neq j}^n\left|A_{k,j}\right|\]
+    考虑$V$的对偶空间$V'$,$T$的对偶算子$T'$和$\li v,n$的对偶基$\li \phi,n$.\\
+    根据\tbf{5A.15}可得$T'$与$T$有相同的特征值.又$\mathcal{M}(T')=\left(\mathcal{M}(T)\right)^\text{t}=A^{\text t}$.\\
+    对$T'$使用重定义前的格什戈林圆盘定理,有
+    \[\left|\lambda-A_{j,j}\right|\leqslant\sum_{k=1,k\neq j}^n\left|A^{\text{t}}_{j,k}\right|=\sum_{k=1,k\neq j}^n\left|A_{k,j}\right|\]
+    于是命题得证.
 \end{proof}
 \end{document}
