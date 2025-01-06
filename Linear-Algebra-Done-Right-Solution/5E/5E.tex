@@ -28,10 +28,73 @@
     设$\mathcal{E}$是$\L(V)$的子集,且$\mathcal{E}$中的每个元素均可对角化.证明:存在$V$的一个基使得$\mathcal{E}$的每个元素关于这组基都有对角矩阵,当且仅当$\mathcal{E}$中的每对元素可交换.
 \end{problem}
 \begin{proof}
-    $\Rightarrow$:对于任意$S,T\in\mathcal{E}$,假定存在$V$的一组基$v_1,\cdots$使得它们关于这组基有对角矩阵,于是
+    $\Rightarrow$:对于任意$S,T\in\mathcal{E}$,存在$V$的一组基$v_1,\cdots$使得它们关于这组基有对角矩阵,于是
     \[\mathcal{M}(ST)=\mathcal{M}(S)\mathcal{M}(T)=\mathcal{M}(T)\mathcal{M}(S)=\mathcal{M}(TS)\]
     于是$S,T$可交换.\\
     $\Leftarrow$:
 
+\end{proof}
+\begin{problem}[3.]
+    设$S,T\in\L(V)$使得$ST=TS$.设$p\in\P(\F)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$\nul p(S)$在$T$下不变.
+        \item 试证明:$\range p(S)$在$T$下不变.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    首先,对于任意$n\in N^*$有
+        \[S^{n}T=S^{n-1}ST=S^{n-1}TS=\cdots=TS^n\]
+    又
+    \[TI=IT=T\]
+    于是对于任意$\displaystyle p:=\sum_{i=0}^{m}a_iz^i\in\P(\F)$有
+    \[p(S)T=\sum_{i=0}^{m}a_iS^iT=\sum_{i=0}^{m}a_iTS^i=Tp(S)\]
+    于是$p(S)$和$T$可交换.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$v\in\nul p(S)$有
+            \[p(S)(Tv)=Tp(S)v=T\mbf0=\mbf0\]
+            于是$Tv\in\nul p(S)$,即$\nul p(S)$在$T$下不变.
+        \item 对于任意$v\in\range p(S)$,设$u\in V$使得$p(S)u=v$.则有
+            \[Tv=T(p(S)u)=p(S)(Tu)\]
+            因为$p(S)(Tu)\in\range p(S)$,于是$\range p(S)$在$T$下不变.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[4.]
+    证明或给出一反例:若$A$是对角矩阵,$B$是与$A$大小相同的上三角矩阵,那么$A$和$B$可交换.
+\end{problem}
+\begin{solution}
+    考虑矩阵
+    \[A=\begin{pmatrix}
+        1&0\\0&2
+    \end{pmatrix}\ \ \ \ \ 
+    B=\begin{pmatrix}
+        1&2\\0&1
+    \end{pmatrix}\]
+    那么$A$是对角矩阵,$B$是上三角矩阵.而
+    \[AB=\begin{pmatrix}
+        1&2\\0&2
+    \end{pmatrix}\ \ \ \ \ 
+    BA=\begin{pmatrix}
+        1&4\\0&2
+    \end{pmatrix}\]
+    于是$AB\neq BA$,因而$A,B$不可交换.
+\end{solution}
+\begin{problem}[5.]
+    设$V$是有限维向量空间,$S,T\in\L(V)$.试证明:$S,T$可交换,当且仅当$S',T'$可交换.
+\end{problem}
+\begin{proof}
+    取$V$的一组基$\li v,n$和其对偶基$\li\phi,n$.令
+    \[A=\mathcal{M}(S,(\li v,n))\ \ \ \ \ B=\mathcal{M}(T,(\li v,n))\]
+    于是
+    \[A^{\text t}=\mathcal{M}(S',(\li\phi,n))\ \ \ \ \ B^{\text t}=\mathcal{M}(T',(\li\phi,n))\]
+    于是
+    \[S,T\text{可交换}\Leftrightarrow AB=BA\Leftrightarrow (AB)^{\text t}=(BA)^{\text t}\Leftrightarrow B^{\text t}A^{\text t}=A^{\text t}B^{\text t}\Leftrightarrow S',T'\text{可交换}\]
+\end{proof}
+\begin{problem}[6.]
+    设$V$是有限维复向量空间,且$S,T\in\L(V)$可交换.试证明:存在$\alpha,\lambda\in\C$使得
+    \[\range(S-\alpha I)+\range(T-\lambda I)\neq V\]
+\end{problem}
+\begin{proof}
+    由于$S,T$可交换,于是它们有公共的特征向量$v$.令$\alpha,\lambda$满足$Sv=\alpha v,Tv=\lambda v$.
+    
 \end{proof}
 \end{document}
