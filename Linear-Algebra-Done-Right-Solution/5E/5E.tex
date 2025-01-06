@@ -19,8 +19,19 @@
     给出一例$S,T\in\L(\F^4)$且$S,T$可交换,且$\F^4$中存在在$S$下不变但不在$T$下不变的子空间,也存在在$T$下不变但不在$S$下不变的子空间.
 \end{problem}
 \begin{solution}
-    
-    因为$S$和$T$关于标准基都有对角矩阵,于是$S$和$T$可交换.\\
-    令$U_1=E(1,S)$
+    令$S(x_1,x_2,x_3,x_4)=(x_2,x_1,0,0),T(x_1,x_2,x_3,x_4)=(0,0,x_4,x_3)$.\\
+    于是$ST(x_1,x_2,x_3,x_4)=TS(x_1,x_2,x_3,x_4)=(0,0,0,0)=\mbf0$,因此$S$和$T$可交换.\\
+    注意到$U_1=\{(0,0,x,0)\in\F^4:x\in\F\}$在$S$下不变,但不在$T$下不变.\\
+    $U_2=\{(x,0,0,0)\in\F^4:x\in\F\}$在$T$下不变,但不在$S$下不变.
 \end{solution}
+\begin{problem}[2.]
+    设$\mathcal{E}$是$\L(V)$的子集,且$\mathcal{E}$中的每个元素均可对角化.证明:存在$V$的一个基使得$\mathcal{E}$的每个元素关于这组基都有对角矩阵,当且仅当$\mathcal{E}$中的每对元素可交换.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对于任意$S,T\in\mathcal{E}$,假定存在$V$的一组基$v_1,\cdots$使得它们关于这组基有对角矩阵,于是
+    \[\mathcal{M}(ST)=\mathcal{M}(S)\mathcal{M}(T)=\mathcal{M}(T)\mathcal{M}(S)=\mathcal{M}(TS)\]
+    于是$S,T$可交换.\\
+    $\Leftarrow$:
+
+\end{proof}
 \end{document}
