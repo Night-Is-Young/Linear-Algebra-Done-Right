@@ -1,0 +1,32 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 6A}
+\end{center}
+\begin{problem}[1.]
+    证明:如果$\li v,m\in V$,那么
+    \[\sum_{j=1}^{m}\sum_{k=1}^{m}\langle v_j,v_k\rangle\geqslant 0\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        ||\li v+m||^2
+        &= \sum_{j=1}^m||v_j||^2+2\sum_{j,k\in\{1,\cdots,m\},j\neq k}\langle v_j,v_k\rangle \\
+        &= \sum_{j=1}^{m}\sum_{k=1}^{m}\langle v_j,v_k\rangle
+    \end{aligned}\]
+    于是
+    \[\sum_{j=1}^{m}\sum_{k=1}^{m}\langle v_j,v_k\rangle=||\li v+m||^2\geqslant0\]
+\end{proof}
+\end{document}
