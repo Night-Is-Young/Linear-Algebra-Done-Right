@@ -31,8 +31,22 @@
     $\Rightarrow$:对于任意$S,T\in\mathcal{E}$,存在$V$的一组基$v_1,\cdots$使得它们关于这组基有对角矩阵,于是
     \[\mathcal{M}(ST)=\mathcal{M}(S)\mathcal{M}(T)=\mathcal{M}(T)\mathcal{M}(S)=\mathcal{M}(TS)\]
     于是$S,T$可交换.\\
-    $\Leftarrow$:
-
+    $\Leftarrow$:设$\dim V=n$,则$\dim\L(V)=n^2$.\\
+    由于$\mathcal{E}\subseteq\L(V)$,于是存在$\L(V)$中的线性无关组$\li T,m$使得$\mathcal{E}\subseteq\span(\li T,m)$,其中$m\leqslant n^2$.\\
+    根据\tbf{5D.17},可以使这样的$\li T,m$均为可对角化算子.于是
+    \[V=\bigoplus_{\lambda_1\in\F} E(\lambda_{1},T_1)\]
+    因为$V$是有限维的,于是这样的$\lambda_{1}$是有限个的,它们对应于$T_1$的所有特征值.取定$\lambda_1\in\F$.\\
+    由于特征空间在可交换算子下不变,又因为$T_2$是可对角化的,于是$T_2|_{E(\lambda_1,T_1)}$是$E(\lambda_1,T_1)$上的可对角化算子.\\
+    于是对$E(\lambda_1)$作直和分解有
+    \[E(\lambda_1,T_1)=\bigoplus_{\lambda_2\in\F}E\left(\lambda_2,T_2|_{E(\lambda_1,T_1)}\right)\]
+    出于相似的原因,这样的直和分解是有限的.而
+    \[v\in E\left(\lambda_2,T_2|_{E(\lambda_1,T_1)}\right)\Leftrightarrow v\in E(\lambda_1,T_1),(T_2-\lambda_2)v=\mbf0\Leftrightarrow v\in E(\lambda_1,T_1)\cap E(\lambda_2,T_2)\]
+    于是$E\left(\lambda_2,T_2|_{E(\lambda_1,T_1)}\right)=E(\lambda_1,T_1)\cap E(\lambda_2,T_2)$.\\
+    取定$\lambda_2\in\F$,有
+    \[V=\bigoplus_{\lambda_1\in\F} E(\lambda_{1},T_1)=\bigoplus_{\lambda_1\in\F}\bigoplus_{\lambda_2\in\F}E\left(\lambda_2,T_2|_{E(\lambda_1,T_1)}\right)=\bigoplus_{\lambda_1,\lambda_2\in\F}\left(E(\lambda_1,T_1)\cap E(\lambda_2,T_2)\right)\]
+    递推可知
+    \[V=\bigoplus_{\li\lambda,m\in\F}\left(\bigcap_{k=1}^{m}E(\lambda_k,T_k)\right)\]
+    这个直和是有限的,因为各$T_k$最多有$n$个特征值.为所有非零的$\displaystyle \bigcap_{k=1}^{m}E(\lambda_k,T_k)$选定一组基,并将它们组合,就得到了$V$的一组基.每个$T_k$关于这组基有对角矩阵,因而它们的线性组合也关于这组基有对角矩阵.因而$\mathcal{E}$中的任意元素关于这组基有对角矩阵.于是命题得证.
 \end{proof}
 \begin{problem}[3.]
     设$S,T\in\L(V)$使得$ST=TS$.设$p\in\P(\F)$.
@@ -90,11 +104,117 @@
     \[S,T\text{可交换}\Leftrightarrow AB=BA\Leftrightarrow (AB)^{\text t}=(BA)^{\text t}\Leftrightarrow B^{\text t}A^{\text t}=A^{\text t}B^{\text t}\Leftrightarrow S',T'\text{可交换}\]
 \end{proof}
 \begin{problem}[6.]
-    设$V$是有限维复向量空间,且$S,T\in\L(V)$可交换.试证明:存在$\alpha,\lambda\in\C$使得
-    \[\range(S-\alpha I)+\range(T-\lambda I)\neq V\]
+    设$V$是有限维复向量空间,且$S,T\in\L(V)$可交换.试证明:存在$\alpha,\beta\in\C$使得
+    \[\range(S-\alpha I)+\range(T-\beta I)\neq V\]
 \end{problem}
 \begin{proof}
-    由于$S,T$可交换,于是它们有公共的特征向量$v$.令$\alpha,\lambda$满足$Sv=\alpha v,Tv=\lambda v$.
-    
+    由于$S,T$可交换,于是它们有上三角矩阵$\mathcal{M}(S),\mathcal{M}(T)$.\\
+    令$\alpha,\beta$分别为$\mathcal{M}(S),\mathcal{M}(T)$右下角的元素,那么$\mathcal{M}(S-\alpha I),\mathcal{M}(T-\beta I)$的最后一行均为$0$.\\
+    因而$\range(S-\alpha I)+\range(T-\beta I)\neq V$.
 \end{proof}
+\begin{problem}[7.]
+    设$V$是有限维复向量空间,$S\in\L(V)$可对角化,且$T\in\L(V)$和$S$可交换.试证明:存在$V$的一个基使得$S$有对角矩阵而$T$有上三角矩阵.
+\end{problem}
+\begin{proof}
+    令$n=\dim V$.我们对$n$用归纳法.\\
+    欲证结论对$n=1$是成立的,因为所有的$1\times 1$矩阵都是对角矩阵和上三角矩阵.\\
+    现在假设$n>1$,且欲证结论对所有小于$n$维的复向量空间成立.\\
+    对于任意$\lambda\in\C$,根据\tbf{5D.5}可知
+    \[V=\nul(S-\lambda I)\oplus\range(S-\lambda I)\]
+    令$U=\nul(S-\lambda I),W=\range(S-\lambda I)$.\\
+    若$S=\lambda I$,那么$S$关于$V$的任意一组基的矩阵都是对角矩阵.而$V$是复向量空间,于是$T$关于$V$的某组基有上三角矩阵,因此命题成立.\\
+    若$S\neq\lambda I$,则$1\leqslant \dim U,\dim W<n$.\tbf{5E.3}表明$U,W$在$S,T$下不变.限制在$U,W$上的$S,T$也是可交换的.\\
+    分别对$U,W$使用归纳假设,可知存在$U$的一组基$\li u,m$使得$S|_U$和$T|_U$分别有对角矩阵和上三角矩阵.\\
+    同理存在$W$的一组基$\li w,{n-m}$使得$S|_W$和$T|_W$分别有对角矩阵和上三角矩阵.\\
+    于是我们有
+    \[Tu_k\in\span(\li u,k),\forall k\in\{1,\cdots,m\}\]
+    \[Tw_k\in\span(\li w,k)\subseteq\span(\li u,m,\li w,k),\forall k\in\{1,\cdots,n-m\}\]
+    于是存在$V$的一组基$\li u,m,\li w,{n-m}$使得$S$关于其有对角矩阵,$T$关于其有上三角矩阵.\\
+    归纳可知命题成立.
+\end{proof}
+\begin{problem}[8.]
+    设$D_x,D_y$是$\P_3(\R^2)$上可交换的偏微分算子.求$\P_3(\R^2)$的一个基使得$D_x,D_y$有上三角矩阵.
+\end{problem}
+\begin{proof}
+    考虑$\P_3(\R^2)$中的向量组$\mathcal{B}:1,x,y,x^2,xy,y^2,x^3,x^2y,xy^2,y^3$.\\
+    不难证明$\mathcal{B}$张成$\P_3(\R^2)$.我们只需证明$\mathcal{B}$中的向量线性无关.为此,令
+    \[a_{0,0}+a_{1,0}x+a_{0,1}y+a_{2,0}x^2+a_{1,1}xy+a_{0,2}y^2+a_{3,0}x^3+a_{2,1}x^2y+a_{1,2}xy^2+a_{0,3}y^3=0\]
+    令$y=0$可知$a_{0,0}+a_{1,0}x+a_{2,0}x^2+a{3,0}x^3=0$,于是$a_{0,0}=a_{1,0}=a_{2,0}=a_{3,0}=0$\\
+    令$x=0$,同理可知$a_{0,0}=a_{0,1}=a_{0,2}=a_{0,3}=0$.\\
+    分别令$(x,y)=(1,1),(1,2)$和$(2,1)$,可知$a_{1,1}=a_{2,1}=a_{1,2}=0$.\\
+    于是$\mathcal{B}$中各向量线性无关,因而$\mathcal{B}$是$\P_3(\R^2)$的一组基.\\
+    $D_x$关于$\mathcal{B}$的矩阵为
+    \[\mathcal{M}(D_x)=\begin{pmatrix}
+        0&1&0&0&0&0&0&0&0&0\\
+        0&0&0&2&0&0&0&0&0&0\\
+        0&0&0&0&1&0&0&0&0&0\\
+        0&0&0&0&0&0&3&0&0&0\\
+        0&0&0&0&0&0&0&2&0&0\\
+        0&0&0&0&0&0&0&0&1&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+    \end{pmatrix}\]
+    $D_y$关于$\mathcal{B}$的矩阵为
+    \[\mathcal{M}(D_y)=\begin{pmatrix}
+        0&0&1&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&1&2&0&0&0&0\\
+        0&0&0&0&0&0&0&1&0&0\\
+        0&0&0&0&0&0&0&0&2&0\\
+        0&0&0&0&0&0&0&0&0&3\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+        0&0&0&0&0&0&0&0&0&0\\
+    \end{pmatrix}\]
+    这两个矩阵都是上三角矩阵.
+\end{proof}
+\begin{problem}[9.]
+    设$V$是有限维非零复向量空间.设$\mathcal{E}\subseteq \L(V)$,使得对于任意$S,T\in\mathcal{E}$都有$S$和$T$可交换.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:存在$v\in V$使得对于任意$T\in\mathcal{E}$都有$v$是$T$的特征向量.
+        \item 试证明:存在$V$的一个基使得$\mathcal{E}$中的每个元素关于这基有上三角矩阵.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    设$\dim V=n$,令$\mathcal{E}\subseteq\span(\li T,m)$,其中各$T_k$可交换.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$T_1$的特征值$\lambda_1$,则$E(\lambda_1,T_1)\neq\{\mbf0\}$.由于$T_1,T_2$可交换,于是$E(\lambda_1,T_1)$在$T_2$下不变.\\
+            于是$T_2|_{E(\lambda_1,T_1)}$存在特征值$\lambda_2$和对应的特征向量,于是$E(\lambda_1,T_1)\cap E(\lambda_2,T_2)\neq\{\mbf0\}$.\\
+            重复此操作可知存在$\li\lambda,m\in\F$使得$\displaystyle\bigcap_{k=1}^{m}E(\lambda_k,T_k)$非空.取$v\in\displaystyle\bigcap_{k=1}^{m}E(\lambda_k,T_k)$,则有
+            \[v\in\bigcap_{k=1}^{m}E(\lambda_k,T_k)\Rightarrow v\in E(\lambda_k,T_k)\Rightarrow T_k v=\lambda_k\]
+            因而$v$是$\li T,m$的特征向量.\\
+            由于$\mathcal{E}$中的元素都可以视为$\li T,m$的线性组合,令$T:=a_1T_1+\cdots+a_mT_m\in\mathcal{E}$,则有
+            \[Tv=a_1T_1v+\cdots+a_mT_mv=\left(a_1\lambda_1+\cdots+a_m\lambda_m\right)v\]
+            于是$v$是$T$的特征向量,命题得证.
+        \item 采用归纳法.令$\dim V=n$.当$n=1$时,所有$1\times 1$矩阵都是上三角矩阵,命题成立.\\
+            现在假设$n>1$,且欲证结论对所有小于$n$的正整数都成立.由\tbf{(1)},存在$v_1\in V$使得$v_1$是$\li T,m$的共同特征向量.令$V$的子空间$W$满足
+            \[V=\span(v_1)\oplus W\]
+            定义线性映射$P:V\to W$使得$P(av_1+w)=w$对任意$a\in\C$和任意$w\in W$成立.\\
+            定义$\li {\hat{T}},m\in\L(W)$使得$\hat{T_k}w=P(T_kw)$对任意$w\in W$和$k\in\{1,\cdots,m\}$成立.\\
+            首先,我们需要说明$\li {\hat{T}},m\in\L(W)$两两可交换.\\
+            对于任意$i,j\in\{1,\cdots,m\}$且$i\neq j$和任意$w\in W$,存在$a\in\C$使得
+            \[(\hat{T_i}\hat{T_j})w=\hat{T_i}(P(T_jw))=\hat{T_i}(T_jw-av_1)=P(T_i(T_jw-av_1))=P(T_iT_jw)\]
+            最后一个等号成立是因为$v_1$是$T_i$的特征向量且$Pv_1=\mbf0$.同理有$\hat{T_j}\hat{T_i}w=P(T_jT_i)w$.\\
+            因为$T_i$和$T_j$可交换,于是
+            \[(\hat{T_i}\hat{T_j})w=P(T_iT_jw)=P(T_jT_i)w=(\hat{T_j}\hat{T_i})w\]
+            对任意$w\in W$成立,于是$\hat{T_i},\hat{T_j}$可交换.\\
+            因此,应用归纳假设可知存在$W$的一组基$v_2,\cdots,v_n$使得$\li {\hat{T}},m$有上三角矩阵.\\
+            于是对于任意$j\in\{1,\cdots,m\}$和任意$k\in\{2,\cdots,n\}$有$\hat{T}v_k\in\span(v_2,\cdots,v_k)$.\\
+            又根据$\hat{T_j}$的定义,存在$\lambda_{j,k}\in\C$使得
+            \[T_jv_k=\lambda_{j,k}v_1+\hat{T_j}v_k\in\span(\li v,k)\]
+            另外有$Tv_1\in\span(v_1)$.于是$T_j$关于$\li v,n$有上三角矩阵.\\
+            又上三角矩阵的线性组合仍是上三角矩阵,归纳可知命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[10.]
+    给出一例在有限维实向量空间上的两个可交换算子$S,T$,使得$S+T$有特征值不等于$S,T$的特征值之和,$ST$有特征值不等于$S,T$的特征值之积.
+\end{problem}
+\begin{solution}
+    令$S,T\in\L(\R^2)$满足$S(x,y)=(-y,x)$,$T(x,y)=(y,-x)$.于是
+    \[ST(x,y)=TS(x,y)=(x,y)\]
+    于是$S,T$可交换.由于$S+T=\mbf0,ST=I$,于是两者分别有特征值$0,1$.然而$S,T$都没有特征值,于是我们找到了符合题意的$S,T$.
+\end{solution}
 \end{document}
