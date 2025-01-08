@@ -170,4 +170,165 @@
         \item 据Cauchy-Schwarz不等式的取等条件,当且仅当$u=\lambda v$时取等,即$a=b=c=d$.
     \end{enumerate}
 \end{solution}
+\begin{problem}[13.]
+    证明:如果$\li a,n\in\R$,那么
+    \[\left(\dfrac{\li a+n}{n}\right)^2\leqslant \dfrac{a_1^2+\cdots+a_n^2}{n}\]
+\end{problem}
+\begin{proof}
+    据Cauchy-Schwarz不等式有
+    \[\left(\dfrac{\li a+n}{n}\right)^2\leqslant\left(n\cdot\dfrac{1}{n^2}\right)\left(a_1^2+\cdots+a_n^2\right)=\dfrac{a_1^2+\cdots+a_n^2}{n}\]
+    于是命题得证.
+\end{proof}
+\begin{problem}[14.]
+    设$v\in V$且$v\neq\mbf0$.试证明:如果$u\in V$且$||u||=1$,那么
+    \[\left|\left|v-\dfrac{v}{||v||}\right|\right|\leqslant||v-u||\]
+    当且仅当$u=\dfrac{v}{||v||}$时等号成立.
+\end{problem}
+\begin{proof}
+    我们有
+    \[||v-u||^2-\left(||v||-||u||\right)^2=2\inprod vu+2||u||||v||\geqslant0\]
+    即
+    \[\left|||v||-||u||\right|\leqslant||v-u||^2\]
+    当且仅当$v,u$成标量倍关系时等式成立,即$u=\dfrac{v}{||v||}$或$u=-\dfrac{v}{||v||}$时等号成立.\\
+    我们有
+    \[\left|1-\dfrac{1}{||v||}\right|<1+\dfrac{1}{||v||}\]
+    于是
+    \[\min||v-u||=\left|\left|v-\dfrac{v}{||v||}\right|\right|\]
+    命题得证.
+\end{proof}
+\begin{problem}[15.]
+    设$u,v\in\R^2$且$u,v\neq\mbf0$,试证明:
+    \[\inprod uv=||u||||v||\cos\theta\]
+    其中$\theta$为向量$u,v$的夹角.
+\end{problem}
+\begin{proof}
+    对于$u,v,u-v$构成的三角形使用余弦定理,则有
+    \[\cos\theta=\dfrac{||u||^2+||v||^2-||u-v||^2}{2||u||||v||}\]
+    而
+    \[||u-v||^2=||u||^2+||v^2||-2\inprod uv\]
+    代入上式有
+    \[\cos\theta=\dfrac{\inprod uv}{||u||||v||}\]
+    变形可得
+    \[\inprod uv=||u||||v||\cos\theta\]
+    于是命题得证.
+\end{proof}
+\begin{problem}[16.]
+    $\R^2$和$\R^3$中向量的夹角可以用几何方法定义,然而对于更高维的空间$\R^n$中的几何则并不明晰.
+    因此,定义$x,y\in\R^n$的夹角$\theta$为
+    \[\arccos\dfrac{\inprod xy}{||x||||y||}\]
+    这一定义的动机来源于$\R^2$和$\R^3$中夹角的几何意义.试解释:证明这一定义的成立需要用到Cauchy-Schwarz不等式.
+\end{problem}
+\begin{solution}
+    为保证$\arccos$函数有意义,这一定义的成立至少要求
+    \[-1\leqslant\dfrac{\inprod xy}{||x||||y||}\leqslant 1\]
+    即
+    \[\left|\inprod xy\right|\leqslant||x||||y||\]
+    这就需要用到Cauchy-Schwarz不等式.
+\end{solution}
+\begin{problem}[17.]
+    试证明:对于任意$\li a,n,\li b,n\in\R$,都有
+    \[\left(\sum_{k=1}^{n}a_kb_k\right)^2\leqslant\left(\sum_{k=1}^{n}ka_k^2\right)\left(\sum_{k=1}^{n}\dfrac{b_k^2}{k}\right)\]
+\end{problem}
+\begin{proof}
+    令$u=\left(a_1,\sqrt2a_2,\cdots,\sqrt{n}a_n\right),v=\left(b_1,\dfrac{b_2}{\sqrt{2}},\cdots,\dfrac{b_n}{\sqrt{n}}\right)$.据Cauchy-Schwarz不等式有
+    \[\left|\inprod uv\right|^2\leqslant||u||^2||v||^2\]
+    即
+    \[\left(\sum_{k=1}^{n}a_kb_k\right)^2\leqslant\left(\sum_{k=1}^{n}ka_k^2\right)\left(\sum_{k=1}^{n}\dfrac{b_k^2}{k}\right)\]
+\end{proof}
+\begin{problem}[18.]
+    设函数$f(x):[1,+\infty)\to[0,+\infty)$连续.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:
+            \[\left(\int_{1}^{+\infty}f(x)\di x\right)^2\leqslant\int_1^{+\infty}x^2\left(f(x)\right)^2\di x\].
+        \item 试给出上述不等式两边均有限且取等时$f(x)$满足的条件.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$\R^{[1,t]}$上的内积
+            \[\inprod uv=\int_{1}^{t}uv\]
+            据Cauchy-Schwarz不等式有
+            \[\left(\int_1^tuv\right)^2\leqslant\left(\int_1^t u^2\right)\left(\int_1^t v^2\right)\]
+            于是
+            \[\left(\int_1^tf(x)\di x\right)^2=\left(\int_1^t\dfrac xxf(x)\di x\right)\leqslant\left(\int_1^tx^2\left(f(x)\right)^2\di x\right)\left(\int_1^t\dfrac{1}{x^2}\di x\right)=\left(\int_1^tx^2\left(f(x)\right)^2\di x\right)\left(1-\dfrac 1t\right)\]
+            而$\displaystyle\lim_{t\to+\infty}\left(1-\dfrac1t\right)=1$,又$f(x)$非负,于是
+            \[\left(\int_1^{+\infty}f(x)\di x\right)^2\leqslant\int_{1}^{+\infty}x^2\left(f(x)\right)^2\di x\]
+        \item 当且仅当$xf(x)$是$\dfrac1x$的标量倍,即$f(x)=\dfrac{\lambda}{x^2}$,其中$\lambda\in\R^*$.此时
+            \[\left(\int_1^{+\infty}f(x)\di x\right)^2=\int_{1}^{+\infty}x^2\left(f(x)\right)^2\di x=\lambda^2\]
+    \end{enumerate}
+\end{proof}
+\begin{problem}[19.]
+    设$\li v,n$是$V$的一个基,且$T\in\L(V)$.试证明:如果$\lambda$是$T$的特征值,那么
+    \[|\lambda|^2\leqslant\sum_{j=1}^n\sum_{k=1}^n\left|\mathcal{M}(T)_{j,k}\right|^2\]
+\end{problem}
+\begin{proof}
+    考虑$V$上的内积
+    \[\inprod{a_1v_1+\cdots+a_nv_n}{b_1v_1+\cdots+b_nv_n}=a_1\overline{b_1}+\cdots+a_n\overline{b_n}\]
+    考虑$T$的特征向量$v:=a_1v_1+\cdots+a_nv_n$使得$Tv=\lambda v$,则有
+    \[Tv=\sum_{k=1}^{n}a_kTv_k=\sum_{k=1}^n\left(a_k\sum_{j=1}^n\mathcal{M}(T)_{j,k}v_j\right)=\sum_{j=1}^n\left(\sum_{k=1}^{n}a_k\mathcal{M}(T)_{j,k}\right)v_j\]
+    于是
+    \[||Tv||^2=\sum_{j=1}^{n}\left|\sum_{k=1}^{n}a_k\mathcal{M}(T)_{j,k}\right|^2\]
+    又因为$||Tv||^2=|\lambda|^2||v||^2$,于是
+    \[|\lambda|^2=\dfrac{\displaystyle\sum_{j=1}^{n}\left|\sum_{k=1}^{n}a_k\mathcal{M}(T)_{j,k}\right|^2}{||v||^2}=\dfrac{\displaystyle\sum_{j=1}^{n}\left|\sum_{k=1}^{n}a_k\mathcal{M}(T)_{j,k}\right|^2}{\displaystyle\sum_{k=1}^{n}|a_k|^2}\]
+    据Cauchy-Schwarz不等式,对于任意$j\in\{1,\cdots,n\}$有
+    \[\left|\sum_{k=1}^{n}a_k\mathcal{M}(T)_{j,k}\right|^2\leqslant\left(\sum_{k=1}^{n}\left|a_k\right|^2\right)\left(\sum_{k=1}^{n}\left|\mathcal{M}(T)_{j,k}\right|^2\right)\]
+    于是
+    \[|\lambda|^2\leqslant\sum_{j=1}^n\sum_{k=1}^n\left|\mathcal{M}(T)_{j,k}\right|^2\]
+\end{proof}
+\begin{problem}[20.]
+    试证明:如果$u,v\in V$,那么$\left|||u||-||v||\right|\leqslant||u-v||$.
+\end{problem}
+\begin{proof}
+    我们有
+    \[||u-v||^2-\left(||u||-||v||\right)^2=2\inprod uv+2||u||||v||\geqslant0\]
+    即
+    \[\left|||u||-||v||\right|\leqslant||u-v||^2\]
+    当且仅当$v,u$成标量倍关系时等式成立.
+\end{proof}
+\begin{problem}[21.]
+    设$u,v\in V$使得
+    \[||u||=3\ \ \ \ \ ||u+v||=4\ \ \ \ \ ||u-v||=6\]
+    求$||v||$.
+\end{problem}
+\begin{solution}
+    根据平行四边形不等式有
+    \[4^2+6^2=2\left(3^2+||v||^2\right)\]
+    于是$||v||=\sqrt{17}$.
+\end{solution}
+\begin{problem}[22.]
+    试证明:如果$u,v\in V$,那么
+    \[||u+v||||u-v||\leqslant||u||^2+||v||^2\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        &\left(||u||^2+||v||^2\right)^2-\left(||u+v||||u-v||\right)^2\\
+        =&\left(||u||^2+||v||^2\right)^2-||u+v||^2||u-v||^2\\
+        =&\left(||u||^2+||v||^2\right)^2-\left(||u||^2+||v||^2+2\left|\inprod uv\right|\right)\left(||u||^2+||v||^2-2\left|\inprod uv\right|\right) \\
+        =&\left(||u||^2+||v||^2\right)^2-\left(||u||^2+||v||^2\right)^2+4\left|\inprod uv\right|^2 \\
+        =&4\left|\inprod uv\right|^2\geqslant0
+    \end{aligned}\]
+    即
+    \[\left(||u+v||||u-v||\right)^2\leqslant\left(||u||^2+||v||^2\right)^2\]
+    两边开平方即得
+    \[||u+v||||u-v||\leqslant||u||^2+||v||^2\]
+\end{proof}
+\begin{problem}[23.]
+    设$\li v,m\in V$使得对任意$k\in\{1,\cdots,m\}$都有$||v_k||\leqslant1$.试证明:存在$\li a,m\in\{-1,1\}$使得
+    \[||a_1v_1+\cdots+a_mv_m||\leqslant\sqrt m\]
+\end{problem}
+\begin{proof}
+    对$m$使用归纳法.当$m=1$时,命题的成立是显然的,因为$||v_1||\leqslant1$.\\
+    现在假设$m>1$,且命题对所有小于$m$的正整数均成立.令$v=a_1v_1+\cdots+a_{m-1}v_{m-1}$,于是$||v||\leqslant\sqrt{m-1}$.\\
+    我们有
+    \[||v+a_mv_m||^2=||v||^2+||v_m||^2+2a_m\inprod{v}{v_m}=m+2a_m\inprod{v}{v_m}\]
+    若$\inprod{v}{v_m}\geqslant0$,则令$a_m=-1$,否则令$a_m=1$,则有
+    \[||v+a_mv_m||^2\leqslant m\]
+    两边开平方即得
+    \[||v+a_mv_m||=||a_1v_1+\cdots+a_mv_m||\leqslant\sqrt{m}\]
+    归纳可知命题成立.
+\end{proof}
+\begin{problem}
+    
+\end{problem}
 \end{document}
