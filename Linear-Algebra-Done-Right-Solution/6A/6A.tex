@@ -29,4 +29,66 @@
     于是
     \[\sum_{j=1}^{m}\sum_{k=1}^{m}\langle v_j,v_k\rangle=||\li v+m||^2\geqslant0\]
 \end{proof}
+\begin{problem}[2.]
+    设$S\in\L(V)$,定义$\langle\cdot,\cdot\rangle_S$为
+    \[\langle u,v\rangle_S=\langle Su,Sv\rangle\]
+    对所有$u,v\in V$成立.试证明:$\langle\cdot,\cdot\rangle_S$是$V$上的内积,当且仅当$S$是单射.
+\end{problem}
+\begin{proof}
+    我们有
+    \[\langle\cdot,\cdot\rangle_S\text{是内积}\Leftrightarrow \langle v,v\rangle_S=0\text{当且仅当}v=\mbf0\Leftrightarrow \langle Sv,Sv\rangle=0\text{当且仅当}Sv=\mbf0\Leftrightarrow\nul S=\{\mbf0\}\Leftrightarrow S\text{是单射}\]
+\end{proof}
+\begin{problem}[3.]
+    证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:将$\R^2$中的有序对$\left((x_1,x_2),(y_1,y_2)\right)$映射到$|x_1y_1|+|x_2y_2|$的函数不是$\R^2$上的内积.
+        \item 证明:将$\R^3$中的有序对$\left((x_1,x_1,x_3),(y_1,y_2,y_3)\right)$映射到$x_1y_1+x_3y_3$的函数不是$\R^3$上的内积.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 令$u=(1,0),v=(-1,0),w=(1,0)$,于是
+            \[f(u,w)=1\ \ \ \ \ f(v,w)=1\ \ \ \ \ f(u+v,w)=0\]
+            于是$f(u+v,w)\neq f(u,w)+f(v,w)$,因而这映射$f$不满足第一位上的可加性,不是$\R^2$上的内积.
+        \item 令$v=(0,1,0)$,则$g(v,v)=0$,而$v\neq\mbf0$,因而这映射$g$不满足定性,不是$\R^3$上的内积.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[4.]
+    设$T\in\L(V)$使得$||Tv||\leqslant||v||$对任意$v\in V$成立.试证明:$T-\sqrt2I$是单射.
+\end{problem}
+\begin{proof}
+    若$T-\sqrt2I$不是单射,则存在$v\in V$且$v\neq\mbf0$使得$Tv=\sqrt2v$.于是
+    \[||Tv||=||\sqrt2v||=\sqrt2||v||>||v||\]
+    这与题设矛盾,从而$T-\sqrt2I$是单射.
+\end{proof}
+\begin{problem}[5.]
+    设$V$是实内积空间.证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 证明:$\langle u+v,u-v\rangle=||u||^2-||v||^2$对任意$u,v\in V$成立.
+        \item 证明:若$u,v\in V$满足$||u||=||v||$,那么$u+v$正交于$u-v$.
+        \item 证明:菱形的对角线相互垂直.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有
+            \[\begin{aligned}
+                \langle u+v,u-v\rangle
+                &= \langle u,u-v\rangle+\langle v,u-v\rangle \\
+                &= \langle u,u\rangle-\langle u,v\rangle+\langle v,u\rangle-\langle v,v\rangle \\
+                &= \langle u,u\rangle-\inprod vv \\
+                &= ||u||^2-||v||^2
+            \end{aligned}\]
+        \item 我们有
+            \[||u||=||v||\Rightarrow \inprod{u+v}{u-v}=0\Rightarrow u+v\bot u-v\]
+        \item 令$V=\R^2$,考虑菱形$ABCD$,令$u=\overrightarrow{BA},v=\overrightarrow{BC}$,则有$u+v=\overrightarrow{BD},u-v=\overrightarrow{CA}$.\\
+            由于$BA=BC$,则$||u||=||v||$,由\tbf{(2)}可知$\overrightarrow{BD}$和$\overrightarrow{CA}$正交,因而$BD\bot AC$,命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[6.]
+    设$u,v\in V$,试证明:$\inprod{u}{v}=0$当且仅当对任意$a\in\F$都有$||u||\leqslant||u+av||$.
+\end{problem}
+\begin{proof}
+    
+\end{proof}
 \end{document}
