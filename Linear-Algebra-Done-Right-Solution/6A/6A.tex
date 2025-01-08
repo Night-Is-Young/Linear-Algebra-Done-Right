@@ -89,6 +89,85 @@
     设$u,v\in V$,试证明:$\inprod{u}{v}=0$当且仅当对任意$a\in\F$都有$||u||\leqslant||u+av||$.
 \end{problem}
 \begin{proof}
-    
+    $\Rightarrow$:对任意$a\in\F$有$\inprod{u}{av}=\bar{a}\inprod{u}{v}=0$,于是$u$和$av$正交.于是
+    \[||u+av||^2=||u||^2+||av||^2\geqslant||u||^2\]
+    于是$||u||\leqslant||u+av||$.\\
+    $\Leftarrow$:考虑$u$的正交分解,取$c=\dfrac{\inprod{u}{v}}{||v||^2}$.取$w=u-cv$,则$\inprod{w}{v}=0$.于是
+    \[||u+cv||^2=||w||^2=||u||^2-||cv||^2=||u||^2-c^2||v||^2\geqslant||u||^2\]
+    于是$c=0$,因而$\inprod{u}{v}=\inprod{w}{v}=0$.
 \end{proof}
+\begin{problem}[7.]
+    设$u,v\in V$.试证明:$||au+bv||=||bu+av||$对任意$a,b\in\R$成立,当且仅当$||u||=||v||$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:取$a=1,b=0$即有$||u||=||v||$.\\
+    $\Leftarrow$:当$||u||=||v||$时,我们有
+    \[\begin{aligned}
+        ||au+bv||^2
+        &= \inprod{au+bv}{au+bv} \\
+        &= a^2||u||^2+b^2||v||^2+2ab\inprod uv \\
+        &= a^2||v||^2+b^2||u||^2+2ab\inprod uv \\
+        &= \inprod{bu+av}{bu+av} \\
+        &= ||bu+av||^2
+    \end{aligned}\]
+    于是$||au+bv||=||bu+av||$.
+\end{proof}
+\begin{problem}[8.]
+    设$a,b,c,x,y\in\R$且$a^2+b^2+c^2+x^2+y^2\leqslant1$.试证明:$a+b+c+4x+9y\leqslant10$.
+\end{problem}
+\begin{proof}
+    我们有
+    \[(a+b+c+4x+9y)^2\leqslant(a^2+b^2+c^2+x^2+y^2)(1^2+1^2+1^2+4^2+9^2)\leqslant100\]
+    两边开平方即得\[a+b+c+4x+9y\leqslant10\]
+\end{proof}
+\begin{problem}[9.]
+    设$u,v\in V$,$||u||=||v||=\inprod uv=1$.试证明:$u=v$.
+\end{problem}
+\begin{proof}
+    据Cauchy-Schwarz不等式,$|\langle u,v\rangle|\leqslant||u||||v||$当且仅当$u=\lambda v,\lambda\in\F$时成立.\\
+    又$1=\inprod uv=\inprod{v}{\lambda v}=\lambda||v||^2=\lambda$,于是$\lambda=1$,即$u=v$.
+\end{proof}
+\begin{problem}[10.]
+    设$u,v\in V$,$||u||<1$且$||v||<1$.试证明
+    \[\sqrt{1-||u||^2}\sqrt{1-||v||^2}\leqslant1-\left|\inprod uv\right|\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[\left(||u||-||v||\right)^2\geqslant0\]
+    于是
+    \[||u||^2+||v||^2\geqslant2||u||||v||\]
+    变形可得
+    \[\left(1-||u||^2\right)\left(1-||v||^2\right)\leqslant\left(1-||u||||v||\right)^2\]
+    而$||u||,||v||<1$,于是
+    \[\sqrt{1-||u||^2}\sqrt{1-||v||^2}\leqslant1-||u||||v||\]
+    据Cauchy-Schwarz不等式有
+    \[\left|\inprod uv\right|\leqslant ||u||||v||\]
+    于是
+    \[\sqrt{1-||u||^2}\sqrt{1-||v||^2}\leqslant1-\left|\inprod uv\right|\]
+\end{proof}
+\begin{problem}[11.]
+    求向量$u,v\in\R^2$使得$u$是$(1,3)$的标量倍,$v$正交于$(1,3)$,且$u+v=(1,2)$.
+\end{problem}
+\begin{solution}
+    考虑$(1,2)$在$(1,3)$上的正交分解$(1,2)=c(1,3)+w$,其中$c=\dfrac{\inprod{(1,2)}{(1,3)}}{||(1,3)||^2}=\dfrac{7}{10}$.\\
+    于是令$u=\left(\dfrac{7}{10},\dfrac{21}{10}\right),v=\left(\dfrac{3}{10},-\dfrac{1}{10}\right)$.
+\end{solution}
+\begin{problem}[12.]
+    设$a,b,c,d\in\R^*$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$\left(a+b+c+d\right)\left(\dfrac1a+\dfrac1b+\dfrac1c+\dfrac1d\right)\geqslant16$.
+        \item 求上述不等式的取等条件.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 令$u=\left(\sqrt{a},\sqrt{b},\sqrt{c},\sqrt{d}\right),v=\left(\sqrt{\dfrac1a},\sqrt{\dfrac1b},\sqrt{\dfrac1c},\sqrt{\dfrac1d}\right)$.据Cauchy-Schwarz不等式有
+            \[\left|\inprod uv\right|\leqslant||u||||v||\]
+            即
+            \[4\leqslant\sqrt{a+b+c+d}\cdot\sqrt{\dfrac1a+\dfrac1b+\dfrac1c+\dfrac1d}\]
+            两边平方即得
+            \[\left(a+b+c+d\right)\left(\dfrac1a+\dfrac1b+\dfrac1c+\dfrac1d\right)\geqslant16\]
+        \item 据Cauchy-Schwarz不等式的取等条件,当且仅当$u=\lambda v$时取等,即$a=b=c=d$.
+    \end{enumerate}
+\end{solution}
 \end{document}
