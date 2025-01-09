@@ -346,7 +346,7 @@
     令$f(x,y)=\left(|x|^p+|y|^p\right)^{\frac 1p}$,$u=(1,0),v=(0,1)$,则有
     \[f^2(u+v)+f^2(u-v)=2\cdot2^{\frac 2p}\]
     \[f^2(u)+f^2(v)=2\]
-    由平行四边形不等式可得
+    由平行四边形等式可得
     \[2\cdot2^{\frac{2}{p}}=2\cdot 2\]
     于是$2^{\frac 2p}=2$,即$p=2$.
 \end{proof}
@@ -504,5 +504,94 @@
             \end{aligned}\]
     \end{enumerate}
     于是这定义满足内积的性质,因而是$\li V\times m$上的内积.
+\end{proof}
+\begin{problem}[30.]
+    设$V$是实内积空间.对于$u,v,w,x\in V$,定义
+    \[\inprod{u+\i v}{w+\i x}_{\C}=\inprod uw+\inprod vx+\left(\inprod vw-\inprod ux\right)\i\]
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:${\inprod\cdot\cdot}_{\C}$使$V_{\C}$成为复内积空间.
+        \item 试证明:如果$u,v\in V$,那么
+            \[{\inprod uv}_{\C}=\inprod uv\text{  且  }||u+\i v||^2_{\C}=||u||^2+||v||^2\]
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 只需依次证明这定义满足内积的性质即可,在此不再赘述.
+        \item 我们有
+            \[\begin{aligned}
+                {\inprod uv}_\C
+                &= \inprod uv+\inprod{\mbf0}{\mbf0}+\left(\inprod{\mbf0}{v}-\inprod{u}{\mbf0}\right)\i \\
+                &= \inprod uv+0+\left(0-0\right)\i \\
+                &= \inprod uv
+            \end{aligned}\]
+            又
+            \[\begin{aligned}
+                ||u+\i v||^2_\C
+                &= \inprod{u+\i v}{u+\i v} \\
+                &= \inprod uu+\inprod vv+\left(\inprod vu-\inprod uv\right)\i \\
+                &= ||u||^2+||v||^2
+            \end{aligned}\]
+            于是命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[31.]
+    设$V$是内积空间,试证明:对于任意$u,v,w\in V$,有
+    \[\left|\left|w-\dfrac{1}{2}(u+v)\right|\right|^2=\dfrac{||w-u||^2+||w-v||^2}{2}-\dfrac{||u-v||^2}{4}\]
+\end{problem}
+\begin{proof}
+    根据平行四边形等式有
+    \[||u+v-2w||^2+||u-v||^2=2||u-w||^2+2||v-w||^2\]
+    移项后两边除以$4$即可得到欲证等式.
+\end{proof}
+\begin{problem}[32.]
+    设$E$是$V$的子集,满足对任意$u,v\in E$都有$\dfrac{1}{2}(u+v)\in E$.令$w\in V$,试证明:至多存在一个$u\in E$使得
+    \[||w-u||\leqslant||w-x||\]
+    对所有$x\in E$成立.
+\end{problem}
+\begin{proof}
+    如果存在$u,v\in E$满足题意且$u\neq v$,那么$\dfrac12(u+v)\in E$.根据\tbf{6A.31}可得
+    \[\begin{aligned}
+        \left|\left|w-\dfrac12{(u+v)}\right|\right|^2
+        &= \dfrac{||w-u||^2+||w-v||^2}{2}-\dfrac{||u-v||^2}{4} \\\
+        &= ||w-u||^2-\dfrac{||u-v||^2}{4} \\
+        &< ||w-u||^2
+    \end{aligned}\]
+    这就推出了矛盾,于是命题得证.
+\end{proof}
+\begin{problem}[33.]
+    设$f,g$是$\R\to\R^n$的可微函数.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:
+            \[\left(\inprod{f(t)}{g(t)}\right)'=\inprod{f'(t)}{g(t)}+\inprod{f(t)}{g'(t)}\]
+        \item 设$c>0$,且$||f(t)||=c$对任意$t\in\R$成立.试证明:$\inprod{f'(t)}{f(t)}=0$对任意$t\in\R$成立.
+        \item 用几何的方式,从$\R^n$中以原点为球心的球上一曲线的切向量这一角度解释上一问的结果.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\li f,n,\li g,n$使得对任意$t\in\R$有
+            \[f(t)=\left(f_1(t),\cdots,f_n(t)\right)\ \ \ \ \ g(t)=\left(g_1(t),\cdots,g_n(t)\right)\]
+            于是
+            \[\inprod{f(t)}{g(t)}=\left(f_1(t)g_1(t),\cdots,f_n(t)g_n(t)\right)\]
+            又对于任意$k\in\{1,\cdots,n\}$有
+            \[\left(f_k(t)g_k(t)\right)'=f'_k(t)g_k(t)+f_k(t)g'_k(t)\]
+            于是
+            \[\begin{aligned}
+                \left(\inprod{f(t)}{g(t)}\right)'
+                &= \left(\left(f_1(t)g_1(t)\right),\cdots,\left(f_n(t)g_n(t)\right)'\right) \\
+                &= \left(f'_1(t)g_1(t)+f_1(t)g'_1(t),\cdots,f'_n(t)g_n(t)+f_n(t)g'_n(t)\right) \\
+                &= \left(f'_1(t)g_1(t),\cdots,f'_n(t)g_n(t)\right)+\left(f_1(t)g'_1(t),\cdots,f_n(t)g'_n(t)\right) \\
+                &= \inprod{f'(t)}{g(t)}+\inprod{f(t)}{g'(t)}
+            \end{aligned}\]
+            于是命题得证.
+        \item 我们有
+            \[c^2=||f(t)||^2=\inprod{f(t)}{f(t)}\]
+            于是
+            \[0=\left(\inprod{f(t)}{f(t)}\right)'=\inprod{f(t)}{f'(t)}+\inprod{f'(t)}{f(t)}=2\inprod{f'(t)}{f(t)}\]
+            于是
+            \[\inprod{f'(t)}{f(t)}=0\]
+            于是命题得证.
+        \item 当曲线恒在球面上时,其切向量一定在球面的切面上,于是一定与该曲线正交.
+    \end{enumerate}
 \end{proof}
 \end{document}
