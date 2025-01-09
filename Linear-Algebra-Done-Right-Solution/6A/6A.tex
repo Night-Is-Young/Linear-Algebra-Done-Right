@@ -328,7 +328,181 @@
     \[||v+a_mv_m||=||a_1v_1+\cdots+a_mv_m||\leqslant\sqrt{m}\]
     归纳可知命题成立.
 \end{proof}
-\begin{problem}
-    
+\begin{problem}[24.]
+    证明或给出一反例:如果$||\cdot||$是与$\R^2$上与一内积关联的范数,那么存在$(x,y)\in\R^2$使得$||(x,y)||\neq\max\left\{|x|,|y|\right\}$.
 \end{problem}
+\begin{proof}
+    如果对于任意$(x,y)\in\R^2$都有$||(x,y)||=\max\left\{|x|,|y|\right\}$，不妨令$f((x,y))=\max\{|x|,|y|\}$.\\
+    令$u=(1,0),v=(1,1)$,则有
+    \[f^2(u+v)+f^2(u-v)=5\neq4=2\left(f^2(u)+f^2(v)\right)\]
+    于是这定义不满足范数的性质.于是对于任意$\R^2$上的范数,总存在$(x,y)\in\R^2$使得$||(x,y)||\neq\max\{|x|,|y|\}$.
+\end{proof}
+\begin{problem}[25.]
+    设$p>0$.试证明:$\R^2$上存在一内积,使得与其关联的范数由下式给出:
+    \[||(x,y)||=\left(|x|^p+|y|^p\right)^{\frac 1p},\forall(x,y)\in\R^2\]
+    当且仅当$p=2$.
+\end{problem}
+\begin{proof}
+    令$f(x,y)=\left(|x|^p+|y|^p\right)^{\frac 1p}$,$u=(1,0),v=(0,1)$,则有
+    \[f^2(u+v)+f^2(u-v)=2\cdot2^{\frac 2p}\]
+    \[f^2(u)+f^2(v)=2\]
+    由平行四边形不等式可得
+    \[2\cdot2^{\frac{2}{p}}=2\cdot 2\]
+    于是$2^{\frac 2p}=2$,即$p=2$.
+\end{proof}
+\begin{problem}[26.]
+    设$V$是实内积空间,试证明:对任意$u,v\in V$,有
+    \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2}{4}\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[||u+v||^2=\inprod{u+v}{u+v}=\inprod uu+\inprod uv+\inprod vu+\inprod vv\]
+    同理有
+    \[||u-v||^2=\inprod{u-v}{u-v}=\inprod uu-\inprod uv-\inprod vu-\inprod vv\]
+    在实内积空间上有
+    \[\inprod uv=\inprod vu\]
+    于是将两式相减可得
+    \[||u+v||^2-||u-v||^2=4\inprod uv\]
+    整理可得
+    \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2}{4}\]
+\end{proof}
+\begin{problem}[27.]
+    设$V$是复内积空间,试证明:对任意$u,v\in V$,有
+    \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2+||u+\i v||^2\i-||u-\i v||^2\i}{4}\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[||u+v||^2=||u||^2+||v||^2+\inprod uv+\inprod vu\]
+    同理有
+    \[||u-v||^2=||u||^2+||v||^2-\inprod uv-\inprod vu\]
+    \[||u+\i v||^2=||u||^2+||v||^2-\i\inprod uv+\i\inprod vu\]
+    \[||u-\i v||^2=||u||^2+||v||^2+\i\inprod uv-\i\inprod vu\]
+    在复内积空间上有
+    \[\inprod vu=\overline{\inprod uv}\]
+    于是
+    \[\begin{aligned}
+        &||u+v||^2-||u-v||^2+||u+\i v||^2\i-||u-\i v||^2\i\\
+        =&\left(2\inprod{u}{v}+2\inprod{v}{u}\right)+\left(\inprod uv-\inprod vu+\inprod uv=\inprod vu\right) \\
+        =&4\inprod uv
+    \end{aligned}\]
+    整理可得
+    \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2+||u+\i v||^2\i-||u-\i v||^2\i}{4}\]
+\end{proof}
+\begin{problem}[28.]
+    设向量空间$U$上的范数是这样的一个函数
+    \[||\cdot||:U\to[0,+\infty)\]
+    其满足如下性质.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $||u||=0$当且仅当$u=\mbf0$.
+        \item $||\alpha u||=|\alpha|||u||$对任意$\alpha\in\F$和任意$u\in U$成立.
+        \item $||u+v||\leqslant||u||+||v||$对任意$u,v\in U$成立.
+    \end{enumerate}
+    证明:如果$||\cdot||$满足平行四边形等式,那么$U$上存在一内积$\inprod\cdot\cdot$使得对任意$u\in U$有$||u||=\sqrt{\inprod uu}$.
+\end{problem}
+\begin{proof}
+    若$U$是实向量空间,那么定义$U$上的内积$\inprod\cdot\cdot$为
+    \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2}{4}\]
+    首先有
+    \[\inprod uu=\dfrac{||2u||^2}{4}=||u||^2\]
+    于是这一定义满足
+    \[||u||=\sqrt{\inprod uu}\]
+    我们现在来证明这定义是满足内积的性质的.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item \tbf{正性}:对于任意$u\in U$,都有$\inprod uu=||u||^2\geqslant0$.
+        \item \tbf{定性}:$\inprod uu=||u||^2=0$当且仅当$||u||=0$,即当且仅当$u=\mbf0$.
+        \item \tbf{共轭对称性}:我们有
+            \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2}{4}=\dfrac{||v+u||^2-||v-u||^2}{4}=\inprod vu\]
+        \item \tbf{第一位上的可加性}:对于任意$u,v,w\in U$,有
+            \[||v+2w||^2+||v||^2=2||v+w||^2+2||w||^2\]
+            \[||v-2w||^2+||v||^2=2||v-w||^2+2||w||^2\]
+            上述两式相减可得
+            \[||v+2w||^2-||v-2w||^2=2||v+w||^2-2||v-w||^2\]
+            再次运用平行四边形定理可得
+            \[2||u+v+w||^2+2||u-w||^2=||v+2u||^2+||v+2w||^2\]
+            \[2||u+v-w||^2+2||u+w||^2=||v+2u||^2+||v-2w||^2\]
+            两式相减,结合前面的推导可得
+            \[||u+v+w||^2-||u+v-w||^2+||u-w||^2-||u+w||^2=||v+w||^2-||v-w||^2\]
+            即
+            \[\dfrac{||u+v+w||^2-||u+v-w||^2}{4}=\dfrac{||u+w||^2-||u-w||^2}{4}+\dfrac{||v+w||^2-||v-w||^2}{4}\]
+            即
+            \[\inprod{u+v}{w}=\inprod uw+\inprod vw\]
+            于是这内积满足可加性.
+        \item \tbf{第一位上的齐次性}:我们首先证明对于任意$n\in\mathbb{Z}$.对于任意$u,v\in U$有$\inprod{nu}{v}=n\inprod uv$.\\
+            为此,采取归纳法.当$n=1$时,命题的成立是显然的.\\
+            现在假设$n>1$,且命题对所有小于$n$的正整数都成立.于是
+            \[\inprod{nu}{v}=\inprod{(n-1)u+u}{v}=\inprod{(n-1)u}{v}+\inprod uv=(n-1)\inprod uv+\inprod uv=n\inprod uv\]
+            而$n=0$时有
+            \[\inprod{0u}{v}=\inprod{\mbf0}{v}=0=0\inprod uv\]
+            对于任意负整数$n$,有
+            \[\inprod{nu}{v}=\dfrac{||v-(-nu)||^2-||v+(-nu)||^2}{4}=-n\inprod{-u}{v}=n\inprod{u}{v}\]
+            当$n\neq0$时,有
+            \[n\inprod{\dfrac1nu}{v}=\sum_{k=1}^{n}\inprod{\dfrac1nu}{v}=\inprod{\sum_{k=1}^{n}\dfrac1nu}{v}=\inprod uv\]
+            于是
+            \[\inprod{\dfrac1nu}{v}=\dfrac{1}{n}\inprod uv\]
+            于是对于任意$\dfrac pq\in\mathbb{Q}:p,q\in\mathbb{Z}$有
+            \[\inprod{\dfrac pqu}{v}=p\inprod{\dfrac1qu}{v}=\dfrac pq\inprod uv\]
+            对于任意$r\in\R/\mathbb{Q}$,总存在有理序列$\{r_k\}_{k=1}^{\infty}$满足$\displaystyle\lim_{k\to\infty}r_k=r$.\\
+            又根据三角不等式,不难推出$||\cdot||$是$U\to\R$的连续函数.我们有
+            \[\begin{aligned}
+                r\inprod uv
+                &= \lim_{k\to\infty}r_k\inprod uv \\
+                &= \lim_{k\to\infty}\inprod{r_ku}{v} \\
+                &= \lim_{k\to\infty}\dfrac{||r_ku+v||^2-||r_ku-v||^2}{4} \\
+                &= \dfrac{||ru+v||^2-||ru-v||^2}{4} \\
+                &= \inprod{ru}{v}
+            \end{aligned}\]
+            综上所述,对于任意$u,v\in U$和任意$\lambda\in\R$,都有$\inprod{\lambda u}{v}=\lambda\inprod uv$.于是这内积满足齐次性.
+    \end{enumerate}
+    因此这内积的定义是成立的.\\
+    若$U$是复向空间,那么定义$U$上的内积$\inprod\cdot\cdot$为
+    \[\inprod uv=\dfrac{||u+v||^2-||u-v||^2+||u+\i v||^2\i-||u-\i v||^2\i}{4}\]
+    如此证明,过程是相似的,在此不再赘述.\\
+    综上可知命题成立.
+\end{proof}
+\begin{problem}[29.]
+    设$\li V,m$是内积空间,试证明等式
+    \[\inprod{(\li u,m)}{(\li v,m)}=\inprod{u_1}{v_1}+\cdots+\inprod{u_m}{v_m}\]
+    定义了$\li V\times m$上的一个内积.
+\end{problem}
+\begin{proof}
+    我们逐条证明这定义符合内积的性质.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item \tbf{正性}:对于任意$\li v,m$满足$v_k\in V_k$,有
+            \[\inprod{(\li v,m)}{(\li v,m)}=\inprod{v_1}{v_1}+\cdots+\inprod{v_m}{v_m}\geqslant0\]
+        \item \tbf{定性}:我们有
+            \[\begin{aligned}
+                \inprod{(\li v,m)}{(\li v,m)}=0
+                &\Leftrightarrow\inprod{v_1}{v_1}+\cdots+\inprod{v_m}{v_m}=0\\
+                &\Leftrightarrow \inprod{v_1}{v_1}=\cdots=\inprod{v_m}{v_m}=0\\
+                &\Leftrightarrow \li v=m=\mbf0 \\
+                &\Leftrightarrow \left(\li v,m\right)=\mbf0
+            \end{aligned}\]
+        \item \tbf{第一位上的可加性}:对于任意$\li v,m,\li u,m,\li w,m$满足$u_k,v_k,w_k\in V_k$,我们有
+            \[\begin{aligned}
+                &\inprod{(\li u,m)+(\li v,m)}{\li w,m} \\
+                =&\inprod{(u_1+v_1,\cdots,u_m+v_m)}{\li w,m} \\
+                =&\inprod{u_1+v_1}{w_1}+\cdots+\inprod{u_m+v_m}{w_m} \\
+                =&\inprod{u_1}{w_1}+\inprod{v_1}{w_1}+\cdots+\inprod{u_m}{w_m}+\inprod{v_m}{w_m} \\
+                =&\inprod{u_1}{w_1}+\cdots+\inprod{u_m}{w_m}+\inprod{v_1}{w_1}+\cdots+\inprod{v_m}{w_m} \\
+                =&\inprod{(\li u,m)}{(\li w,m)}+\inprod{(\li v,m)}{(\li w,m)}
+            \end{aligned}\]
+        \item \tbf{第一位上的齐次性}:对于任意$\lambda\in\F$,任意$\li u,m,\li v,m$满足$u_k,v_k\in V_k$,我们有
+            \[\begin{aligned}
+                \inprod{\lambda(\li u,m)}{(\li v,m)}
+                &= \inprod{(\li{\lambda u},m)}{(\li v,m)} \\
+                &= \inprod{\lambda u_1}{v_1}+\cdots+\inprod{\lambda u_m}{v_m} \\
+                &= \lambda\left(\inprod {u_1}{v_1}+\cdots+\inprod{u_m}{v_m}\right) \\
+                &= \lambda\inprod{(\li u,m)}{(\li v,m)}
+            \end{aligned}\]
+        \item \tbf{共轭对称性}:对于任意$\li u,m,\li v,m$满足$u_k,v_k\in V_k$,我们有
+            \[\begin{aligned}
+                \inprod{(\li v,m)}{(\li u,m)}
+                &= \inprod{v_1}{u_1}+\cdots+\inprod{v_m}{u_m} \\
+                &= \overline{\inprod{u_1}{v_1}}+\cdots+\overline{\inprod{u_m}{v_m}} \\
+                &= \overline{\inprod {u_1}{v_1}+\cdots+\inprod{u_m}{v_m}} \\
+                &= \overline{\inprod{(\li u,m)}{(\li v,m)}}
+            \end{aligned}\]
+    \end{enumerate}
+    于是这定义满足内积的性质,因而是$\li V\times m$上的内积.
+\end{proof}
 \end{document}
