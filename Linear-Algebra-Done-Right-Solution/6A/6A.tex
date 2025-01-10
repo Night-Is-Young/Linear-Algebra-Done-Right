@@ -594,4 +594,33 @@
         \item 当曲线恒在球面上时,其切向量一定在球面的切面上,于是一定与该曲线正交.
     \end{enumerate}
 \end{proof}
+\begin{problem}[34.]
+    证明阿波罗尼斯恒等式成立:在三边长为$a,b,c$的三角形中,令$d$为$c$对应边上的中线长度,则有
+    \[a^2+b^2=\dfrac12c^2+2d^2\]
+\end{problem}
+\begin{proof}
+    令$\triangle ABC$中$AB=c,AC=b,BC=a$,$\overrightarrow{AB}=u,\overrightarrow{AC}=v$.于是
+    \[||u+v||^2+||u-v||^2=2||u||^2+2||v||^2\]
+    即
+    \[\left(2d\right)^2+c^2=2a^2+2b^2\]
+    整理可得
+    \[a^2+b^2=\dfrac12c^2+2d^2\]
+\end{proof}
+\begin{problem}[35.]
+    取定一正整数$n$.$\R^n$上的二阶可微实值函数$p$的Laplace算子$\Delta p$是$\R^n$上的函数,定义为
+    \[\Delta p=\dfrac{\p^2p}{\p x_1^2}+\cdots+\dfrac{\p^2 p}{\p x_n^2}\]
+    如果$\Delta p=0$,则称$p$是调和的.\\
+    $\R^n$上的多项式是形如$x_1^{m_1}\cdots x_n^{m_n}$的函数的线性组合(其系数在$\R$中),其中$\li m,n$是非负整数.\\
+    设$q$是$\R^n$上的多项式.试证明:$\R^n$上存在一调和多项式$p$,使得$p(x)=q(x)$对任意满足$||x||=1$的$x\in\R^n$都成立.
+\end{problem}
+\begin{proof}
+    在说明问题之前,我们先做一些定义.\\
+    令多项式$p$的次数$\deg p$为形如$x_1^{m_1}\cdots x_n^{m_n}$的所有项各中$m_k$的最大值.\\
+    定义$\P_m(\R^n)$为所有次数不高于$m$的$\R^n$上的多项式的集合.不难验证$\P_m(\R^n)$是向量空间.\\
+    根据Laplace算子的定义,当$\deg p\geqslant 2$时,$\deg\Delta p=\deg p-2$.又因为
+    \[1-||x||^2=1-x_1^2-\cdots-x_n^2\]
+    于是$\deg\Delta\left(\left(1-||x||^2\right)r\right)=\deg r+2-2=\deg r$.\\
+    于是,定义映射$T\in\L(\P_m(\R^n))$为$Tr=\Delta\left(\left(1-||x||^2\right)\right)r$.不难验证$T$是线性映射.\\
+    现在我们来证明$T$是单射.
+\end{proof}
 \end{document}
