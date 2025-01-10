@@ -1,0 +1,234 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 6B}
+\end{center}
+\begin{problem}[1.]
+    设$\li e,n$是$V$中的向量组,使得
+    \[||a_1e_1+\cdots+a_ne_n||^2=|a_1|^2+\cdots+|a_m|^2\]
+    对任意$\li a,n\in\F$都成立.试证明:$\li e,n$是规范正交组.
+\end{problem}
+\begin{proof}
+    对于任意$k\in\{1,\cdots,n\}$,令
+    \[a_j=\left\{\begin{array}{l}
+        0,j\neq k\\
+        1,j=k
+    \end{array}\right.\]
+    可得$||e_k||^2=1$,即$\inprod{e_k}{e_k}=1$.\\
+    对于任意$k,j\in\{1,\cdots,n\}$且$j\neq k$,令
+    \[a_i=\left\{\begin{array}{l}
+        0,i\neq j\text{或}i\neq k\\
+        1,i=j\\
+        t,i=k
+    \end{array}\right.\]
+    可得$||e_j+te_k||^2=1+|t|^2\geqslant||e_j||^2$.根据\tbf{6A.6}可知$\inprod{e_j}{e_k}=0$.\\
+    综上可知$\li e,n$是规范正交组.
+\end{proof}
+\begin{problem}[2.]
+    证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\theta\in\R$,试证明:$(\cos\theta,\sin\theta),(-\sin\theta,\cos\theta)$和$(\cos\theta,\sin\theta),(\sin\theta,-\cos\theta)$都是$\R^2$的规范正交基.
+        \item 试证明:$\R^2$中的每个规范正交基都具有\tbf{(1)}中两个形式之一.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$a,b\in\R$,都有
+            \[\begin{aligned}
+                ||a(\cos\theta,\sin\theta),b(-\sin\theta,\cos\theta)||^2
+                &= ||a\cos\theta-b\sin\theta,a\sin\theta+b\cos\theta||^2 \\
+                &= (a\cos\theta-b\sin\theta)^2+(a\sin\theta+b\cos\theta)^2 \\
+                &= a^2+b^2
+            \end{aligned}\]
+            根据\tbf{6B.1}可知$(\cos\theta,\sin\theta),(-\sin\theta,\cos\theta)$是$\R^2$中的规范正交组.\\
+            又因为$\dim\R^2=2$,于是$(\cos\theta,\sin\theta),(-\sin\theta,\cos\theta)$是$\R^2$中的规范正交基.\\
+            另一组向量的证明过程相似,在此不再赘述.
+        \item 考虑$\R^2$中所有满足$||u||=1$的向量$u$,都应当具有$(\cos\alpha,\sin\alpha)$的形式.\\
+            考虑向量$u=(\cos\alpha,\sin\alpha),v=(\cos\beta,\sin\beta)$.令$\inprod uv=0$,则有
+            \[\cos\alpha\cos\beta+\sin\alpha\sin\beta=0\]
+            即\[\cos(\alpha-\beta)=0\]
+            当且仅当$\beta=\alpha+\dfrac{\pi}{2}+k\pi$,$k\in\mathbb{Z}$时成立.\\
+            若$k$是偶数,则$v=(-\sin\alpha,\cos\alpha)$.\\
+            若$k$是奇数,则$v=(\sin\alpha,-\cos\alpha)$.\\
+            于是命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[3.]
+    设$\li e,m$是$V$中的一规范正交组,且$v\in V$.试证明:
+    \[||v||^2=\left|\inprod{v}{e_1}\right|^2+\cdots+\left|\inprod{v}{e_m}\right|^2\Leftrightarrow v\in\span(\li e,m)\]
+\end{problem}
+\begin{proof}
+    根据Bessel不等式,$\left|\inprod{v}{e_1}\right|^2+\cdots+\left|\inprod{v}{e_m}\right|^2\leqslant||v||^2$,当且仅当
+    \[v-\inprod{v}{e_1}e_1-\cdots-\inprod{v}{e_m}e_m=\mbf0\]
+    时等式成立.这等价于$v\in\span(\li e,m)$.
+\end{proof}
+\begin{problem}[4.]
+    设$n\in\N^*$,试证明:
+    \[\dfrac{1}{\sqrt{2\pi}},\dfrac{\cos x}{\sqrt{\pi}},\cdots,\dfrac{\cos nx}{\sqrt{\pi}},\dfrac{\sin x}{\sqrt{\pi}},\cdots,\dfrac{\sin nx}{\sqrt{\pi}}\]
+    是$C[-\pi,\pi]$中的一规范正交组.\\
+    $C[\pi,\pi]$是定义在$[-\pi,\pi]$上的连续实值函数构成的向量空间,其内积定义为$\displaystyle\inprod fg=\int_{-\pi}^{\pi}fg$.
+\end{problem}
+\begin{proof}
+    首先有\[\inprod{\dfrac{1}{\sqrt{2\pi}}}{\dfrac{1}{\sqrt{2\pi}}}=\displaystyle\int_{-\pi}^{\pi}\dfrac{1}{2\pi}\di x=1\]
+    又对于任意$k\in\{1,\cdots,n\}$有
+    \[\inprod{\dfrac{\cos kx}{\sqrt{\pi}}}{\dfrac{\cos kx}{\sqrt{\pi}}}=\int_{-\pi}^{\pi}\dfrac{\cos^2kx}{\pi}\di x=\int_{-\pi}^{\pi}\dfrac{1+\cos 2kx}{2\pi}\di x=\left.\left(\dfrac{x}{2\pi}+\dfrac{\sin 2kx}{4k\pi}\right)\right|_{-\pi}^{\pi}=1\]
+    \[\inprod{\dfrac{\sin kx}{\sqrt{\pi}}}{\dfrac{\sin kx}{\sqrt{\pi}}}=\int_{-\pi}^{\pi}\dfrac{\sin^2kx}{\pi}\di x=\int_{-\pi}^{\pi}\dfrac{1-\cos 2kx}{2\pi}\di x=\left.\left(\dfrac{x}{2\pi}-\dfrac{\sin 2kx}{4k\pi}\right)\right|_{-\pi}^{\pi}1\]
+    于是这向量组中各向量的范数均为$1$.又因为
+    \[\inprod{\dfrac{1}{\sqrt{2\pi}}}{\dfrac{\cos x}{\sqrt{\pi}}}=\dfrac{1}{2\pi}\int_{-\pi}^{\pi}\cos kx\dx=\left.\dfrac{\sin kx}{2k\pi}\right|_{-\pi}^{\pi}=0\]
+    \[\inprod{\dfrac{1}{\sqrt{2\pi}}}{\dfrac{\sin x}{\sqrt{\pi}}}=\dfrac{1}{2\pi}\int_{-\pi}^{\pi}\sin kx\dx=0\]
+    对于任意$j,k\in\{1,\cdots,n\}$且$j\neq k$有
+    \[\inprod{\dfrac{\cos jx}{\sqrt{\pi}}}{\dfrac{\cos kx}{\sqrt{\pi}}}=\int_{-\pi}^{\pi}\dfrac{\cos(j-k)x+\cos(j+k)x}{2}\dx=\left.\left(\dfrac{\sin(j-k)x}{2(j-k)}+\dfrac{\sin(j+k)x}{2(j+k)}\right)\right|_{-\pi}^{\pi}=0\]
+    \[\inprod{\dfrac{\sin jx}{\sqrt{\pi}}}{\dfrac{\sin kx}{\sqrt{\pi}}}=\int_{-\pi}^{\pi}\dfrac{\cos(j-k)x-\cos(j+k)x}{2}\dx=\left.\left(\dfrac{\sin(j-k)x}{2(j-k)}-\dfrac{\sin(j+k)x}{2(j+k)}\right)\right|_{-\pi}^{\pi}=0\]
+    \[\inprod{\dfrac{\sin jx}{\sqrt{\pi}}}{\dfrac{\cos kx}{\sqrt{\pi}}}=\int_{-\pi}^{\pi}\dfrac{\sin(j-k)x+\sin(j+k)x}{2}\dx=\left.\left(\dfrac{\cos(j-k)x}{2(k-j)}-\dfrac{\cos(j+k)x}{2(j+k)}\right)\right|_{-\pi}^{\pi}=0\]
+    于是这向量组满足规范正交组的定义,命题得证.
+\end{proof}
+\begin{problem}[5.]
+    设$f:[-\pi,\pi]\to\R$是连续的.对于任意$k\in\N$,定义
+    \[a_k=\dfrac{1}{\sqrt{\pi}}\int_{-\pi}^{\pi}f(x)\cos(kx)\di x\text{\ \ \ \ \ 和\ \ \ \ \ }b_k=\dfrac{1}{\sqrt{\pi}}\int_{-\pi}^{\pi}f(x)\sin(kx)\dx\]
+    试证明:
+    \[\dfrac{a_0^2}{2}+\sum_{k=1}^{\infty}\left(a_k^2+b_k^2\right)\leqslant\int_{-\pi}^{\pi}\left(f(x)\right)^2\dx\]
+\end{problem}
+\begin{proof}
+    设$V=C[-\pi,\pi]$,于是$f\in C[-\pi,\pi]$.沿用\tbf{6B.4}中$V$上内积的定义,我们有
+    \[\dfrac{a_0^2}{2}=\left|\dfrac{a_0}{\sqrt{2}}\right|^2=\left|\int_{-\pi}^{\pi}\dfrac{1}{\sqrt{2\pi}}f(x)\di x\right|^2=\left|\inprod{f}{\dfrac{1}{\sqrt{2\pi}}}\right|^2\]
+    \[a_k^2=\left|a_k\right|^2=\left|\inprod{f}{\dfrac{\cos kx}{\sqrt{\pi}}}\right|^2\]
+    \[b_k^2=\left|b_k\right|^2=\left|\inprod{f}{\dfrac{\sin kx}{\sqrt{\pi}}}\right|^2\]
+    对于任意$n\in\N$,根据\tbf{6B.4}可知
+    \[\dfrac{1}{\sqrt{2\pi}},\dfrac{\cos x}{\sqrt{\pi}},\cdots,\dfrac{\cos nx}{\sqrt{\pi}},\dfrac{\sin x}{\sqrt{\pi}},\cdots,\dfrac{\sin nx}{\sqrt{\pi}}\]
+    是$C[-\pi,\pi]$上的规范正交组.根据Bessel不等式有
+    \[\left|\inprod{f}{\dfrac{1}{\sqrt{2\pi}}}\right|^2+\left|\inprod{f}{\dfrac{\cos x}{\sqrt{\pi}}}\right|^2+\cdots+\left|\inprod{f}{\dfrac{\cos nx}{\sqrt{\pi}}}\right|^2+\left|\inprod{f}{\dfrac{\sin x}{\sqrt{\pi}}}\right|^2+\cdots+\left|\inprod{f}{\dfrac{\sin nx}{\sqrt{\pi}}}\right|^2\leqslant||f||^2\]
+    即
+    \[\dfrac{a_0^2}{2}+\sum_{k=1}^{n}\left(a_k^2+b_k^2\right)\leqslant\int_{-\pi}^{\pi}\left(f(x)\right)^2\dx\]
+    因为上式对所有正整数$n$都成立,于是两边对$n$取极限有
+    \[\dfrac{a_0^2}{2}+\sum_{k=1}^{\infty}\left(a_k^2+b_k^2\right)\leqslant\int_{-\pi}^{\pi}\left(f(x)\right)^2\dx\]
+\end{proof}
+\begin{problem}[6.]
+    设$\li e,n$是$V$中的规范正交基.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:如果$\li v,n$是$V$中的向量组,满足
+            \[||e_k-v_k||<\dfrac{1}{\sqrt{n}}\]
+            对于任意$k\in\{1,\cdots,n\}$成立,那么$\li v,n$是$V$的基.
+        \item 试证明:存在$V$中的向量组$\li v,n$,满足
+            \[||e_k-v_k||\leqslant\dfrac{1}{\sqrt{n}}\]
+            对于任意$k\in\{1,\cdots,n\}$成立,且$\li v,n$不是线性无关组.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\li a,n\in\F$使得
+            \[a_1v_1+\cdots+a_nv_n=\mbf0\]
+            则有
+            \[\sum_{k=1}^{n}|a_k|^2=\left|\left|\sum_{k=1}^{n}a_ke_k\right|\right|^2
+            =\left|\left|\sum_{k=1}^{n}a_k\left(e_k-v_k\right)\right|\right|^2
+            \leqslant\sum_{k=1}^{n}|a_k|^2||e_k-v_k||^2
+            \leqslant\sum_{k=1}^{n}|a_k|^2\cdot\sum_{k=1}^{n}||e_k-v_k||^2\]
+            又
+            \[\sum_{k=1}^{n}||e_k-v_k||^2<n\cdot\dfrac{1}{n}=1\]
+            于是$\displaystyle\sum_{k=1}^{n}|a_k|^2=0$,即$\li a=n=0$.\\
+            于是$\li v,n$线性无关.因而$\li v,n$是$V$的基.
+        \item 令$v_k=e_k-\dfrac{\li e+n}{n}$.注意到
+            \[\li v+n=\li e+n-n\left(\dfrac{\li e+n}{n}\right)=\mbf0\]
+            于是$\li v,n$不是线性无关组.另一方面,有
+            \[\left|\left|v_k-e_k\right|\right|=\left|\left|\dfrac{\li e+n}{n}\right|\right|=\dfrac{1}{n}||\li e+n||=\dfrac{\sqrt{n}}{n}\leqslant\dfrac{1}{\sqrt{n}}\]
+            于是这样的$\li v,n$满足题意.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[7.]
+    设$T\in\L(\R^3)$关于基$(1,0,0),(1,1,1),(1,1,2)$有上三角矩阵.求$\R^3$的一规范正交基,使得$T$关于其有上三角矩阵.
+\end{problem}
+\begin{solution}
+    令$v_1=(1,0,0),v_2=(1,1,1),v_3=(1,1,2)$.\\
+    对$v_1,v_2,v_3$应用Gram-Schmidt过程得到$\R^3$的一规范正交基
+    \[e_1=(1,0,0),e_2=\left(0,\dfrac{1}{\sqrt{2}},\dfrac{1}{\sqrt{2}}\right),e_3=\left(0,-\dfrac{1}{\sqrt{2}},\dfrac{1}{\sqrt{2}}\right)\]
+    且满足$\span(\li v,k)=\span(\li e,k)$.于是$T$在$\span(\li e,k)$下不变,即$T$关于$\li e,3$有上三角矩阵.
+\end{solution}
+\begin{problem}[8.]
+    定义$\P_2(\R)$的内积为$\inprod pq=\displaystyle\int_0^1pq$,使得$\P_2(\R)$成为内积空间.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对$\P_2(\R)$的标准基应用Gram-Schmidt过程,得到$\P_2(\R)$的一组规范正交基.
+        \item $\P_2(\R)$上的微分算子$D$关于基$1,x,x^2$有上三角矩阵.求$\P_2(\R)$关于\tbf{(1)}中所求规范正交基的矩阵,并验证这矩阵是上三角矩阵.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 令$v_1=1,v_2=x,v_3=x^2$.我们有
+            \[f_1=v_1=1\]
+            \[f_2=v_2-\dfrac{\inprod{v_2}{f_1}}{||f_1||^2}f_1=x-\dfrac12\]
+            \[f_3=v_3-\dfrac{\inprod{v_3}{f_1}}{||f_1||^2}f_1-\dfrac{\inprod{v_3}{f_2}}{||f_2||^2}f_2=x^2-\dfrac{1}{3}-\left(x-\dfrac12\right)=x^2-x+\dfrac{1}{6}\]
+            于是
+            \[e_1=\dfrac{f_1}{||f_1||}=1,e_2=\dfrac{f_2}{||f_2||}=2\sqrt{3}\left(x-\dfrac{1}{2}\right),e_3=\dfrac{f_3}{||f_3||}=6\sqrt{5}\left(x^2-x+\dfrac{1}{6}\right)\]
+            即为所求的规范正交基.
+        \item 不难得出,所求矩阵为
+            \[\mathcal{M}(D)=\begin{pmatrix}
+                0&2\sqrt{3}&0\\
+                0&0&2\sqrt{15}\\
+                0&0&0
+            \end{pmatrix}\]
+            这显然是一个上三角矩阵.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[9.]
+    设$\li e,m$是对$V$中的线性无关组$\li v,m$运用Gram-Schmidt过程得到的规范正交组.试证明:对于任意$k\in\{1,\cdots,m\}$,都有$\inprod{v_k}{e_k}>0$.
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        \inprod{v_k}{e_k}
+        &= \dfrac{1}{||f_k||}\inprod{v_k}{f_k} \\
+        &= \dfrac{1}{||f_k||}\inprod{v_k}{v_k-\sum_{j=1}^{k-1}\dfrac{\inprod{v_k}{f_j}}{||f_j||^2}f_j} \\
+        &= \dfrac{1}{||f_k||}\left(||v_k||^2-\sum_{j=1}^{k-1}\dfrac{\left|\inprod{v_k}{f_j}\right|^2}{||f_j||^2}\right) \\
+        &= \dfrac{1}{||f_k||}\left(||v_k||^2-\sum_{j=1}^{k-1}\left|\inprod{v_k}{e_j}\right|^2\right)
+    \end{aligned}\]
+    又因为$v_k\notin\span(\li e,{k-1})$,于是根据Bessel不等式有
+    \[||v_k||^2>\sum_{j=1}^{k-1}\left|\inprod{v_k}{e_j}\right|^2\]
+    于是$\inprod{v_k}{e_k}>0$.
+\end{proof}
+\begin{problem}[10.]
+    设$\li v,m$是$V$中的线性无关组.试证明:通过Gram-Schmidt过程得到的规范正交组$\li e,m$是仅有的对任意$k\in\{1,\cdots,m\}$都有$\inprod{v_k}{e_k}>0$且$\span(\li v,k)=\span(\li e,k)$的规范正交组.
+\end{problem}
+\begin{lemma}[Lemma.10]
+    设$\li v,n$是$V$中的线性无关组,对其应用Gram-Schmidt过程得到$V$上的规范正交组$\li e,n$.%
+    令$S=\{\lambda\in\F:|\lambda|=1\}$和$m\in\N^*$,设$S^m$为所有将$\{1,\cdots,m\}$映射到$S$的函数的集合.%
+    那么对于$V$的规范正交组$\li u,m$使得对于任意$k\in\{1,\cdots,n\}$都有$\span(\li u,k)=\span(\li v,k)$,%
+    一定存在$f\in S^{m}$使得对于任意$k\in\{1,\cdots,n\}$有$u_k=f(k)e_k$.
+\end{lemma}
+\begin{proof}
+    对于给定的$f\in S^m$,可知对于任意$j,k\in\{1,\cdots,m\}$且$j\neq k$有
+    \[||f(j)e_j||=|f(j)|||e_j||=1\ \ \ \ \ \inprod{f(j)e_j}{f(k)e_k}=f(j)\overline{f(k)}\inprod{e_j}{e_k}=0\]
+    又因为$0\notin S$,于是
+    \[\span(f(1)e_1,\cdots,f(k)e_k)=\span(\li e,k)=\span(\li v,k)\]
+    于是$f(1)e_1,\cdots,f(m)e_m$是满足
+    \[\span(f(1)e_1,\cdots,f(k)e_k)=\span(\li v,k),\forall k\in\{1,\cdots,m\}\]
+    的规范正交组.现在考虑题设中的规范正交组$\li u,m$,则有
+    \[\span(\li u,k)=\span(\li v,k)=\span(\li e,k),\forall k\in\{1,\cdots,m\}\]
+    于是$\span(u_1)=\span(e_1)$.令$u_1=\lambda_1e_1$.因为$||u_1||=||e_1||=1$,于是$|\lambda_1|=1$,即$\lambda_1\in S$.\\
+    由于$\span(u_1,u_2)=\span(e_1,e_2)$,于是$u_2\in\span(e_1,e_2)$.于是
+    \[u_2=\inprod{u_2}{e_1}e_1+\inprod{u_2}{e_2}e_2\]
+    又因为$u_1,u_2$是规范正交组,于是
+    \[0=\inprod{u_1}{u_2}=\inprod{\lambda_1e_1}{u_2}=\lambda_1\inprod{e_1}{u_2}\]
+    因为$\lambda_1\neq0$,于是$\inprod{e_1}{u_2}=0$,于是
+    \[u_2=\inprod{u_2}{e_2}e_2\]
+    令$\lambda_2=\inprod{u_2}{e_2}$,同理可知$|\lambda_2|=1$,即$\lambda_2\in S$.\\
+    依此过程构造$\li\lambda,m\in S$,令$f\in S^m$满足$f(k)=\lambda_k$对任意$k\in\{1,\cdots,m\}$成立.\\
+    于是$\li u,m$就被写成$f(1)e_1,\cdots,f(m)e_m$的形式,命题得证.
+\end{proof}
+\begin{solution}
+    回到\tbf{6B.10},假定存在$\li u,k$亦满足题设条件,则存在$f\in S^m$使得$u_k=f(k)e_k$对任意$k\in\{1,\cdots,m\}$成立.\\
+    此时有
+    \[\inprod{v_k}{u_k}=\inprod{v_k}{f(k)u_k}=\overline{f(k)}\inprod{v_k}{e_k}>0\]
+    这要求$\overline{f(k)}\in\R$且$\overline{f(k)}>0$.又因为$f(k)\in S$,于是$f(k)=1$,从而表明$u_k=e_k$.\\
+    于是只有$\li e,m$满足题意.
+\end{solution}
+\end{document}

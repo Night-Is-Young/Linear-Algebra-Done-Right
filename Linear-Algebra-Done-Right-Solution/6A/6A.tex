@@ -609,9 +609,10 @@
 \begin{problem}[35.]
     取定一正整数$n$.$\R^n$上的二阶可微实值函数$p$的Laplace算子$\Delta p$是$\R^n$上的函数,定义为
     \[\Delta p=\dfrac{\p^2p}{\p x_1^2}+\cdots+\dfrac{\p^2 p}{\p x_n^2}\]
-    如果$\Delta p=0$,则称$p$是调和的.\\
+    如果$\Delta p=\mbf0$,则称$p$是调和的.\\
     $\R^n$上的多项式是形如$x_1^{m_1}\cdots x_n^{m_n}$的函数的线性组合(其系数在$\R$中),其中$\li m,n$是非负整数.\\
-    设$q$是$\R^n$上的多项式.试证明:$\R^n$上存在一调和多项式$p$,使得$p(x)=q(x)$对任意满足$||x||=1$的$x\in\R^n$都成立.
+    设$q$是$\R^n$上的多项式.试证明:$\R^n$上存在一调和多项式$p$,使得$p(x)=q(x)$对任意满足$||x||=1$的$x\in\R^n$都成立.\\
+    \tbf{提示}:对于$\R^n$上的调和函数$p$,若$p(x)=0$对所有满足$||x||=1$的$x\in\R^n$成立,那么$p=\mbf0$.
 \end{problem}
 \begin{proof}
     在说明问题之前,我们先做一些定义.\\
@@ -620,7 +621,11 @@
     根据Laplace算子的定义,当$\deg p\geqslant 2$时,$\deg\Delta p=\deg p-2$.又因为
     \[1-||x||^2=1-x_1^2-\cdots-x_n^2\]
     于是$\deg\Delta\left(\left(1-||x||^2\right)r\right)=\deg r+2-2=\deg r$.\\
-    于是,定义映射$T\in\L(\P_m(\R^n))$为$Tr=\Delta\left(\left(1-||x||^2\right)\right)r$.不难验证$T$是线性映射.\\
-    现在我们来证明$T$是单射.
+    设$m=\deg q$,定义映射$T\in\L(\P_m(\R^n))$为$Tr=\Delta\left(\left(1-||x||^2\right)\right)r$.不难验证$T$是线性映射.\\
+    现在我们来证明$T$是单射.考虑$r\in\P_m(\R^n)$使得$Tr=\mbf0$,即$\Delta\left(\left(1-||x||^2\right)r\right)=0$.\\
+    又因为对于所有满足$||x||=1$的$x\in\R$都有$\left(1-||x||^2\right)r=0$,于是根据题意可知$(1-||x||^2)r=\mbf0$.\\
+    从而$\nul T=\{\mbf0\}$,于是$T$是满射.因此,存在$r\in\P_m(\R^n)$使得$Tr=\Delta(-q)$.令$p=q+\left(1-||x||^2\right)r$,则有
+    \[\Delta p=\Delta q+Tr=\mbf0\]
+    于是存在这样的调和多项式$p$使得$p(x)=q(x)$对所有满足$||x||=1$的$x\in\R^n$都成立.
 \end{proof}
 \end{document}
