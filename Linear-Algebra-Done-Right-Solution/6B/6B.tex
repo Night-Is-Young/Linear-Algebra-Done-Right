@@ -234,4 +234,53 @@
 \begin{problem}[11.]
     求多项式$q\in\P_2(\R)$使得$p\left(\dfrac12\right)=\displaystyle\int_0^1pq$对任意$p\in\P_2(\R)$都成立.
 \end{problem}
+\begin{solution}
+    令$\phi\in\left(\P_2(\R)\right)'$为$\phi(p)=p\left(\dfrac12\right)$.根据\tbf{6B.8},令$e_1,e_2,e_3$为$\P_2(\R)$的标准基.令
+    \[q=\phi(e_1)e_1+\phi(e_2)e_2+\phi(e_3)e_3=-15x^2+15x-\dfrac32\]
+    于是
+    \[\phi(p)=p\left(\dfrac12\right)=\inprod pq=\int_0^1 pq\]
+\end{solution}
+\begin{problem}[12.]
+    求多项式$q\in\P_2(\R)$使得$\displaystyle\int_0^1p(x)\cos(\pi x)\di x=\int_0^1pq$对任意$p\in\P_2(\R)$都成立.
+\end{problem}
+\begin{solution}
+    令$\phi\in\left(\P_2(\R)\right)'$为$\phi(p)=\displaystyle\int_0^1p(x)\cos(\pi x)\dx$,与\tbf{6B.11}同理令
+    \[q=\phi(e_1)e_1+\phi(e_2)e_2+\phi(e_3)e_3=-\dfrac{24}{\pi^2}\left(x-\dfrac12\right)\]
+    于是
+    \[\phi(p)=\int_0^1p(x)\cos(\pi x)=\inprod pq=\int_0^1 pq\]
+\end{solution}
+\begin{problem}[13.]
+    试证明:$V$中的一组向量组$\li v,m$线性相关,当且仅当使用Gram-Schmidt过程得到的某个$f_k=\mbf0(k\in\{1,\cdots,m\})$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:如果$\li v,m$线性无关,那么根据Gram-Schmidt过程,$\li f,k$必然都是非零的.\\
+    取上面命题的逆否命题,即若存在$k\in\{1,\cdots,m\}$使得$f_k=\mbf0$,那么$\li v,m$线性相关.\\
+    $\Rightarrow$:设$\li v,m$线性相关.若$v_1=\mbf0$,那么$f_1=\mbf0$.\\
+    否则,令$k\in\{2,\cdots,m\}$是使得$v_k\in\span(\li v,{k-1})$成立的最小的数.\\
+    于是$\li v,{k-1}$线性无关,并且根据Gram-Schmidt过程,可知$\span(\li v,{k-1})=\span(\li f,{k-1})$.\\
+    于是$v_k\in\span(\li f,{k-1})$.不妨令$v_k=a_1f_1+\cdots+a_{k-1}f_{k-1}$.注意到对任意$j\in\{1,\cdots,k-1\}$有
+    \[\inprod{v_k}{f_j}=\inprod{a_jf_j}{f_j}=a_j||f_j||^2\]
+    于是
+    \[v_k=\sum_{j=1}^{k-1}\dfrac{\inprod{v_k}{f_j}}{||f_j||^2}f_j\]
+    于是
+    \[f_k=v_k-\sum_{j=1}^{k-1}\dfrac{\inprod{v_k}{f_j}}{||f_j||^2}f_j=v_k-v_k=\mbf0\]
+\end{proof}
+\begin{problem}[14.]
+    设$V$是实内积空间,且$\li v,m\in V$线性无关.试证明:$V$中恰好存在$2^m$个规范正交组$\li e,m$使得
+    \[\span(\li v,k)=\span(\li e,k)\]
+    对所有$k\in\{1,\cdots,m\}$成立.
+\end{problem}
+\begin{proof}
+    首先,对$\li v,m$用Gram-Schmidt过程构造的规范正交向量组$\li e,m$是符合题意的.\\
+    \tbf{Lemma.L.10}表明
+    \[f(1)e_1,\cdots,f(m)e_m\]
+    也是符合上述条件的规范正交组.对于任意$k\in\{1,\cdots,m\}$,$f(k)\in\{-1,1\}$,故而一共有$2^m$种这样的$f$.\\
+    这就表明一共有$2^m$种这样的规范正交组符合题意.
+\end{proof}
+\begin{problem}[15.]
+    设${\inprod\cdot\cdot}_1$和${\inprod\cdot\cdot}_2$是$V$上的内积,使得${\inprod uv}_1=0$当且仅当${\inprod uv}_2=0$.试证明:存在$c>0$使得${\inprod uv}_1=c{\inprod uv}_2$对任意$u,v\in V$成立.
+\end{problem}
+\begin{proof}
+    
+\end{proof}
 \end{document}
