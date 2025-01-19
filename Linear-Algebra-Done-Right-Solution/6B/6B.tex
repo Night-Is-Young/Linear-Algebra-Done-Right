@@ -281,6 +281,25 @@
     设${\inprod\cdot\cdot}_1$和${\inprod\cdot\cdot}_2$是$V$上的内积,使得${\inprod uv}_1=0$当且仅当${\inprod uv}_2=0$.试证明:存在$c>0$使得${\inprod uv}_1=c{\inprod uv}_2$对任意$u,v\in V$成立.
 \end{problem}
 \begin{proof}
-    
+    如果$V=\{\mbf0\}$,那么我们可以取任意的$c>0$使命题成立.\\
+    如果$V\neq\{\mbf0\}$,对于任意$v\in V$,定义$c_v=\dfrac{{\inprod vv}_1}{{\inprod vv}_2}$.\\
+    根据正交分解,对于任意非零的$u,v\in V$,有
+    \[{\inprod{u-\dfrac{{\inprod{u}{v}}_2}{{\inprod{v}{v}}_2}v}{v}}_2=0\]
+    于是
+    \[{\inprod{u-\dfrac{{\inprod{u}{v}}_2}{{\inprod{v}{v}}_2}v}{v}}_1=0\]
+    即
+    \[{\inprod uv}_1-\dfrac{{\inprod{u}{v}}_2}{{\inprod{v}{v}}_2}{\inprod vv}_2=0\]
+    即
+    \[{\inprod uv}_1=c_v{\inprod uv}_2\]
+    交换$u,v$,我们可以得到${\inprod vu}_1=c_u{\inprod vu}_2$.于是
+    \[c_v{\inprod uv}_2={\inprod uv}_1=\overline{{\inprod vu}_1}=\overline{c_u{\inprod vu}_2}=c_u{\inprod uv}_2\]
+    于是,对于任意非零的$u,v\in V$有
+    \[{\inprod uv}_1=c_u{\inprod uv}_2=c_v{\inprod uv}_2\]
+    现在,我们考虑任意的$u,v\in V$,取$w\in V$使得${\inprod wu}_2\neq0$且${\inprod vw}_2\neq0$.于是
+    \[c_w{\inprod wu}_2=c_u{\inprod wu}_2\text{\ \ \ \ \ 且\ \ \ \ \ }c_v{\inprod vw}_2=c_w{\inprod vw}_2\]
+    于是上式表明$c_v=c_u=c_w$.这表示对于任意非零的$u,v\in V$,$c_u=c_v$.\\
+    于是令$c=c_v$对于任意非零的$v\in V$成立.这就使得
+    \[{\inprod uv}_1=c{\inprod uv}_2\]
+    对所有$u,v\in V$都成立.
 \end{proof}
 \end{document}
