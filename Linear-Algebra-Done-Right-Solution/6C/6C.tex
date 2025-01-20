@@ -1,0 +1,41 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 6C}
+\end{center}
+\begin{problem}[1.]
+    设$\li v,m\in V$.试证明
+    \[\left\{\li v,m\right\}^{\bot}=\left(\span\left(\li v,m\right)\right)^{\bot}\]
+\end{problem}
+\begin{proof}
+    由于$\left\{\li v,m\right\}\subseteq\span\left(\li v,m\right)$,于是根据正交补的性质有$\left(\span\left(\li v,m\right)\right)^{\bot}\subseteq\left\{\li v,m\right\}^{\bot}$.\\
+    对于任意$u\in\left\{\li v,m\right\}^\bot$,都满足$\inprod{u}{v_k}=0$对任意$k\in\{1,\cdots,m\}$成立.\\
+    于是对于任意$v:=a_1v_1+\cdots+a_mv_m\in\span\left(\li v,m\right)$有
+    \[\inprod{u}{v}=\inprod{u}{\sum_{k=1}^{m}a_kv_k}=\sum_{k=1}^{m}a_k\inprod{u}{v_k}=0\]
+    从而$u\in\left(\span\left(\li v,m\right)\right)^{\bot}$,因而$\left\{\li v,m\right\}\subseteq\left(\span\left(\li v,m\right)\right)^{\bot}$.\\
+    综上可知$\left\{\li v,m\right\}^{\bot}=\left(\span\left(\li v,m\right)\right)^{\bot}$.
+\end{proof}
+\begin{problem}[2.]
+    设$U$是$V$的子空间,且有一组基$\li u,m$.向量组$\li u,m,\li v,n$是$V$的一组基.对上述$V$的基运用Gram-Schmidt过程得到$V$的规范正交基$\li e,m,\li f,n$.试证明:$\li e,m$是$U$的规范正交基,$\li f,n$是$U^\bot$的规范正交基.
+\end{problem}
+\begin{proof}
+    对$\li u,m$应用Gram-Schmidt过程得到的$\li e,m$自然是$U$的规范正交基.\\
+    对于任意$k\in\{1,\cdots,n\}$和任意$j\in\{1,\cdots,m\}$,都有$\inprod{f_k}{e_j}=0$,于是$f_k\in U^\bot$.\\
+    又因为$U\oplus U^\bot=V$,于是$\dim U^\bot=\dim V-\dim U=n$,因而$\li f,n$是$U^\bot$的规范正交基.
+\end{proof}
+\begin{problem}[3.]
+    设$U$是$\R^4$的子空间,其定义为
+\end{problem}
+\end{document}
