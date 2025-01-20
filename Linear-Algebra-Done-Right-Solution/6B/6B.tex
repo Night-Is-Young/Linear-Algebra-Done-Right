@@ -302,4 +302,84 @@
     \[{\inprod uv}_1=c{\inprod uv}_2\]
     对所有$u,v\in V$都成立.
 \end{proof}
+\begin{problem}[16.]
+    设$V$是有限维的,设${\inprod\cdot\cdot}_1,{\inprod\cdot\cdot}_2$都是$V$上的内积,与之关联的范数为$||\cdot||_1$和$||\cdot||_2$.试证明:存在$c>0$使得$||v||_1\leqslant c||v||_2$对任意$v\in V$成立.
+\end{problem}
+\begin{proof}
+    令$\li e,n$为$V$关于${\inprod\cdot\cdot}_2$的规范正交基.对于任意$v:=a_1e_1+\cdots+a_ne_n\in V$,有
+    \[|a_1|+\cdots+|a_n|\leqslant n\max\{|a_1|,\cdots,|a_n|\}\leqslant n\sqrt{|a_1|^2+\cdots+|a_n|^2}=n||v||_2\]
+    不妨令$M=\max\left\{||e_1||_1,\cdots,||e_n||_1\right\}$.于是根据三角不等式有
+    \[||v||_1\leqslant |a_1|||e_1||_1+\cdots+|a_n|||e_n||_1\leqslant M\left(|a_1|+\cdots+|a_n|\right)\leqslant nM||v||_2\]
+    于是取$c=nM$即可使命题成立.
+\end{proof}
+\begin{problem}[17.]
+    设$V$是有限维复向量空间.试证明:如果$T\in\L(V)$使得其唯一特征值为$1$且对任意$v\in V$都有$||Tv||\leqslant||v||$,那么$T$是恒等算子.
+\end{problem}
+\begin{proof}
+    根据Schur定理,$T$关于$V$的某个规范正交基$\li e,n$具有上三角矩阵,不妨记为$A$.\\
+    由于$T$有唯一特征值$1$,于是$A_{1,1}=\cdots=A_{n,n}=1$.\\
+    对于任意$k\in\{1,\cdots,n\}$我们有
+    \[||Te_k||
+    =\left|\left|\sum_{j=1}^{k}A_{j,k}e_j\right|\right|
+    =\sum_{j=1}^{k}\left|A_{j,k}\right|^2
+    =1+\sum_{j=1}^{k-1}\left|A_{j,k}\right|^2\]
+    由于$||Te_k||\leqslant||e_k||=1$,于是
+    \[\sum_{j=1}^{k-1}\left|A_{j,k}\right|=0\]
+    于是$A_{1,k}=\cdots=A_{k-1,k}=0$.这表明$A$是对角矩阵,且对角线上元素均为$1$.\\
+    从而$A$是恒等矩阵,因此$T$是恒等算子.
+\end{proof}
+\begin{problem}[18.]
+    设$\li u,m$是$V$中一线性无关组,试证明:存在$v\in V$使得$\inprod{u_k}{v}=1$对任意$k\in\{1,\cdots,m\}$成立.
+\end{problem}
+\begin{proof}
+    令$U=\span\left(\li u,m\right)$,令$\li\phi,m$为其对偶基.\\
+    令$\phi=\li\phi+m$,于是对于任意$k\in\{1,\cdots,m\}$都有$\phi\left(u_k\right)=1$.\\
+    根据Riesz表示定理,存在$v\in U\subseteq V$使得对任意$u\in U$都有$\phi(u)=\inprod uv$.\\
+    于是命题成立.
+\end{proof}
+\begin{problem}[19.]
+    设$\li v,n$是$V$的基.试证明:存在$V$的一个基$\li u,n$使得
+    \[\inprod{v_j}{u_k}=\left\{\begin{array}{l}
+        0,j\neq k\\
+        1,j=k
+    \end{array}\right.\]
+\end{problem}
+\begin{proof}
+    令$\li\phi,n$为$\li v,n$的对偶基.根据Riesz表示定理,存在$u_k\in V$使得
+    \[\phi_k(v)=\inprod{v}{u_k}\]
+    于是$\inprod{v_k}{u_k}=\phi_k(v_k)=1$.当$j\neq k$时$\inprod{v_j}{u_k}=\phi_k(v_j)=0$.\\
+    我们只需证明$\li u,n$线性无关即可.为此,设$a_1u_1+\cdots+a_nu_n=\mbf0$.\\
+    对于任意$k\in\{1,\cdots,n\}$,都有
+    \[0=\inprod{v_k}{a_1u_1+\cdots+a_nu_n}=\sum_{j=1}^{n}a_j\phi_j(v_k)=a_k\]
+    于是$\li a=n=0$,从而$\li u,n$线性无关,是$V$的一组基.
+\end{proof}
+\begin{problem}[20.]
+    设$V$是有限维复向量空间,且$\mathcal{E}\subseteq\L(V)$使得$ST=TS$对所有$S,T\in\mathcal{E}$成立.试证明:存在$V$的一组规范正交基,使得$\mathcal{E}$中的每个元素关于其有上三角矩阵.
+\end{problem}
+\begin{proof}
+    根据\tbf{5E.9}可知,存在$V$的一组基$\li v,n$使得$\mathcal{E}$中的每个元素关于其有上三角矩阵.\\
+    对这组基应用Gram-Schmidt过程得到$V$的规范正交基$\li e,n$,满足对任意$k\in\{1,\cdots,n\}$有
+    \[\span(\li v,k)=\span(\li e,k)\]
+    从而$\mathcal{E}$中的各元素仍关于$\li e,n$有上三角矩阵.
+\end{proof}
+\begin{problem}[21.]
+    设$V$是有限维复向量空间,$T\in\L(V)$且其特征值绝对值都小于$1$.试证明:对于任意$\ep>0$,存在$m\in\N$使得$||T^mv||\leqslant\ep||v||$对任意$v\in V$成立.
+\end{problem}
+\begin{proof}
+    根据Schur定理,存在$V$的一组规范正交基$\li e,n$使得$T$关于其有上三角矩阵.
+\end{proof}
+\begin{problem}[22.]
+    设$C[-1,1]$是区间$[-1,1]$上的连续实值函数构成的向量空间,其内积定义为
+    \[\inprod fg=\displaystyle\int_{-1}^{1}fg\]
+    令$\phi$为$C[-1,1]$上的线性泛函,定义为$\phi(f)=f(0)$.试证明:不存在$g\in C[-1,1]$使得
+    \[\phi(f)=\inprod fg\]
+    对任意$f\in C[-1,1]$成立.
+\end{problem}
+\begin{proof}
+    我们假定这样的$g$存在,那么令$h(x)=x^2g(x)\in C[-1,1]$,则有
+    \[0=h(0)=\phi(h)=\inprod hg=\int_{-1}^{1}x^2\left(g(x)\right)^2\di x\]
+    当且仅当$g(x)=0$时上式成立.再定义$f(x)=1$,于是有
+    \[\phi(f)=f(0)=1\neq0=\inprod fg\]
+    于是产生矛盾,因而这样的$g$不存在.
+\end{proof}
 \end{document}
