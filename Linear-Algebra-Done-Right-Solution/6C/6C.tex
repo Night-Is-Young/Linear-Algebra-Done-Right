@@ -115,9 +115,83 @@
     因此$\phi(u)=\inprod uv=\inprod{u}{P_Uv}$.而$P_Uv\in U$.根据Riesz表示定理,这样的向量是唯一存在的,于是$w=P_Uv$.
 \end{proof}
 \begin{problem}[9.]
-    设$V$是有限维的,设$P\in\L(V)$使得$P^2=P$且$\nul P$中的任意向量都正交与$\range P$中的任意向量.试证明:存在$V$的子空间$U$使得$P=P_U$.
+    设$V$是有限维的,$P\in\L(V)$使得$P^2=P$且$\nul P$中的任意向量都正交与$\range P$中的任意向量.试证明:存在$V$的子空间$U$使得$P=P_U$.
 \end{problem}
 \begin{proof}
-    令$U=\range P$.由题意$\nul P\cap\range P=\{\mbf0\}$
+    根据\tbf{3B.27}可知$V=\range P\oplus\nul P$.又因为$V=\range P\oplus\left(\range P\right)^\bot$,于是
+    \[\dim\nul P=\dim\left(\range P\right)^\bot\]
+    根据题意可知$\nul P\subseteq\left(\range P\right)^{\bot}$.于是$\nul P=\left(\range P\right)^\bot$.\\
+    令$U=\range P$.对于任意$v:=Px+w\in V$,其中$Px\in\range P,w\in\nul P$,有
+    \[P_Uv=Px=P\left(Px+w\right)=Pv\]
+    此时$P_U=P$.
+\end{proof}
+\begin{problem}[10.]
+    设$V$是有限维的,$P\in\L(V)$使得$P^2=P$且$||Pv||\leqslant||v||$对任意$v\in V$成立.试证明:存在$V$的子空间$U$使得$P=P_U$.
+\end{problem}
+\begin{proof}
+    考虑$w\in\nul P$和$Px\in\range P$,根据题意,对任意$\lambda\in\F$有
+    \[||Px||=||P(Px+\lambda w)||\leqslant||Px+\lambda w||\]
+    根据\tbf{6A.6}可知$\inprod{w}{Px}=0$,即$\nul P$中的任意向量都正交与$\range P$中的任意向量.\\
+    根据\tbf{6C.9},取$U=\range P$即可使$P=P_U$.
+\end{proof}
+\begin{problem}[11.]
+    设$T\in\L(V)$且$U$是$V$的有限维子空间.试证明:$U$在$T$下不变,当且仅当$P_UTP_U=TP_U$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对于任意$v\in V$,都有$P_Uv\in U$.因为$U$在$T$下不变,于是$T\left(P_Uv\right)\in U$.\\
+    于是$P_U\left(T\left(P_Uv\right)\right)=T\left(P_Uv\right)$.因而$P_UTP_U=TP_U$.\\
+    $\Leftarrow$:如果$U$不在$T$下不变,那么存在$u\in U$使$Tu\notin U$.于是
+    \[P_UTP_Uu=P_UTu\neq Tu=TP_Uu\]
+    于是$P_UTP_U\neq TP_U$.
+\end{proof}
+\begin{problem}[12.]
+    设$V$是有限维的,$T\in\L(V)$,且$U$是$V$的子空间.试证明$U$和$U^\bot$在$T$下不变,当且仅当$P_UT=TP_U$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对任意$v:=u+w\in V$,其中$u\in U,w\in U^\bot$,都有$Tu\in U,Tw\in U^\bot$.于是
+    \[P_UTv=P_U\left(Tu+Tw\right)=Tu=TP_Uv\]
+    于是$P_UT=TP_U$.\\
+    $\Leftarrow$:若存在$u\in U$使得$Tu\notin U$,那么
+    \[TP_Uu=Tu\notin U,P_U(Tu)\in U\]
+    于是$TP_U\neq P_UT$,与题设矛盾.从而$Tu\in U$对任意$u\in U$成立.\\
+    若存在$w\in U^\bot$使得$Tw\notin U^\bot$,那么
+    \[TP_Uw=T\mbf0=\mbf0,P_UTw\neq\mbf0\]
+    同理可推出矛盾,因此$Tw\in U^\bot$对任意$w\in U^\bot$成立.\\
+    于是$U$和$U^\bot$在$T$下不变.
+\end{proof}
+\begin{problem}[13.]
+    设$\F=\R$,$V$是有限维向量空间.对任意$v\in V$,令$\phi_v$为$V$上的线性泛函,定义为$\phi_v(u)=\inprod uv$对所有$u\in V$成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$v\mapsto\phi_v$是$V$到$V'$的单的线性映射.
+        \item 试证明:$v\mapsto\phi_v$是$V$到$V'$的同构.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    令映射$T:V\to V'$为$Tv=\phi_v$对所有$v\in V$成立.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$v,w\in V$,对于任意$u\in V$有
+            \[\phi_v(u)+\phi_w(u)=\inprod uv+\inprod uw=\inprod{u}{v+w}=\phi_{v+w}(u)\]
+            于是$Tv+Tw=T(v+w)$.\\
+            对于任意$v\in V$和$\lambda\in\F$,对于任意$u\in V$有
+            \[\lambda\phi_v(u)=\lambda\inprod{u}{v}=\inprod{u}{\lambda v}=\phi_{\lambda v}(u)\]
+            于是$\lambda Tv=T\left(\lambda v\right)$.\\
+            因此$T$满足可加性和齐次性,是$V$到$V'$的线性映射.\\
+            现在,假定存在$v,w\in V$使得$Tv=Tw$.于是对于任意$u\in V$有$\phi_v(u)=\phi_w(u)$.而
+            \[\phi_v(u)=\phi_w(u)\Leftrightarrow \inprod uv=\inprod uw\Leftrightarrow \inprod{u}{v-w}=0\Leftrightarrow v-w=\mbf0\Leftrightarrow v=w\]
+            于是$T$是单射.
+        \item 注意到$\dim V=\dim V'$,又因为$T$是单射,于是$T$是$V$到$V'$的同构.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[14.]
+    设$\li e,n$是$V$的规范正交基.对于$v\in V$,令$\phi_v(u)=\inprod uv$对所有$u\in U$成立.试证明:$\li e,n$的对偶基为$\phi_{e_1},\cdots,\phi_{e_n}$.
+\end{problem}
+\begin{proof}
+    对于任意$j,k\in\{1,\cdots,n\}$且$j\neq k$有
+    \[\phi_{e_k}\left(e_j\right)=\inprod{e_j}{e_k}=0\]
+    又$\phi_{e_k}\left(e_k\right)=\inprod{e_k}{e_k}=1$.于是
+    \[\phi_{e_k}\left(e_j\right)=\left\{\begin{array}{l}
+        1,j=k\\0,j\neq k
+    \end{array}\right.\]
+    这符合$e_k$的对偶$\phi_k$的定义.于是$\phi_{e_1},\cdots,\phi_{e_n}$为$\li e,n$的对偶基.
 \end{proof}
 \end{document}
