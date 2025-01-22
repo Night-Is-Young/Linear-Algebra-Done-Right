@@ -194,4 +194,116 @@
     \end{array}\right.\]
     这符合$e_k$的对偶$\phi_k$的定义.于是$\phi_{e_1},\cdots,\phi_{e_n}$为$\li e,n$的对偶基.
 \end{proof}
+\begin{problem}[15.]
+    在$\R^4$中,令$U=\span\left((1,1,0,0),(1,1,1,2)\right)$.求$u\in U$使得$||u-(1,2,3,4)||$尽可能小.
+\end{problem}
+\begin{proof}
+    对$U$的基使用Gran-Schmidt过程得到其规范正交基$e_1=\dfrac{1}{\sqrt{2}}(1,1,0,0),e_2=\dfrac{1}{\sqrt{5}}(0,0,1,2)$.\\
+    令$v=(1,2,3,4)$,则
+    \[P_Uv=\inprod{v}{e_1}e_1+\inprod{v}{e_2}e_2=\dfrac{3}{2}(1,1,0,0)+\dfrac{11}{5}(0,0,1,2)=\left(\dfrac32,\dfrac32,\dfrac{11}{5},\dfrac{22}{5}\right)\]
+    于是$u=P_Uv$即为所求向量.
+\end{proof}
+\begin{problem}[16.]
+    设$C[-1,1]$是闭区间$[-1,1]$上所有连续实值函数构成的向量空间,其内积定义为$\displaystyle \inprod fg=\int_{-1}^{1}fg$对所有$f,g\in C[-1,1]$成立.%
+    令$U$是$C[-1,1]$的子空间,定义为$U=\left\{f\in C[-1,1]:f(0)=0\right\}$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$U^\bot=\{\mbf0\}$.
+        \item 试证明:不假设有限维的情况下,$V=U\oplus U^\bot$和$U=\left(U^{\bot}\right)^{\bot}$不再成立.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 显然$\mbf0\in U^\bot$.考虑$g\in U^\bot$,令$f(x)=x^2g(x)\in U$,于是
+            \[\inprod fg=\int_{-1}^{1}\left(xg(x)\right)^2=0\]
+            这就要求$xg(x)=0$对任意$x\in[-1,1]$成立,于是$g=\mbf0$,则$U^\bot=\{\mbf0\}$.
+        \item 在\tbf{(1)}中有$U^\bot\subset U\subset C[-1,1]$,于是$U\oplus U^\bot=U\neq C[-1,1]$.\\
+            又有$\left(U^\bot\right)^\bot=\left\{\mbf0\right\}^{\bot}=C[-1,1]\neq U$.于是题设的两式不再成立.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[17.]
+    求$p\in\P_3(\R)$使得$p(0)=p'(0)=0$,且$\displaystyle\int_{0}^{1}\left|2+3x-p(x)\right|^2\dx$尽可能小.
+\end{problem}
+\begin{solution}
+    考虑$\P_3(\R)$的内积$\inprod pq=\displaystyle\int_{0}^{1}pq$对所有$p,q\in\P_3(\R)$成立.\\
+    令$U=\{p\in\P_3(\R):p(0)=p'(0)=0\}$为$\P_3(\R)$的子空间,$U$的一组基为$x^2,x^3$.对这组基运用Gram-Schmidt过程得到$U$的一组规范正交基
+    \[e_1=\sqrt5x^2,e_2=6\sqrt7\left(x^3-\dfrac56x^2\right)\]
+    令$q=2+3x$.我们只需求使得$||q-p||^2$最小的$p(x)$,于是
+    \[p(x)=P_Uq=\inprod{q}{e_1}e_1+\inprod{q}{e_2}e_2=24x^2-\dfrac{203}{10}x^3\]
+\end{solution}
+\begin{problem}[18.]
+    求$p\in\P_5(\R)$使得$\displaystyle\int_{-\pi}^{\pi}\left|\sin x-p(x)\right|^2\di x$尽可能小.
+\end{problem}
+\begin{proof}
+    本题的求解涉及到复杂的积分计算,因此过程不再赘述.最终的解为
+    \[p(x)=\dfrac{105\left(1465-153\pi^2+\pi^4\right)}{8\pi^6}x-\dfrac{315\left(1155-125\pi^2+\pi^4\right)}{4\pi^8}x^3+\dfrac{693\left(945-105\pi^2+\pi^4\right)}{8\pi^{10}}x^5\]
+\end{proof}
+\begin{problem}[19.]
+    设$V$是有限维的,$P\in\L(V)$是将$V$映成其某个子空间的正交投影.试证明:$P^\dagger=P$.
+\end{problem}
+\begin{proof}
+    设$P=P_U$,其中$U$是$V$的子空间.那么
+    \[P^\dagger=\left(P|_{(\nul P)^\bot}\right)^{-1}P_{\range P}=\left(P|_U\right)^{-1}P_U=I_UP_U=P_U=P\]
+    于是命题成立.
+\end{proof}
+\begin{problem}[20.]
+    设$V$是有限维的,且$T\in\L(V,W)$.试证明:$\nul T^\dagger=\left(\range T\right)^\bot$且$\range T^\dagger=\left(\nul T\right)^\bot$.
+\end{problem}
+\begin{proof}
+    考虑$T$的伪逆$T^\dagger=\left(T|_{(\nul T)^\bot}\right)^{-1}P_{\range T}$.\\
+    由于$T|_{(\nul T)^\bot}$是双射,于是$\left(T|_{(\nul T)^\bot}\right)^{-1}w=\mbf0$当且仅当$w=\mbf0$.\\
+    而$P_{\range T}w=\mbf0$当且仅当$w\in(\range T)^\bot$,于是$\nul T^\dagger=(\range T)^\bot$.\\
+    再次根据$T|_{(\nul T)^\bot}$是双射,可知$\left(T|_{(\nul T)^\bot}\right)^{-1}$是将$\range T$映成$(\nul T)^\bot$的双射.\\
+    又因为$P_{\range T}$是$W$映到$\range T$的满射,于是$T^\dagger$将$W$映到$(\nul T)^\bot$,即$\range T^{\dagger}=(\nul T)^{\bot}$.
+\end{proof}
+\begin{problem}[21.]
+    设$T\in\L(\F^3,\F^2)$定义为$T(a,b,c)=(a+b+c,2b+3c)$.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于$(x,y)\in\F^2$,求$T^\dagger(x,y)$的表达式.
+        \item 用本题的例子验证$TT^\dagger=P_{\range T}$.
+        \item 用本题的例子验证$T^\dagger T=P_{(\nul T)^\bot}$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由题意可知$\nul T=\span(1,-3,2)$.于是$T^\dagger(x,y)=(a,b,c)$需满足
+            \[\left\{\begin{array}{l}
+                x=a+b+c\\
+                y=3b+2c\\
+                a-3b+2c=0
+            \end{array}\right.\]
+            解得$a=\dfrac{1}{14}(13x-5y),b=\dfrac{1}{14}(3x+y),c=-\dfrac17(-x+2y)$.于是
+            \[T^\dagger(x,y)=\dfrac{1}{14}(13x-5y,3x+y,-2x+4y)\]
+        \item 我们有
+            \[TT^{\dagger}(x,y)=\dfrac{1}{14}T(13x-5y,3x+y,-2x+4y)=\dfrac{1}{14}T(14x,14y)=(x,y)\]
+            于是$TT^\dagger=P_{\range T}$.
+        \item 这也是不难验证的,在此不再赘述.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[22.]
+    设$V$是有限维的,且$T\in\L(V,W)$.试证明:$TT^{\dagger}T=T$且$T^{\dagger}TT^{\dagger}=T^\dagger$.
+\end{problem}
+\begin{proof}
+    我们有
+    \[TT^{\dagger}T=P_{range T}T=T\]
+    又有
+    \[T^{\dagger}TT^{\dagger}=T^{\dagger}P_{\range T}=\left(T|_{(\nul T)^\bot}\right)^{-1}P_{\range T}P_{\range T}=\left(T|_{(\nul T)^\bot}\right)^{-1}P_{\range T}=T^\dagger\]
+    于是命题成立.
+\end{proof}
+\begin{problem}[23.]
+    设$V$是有限维的,且$T\in\L(V,W)$.试证明:$\left(T^\dagger\right)^\dagger=T$.
+\end{problem}
+\begin{proof}
+    根据\tbf{6C.20}可知
+    \[\left(T^\dagger\right)^\dagger
+    =\left(T^\dagger|_{\left(\nul T^\dagger\right)^\bot}\right)^{-1}P_{\range T^\dagger}
+    =\left(T^\dagger|_{\range T}\right)^{-1}P_{\left(\nul T\right)^\bot}\]
+    考虑到$T^\dagger=\left(T|_{(\nul T)^\bot}\right)^{-1}P_{\range T}$,于是$T^\dagger|_{\range T}=\left(T|_{(\nul T)^\bot}\right)^{-1}$.于是
+    \[\left(T^\dagger\right)^\dagger
+    =\left(\left(T|_{(\nul T)^\bot}\right)^{-1}\right)^{-1}P_{(\nul T)^\bot}
+    =T|_{(\nul T)^\bot}P_{(\nul T)^\bot}
+    =TP_{(\nul T)^\bot}\]
+    对于任意$v\in V$,存在唯一的分解方式$v=u+w$使得$u\in\nul T,w\in(\nul T)^\bot$.此时
+    \[TP_{(\nul T)^\bot}v=Tw=Tw+Tu=T(w+u)=Tv\]
+    于是$T=TP_{(\nul T)^\bot}$,因而$\left(T^\dagger\right)^\dagger=T$.
+\end{proof}
 \end{document}
