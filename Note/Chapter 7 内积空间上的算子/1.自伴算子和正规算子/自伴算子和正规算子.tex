@@ -17,5 +17,121 @@
 \tbf{1.伴随}
 \begin{definition}[1.1 定义:伴随]
     设$T\in\L(V,W)$,$T$的\tbf{伴随}是使得对任意$v\in V$和任意$w\in W$都有$\langle Tv,w\rangle=\langle v,T^*w\rangle$的映射$T^*:W\to V$.
-\end{definition}
+\end{definition}\noindent
+我们简单看一下这个定义有意义的原因.设$T\in\L(V,W)$,取定$w\in W$,考虑$V$上的线性泛函$v\mapsto\inprod{Tv}{w}$.\\
+根据Riesz表示定理,$V$中存在唯一的向量使得该线性泛函由与其的内积给出.我们记这个向量为$T^*w$.\\
+换言之,$T^*w$是$V$中唯一使得任意$v\in V$都满足
+\[\inprod{Tv}{w}=\inprod{v}{T^*w}\]
+的向量.上式中左侧的内积在$W$上,右侧的内积在$V$上,这里统一写作$\inprod\cdot\cdot$.\\
+伴随作为一个函数似乎也具有线性映射的基本性质.下面我们证明之.
+\begin{formal}[1.2 线性映射的伴随也是线性映射]
+    如果$T\in\L(V,W)$,那么$T^*\in\L(W,V)$.
+\end{formal}
+\begin{proof}
+    设$T\in\L(V,W)$.对于$v\in V$和$w_1,w_2\in W$,有
+    \[\inprod{Tv}{w_1+w_2}=\inprod{Tv}{w_1}+\inprod{Tv}{w_2}=\inprod{v}{T^*w_1}+\inprod{v}{T^*w_2}\]
+    \[\inprod{Tv}{w_1+w_2}=\inprod{v}{T^*\left(w_1+w_2\right)}\]
+    上面两式表明$T^*w_1+T^*w_2=T^*\left(w_1+w_2\right)$.\\
+    对于$v\in V,w\in W$和$\lambda\in\F$有
+    \[\inprod{Tv}{\lambda w}=\overline{\lambda}\inprod{Tv}{w}=\overline{\lambda}\inprod{v}{T^*w}=\inprod{v}{\lambda T^*w}\]
+    \[\inprod{Tv}{\lambda w}=\inprod{v}{T^*(\lambda w)}\]
+    上面两式表明$\lambda T^*w=T^*(\lambda w)$.\\
+    从而$T^*$满足可加性和齐次性,于是$T^*$是线性映射.
+\end{proof}\noindent
+除此之外,伴随还具有如下性质.
+\begin{formal}[1.3 伴随的性质]
+    设$T\in\L(V,W)$,那么有
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $(S+T)^*=S^*+T^*$对所有$S,T\in\L(V,W)$成立.
+        \item $(\lambda T)^*=\overline{\lambda}T^*$对所有$\lambda\in\F$成立.
+        \item $\left(T^*\right)^*=T$.
+        \item $(ST)^*=T^*S^*$对所有$S\in\L(W,U)$成立.
+        \item $I^*=I$,其中$I$是$V$上的恒等算子.
+        \item 如果$T$可逆,那么$T^*$可逆且$\left(T^*\right)^{-1}=\left(T^{-1}\right)^*$.
+    \end{enumerate}
+\end{formal}\noindent
+上面性质的证明从略.不难发现,$\F=\R$时$T\mapsto T^*$是$\L(V,W)$到$\L(W,V)$的线性映射,而当$\F=\C$时则不成立.%
+这是由于上面性质中出现的复共轭.\\
+下面的结论给出了伴随的零空间和值域.
+\begin{formal}[1.4 伴随的零空间和值域]
+    设$T\in\L(V,W)$,那么
+    \[\nul T^*=(\range T)^\bot,\range T^*=(\nul T)^\bot\]
+    \[\nul T=\left(\range T^*\right)^\bot,\range T=\left(\nul T^*\right)^\bot\]
+\end{formal}
+\begin{proof}
+    对于$w\in W$,我们有
+    \[w\in\nul T^*\Leftrightarrow T^*w=\mbf0
+    \Leftrightarrow\forall v\in V,\inprod{v}{T^*w}=0
+    \Leftrightarrow\forall v\in V,\inprod{Tv}{w}=0
+    \Leftrightarrow w\in(\range T)^\bot\]
+    于是$\nul T^*=(\range T)^\bot$.两边取正交补即可知$\range T=\left(\nul T^*\right)^\bot$.\\
+    用$T^*$代替$T$,即可得出剩余两个等式.
+\end{proof}\noindent
+那么,线性伴随的矩阵具有什么样的特点呢?为此,我们先做共轭转置的定义.
+\begin{definition}[1.5 定义:共轭转置]
+    $m\times n$矩阵$A$的\tbf{共轭转置}是将其转置后的矩阵中每个元素取复共轭得到的$n\times m$矩阵$A^*$.\\
+    换言之,对于任意$j,k\in\{1,\cdots,n\}$,有$\left(A^*\right)_{j,k}=\overline{A_{k,j}}$.
+\end{definition}\noindent
+接下来的结论表明线性伴随和共轭转置之间的联系.
+\begin{formal}[1.6 线性伴随与共轭转置]
+    令$T\in\L(V,W)$.设$\li e,n$是$V$的规范正交基,$\li f,m$是$W$的规范正交基.\\
+    那么$\M\left(T^*,\left(\li f,m\right),\left(\li e,n\right)\right)$是$\M\left(T,\left(\li e,n\right),\left(\li f,m\right)\right)$的共轭转置.\\
+    换句话说$\M\left(T^*\right)=\left(\M(T)\right)^*$.
+\end{formal}
+\begin{proof}
+    我们把命题中的两个较长的表达式分别简写为$\M\left(T^*\right)$和$\M(T)$.\\
+    因为$\li f,m$是$W$的规范正交基,于是对于任意$k\in\{1,\cdots,n\}$有
+    \[Te_k=\inprod{Te_k}{f_1}f_1+\cdots+\inprod{Te_k}{f_m}f_m\]
+    考虑线性映射的矩阵的含义,可知$\M(T)$的第$j$行第$k$列的元素为$\inprod{Te_j}{f_k}$.\\
+    同理可知$\M\left(T^*\right)$的第$j$行第$k$列的元素为$\inprod{T^*f_k}{e_j}$.而
+    \[\inprod{T^*f_j}{e_k}=\inprod{f_k}{Te_j}=\overline{\inprod{Te_j}{f_k}}\]
+    这就等于$\M(T)$的第$k$行第$j$列的元素的复共轭.于是命题得证.
+\end{proof}\noindent
+我们看到伴随映射和对偶映射的相似性.在处理内积空间时,正交补和伴随更容易处理,于是就不需要处理零化子和伴随映射了.\\
+\tbf{2.自伴算子}\\
+现在,我们把注意力重新放在内积空间上的算子.
+\begin{definition}[2.1 定义:自伴算子]
+    算子$T\in\L(V)$被称为\tbf{自伴的},如果$T=T^*$.
+\end{definition}\noindent
+自伴算子的矩阵都是实矩阵,并且关于对角线对称.我们还有如下命题.
+\begin{formal}[2.2 $T=\mbf0$的充要条件]
+    设$V$是有限维复向量空间,$T\in\L(V)$,那么$\inprod{Tv}{v}=0$对所有$v\in V$成立,当且仅当$T=\mbf0$.
+\end{formal}
+\begin{proof}
+    如果$u,w\in V$,那么有
+    \[\begin{aligned}
+        \inprod{Tu}{w}
+        =&\dfrac{\inprod{T(u+w)}{u+w}-\inprod{T(u-w)}{u-w}}{4} \\
+        &-\dfrac{\inprod{T(u+\i v)}{u+\i v}-\inprod{T(u-\i w)}{u-\i w}}{4}\i
+    \end{aligned}\]
+    现在假设$\inprod{Tv}{v}=0$对任意$v\in V$成立,于是上式表明$\inprod{Tu}{w}=0$对任意$u,w\in V$成立.%
+    取$w=Tu$可知$Tu=\mbf0$对所有$u\in U$成立,于是$T=\mbf0$.\\
+    当$T=\mbf0$时,自然有$\inprod{Tv}{v}=\inprod{\mbf0}{v}=0$.\\
+    综上可知命题得证.
+\end{proof}\noindent
+下面的命题只在复向量空间上成立.它给出了自伴算子表现得像实数的一个例子.
+\begin{formal}[2.3 复向量空间上自伴算子的充要条件]
+    设$V$是有限维复向量空间,对于$T\in\L(V)$,$T$是自伴的,当且仅当$\inprod{Tv}{v}\in\R$对任意$v\in V$成立.
+\end{formal}
+\begin{proof}
+    如果$v\in V$,那么就有$\inprod{T^*v}{v}=\overline{\inprod{Tv}{v}}$.如此,就有
+    \[\begin{aligned}
+        T\text{是自伴的}
+        &\Leftrightarrow T-T^*=\mbf0\\
+        &\Leftrightarrow \inprod{\left(T-T^*\right)v}{v}=0,\forall v\in V\\
+        &\Leftrightarrow \inprod{Tv}{v}-\overline{\inprod{Tv}{v}}=0,\forall v\in V\\
+        &\Leftrightarrow \inprod{Tv}{v}\in\R,\forall v\in V
+    \end{aligned}\]
+\end{proof}\noindent
+在实内积空间$V$上,一个非零算子也许可以满足对任意$v\in V$都有$\inprod{Tv}{v}=0$.然而下面的定理表明,这不会发生在自伴算子上.
+\begin{formal}[2.4 非零自伴算子不会使$\inprod{Tv}{v}=0$]
+    设$T$是$V$上的自伴算子,那么$\inprod{Tv}{v}=0$对任意$v\in V$成立,当且仅当$T=\mbf0$.
+\end{formal}
+\begin{proof}
+    在复内积空间上,我们不需要$T$自伴这一条件也可证明命题.\\
+    在实内积空间上,对于$u,w\in V$,我们有
+    \[\inprod{Tu}{w}=\dfrac{\inprod{T(u+w)}{u+w}-\inprod{T(u-w)}{u-w}}{4}\]
+    证明上面的等式需要用到$\inprod{Tw}{u}=\inprod{w}{Tu}=\inprod{Tu}{w}$.前一个等号是由于$T$是自伴算子,后一个等号是由于在实内积空间上操作.\\
+    用与\tbf{2.2}类似的方法可知$T=\mbf0$.
+\end{proof}
 \end{document}
