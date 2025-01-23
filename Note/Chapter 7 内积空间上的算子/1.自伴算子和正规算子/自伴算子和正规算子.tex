@@ -133,5 +133,57 @@
     \[\inprod{Tu}{w}=\dfrac{\inprod{T(u+w)}{u+w}-\inprod{T(u-w)}{u-w}}{4}\]
     证明上面的等式需要用到$\inprod{Tw}{u}=\inprod{w}{Tu}=\inprod{Tu}{w}$.前一个等号是由于$T$是自伴算子,后一个等号是由于在实内积空间上操作.\\
     用与\tbf{2.2}类似的方法可知$T=\mbf0$.
+\end{proof}\noindent
+\tbf{3.正规算子}\\
+\begin{definition}[3.1 定义:正规算子]
+    如果内积空间上的算子与它的伴随可交换,我们就称它是\tbf{正规的}.\\
+    换言之,对于$T\in\L(V)$,如果$TT^*=T^*T$,那么称$T$是正规的.
+\end{definition}\noindent
+特别地,自伴算子都是正规算子.接下来的命题给出了对正规算子的一个有用的刻画.
+\begin{formal}[3.2 正规算子的充要条件I]
+    设$T\in\L(V)$,那么$T$是正规的,当且仅当$||Tv||=||T^*v||$对任意$v\in V$成立.
+\end{formal}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        T\text{是正规的}
+        &\Leftrightarrow TT^*-T^*T=\mbf0 \\
+        &\Leftrightarrow \inprod{\left(TT^*T-T^*T\right)v}{v}=0,\forall v\in V \\
+        &\Leftrightarrow \inprod{TT^*v}{v}=\inprod{T^*Tv}{v}=0,\forall v\in V \\
+        &\Leftrightarrow \inprod{Tv}{Tv}=\inprod{T^*v}{T^*v},\forall v\in V \\
+        &\Leftrightarrow ||Tv||=||T^*v||,\forall v\in V
+    \end{aligned}\]
+\end{proof}\noindent
+正规算子有如下的性质.
+\begin{formal}[3.3 正规算子的性质]
+    设$T\in\L(V)$是正规的,那么有
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\nul T=\nul T^*$.
+        \item $\range T=\range T^*$.
+        \item $V=\nul T\oplus\range T$.
+        \item 对于任意$\lambda\in\F$,$T-\lambda I$都是正规的.
+        \item 对于$v\in V$和$\lambda\in\F$,$Tv=\lambda v$当且仅当$T^*v=\overline{\lambda}v$.
+    \end{enumerate}
+\end{formal}\noindent
+正规算子的特征向量还具有如下的性质.
+\begin{formal}[3.4 正规算子的特征向量]
+    设$T\in\L(V)$是正规的,那么$T$对应于不同特征值的特征向量正交.
+\end{formal}
+\begin{proof}
+    设$\alpha,\beta$是$T$的不同特征值,对应的特征向量为$u,v$.于是
+    \[(\alpha-\beta)\inprod{u}{v}=\inprod{\alpha u}{v}-\inprod{u}{\overline{\beta}v}=\inprod{Tu}{v}-\inprod{u}{T^*v}=0\]
+    因而$\inprod uv=0$,于是$u$和$v$正交.
+\end{proof}\noindent
+我们还有一个判断算子是否正规的方法.
+\begin{formal}[3.5 正规算子的充要条件II]
+    设$\F=\C$且$T\in\L(V)$.那么$T$是正规的当且仅当存在可交换的自伴算子$A,B\in\L(V)$使得$T=A+\i B$.
+\end{formal}
+\begin{proof}
+    首先假定$T$是正规的.令$A=\dfrac{T+T^*}{2},B=\dfrac{T-T^*}{2\i}$.那么$A,B$都是自伴的,且$T=A+\i B$.我们有
+    \[AB-BA=\dfrac{TT^*-T^*T}{2\i}=\mbf0\]
+    于是$AB=BA$,因而$A,B$是可交换的.\\
+    现在假设存在可交换的自伴算子$A,B$使得$T=A+\i B$,那么$T^*=A-\i B$.于是
+    \[TT^*-T^*T=2\i\left(AB-BA\right)=\mbf0\]
+    于是$T$是正规的.综上可知命题得证.
 \end{proof}
 \end{document}
