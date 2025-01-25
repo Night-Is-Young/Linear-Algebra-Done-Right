@@ -1,0 +1,76 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 7A}
+\end{center}
+\begin{problem}[1.]
+    设$n\in\N^*$,定义$T\in\L(\F^n)$为
+    \[T\left(\li z,n\right)=\left(0,\li z,{n-1}\right)\]
+    求$T^*\left(\li z,n\right)$的表达式.
+\end{problem}
+\begin{solution}
+    令$v=\left(\li a,n\right),w=\left(\li b,n\right)$,于是
+    \[\begin{aligned}
+        \inprod{Tv}{w}
+        &= \inprod{\left(0,\li a,{n-1}\right)}{\left(\li b,n\right)} \\
+        &= \sum_{k=1}^{n-1}a_kb_{k+1} \\
+        &= \inprod{\left(\li a,n\right)}{\left(b_2,\cdots,b_n,0\right)} \\
+        &= \inprod{v}{T^*w}
+    \end{aligned}\]
+    于是
+    \[T^*\left(\li z,n\right)=\left(z_2,\cdots,z_n,0\right)\]
+\end{solution}
+\begin{problem}[2.]
+    设$T\in\L(V,W)$.试证明
+    \[T=\mbf0\Leftrightarrow T^*=\mbf0\Leftrightarrow TT^*=\mbf0\Leftrightarrow T^*T=\mbf0\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        T=\mbf0
+        &\Leftrightarrow \nul T=V,\range T=\{\mbf0\} \\
+        &\Leftrightarrow \left(\range T^*\right)^\bot=V,\left(\nul T^*\right)^\bot=\{\mbf0\} \\
+        &\Leftrightarrow \range T^*=\{\mbf0\},\nul T=V \\
+        &\Leftrightarrow T^*=\mbf0
+    \end{aligned}\]
+    从$T=\mbf0$出发推出$TT^*=T^*T=\mbf0$是容易的.现在假设$T^*T=\mbf0$,于是对任意$v\in V$有
+    \[TT^*=\mbf0\Rightarrow TT^*v=\mbf0\Rightarrow\inprod{T^*Tv}{v}=0\Rightarrow\inprod{Tv}{Tv}=0\Rightarrow Tv=\mbf0\]
+    这表明$T=\mbf0$.\\
+    现在假设$TT^*=\mbf0$,同理可推出$T^*=\mbf0$,从而$T=\mbf0$.\\
+    于是上述四个命题等价.
+\end{proof}
+\begin{problem}[3.]
+    设$T\in\L(V)$和$\lambda\in\F$.试证明:$\lambda$是$T$的特征值,当且仅当$\overline{\lambda}$是$T^*$的特征值.
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        \lambda\text{是}T\text{的特征值}
+        &\Leftrightarrow T-\lambda I\text{不是满射} \\
+        &\Leftrightarrow \range(T-\lambda I)\neq V \\
+        &\Leftrightarrow \left(\nul \left(T-\lambda I\right)^*\right)^\bot\neq V \\
+        &\Leftrightarrow \left(\nul T^*-\overline{\lambda}I\right)^\bot\neq V \\
+        &\Leftrightarrow \nul \left(T^*-\overline{\lambda}I\right)\neq\{\mbf0\} \\
+        &\Leftrightarrow T^*-\overline{\lambda}I\text{不是单射} \\
+        &\Leftrightarrow \overline{\lambda}\text{是}T^*\text{的特征值}
+    \end{aligned}\]
+\end{proof}
+\begin{problem}[4.]
+    设$T\in\L(V)$且$U$是$T$的子空间.试证明$U$在$T$下不变,当且仅当$U^\bot$在$T^*$下不变.
+\end{problem}
+\begin{proof}
+    
+\end{proof}
+\end{document}

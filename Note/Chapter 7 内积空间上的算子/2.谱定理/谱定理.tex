@@ -1,0 +1,94 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 谱定理\end{center}
+在内积空间上性质最好的算子就是关于$V$中的某个规范正交基有对角矩阵的算子.正是这些算子的特征向量可以构成$V$的规范正交基.%
+而谱定理则告诉我们这些算子应当满足的条件.它指出,当$\F=\R$时这些算子即自伴算子,当$\F=\C$时这些算子即正规算子.\\
+\tbf{1.实谱定理}\\
+为了证明实谱定理,我们需要两个引理.
+\begin{formal}[1.1 可逆二次表达式]
+    设$T\in\L(V)$是自伴的,且$b,c\in\R$使得$b^2<4c$,那么$T^2+bT+cI$是可逆算子.
+\end{formal}
+\begin{proof}
+    设$v\in V$且$v\neq\mbf0$,那么
+    \[\begin{aligned}
+        \inprod{\left(T^2+bT+cI\right)v}{v}
+        &= \inprod{T^2v}{v}+b\inprod{Tv}{v}+c\inprod{v}{v} \\
+        &= \inprod{Tv}{Tv}+b\inprod{Tv}{v}+c\inprod{v}{v} \\
+        &\geqslant ||Tv||^2-|b|||Tv||||v||+c||v||^2 \\
+        &= \left(||Tv||-\dfrac{|b|||v||}{2}\right)^2+\left(c-\dfrac{b^2}{4}\right)||v||^2 \\
+        &> 0
+    \end{aligned}\]
+    于是意味着$\left(T^2+bT+cI\right)v\neq0$,从而$T^2+bT+cI$是单射,因而它可逆.
+\end{proof}\noindent
+接下来这个定理是我们证明实谱定理的关键.
+\begin{formal}[1.2 自伴算子的最小多项式]
+    设$T\in\L(V)$是自伴的,那么$T$的最小多项式具有$\left(z-\lambda_1\right)\cdots\left(z-\lambda_n\right)$的形式,其中$\li\lambda,m\in\R$.
+\end{formal}
+\begin{proof}
+    当$\F=\C$时,$T$的最小多项式的零点即$T$的特征值.我们已经知道,自伴算子的特征值都是实的,于是$T$的最小多项式自然具有题设的形式.\\
+    当$\F=\R$时,由$\R$上的多项式分解可知$T$的最小多项式应当具有
+    \[\left(z-\lambda_1\right)\cdots\left(z-\lambda_m\right)\left(z^2+b_1z+c_1\right)\cdots\left(z^2+b_Nz+c_N\right)\]
+    的形式,其中$\li\lambda,m,\li b,N,\li c,N\in\R$且对任意$k\in\{1,\cdots,N\}$有$b_k^2<4c_k$.于是
+    \[\left(T-\lambda_1I\right)\cdots\left(T-\lambda_mI\right)\left(T^2+b_1T+c_1I\right)\cdots\left(T^2+b_NT+c_NI\right)=\mbf0\]
+    如果$N>0$,那么在等式两端同乘$\left(T^2+b_NT+c_NI\right)^{-1}$可得
+    \[\left(T-\lambda_1I\right)\cdots\left(T-\lambda_mI\right)\left(T^2+b_1T+c_1I\right)\cdots\left(T^2+b_{N-1}T+c_{N-1}I\right)=\mbf0\]
+    这样就得到了次数比原来低$2$的最小多项式,这与假设矛盾,因而$N=0$.于是$T$的最小多项式自然也具有题设的形式.
+\end{proof}\noindent
+以上的结果连同之前对于最小多项式的讨论,可知每个自伴算子都有特征值.事实上,自伴算子有足够的特征向量形成一个基.%
+接下来的结果是线性代数中的主要定理之一,它全面地描述了实内积空间上的自伴算子.
+\begin{formal}[1.3 实谱定理]
+    设$\F=\R$且$T\in\L(V)$,那么下列命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$是自伴的.
+        \item $T$关于$V$的某个规范正交基有对角矩阵.
+        \item $V$有$T$的特征向量构成的规范正交基.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:由于$T$是自伴的,根据\tbf{1.2}和上三角矩阵的知识可知$T$关于$V$的某个规范正交基有上三角矩阵.\\
+    又因为$T=T^*$,于是$\M(T)=\M\left(T^*\right)=\left(\M(T)\right)^*$,这要求$\M(T)$既是上三角矩阵又是下三角矩阵.\\
+    于是$\M(T)$是对角矩阵.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(a)}:由于对角矩阵的共轭转置不变,于是$\M(T)=\M\left(T^*\right)$,于是$T=T^*$.\\
+    \tbf{(b)}和\tbf{(c)}的等价关系是显然的.
+\end{proof}\noindent
+\tbf{2.复谱定理}\\
+接下来的定理全面描述了复内积空间上的正规算子.
+\begin{formal}[2.1 复谱定理]
+    设$\F=\C$且$T\in\L(V)$,那么下列命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$是正规的.
+        \item $T$关于$V$的某个规范正交基有对角矩阵.
+        \item $V$有$T$的特征向量构成的规范正交基.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:由Schur定理,$T$关于$V$的某个规范正交基有上三角矩阵.不妨设这基为$\li e,n$,于是
+    \[\M\left(T,\left(\li e,n\right)\right)=\begin{pmatrix}
+        A_{1,1} & \cdots & A_{n,1} \\
+         & \ddots & \vdots \\
+        0 & & A_{n,n}
+    \end{pmatrix}\]
+    我们从上面的矩阵可以得到
+    \[\left|\left|Te_1\right|\right|^2=\left|\left|A_{1,1}e_1\right|\right|^2\]
+    \[\left|\left|T^*e_1\right|\right|^2=\left|\left|A_{1,1}e_1\right|\right|^2+\cdots+\left|\left|A_{n,1}e_n\right|\right|^2\]
+    而$\left|\left|Te_1\right|\right|=\left|\left|T^*e_1\right|\right|$,于是这意味着$A_{1,2}=\cdots=A_{1,n}=0$.\\
+    于是有$\left|\left|Te_2\right|\right|^2=\left|\left|A_{2,2}e_2\right|\right|^2$.重复上面的操作,可知$A_{2,3}=\cdots=A_{2,n}=0$.\\
+    重复上面的推理,可知$\M\left(T,\left(\li e,n\right)\right)$是对角矩阵.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(a)}:由$T$关于$V$的某个规范正交基有对角矩阵可知$T^*$关于这基也有对角矩阵.\\
+    由于对角矩阵都是可交换的,于是$TT^*=T^*T$,从而$T$是正规算子.\\
+    \tbf{(b)}和\tbf{(c)}的等价关系是显然的.
+\end{proof}
+\end{document}
