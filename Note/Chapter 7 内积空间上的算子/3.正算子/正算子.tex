@@ -1,0 +1,108 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 正算子\end{center}
+迄今为止我们讨论的多项式都是整数次幂的.算子是否有开平方这一操作呢?为此,我们将研究正算子.\\
+\tbf{1.正算子和平方根}
+\begin{definition}[1.1 定义:正算子]
+    算子$T\in\L(V)$是\tbf{正的},如果$T$是自伴的且对任意$v\in V$有$\inprod{Tv}{v}\geqslant0$.
+\end{definition}\noindent
+如果$V$是复向量空间,那么以上定义中"$T$是自伴的"这一条件可以去掉.因为$\inprod{Tv}{v}\geqslant0$蕴含%
+$\inprod{Tv}{v}\in\R$,这在复内积空间上意味着$T$是自伴算子.
+\begin{definition}[1.2 定义:平方根]
+    算子$R\in\L(V)$称为算子$T\in\L(V)$的\tbf{平方根},如果$R^2=T$.
+\end{definition}\noindent
+于是我们将在下面的叙述中看到,正算子和$\C$中非负数具有许多的相似性.\\
+\tbf{2.正算子的性质}
+\begin{formal}[2.1 正算子的性质I]
+    设$T\in\L(V)$,那么下列命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$是正算子.
+        \item $T$自伴且所有特征值非负.
+        \item $T$关于$V$的某个规范正交基有对角矩阵且对角线上元素均非负.
+        \item $T$有正平方根.
+        \item $T$有自伴平方根.
+        \item 存在$R\in\L(V)$使得$T=R^*R$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    我们将对上述命题逐一推理.\\
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:$T$是正算子蕴含$T$是自伴算子.对于$T$的任意特征值$\lambda$,不妨设对应的特征向量为$v\in V$,于是
+    \[0\leqslant\inprod{Tv}{v}=\inprod{\lambda v}{v}=\lambda||v||^2\]
+    于是$\lambda\geqslant0$,因而\tbf{(b)}成立.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(c)}:由谱定理可知$T$关于$V$的某个规范正交基有对角矩阵.\\
+    又因为$T$的特征值非负,于是这矩阵的对角线元素非负.\\
+    \tbf{(c)}$\Rightarrow$\tbf{(d)}:我们假定$T$关于$V$的一组规范正交基$\li e,n$具有对角矩阵
+    \[\M(T)=\begin{pmatrix}
+        \lambda_1 & \cdots & 0 \\
+        & \ddots & \vdots\\
+        0 & & \lambda_n
+    \end{pmatrix}\]
+    令$R\in\L(V)$关于$\li e,n$的矩阵为
+    \[\M(R)=\begin{pmatrix}
+        \sqrt{\lambda_1} & \cdots & 0 \\
+        & \ddots & \vdots\\
+        0 & & \sqrt{\lambda_n}
+    \end{pmatrix}\]
+    于是$\M(T)=\left(\M(R)\right)^2$,即$T=R^2$.对于任意$v:=a_1e_1+\cdots+a_ne_n$有
+    \[\begin{aligned}
+        \inprod{Rv}{v}
+        &= \inprod{\sqrt{\lambda_1}a_1e_1+\cdots+\sqrt{\lambda_n}a_ne_n}{a_1e_1+\cdots+a_ne_n} \\
+        &= \sqrt{\lambda_1}a_1^2+\cdots+\sqrt{\lambda_n}a_n^2 \\
+        &\geqslant 0
+    \end{aligned}\]
+    因而$R$是正算子,于是$T$有正平方根,\tbf{(d)}成立.\\
+    \tbf{(d)}$\Rightarrow$\tbf{(e)}:根据定义,正算子都是自伴的,于是\tbf{(d)}蕴含\tbf{(e)}.\\
+    \tbf{(e)}$\Rightarrow$\tbf{(f)}:不妨令$R\in\L(V)$使得$T=R^2$,因为$R$是自伴的,于是$R=R^*$,因而$T=R^*R$.\\
+    \tbf{(f)}$\Rightarrow$\tbf{(a)}:我们有
+    \[T^*=\left(R^*R\right)^*=R^*\left(R^*\right)^*=R^*R=T\]
+    于是$T$是自伴算子.对于任意$v\in V$又有
+    \[\inprod{Tv}{v}=\inprod{R^*Rv}{v}=\inprod{Rv}{Rv}=||Rv||^2\geqslant0\]
+    于是$T$是正算子.
+\end{proof}\noindent
+于是我们知道正算子有平方根.那么其正平方根是否和一般的非负实数一样是唯一的呢?接下来的命题表明这是肯定的.
+\begin{formal}[2.2 正算子具有唯一正平方根]
+    $V$上的每个正算子都具有唯一的正平方根.
+\end{formal}
+\begin{proof}
+    设$T\in\L(V)$是正算子,$v\in V$是$T$的特征向量,对应的特征值为$\lambda\geqslant0$.\\
+    令$R$是$T$的正平方根.我们将证明$Rv=\sqrt{\lambda}v$,从而唯一确定这样的$R$.\\
+    谱定理指出,$V$上存在由$R$的特征向量组成的规范正交基$\li e,n$.因为$R$是正算子,于是其所有特征值非负,因而存在非负的$\li\lambda,n$使得%
+    $Re_k=\sqrt{\lambda_k}e_k$对任意$k\in\{1,\cdots,n\}$成立.\\
+    现在,不妨令$v=a_1e_1+\cdots+a_ne_n$,于是$Rv=\sqrt{\lambda_1}a_1e_1+\cdots+\sqrt{\lambda_n}a_ne_n$.于是
+    \[\lambda v=Tv=R^2v=a_1\lambda_1e_1+\cdots+a_n\lambda_ne_n\]
+    上式表明
+    \[a_1\lambda e_1+\cdots+a_n\lambda e_n=a_1\lambda_1e_1+\cdots+a_n\lambda_ne_n\]
+    于是$a_k\left(\lambda-\lambda_k\right)=0$对任意$k\in\{1,\cdots,n\}$成立.于是
+    \[v=\sum_{\left\{k:\lambda_k=\lambda\right\}}a_ke_k\]
+    因而
+    \[Rv=\sum_{\left\{k:\lambda_k=\lambda\right\}}a_k\sqrt{\lambda}e_k=\lambda v\]
+    于是命题得证.
+\end{proof}\noindent
+需要注意的是,算子的平方根可以有无穷多个,但是算子的正平方根只能有一个.\\
+基于上面的论述,我们可以做如下定义.
+\begin{definition}[2.3 定义:$\sqrt{T}$]
+    对于正算子$T\in\L(V)$,$\sqrt{T}$表示其唯一的正平方根.
+\end{definition}\noindent
+利用平方根,我们也可以简洁的说明一些问题.
+\begin{formal}[2.4 正算子的性质II]
+    设$T\in\L(V)$是正算子且$v\in V$使得$\inprod{Tv}{v}=0$,那么$Tv=\mbf0$.
+\end{formal}
+\begin{proof}
+    我们有
+    \[0=\inprod{Tv}{v}=\inprod{\sqrt{T}\sqrt{T}v}{v}=\inprod{\sqrt{T}v}{\sqrt{T}v}=\left|\left|\sqrt{T}v\right|\right|^2\]
+    于是$\sqrt{T}v=\mbf0$.于是$Tv=\sqrt{T}\left(\sqrt{T}v\right)=\sqrt{T}\mbf0=\mbf0$.
+\end{proof}
+\end{document}

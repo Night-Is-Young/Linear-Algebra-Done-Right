@@ -1,0 +1,190 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 等距映射,酉矩阵和矩阵分解\end{center}
+矩阵的分解是算法中的重要的一环.我们将开始介绍矩阵分解的相关内容.\\
+\tbf{1.等距映射}\\
+保持范数的映射十分重要.我们为其专门命名.
+\begin{definition}[1.1 定义:等距映射]
+    线性映射$S\in\L(V,W)$被称为\tbf{等距映射},如果$||Sv||=||v||$对于任意$v\in V$成立.
+\end{definition}\noindent
+从等距映射的定义可以看出每个等距映射都是单射.欧几里得空间中的旋转映射就是等距映射的一种.
+\begin{formal}[1.2 等距映射的性质]
+    设$S\in\L(V,W)$,$\li e,n$为$V$的规范正交基,$\li f,m$为$W$的规范正交基,那么下列命题是等价的.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $S$是等距映射.
+        \item $S^*S=I$.
+        \item $\inprod{Su}{Sv}=\inprod{u}{v}$对于任意$u,v\in V$成立.
+        \item $\li{Se},n$为$W$中的规范正交组.
+        \item $\M\left(S,\left(\li e,n\right),\left(\li f,m\right)\right)$的列形成$\F^m$中关于欧几里得内积的规范正交组.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    我们将对上述命题逐一推理.\\
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:因为$S$是等距映射,于是对于任意$v\in V$有
+    \[\inprod{\left(I-S^*S\right)v}{v}=\inprod{v}{v}-\inprod{S^*Sv}{v}=||v||^2-\inprod{Sv}{Sv}=||v||^2-||Sv||^2=0\]
+    于是$I-S^*S=\mbf0$,即$S^*S=I$.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(c)}:对于任意$u,v\in V$,有
+    \[\inprod{Su}{Sv}=\inprod{S^*Su}{v}=\inprod{Iu}{v}=\inprod{u}{v}\]
+    于是\tbf{(b)}蕴含\tbf{(c)}.\\
+    \tbf{(c)}$\Rightarrow$\tbf{(d)}:对于任意$j,k\in\{1,\cdots,n\}$且$j\neq k$有$\inprod{Se_j}{Se_k}=\inprod{e_j}{e_k}=0$.\\
+    对于任意$k\in\{1,\cdots,n\}$又有$\inprod{Se_k}{Se_k}=\inprod{e_k}{e_k}=1$.于是$\li{Se},k$是$W$中的规范正交组.\\
+    \tbf{(d)}$\Rightarrow$\tbf{(e)}:令$A=\M\left(T,\left(\li e,n\right),\left(\li f,m\right)\right)$.对于$k,r\in\{1,\cdots,n\}$,我们有
+    \[\inprod{A_{\cdot,k}}{A_{\cdot,r}}=\sum_{j=1}^{m}A_{j,k}\overline{A_{j,r}}=\inprod{\sum_{j=1}^{m}A_{j,k}f_j}{\sum_{j=1}^{m}A_{j,r}f_j}=\inprod{Se_k}{Se_r}
+    =\left\{\begin{array}{l}
+        1,k=r\\0,k\neq r
+    \end{array}\right.\]
+    于是$A$的列是$\F^m$中的规范正交组.\\
+    \tbf{(e)}$\Rightarrow$\tbf{(a)}:上式表明$\li {Se},n$是$W$中的规范正交组.对于任意$v:=a_1e_1+\cdots+a_ne_n\in V$有
+    \[Sv=a_1Se_1+\cdots+a_nSe_n\]
+    于是
+    \[||Sv||^2=a_1^2+\cdots+a_n^2\]
+    \[||v||^2=a_1^2+\cdots+a_n^2\]
+    于是$||Sv||=||v||$,因而$S$是等距映射.
+\end{proof}\noindent
+当等距的算子同时具有可逆性时,就引出了我们要讨论的第二种算子.\\
+\tbf{2.酉算子(幺正算子)}
+\begin{definition}[2.1 定义:酉算子]
+    算子$T\in\L(V)$被称为\tbf{酉的(幺正的)},如果$T$是可逆等距映射.
+\end{definition}\noindent
+你似乎会觉得奇怪,因为有限维内积空间上的酉算子就是等距算子.然而我们总应该记得,算子将向量映射至原本的向量空间,而一般地线性映射则是两个空间之间的.%
+此外,在遇到无限维向量空间时,我们的定义中仍应当保留可逆这一条件,毕竟无限维向量空间上的单射不一定可逆.\\
+酉算子具有如下的性质.请注意与\tbf{1.2}中等距映射的性质作比较.
+\begin{formal}[2.2 酉算子的性质]
+    设$S\in\L(V)$,$\li e,n$为$V$的规范正交基,那么下列命题是等价的.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $S$是酉算子.
+        \item $S^*S=SS^*=I$.
+        \item $S$可逆且$S^{-1}=S^*$.
+        \item $\li{Se},n$为$V$的规范正交基.
+        \item $\M\left(S,\left(\li e,n\right)\right)$的行形成$\F^n$中关于欧几里得内积的规范正交组.
+        \item $S^*$是酉算子.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    我们将对上述命题逐一推理.\\
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:根据\tbf{1.2}可知$S^*S=I$.等式两端右乘$S^{-1}$有$SS^*=SS^{-1}=I$,于是$S^*S=SS^*=I$.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(c)}:根据可逆性和逆的定义即可知\tbf{(b)}蕴含\tbf{(c)}.\\
+    \tbf{(c)}$\Rightarrow$\tbf{(d)}:由\tbf{(c)}可知$S^{-1}=S^*$,于是$SS^*=I$.根据\tbf{1.2}中\tbf{(b)}和\tbf{(d)}的等价关系可知$\li{Se},n$是$V$中的规范正交组.又因为$\dim V=n$,于是$\li{Se},n$是$V$的规范正交基.\\
+    \tbf{(d)}$\Rightarrow$\tbf{(e)}:由\tbf{1.2}中\tbf{(a)}和\tbf{(d)}的等价关系可知$S$是酉算子.于是
+    \[\left(S^*\right)^*S^*=SS^*=I\]
+    由\tbf{1.2}中\tbf{(a)}和\tbf{(b)}的等价关系可知$S^*$是等距映射,于是$\M\left(S^*,\left(\li e,n\right)\right)$的列形成$\F^m$的规范正交基.\\
+    又因为$\M(S,(\li e,n))$是$\M(S^*,(\li e,n))$的共轭转置,于是$\M(S)$的行形成$\F^m$的规范正交基.\\
+    \tbf{(e)}$\Rightarrow$\tbf{(f)}:$\M(S^*,(\li e,n))$的列形成$\F^m$的规范正交基,于是$S^*$是等距映射,因而是酉算子.\\
+    \tbf{(f)}$\Rightarrow$\tbf{(a)}:由于\tbf{(a)}蕴含\tbf{(f)},于是$\left(S^*\right)^*$是酉算子,即$S$是酉算子.
+\end{proof}\noindent
+回顾一下我们所做的$\C$与$\L(V)$的类比.在这一类比下,复数$z$对应于算子$S\in\L(V)$,$\overline{z}$对应$S^*$.实数($z=\overline{z}$)对应于自伴算子($S=S^*$),而非负数对应于正算子.\\
+$\C$的另一个重要子集为单位圆,由所有满足$|z|=1$(即$z\overline{z}=1$)的复数组成.%
+在我们的类比中,这一条件即$SS^*=I$,表明$S$是酉算子.接下来的结果表明这体现在酉算子的特征值上.
+\begin{formal}[2.3 酉算子的特征值]
+    设$\lambda$是酉算子的特征值,那么$|\lambda|=1$.
+\end{formal}
+\begin{proof}
+    设$S\in\L(V)$是酉算子且$\lambda$是$S$的特征值.不妨令$v\in V$使得$v\neq\mbf0$且$Sv=\lambda v$,于是
+    \[|\lambda|||v||=||\lambda v||=||Sv||=||v||\]
+    于是$|\lambda|=1$,命题得证.
+\end{proof}\noindent
+接下来这一命题结合了复谱定理刻画了复内积空间上的酉算子的性质.
+\begin{formal}[2.4 复内积空间上的酉算子]
+    设$\F=\C$且$S\in\L(V)$,那么下列命题是等价的.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $S$是酉算子.
+        \item 存在$S$的特征向量构成的$V$的规范正交基,使得其对应的特征值的绝对值均为$1$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:由$S$是酉算子表明$S$是正规的,于是由复谱定理可得存在$S$的特征向量构成的$V$的规范正交基.\\
+    而$S$的每个特征值均为$1$,于是\tbf{(a)}蕴含\tbf{(b)}.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(a)}:令$\li e,n$是$S$的特征向量构成的$V$的规范正交基,其对应特征值为$\li\lambda,n$.于是
+    \[\inprod{Se_j}{Se_k}=\inprod{\lambda_je_j}{\lambda_ke_k}=\lambda_j\overline{\lambda_k}\inprod{e_j}{e_k}
+    =\left\{\begin{array}{l}
+        1,j=k\\0,j\neq k
+    \end{array}\right.\]
+    于是$\li{Se},n$也是$V$的规范正交基.根据\tbf{2.2}中\tbf{(a)}和\tbf{(d)}的等价关系可知$S$是酉算子.
+\end{proof}\noindent
+\tbf{3.矩阵分解}\\
+在本小节中,我们将研究的重心转向矩阵.除非另行说明,我们约定$n\times n$矩阵对应的算子都在具有欧几里得内积的$\F^n$上,并且选定的基为$\F^n$的标准基.%
+容易看出,$\F^n$的标准基同时也是规范正交基.我们先做酉矩阵的定义.
+\begin{definition}[3.1 定义:酉矩阵]
+    一$n\times n$矩阵被称为\tbf{酉矩阵},如果它的列形成$\F^n$的规范正交基.
+\end{definition}\noindent
+考察\tbf{1.2}中\tbf{(a)}和\tbf{(e)}的等价关系,可知酉矩阵对应的算子就是酉算子.%
+又根据\tbf{2.2}中\tbf{(a)}和\tbf{(e)}的等价关系,这定义中的列也可以替换为行.%
+下面给出了一些酉矩阵的性质.
+\begin{formal}[3.2 酉矩阵的性质]
+    设$Q$是$n\times n$矩阵,那么下列命题是等价的.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $Q$是酉矩阵.
+        \item $Q$的行形成$\F^n$中的规范正交组.
+        \item $||Qv||=||v||$对任意$v\in\F^n$都成立.
+        \item $QQ^*=Q^*Q=I$,$I$是对角线元素均为$1$的对角矩阵.
+    \end{enumerate}
+\end{formal}\noindent
+上面几个命题的等价关系的证明是不难的,参照酉算子的性质即可.\\
+利用酉矩阵,我们可以对矩阵进行分解.
+\begin{formal}[3.3 矩阵的QR分解]
+    设$A$是各列线性无关的$n\times n$方阵,那么存在唯一一对$n\times n$方阵$Q$和$R$,其中$Q$是酉矩阵而$R$是对角线上仅有正数的上三角矩阵,使得$A=QR$.
+\end{formal}
+\begin{proof}
+    令$\li v,n$表示$A$的列.将其视为$\F^n$的元素并应用Gram-Schmidt过程得到$\F^n$的规范正交基$\li e,n$.\\
+    那么$\span(\li e,k)=\span(\li v,k)$对任意$k\in\{1,\cdots,n\}$成立.令$R$是$n\times n$矩阵,定义为
+    \[R_{j,k}=\inprod{v_k}{e_j}\]
+    当$j>k$时,$e_j\in\left(\span(\li e,k)\right)^{\bot}$,从而$e_j$与$v_k$正交,因而$R_{j,k}=\inprod{e_j}{v_k}=0$.这表明$R$是上三角矩阵.\\
+    令$Q$是各列为$\li e,n$的酉矩阵.那么对于任意$k\in\{1,\cdots,n\}$有
+    \[(QR)_{\cdot,k}=\sum_{j=1}^{n}R_{j,k}Q_{\cdot,k}=\sum_{j=1}^{n}\inprod{v_k}{e_j}e_j=v_k\]
+    于是$A=QR$.\\
+    Gram-Schmidt过程表明每个$v_k$都是$e_k$的正数倍加上$\li e,{n-1}$的线性组合得到,于是$\inprod{v_k}{e_k}>0$,即$R$的对角线上的元素都是正数.这一点也得证.\\
+    最后,假定还有幺正的$\hat{Q}$和对角线上仅有正数的上三角的$\hat{R}$满足$A=\hat{Q}\hat{R}$.\\
+    令$\li q,n$表示$\hat{Q}$的列.将矩阵乘法视作列的线性组合,可知对于任意$k\in\{1,\cdots,n\}$有
+    \[\span(\li v,k)=\span(\li q,k)\]
+    且$\inprod{v_k}{q_k}>0$.我们已经证明了满足上述条件的规范正交组是唯一的,这表示$q_k=e_k$对任意$k\in\{1,\cdots,n\}$成立.\\
+    于是$\hat{Q}=Q$,这表明$\hat{R}=R$,于是QR分解具有唯一性.
+\end{proof}\noindent
+矩阵的QR分解可以用于解线性方程组.具体来说,设$A$是各列线性无关的$n\times n$方阵,而$b\in\F^n$.求解方程$Ax=b$,可以先对%
+$A$做$QR$分解,得到$QRx=b$.方程两端左乘$Q^*$(即$Q$的共轭转置),得到$Rx=Q^*b$.由于$R$是上三角矩阵,于是求解是十分方便的,%
+只需按逆序求出各个位置上的元素即可.\\
+\tbf{4.科列斯基分解}\\
+我们从内积的角度刻画可逆正算子作为本小节的开始.
+\begin{formal}[4.1 可逆正算子]
+    自伴算子$T\in\L(V)$是可逆正算子,当且仅当$\inprod{Tv}{v}>0$对任意非零的$v\in V$都成立.
+\end{formal}
+\begin{proof}
+    首先假设$T$是可逆正算子.对于非零的$v\in V$,由于$T$可逆则有$Tv\neq\mbf0$,于是$\inprod{Tv}{v}\neq0$,于是$\inprod{Tv}{v}>0$.\\
+    现在假设$\inprod{Tv}{v}>0$对任意非零的$v\in V$都成立,那么$\nul T=\{\mbf0\}$,于是$T$是单射,进而$T$可逆.
+\end{proof}\noindent
+接下来,我们将上述结果转化为矩阵语言.
+\begin{definition}[4.2 定义:正定矩阵]
+    矩阵$B\in\F^{n,n}$被称为\tbf{正定的},如果$B=B^*$且$\inprod{Bx}{x}>0$对任意非零的$x\in\F^n$都成立.
+\end{definition}\noindent
+正定矩阵可以被精妙地分解为下三角矩阵和其共轭转置的乘积.
+\begin{formal}[4.3 科列斯基分解]
+    设$B$是正定矩阵,那么存在唯一的对角线上仅含正数的上三角矩阵$R$使得$B=R^*R$.
+\end{formal}
+\begin{proof}
+    由于$B$是正定矩阵,于是存在可逆矩阵$A$使得$B=A^*A$.\\
+    令$A=QR$是$A$的QR分解,那么$A=Q^*R^*$.于是我们有
+    \[B=A^*A=R^*Q^*QR=R^*R\]
+    为证明该分解是唯一的,再令$S$满足$B=S^*S$,其中$S$是对角线上仅含正数的上三角矩阵.于是$S$是可逆的.\\
+    在此式两端右乘$S^{-1}$可得$BS^{-1}=S^*$.令$A$是前面提到的使得$B=A^*A$的矩阵,于是
+    \[\begin{aligned}
+        \left(AS^{-1}\right)^*\left(AS^{-1}\right)
+        &= \left(S^*\right)^{-1}A^*AS^{-1} \\
+        &= \left(S^*\right)^{-1}BS^{-1} \\
+        &= \left(S^*\right)^{-1}S^* \\
+        &= I
+    \end{aligned}\]
+    于是$AS^{-1}$是酉算子.因此,$A=\left(AS^{-1}\right)S$这一分解是QR分解.根据QR分解的唯一性,可知$S=R$,这就证明了科列斯基分解的唯一性.
+\end{proof}
+\end{document}
