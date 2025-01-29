@@ -1,0 +1,183 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 奇异值分解\end{center}
+\tbf{1.奇异值}\\
+我们将在之后的论述中用到$T^*T$的如下性质.
+\begin{formal}[1.1 $T^*T$的性质]
+    设$T\in\L(V,W)$,那么我们有
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T^*T$是$V$上的正算子.
+        \item $\nul T^*T=\nul T$.
+        \item $\range T^*T=\range T^*$.
+        \item $\dim\range T=\dim\range T^*=\dim\range T^*T$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 我们有
+            \[\left(T^*T\right)^*=T^*\left(T^*\right)^*=T^*T\]
+            于是$T^*T$是自伴算子.又对于任意$v\in V$有
+            \[\inprod{T^*Tv}{v}=\inprod{Tv}{Tv}=||Tv||^2\geqslant0\]
+            于是$T^*T$是正算子.
+        \item 对于任意$v\in\nul T^*T$,有
+            \[||Tv||^2=\inprod{Tv}{Tv}=\inprod{T^*Tv}{v}=\inprod{\mbf0}{v}=0\]
+            于是$Tv=\mbf0$,即$\nul T^*T\subseteq\nul T$.另一方面,对于任意$v\in \nul T$,都有
+            \[T^*Tv=T^*\mbf0=\mbf0\]
+            于是$\nul T\subseteq\nul T^*T$.综上可知$\nul T^*T=\nul T$.
+        \item 由于$T^*T$是自伴算子,于是
+            \[\range T^*T=\left(\nul T^*T\right)^\bot=\left(\nul T\right)^\bot=\range T\]
+        \item 我们有
+            \[\dim\range T=\dim\left(\nul T^*\right)^\bot=\dim W-\dim\nul T^*=\dim\range T^*\]
+    \end{enumerate}
+\end{proof}\noindent
+算子的特征值可以反应算子的一些性质.还有一种被称为"奇异值"的数也是很有用的.
+\begin{definition}[1.2 定义:奇异值]
+    设$T\in\L(V,W)$.$T$的\tbf{奇异值}是$T^*T$的特征值的非负平方根,按降序排列,且每个奇异值的出现次数等于$T^*T$对应特征空间的维数.
+\end{definition}
+\begin{formal}[1.3 正奇异值的作用]
+    设$T\in\L(V,W)$,那么我们有
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$是单射,当且仅当$0$不是$T$的奇异值.
+        \item $T$的正奇异值个数等于$\dim\range T$.
+        \item $T$是满射,当且仅当$T$的正奇异值个数等于$\dim W$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 我们有
+            \[T\text{是单射}
+            \Leftrightarrow\nul T=\{\mbf0\}
+            \Leftrightarrow\nul T^*T=\{\mbf0\}
+            \Leftrightarrow0\text{不是}T^*T\text{的特征值}
+            \Leftrightarrow0\text{不是}T\text{的奇异值}\]
+        \item 对$T^*T$应用谱定理可知$\dim\range T^*T$等于$T^*T$的正特征值个数.\\
+            又因为$\range T^*T=\range T$,于是$\dim\range T$等于$T$的正奇异值的数目.
+        \item 由\tbf{(b)}和满射的性质可以得到.
+    \end{enumerate}
+\end{proof}\noindent
+接下来的这条结果用奇异值很好地刻画了等距映射.
+\begin{formal}[1.4 等距映射的奇异值]
+    设$S\in\L(V,W)$,那么$S$是等距映射当且仅当$S$的所有奇异值均等于$1$。
+\end{formal}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        S\text{是等距映射}
+        &\Leftrightarrow S^*S=I \\
+        &\Leftrightarrow S^*S\text{的所有特征值均为}1 \\
+        &\Leftrightarrow S\text{的所有奇异值均等于}1
+    \end{aligned}\]
+\end{proof}\noindent
+\tbf{2.奇异值分解}\\
+接下来的结果表明,对于$V$到$W$的每个线性映射,都可以用它的奇异值和$V$和$W$中的规范正交组给出简洁的描述.%
+在下一节,我们也将看到奇异值分解(SVD)的重要应用.
+\begin{formal}[2.1 奇异值分解]
+    设$T\in\L(V,W)$,且$T$的正奇异值为$\li s,m$.\\
+    那么存在$V$中的规范正交组$\li e,m$和$W$中的规范正交组$\li f,m$使得
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    对任意$v\in V$成立.
+\end{formal}
+\begin{proof}
+    令$\li s,n$表示$T$的奇异值,则$n=\dim V$.\\
+    由于$T^*T$是正算子,于是根据谱定理可知存在$V$的规范正交基$\li e,n$使得
+    \[T^*Te_k=s_k^2e_k\]
+    对于任意$k\in\{1,\cdots,n\}$成立.\\
+    对于任意$k\in\{1,\cdots,m\}$,令$f_k=\dfrac{Te_k}{s_k}$.对于任意$j,k\in\{1,\cdots,m\}$有
+    \[\inprod{f_j}{f_k}
+    =\dfrac{\inprod{Te_j}{Te_k}}{s_js_k}
+    =\dfrac{\inprod{e_j}{T^*Te_k}}{s_js_k}
+    =\dfrac{s_k}{s_j}\inprod{e_j}{e_k}
+    =\left\{\begin{array}{l}
+        0,j\neq k\\1,j=k
+    \end{array}\right.\]
+    于是$\li f,m$是$W$中的规范正交组.\\
+    对于任意$k\in\{m+1,\cdots,n\}$有$s_k=0$,从而$T^*Te_k=\mbf0$,也即$Te_k=\mbf0$.\\
+    对于任意$v\in V$有
+    \[\begin{aligned}
+        Tv
+        &= T\left(\inprod{v}{e_1}e_1+\cdots+\inprod{v}{e_n}e_n\right) \\
+        &= \inprod{v}{e_1}Te_1+\cdots+\inprod{v}{e_m}Te_m \\
+        &= s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m
+    \end{aligned}\]
+    于是欲证等式成立.
+\end{proof}\noindent
+根据奇异值分解的结果,对于任意$T\in\L(V,W)$,将SVD中的$\li e,m$和$\li f,m$分别扩充为$V$和$W$的基.\\
+SVD的结果表明
+\[Te_k=\left\{\begin{array}{l}
+    s_kf_k,1\leqslant k\leqslant m \\
+    0,m<k\leqslant\dim V
+\end{array}\right.\]
+那么$T$关于$\li e,{\dim V}$和$\li f,{\dim W}$的矩阵具有如下简单形式.
+\[\M\left(T,\left(\li e,{\dim V}\right),\left(\li f,{\dim W}\right)\right)_{j,k}
+=\left\{\begin{array}{l}
+    s_k,1\leqslant j=k\leqslant m\\
+    0,\text{其它情形}
+\end{array}\right.\]
+当$\dim V=\dim W$时,上述矩阵描述的就是对角矩阵.而其余情形下,我们可以看到一种类似于对角矩阵的形式.我们对对角矩阵的定义做一些扩展.
+\begin{definition}[2.2 定义:对角矩阵]
+    $m\times n$矩阵$A$被称为\tbf{对角矩阵},如果$A$中除了$A_{k,k}(k\in\{1,\cdots,\min\{m,n\}\})$可能不为$0$以外,所有元素均为$0$.
+\end{definition}\noindent
+奇异值分解给出了一种新的理解伴随和伪逆的方式.
+\begin{formal}[2.3 伴随和伪逆的奇异值分解]
+    设$T\in\L(V,W)$且$T$的正奇异值为$\li s,m$.设$\li e,m$和$\li f,m$是$V$和$W$中的规范正交组,满足
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    对任意$v\in V$成立.那么对于任意$w\in W$有
+    \[T^*w=s_1\inprod{w}{f_1}e_1+\cdots+s_m\inprod{w}{f_m}e_m\]
+    以及
+    \[T^\dagger w=\dfrac{\inprod{w}{f_1}}{s_1}e_1+\cdots+\dfrac{\inprod{w}{f_m}}{s_m}e_m\]
+\end{formal}
+\begin{proof}
+    对于$v\in V$和$w\in W$,我们有
+    \[\begin{aligned}
+        \inprod{Tv}{w}
+        &= \inprod{s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m}{w} \\
+        &= s_1\inprod{v}{e_1}\inprod{f_1}{w}+\cdots+s_m\inprod{v}{e_m}\inprod{f_m}{w} \\
+        &= \inprod{v}{s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m}
+    \end{aligned}\]
+    于是
+    \[T^*w=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    对于$w\in W$,令
+    \[v=\dfrac{\inprod{w}{f_1}}{s_1}e_1+\cdots+\dfrac{\inprod{w}{f_m}}{s_m}e_m\]
+    将$T$作用于上式两侧可得
+    \[\begin{aligned}
+        Tv
+        &= \dfrac{\inprod{w}{f_1}}{s_1}Te_1+\cdots+\dfrac{\inprod{w}{f_m}}{s_m}Te_m \\
+        &= \inprod{w}{f_1}f_1+\cdots+\inprod{w}{f_m}f_m \\
+        &= P_{\range T}w
+    \end{aligned}\]
+    于是根据伪逆的定义可知
+    \[T^\dagger w=\dfrac{\inprod{w}{f_1}}{s_1}e_1+\cdots+\dfrac{\inprod{w}{f_m}}{s_m}e_m\]
+\end{proof}\noindent
+我们还可以给出SVD的矩阵版本.
+\begin{formal}[2.4 奇异值分解的矩阵版本]
+    设$A$是$p\times n$矩阵,秩$m\geqslant 1$.那么存在列规范正交的$p\times m$矩阵$B$,%
+    正定的$m\times m$对角矩阵$D$和列规范正交的$n\times m$矩阵$C$使得$A=BDC^*$.
+\end{formal}
+\begin{proof}
+    令线性映射$T:\F^n\to\F^p$关于标准基的矩阵为$A$,那么$\dim\range T=m$.令
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    是$T$的奇异值分解.令$B$为各列为$\li f,m$的$p\times m$矩阵,$D$为对角线元素为$\li s,m$的对角矩阵,%
+    $C$为各列为$\li e,m$的$n\times m$矩阵.令$\li u,m$表示$\F^m$的标准基,对于任意$k\in\{1,\cdots,m\}$有
+    \[(AC-BD)u_k=Ae_k-B(s_ku_k)=s_kf_k-s_kf_k=\mbf0\]
+    于是$AC=BD$,两边右乘$C^*$有$ACC^*=BDC^*$.\\
+    注意到$C^*$的行为$\li e,m$的复共轭,因此对于任意$k\in\{1,\cdots,m\}$由矩阵乘法的定义可得$C^*e_k=u_k$,%
+    于是$CC^*e_k=e_k$.因此$ACC^*v=Av$对所有$v\in\span(\li e,m)$成立.\\
+    对于任意$v\in\left(\span(\li e,m)\right)^\bot$,都有$Av=\mbf0$.根据矩阵乘法的定义可知$C^*v=\mbf0$.因此$ACC^*v=Av=\mbf0$.\\
+    综合上述推理可知$ACC^*=A$.于是$A=BDC^*$,命题即得证.
+\end{proof}\noindent
+注意到以上结果中的$A$有$pn$个元素,而$B,D,C$一共有$m(p+m+n)$个元素.%
+因此,如果秩$m$相对于$p$和$n$很小,就可以用相对小的空间开销在计算机中存储矩阵$A$.
+\end{document}
