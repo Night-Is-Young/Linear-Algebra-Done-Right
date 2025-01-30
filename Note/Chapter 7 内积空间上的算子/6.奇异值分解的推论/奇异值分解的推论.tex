@@ -1,0 +1,223 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 奇异值分解的推论\end{center}
+\tbf{1.线性映射的范数}\\
+奇异值分解可以为$||Tv||$给出一个上界.
+\begin{formal}[1.1 $||Tv||$的上界]
+    设$T\in\L(V,W)$,令$s_1$是$T$的最大的奇异值,那么
+    \[||Tv||\leqslant s_1||v||\]
+    对任意$v\in V$成立.
+\end{formal}
+\begin{proof}
+    令$\li s,m$为$T$的正奇异值,令$\li e,m$和$\li f,m$分别为$V$和$W$中的规范正交组,且由此可以推出$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    对任意的$v\in V$成立.于是
+    \[\begin{aligned}
+        ||Tv||^2
+        &= s_1^2\left|\inprod{v}{e_1}\right|^2+\cdots+s_m^2\left|\inprod{v}{e_m}\right|^2 \\
+        &\leqslant s_1^2\left(\left|\inprod{v}{e_1}\right|^2+\cdots+\left|\inprod{v}{e_m}\right|^2\right) \\
+        &\leqslant s_1^2||v||^2
+    \end{aligned}\]
+    不等式两侧开平方根即可证得命题.
+\end{proof}\noindent
+考虑$T\in\L(V,W)$且$s_1$是$T$的最大奇异值.以上结果表明$||Tv||\leqslant s_1$对所有满足$||v||\leqslant 1$的$v\in V$成立.%
+在上式中取$v=e_1$,可得$Te_1=s_1f_1$,从而$||Te_1||=s_1$.于是我们有
+\[\max\left\{||Tv||:v\in V,||v||\leqslant 1\right\}=s_1\]
+上述结论可以让我们直接定义$T$的范数,而无需借助奇异值.
+\begin{definition}[1.2 定义:线性映射的范数]
+    设$T\in\L(V,W)$,那么$T$的\tbf{范数}记作$||T||$,定义为$||T||=\max\left\{||Tv||:v\in V,||v||\leqslant 1\right\}$.
+\end{definition}\noindent
+线性映射的范数和向量空间的范数有一定相似指之处,例如其具有的一些共同特征.
+\begin{formal}[1.3 线性映射范数的基本性质]
+    设$T\in\L(V,W)$,那么
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $||T||\geqslant0$.
+        \item $||T||=0$当且仅当$T=\mbf0$.
+        \item $||\lambda T||=|\lambda|||T||$对任意$\lambda\in\F$成立.
+        \item $||S+T||\leqslant||S||+||T||$对所有$S\in\L(V,W)$成立.
+    \end{enumerate}
+\end{formal}\noindent
+这些性质是不难证明的.另外,对于任意$S,T\in\L(V,W)$,$||S-T||$这个量通常被称为两者的距离.%
+不正式地说,这值越小反映了$S$和$T$越接近.另外,$||T||$还有多种等价的表达式.
+\begin{formal}[1.4 $||T||$的多种表达式]
+    设$T\in\L(V,W)$,那么以下式子均等于$||T||$.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$的最大奇异值.
+        \item $\max\left\{||Tv||:v\in V,||v||=1\right\}$.
+        \item $\min\{c:\forall v\in V,||Tv||\leqslant c||v||\}$.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item 由前面的叙述可知.
+        \item 令$v\in V$且$0<||v||\leqslant 1$,令$u=\dfrac{v}{||v||}$,那么有
+            \[||Tu||=\left|\left|T\left(\dfrac{v}{||v||}\right)\right|\right|=\dfrac{||Tv||}{||v||}\geqslant||Tv||\]
+            且$||u||=1$.于是关注$||Tv||$在$||v||\leqslant1$下的最大值只需关注所有范数为$1$的向量即可,于是证明了\tbf{(b)}.
+        \item 设$v\in V$且$v\neq\mbf0$,那么由$T$的定义可得
+            \[\left|\left|T\left(\dfrac{v}{||v||}\right)\right|\right|\leqslant||T||\]
+            于是$||Tv||\leqslant||T||||v||$.\\
+            现在设$c\geqslant0$且$||Tv||\leqslant c||v||$对所有$v\in V$成立,那么$||Tv||\leqslant c$对所有满足$||v||\leqslant 1$的所有$v\in V$成立.\\
+            对于所有这样的$v$,上述不等式左侧取得的最大值为$||T||$,于是$||T||\leqslant c$.于是$||T||$即是满足条件的最小数.
+    \end{enumerate}
+\end{proof}\noindent
+下面的这条结论表明线性映射和它的伴随的范数相同.
+\begin{formal}[1.5 伴随的范数]
+    设$T\in\L(V,W)$,那么$||T^*||=||T||$.
+\end{formal}
+\begin{proof}
+    设$w\in W$,那么
+    \[||T^*w||^2=\inprod{T^*w}{T^*w}=\inprod{TT^*w}{w}\leqslant||TT^*w||||w||\leqslant||T||||T^*w||||w||\]
+    于是
+    \[||T^*w||\leqslant||T||||w||\]
+    根据\tbf{1.4(c)}可知$||T^*||\leqslant||T||$.\\
+    将$T$和$T^*$的位置交换,可相似的证得$||T||\leqslant||T^*||$.于是$||T||=||T^*||$,命题得证.
+\end{proof}\noindent
+\tbf{2.用有较低维值域的线性映射进行逼近}\\
+接下来的结论是奇异值分解的重要应用.它意味着削去奇异值分解前$k$项之后的项,%
+从而得到值域的维数为$k$的线性映射$T_k$是在所有值域维数至多为$k$的线性映射中到$T$的距离最小的.%
+换句话说,在值域维数有限制的前提下,这样所得的线性映射$T_k$是逼近$T$的最佳结果.%
+这条结果引出了压缩巨大矩阵同时尽可能保留较多信息的方法.
+\begin{formal}[2.1 限制值域维数得到的线性映射的最佳逼近]
+    设$T\in\L(V,W)$且$\li s,m$是按序的$T$的正奇异值.对于任意$1\leqslant k<m$,有
+    \[\min\left\{||T-S||:S\in\L(V,W),\dim\range S\leqslant k\right\}=s_{k+1}\]
+    进一步地,假定$T$的奇异值分解为
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    令$T_k$由下式定义
+    \[T_kv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_k}f_k\]
+    那么$T_k$即是上式取等时的$S$.换言之,$\dim\range T_k=k$且$||T-T_k||=s_{k+1}$.
+\end{formal}
+\begin{proof}
+    对于任意$v\in V$有
+    \[\begin{aligned}
+        ||(T-T_k)v||^2
+        &= \left|\left(s_{k+1}\inprod{v}{e_{k+1}}f_{k+1}+\cdots+s_m\inprod{v}{e_m}f_m\right)\right| \\
+        &= s_{k+1}^2\left|\inprod{v}{e_{k+1}}\right|^2+\cdots+s_{m}^2\left|\inprod{v}{e_{m}}\right|^2 \\
+        &\leqslant s_{k+1}^2\left(\left|\inprod{v}{e_{k+1}}\right|^2+\cdots+\left|\inprod{v}{e_{m}}\right|^2\right) \\
+        &\leqslant s_{k+1}^2||v||^2
+    \end{aligned}\]
+    于是$||T-T_k||\leqslant s_{k+1}$.又因为$(T-T_k)e_{k+1}=s_{k+1}f_{k+1}$,于是$||T-T_k||=s_{k+1}$.\\
+    设$S\in\L(V,W)$且$\dim\range S\leqslant k$,那么长度为$k+1$的组$\li {Se},{k+1}$线性相关.\\
+    于是存在不全为$0$的$\li a,{m+1}\in\F$使得
+    \[a_1Se_1+\cdots+a_{k+1}Se_{k+1}=\mbf0\]
+    又因为$\li e,{k+1}$线性无关且各$a$不全为$0$,于是$a_1e_1+\cdots+a_{m+1}e_{m+1}\neq\mbf0$.我们有
+    \[\begin{aligned}
+        \left|\left|\left(T-S\right)\left(a_1e_1+\cdots+a_{k+1}e_{k+1}\right)\right|\right|^2
+        &= \left|\left|T\left(a_1e_1+\cdots+a_{k+1}e_{k+1}\right)\right|\right|^2 \\
+        &= \left|\left|s_1a_1f_1+\cdots+s_{k+1}a_{k+1}f_{k+1}\right|\right|^2 \\
+        &= s_1^2|a_1|^2+\cdots+s_{k+1}^2|a_{k+1}|^2 \\
+        &\geqslant s_{k+1}^2\left(|a_1|^2+\cdots+|a_{k+1}|^2\right) \\
+        &= s_{k+1}^2||a_1e_1+\cdots+a_{k+1}e_{k+1}||^2
+    \end{aligned}\]
+    于是上式意味着$||T-S||\geqslant s_{k+1}$.因此,在所有满足条件的$S$中,当$S=T_k$时使得$||T-S||$最小.
+\end{proof}\noindent
+奇异值分解用于其它条件下求最佳拟合的线性映射的例子见习题.\\
+\tbf{3.极分解}\\
+回顾一下,我们之前讨论了复数和算子之间的类比.现在,观察下列等式
+\[z=\left(\dfrac{z}{|z|}\right)|z|=\left(\dfrac{z}{|z|}\right)\sqrt{\overline{z}z}\]
+根据上式,我们猜测每个$T\in\L(V)$都可以写成一个酉算子乘以$\sqrt{T^*T}$的结果.%
+而上述猜测确实是正确的,它被称为极分解.
+\begin{formal}[3.1 极分解]
+    设$T\in\L(V)$,那么存在酉算子$S\in\L(V)$使得$T=S\sqrt{T^*T}$.
+\end{formal}
+\begin{proof}
+    考虑$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m\]
+    将$\li e,m$和$\li f,m$扩充为$V$的规范正交基$\li e,n$和$\li f,n$.定义$S\in\L(V)$为
+    \[Sv=\inprod{v}{e_1}f_1+\cdots+\inprod{v}{e_n}f_n\]
+    对任意$v\in V$成立.不难验证$S$是酉算子.\\
+    将$T^*$作用于$T$的奇异值分解两侧,然后考虑$T^*$的奇异值分解,可得
+    \[T^*Tv=s_1^2\inprod{v}{e_1}e_1+\cdots+s_m^2\inprod{v}{e_m}e_m\]
+    于是
+    \[\sqrt{T^*T}v=s_1\inprod{v}{e_1}e_1+\cdots+s_m\inprod{v}{e_m}e_m\]
+    于是
+    \[\begin{aligned}
+        S\sqrt{T^*T}v
+        &= S\left(s_1\inprod{v}{e_1}e_1+\cdots+s_m\inprod{v}{e_m}e_m\right) \\
+        &= s_1\inprod{v}{e_1}f_1+\cdots+s_m\inprod{v}{e_m}f_m \\
+        &= Tv
+    \end{aligned}\]
+    于是$T=S\sqrt{T^*T}$.
+\end{proof}\noindent
+我们将在习题中看到极分解中的$S$是最接近$T$的酉算子(就和$\dfrac{z}{|z|}$是最接近$z$的复数类似).\\
+\tbf{4.作用于椭球和平行体的算子}\\
+我们现在有必要研究一些向量空间中特殊的向量所构成的集合.尽管它们并非$V$的子空间,却有更加直观的几何形象以及研究必要.
+\begin{definition}[4.1 定义:球]
+    $V$中半径为$1$,以$\mbf0$为球心的\tbf{球},记为$B$,定义为$B=\left\{v\in V:||v||\leqslant1\right\}$.
+\end{definition}\noindent
+特别地,在维度为$2$的向量空间中,我们有时候会用圆盘代替球这一名称,以免引起混乱.下面的一些定义,在二维空间中亦有相似的情形.
+\begin{definition}[4.2 定义:椭球]
+    设$\li f,n$为$V$的规范正交基,$\li s,n\in\R_+$.\tbf{主轴}为$s_1f_1,\cdots,s_nf_n$的\tbf{椭球}$E(s_1f_1,\cdots,s_nf_n)$定义为
+    \[E(s_1f_1,\cdots,s_nf_n)=\left\{v\in V:\dfrac{\left|\inprod{v}{f_1}\right|^2}{s_1^2}+\cdots+\dfrac{\left|\inprod{v}{f_n}\right|^2}{s_n^2}\leqslant1\right\}\]
+\end{definition}\noindent
+根据帕塞瓦尔恒等式,对于任意$V$的规范正交基$\li f,n$,$E(\li f,n)$都是$V$中的球.\\
+我们现在引入一个新的记号,以体现这些具有几何直观的集合在映射下的变化.
+\begin{definition}[4.3 定义:$T(\Omega)$]
+    对于定义在$V$上的函数$T$以及$\Omega\subseteq V$,定义$T(\Omega)$为$T(\Omega)=\left\{Tv:v\in\Omega\right\}$.
+\end{definition}\noindent
+根据上述定义,不难看出$T(V)=\range T$.从前,我们只能大致从基向量的变化理解线性映射的几何直观.下面的定理给出了另一种更为符合直觉的方式.
+\begin{formal}[4.4 可逆算子化球为椭球]
+    设$T\in\L(V)$是可逆的,那么$T$将$V$中的球$B$映成$V$中的椭球.
+\end{formal}
+\begin{proof}
+    考虑$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    由于$T$是可逆的,因而$n=\dim V$,于是$\li e,n$和$\li f,n$是$V$的规范正交基.于是我们有
+    \[\begin{aligned}
+        v\in B
+        &\Leftrightarrow ||v||\leqslant 1 \Leftrightarrow ||v||^2\leqslant 1 \\
+        &\Leftrightarrow \left|\inprod{v}{e_1}\right|^2+\cdots+\left|\inprod{v}{e_n}\right|^2\leqslant 1 \\
+        &\Leftrightarrow \dfrac{\left|\inprod{Tv}{f_1}\right|^2}{s_1^2}+\cdots+\dfrac{\left|\inprod{Tv}{f_n}\right|^2}{s_n^2}\leqslant 1 \\
+        &\Leftrightarrow Tv\in E(s_1f_1,\cdots,s_nf_n)
+    \end{aligned}\]
+    从而$T(B)=E(s_1f_1,\cdots,s_nf_n)$.
+\end{proof}\noindent
+回顾一下,对于$u\in V,\Omega\subseteq V$,我们用$u+\Omega$表示$\Omega$的平移.
+\begin{definition}[4.5 定义:$P(\li v,n)$,平行体]
+    设$\li v,n$是$V$的一组基,令
+    \[P(\li v,n)=\left\{a_1v_1+\cdots+a_nv_n:\li a,n\in(0,1)\right\}\]
+    \tbf{平行体}是形如$u+P(\li v,n)$的集合,其中$u\in V$.$\li v,n$被称为此平行体的\tbf{边}.
+\end{definition}\noindent
+同样的,在二维的情形下我们更倾向于用平行四边形形容这样的集合.我们有如下定理.
+\begin{formal}[4.6 可逆算子化平行体为平行体]
+    设$u\in V$且$\li v,n$为$V$的基,那么对于任意$T\in\L(V)$,如果$T$可逆,那么
+    \[T\left(u+P(\li v,n)\right)=Tu+P(\li {Tv},n)\]
+\end{formal}\noindent
+上述命题的证明是十分简单的,在此就略去.我们还可以考虑$V$中一类特殊的平行体:长方体(在二维空间中即矩形).
+\begin{definition}[4.7 定义:长方体]
+    $V$中的\tbf{长方体}是形如
+    \[u+P(r_1e_1+\cdots+r_ne_n)\]
+    的集合,其中$u\in V$,$\li r,n\in\R_+$,$\li e,n$是$V$的规范正交基.
+\end{definition}\noindent
+考虑\tbf{4.6}的更特殊的形式,即可逆算子$T$是否能将长方体映至长方体?%
+这在一般的情形下是显然不成立的,但我们能找到一些特殊的长方体使其符合条件.
+\begin{formal}[4.8 每个可逆算子都将某些长方体化成长方体]
+    设可逆算子$T\in\L(V)$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    其中$\li e,n$和$\li f,n$均为$V$的规范正交基.那么,对于任意$u\in V$和$\li r,n\in\R_+$,%
+    $T$将长方体$u+P(r_1e_1,\cdots,r_ne_n)$映成长方体$Tu+P(r_1s_1f_1,\cdots,r_ns_nf_n)$.
+\end{formal}\noindent
+这命题的证明也是简单的,一样略去.\\
+我们接下来讨论如何通过奇异值计算体积.由于体积是分析学的内容,于是我们在线性代数中只需直观地理解即可.%
+具体来说,令长方体$u+P(r_1e_1+\cdots+r_ne_n)$的体积为$r_1\cdots r_n$(这符合我们在二维和三位空间中对体积的定义).%
+考虑\tbf{4.8}中的长方体,可知这样的$T$将体积为$r_1\cdots r_n$的长方体映成体积为$r_1\cdots r_n\cdot s_1\cdots s_n$的长方体.\\
+我们用分析学中的逼近的思想考虑$V$中的椭球,将其用这样的长方体近似代替后取极限可知$T$也将椭球的体积变化为原来的%
+$s_1\cdots s_n$倍.于是我们不加严格证明地给出如下结论.
+\begin{formal}[4.9 体积变化倍数为奇异值的乘积]
+    设$\F=\R$,$T\in\L(V)$可逆,且(可测的)$\Omega\subseteq V$.记$\text{volumn\ }\Omega$表示$\Omega$的体积,$\li s,n$为$T$的奇异值,那么
+    \[\text{volumn\ }T(\Omega)=\prod_{k=1}^{n}s_k\cdot\text{volumn\ }\Omega\]
+\end{formal}\noindent
+当我们学习了行列式时,就会发现$|\text{det\ }T|$恰好等于$T$的奇异值的乘积.
+\end{document}
