@@ -71,6 +71,250 @@
     设$T\in\L(V)$且$U$是$T$的子空间.试证明$U$在$T$下不变,当且仅当$U^\bot$在$T^*$下不变.
 \end{problem}
 \begin{proof}
-    
+    首先假设$U$在$T$下不变.对于任意$u\in U$和$w\in U^\bot$,我们有
+    \[\inprod{Tu}{w}=\inprod{u}{T^*w}\]
+    由于$U$在$T$下不变,于是$Tu\in U$.因此$\inprod{Tu}{w}=0$,于是$\inprod{u}{T^*w}=0$.\\
+    由于上式对任意$u\in U$成立,于是$T^*w\in U^\bot$,即$U^\bot$在$T^*$下不变.\\
+    由于$\left(T^*\right)^*=T,\left(U^\bot\right)^\bot=U$,于是将上述条件中的$U$和$T$分别替换为$U^\bot$和$T^*$即可证得另一方向.
+\end{proof}
+\begin{problem}[5.]
+    设$T\in\L(V,W)$,$\li e,n$为$V$的规范正交基,$\li f,m$为$W$的规范正交基.试证明:
+    \[||Te_1||^2+\cdots+||Te_n||^2=||T^*f_1||^2+\cdots+||T^*f_m||^2\]
+\end{problem}
+\begin{proof}
+    由于$\li f,m$是$W$的规范正交基,于是对于任意$k\in\{1,\cdots,n\}$有
+    \[||Te_k||^2=\left|\inprod{Te_k}{f_1}\right|^2+\cdots+\left|\inprod{Te_k}{f_m}\right|^2\]
+    同理,对于任意$j\in\{1,\cdots,m\}$有
+    \[||T^*f_j||^2=\left|\inprod{T^*f_j}{e_1}\right|^2+\cdots+\left|\inprod{T^*f_j}{e_n}\right|^2\]
+    又因为$\inprod{Te_k}{f_j}=\inprod{e_k}{T^*f_j}$,于是$\left|\inprod{Te_k}{f_j}\right|^2=\left|\inprod{T^*f_j}{e_k}\right|^2$.于是
+    \[\sum_{k=1}^{n}||Te_k||^2
+    =\sum_{k=1}^{n}\sum_{j=1}^{m}\left|\inprod{Te_k}{f_j}\right|^2
+    =\sum_{j=1}^{m}\sum_{k=1}^{n}\left|\inprod{T^*f_j}{e_k}\right|^2
+    =\sum_{j=1}^{m}||T^*f_j||^2\]
+\end{proof}
+\begin{problem}[6.]
+    设$T\in\L(V,W)$,试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T$是单射,当且仅当$T^*$是满射.
+        \item $T$是满射,当且仅当$T^*$是单射.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由于$\nul T=\left(\range T^*\right)^\bot$,我们有
+            \[T\text{是单射}\Leftrightarrow\nul T=\mbf0\Leftrightarrow\range T^*=V\Leftrightarrow T^*\text{是满射}\]
+        \item 由于$\left(T^*\right)^*=T$,于是交换\tbf{(1)}中的$T$和$T^*$即可.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[7.]
+    设$T\in\L(V,W)$,试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\dim\nul T^*=\dim\nul T+\dim W-\dim V$.
+        \item $\dim\range T^*=\dim\range T$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有
+            \[\dim\nul T^*=\dim(\range T)^\bot=\dim W-\dim\range T=\dim W-\dim V+\dim\nul T\]
+        \item 我们有
+            \[\dim\range T^*=\dim(\nul T)^\bot=\dim V-\dim\nul T=\dim\range T\]
+    \end{enumerate}
+\end{proof}
+\begin{problem}[8.]
+    设$A$为$m\times n$矩阵,试证明其行秩等于列秩.
+\end{problem}
+\begin{proof}
+    记$\overline{v}$为列向量$v$的复共轭.考虑$A$的列向量的张成空间的基$\li v,l$,我们有
+    \[a_1\overline{v_1}+\cdots+a_l\overline{v_l}=\mbf0
+    \Rightarrow \overline{a_1}v_1+\cdots+\overline{a_l}v_l=\mbf0
+    \Leftrightarrow \overline{a_1}=\cdots=\overline{a_l}=0
+    \Leftrightarrow \li a=l=0\]
+    从而$\overline{v_1},\cdots,\overline{v_l}$线性无关.于是$\overline{A}$的列秩不小于$A$的列秩.交换两者可知$\overline{A}$与$A$的列秩相等.\\
+    现在我们假设$A$是线性映射$T\in\L(\F^m,\F^n)$对应于标准基的矩阵.于是
+    \[A\text{的列秩}=\dim\range T=\dim\range T^*=A^*\text{的列秩}=A^\text{t}\text{的列秩}=A\text{的行秩}\]
+\end{proof}
+\begin{problem}[9.]
+    试证明:$V$上两自伴算子的乘积是自伴的,当且仅当这两个算子可交换.
+\end{problem}
+\begin{proof}
+    对于自伴的$S,T\in\L(V)$,我们有
+    \[(ST)^*=ST
+    \Leftrightarrow T^*S^*=ST
+    \Leftrightarrow TS=ST\]
+\end{proof}
+\begin{problem}[10.]
+    设$\F=\C$且$T\in\L(V)$.试证明:$T$是自伴的,当且仅当$\inprod{Tv}{v}=\inprod{T^*v}{v}$对任意$v\in V$成立.
+\end{problem}
+\begin{proof}
+    设$T\in\L(V)$,我们有
+    \[\begin{aligned}
+        \inprod{Tv}{v}=\inprod{T^*v}{v},\forall v\in V
+        &\Leftrightarrow \inprod{(T-T^*)v}{v}=0,\forall v\in V \\
+        &\Leftrightarrow T-T^*=\mbf0\\
+        &\Leftrightarrow T\text{是自伴的}
+    \end{aligned}\]
+\end{proof}
+\begin{problem}[11.]
+    定义算子$S:\F^2\to\F^2$为$S(w,z)=(-z,w)$.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 求$S^*$的表达式.
+        \item 试证明:$S$正规但不自伴.
+        \item 求$S$的所有特征值.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$v:=(w_1,z_1),u:=(w_2,z_2)\in\F^2$有
+            \[\inprod{Tv}{u}=(-z_1,w_1)\cdot(w_2,z_2)=-z_1w_2+w_1z_2=(w_1,z_1)\cdot(z_2,-w_2)=\inprod{v}{(z_2,-w_2)}\]
+            于是$S^*(w,z)=(z,-w)$.
+        \item 不难验证$S^*S=SS^*=I$而$S\neq S^*$,于是$S$正规但不自伴.
+        \item 当$\F=\R$时,容易验证$S$没有特征值.\\
+            当$\F=\C$时,令$v:=(w,z)\in\C^2$,于是$Sv=\lambda v$即%
+            $\left\{\begin{array}{l}
+                w=-\lambda z\\z=\lambda w
+            \end{array}\right.$.\\
+            解上述方程,得$\lambda=\pm\i$,于是$S$的特征值为$\i,-\i$.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[12.]
+    称算子$B\in\L(V)$是\tbf{斜的},如果$B+B^*=\mbf0$.设$T\in\L(V)$,试证明:$T$是正规算子,当且仅当存在可交换的$A,B\in\L(V)$且$A$是自伴算子,$B$是斜算子,使得$T=A+B$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:设$T\in\L(V)$且存在满足题意的$A,B$使得$T=A+B$.那么$T^*=A^*+B^*=A-B$.于是
+    \[T^*T=(A-B)(A+B)=A^2-BA+AB-B^2=A^2-B^2\]
+    \[TT^*=(A+B)(A-B)=A^2+BA-AB-B^2=A^2-B^2\]
+    于是$TT^*=T^*T$,因而$T$是自伴的.\\
+    $\Rightarrow$:令$A=\dfrac{T+T^*}{2},B=\dfrac{T-T^*}{2}$.于是
+    \[AB-BA=\dfrac{T^*T-TT^*}{2}=\mbf0\]
+    又$A^*=A,B^*=-B$,因此存在满足条件的$A,B$使$T=A+B$.
+\end{proof}
+\begin{problem}[13.]
+    设$\F=\R$,定义$\mathcal{A}\in\L(\L(V))$为$\mathcal{A}T=T^*$对所有$T\in\L(V)$成立.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 求$\mathcal{A}$的所有特征值.
+        \item 求$\mathcal{A}$的最小多项式.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$\mathcal{A}$的特征值$\lambda\in\R$,于是$\mathcal{A}T=\lambda T=T^*$.%
+            两边取伴随可得$\lambda T^*=T$,从而$(\lambda^2-1)T=\mbf0$.\\
+            由于$T$是$\mathcal{A}$的特征向量,于是$T\neq\mbf0$,于是$\lambda=\pm1$.\\
+            于是$\mathcal{A}$的特征值为$1$或$-1$.
+        \item 令$p(z)=z^2-1$.对于任意$T\in\L(V)$,我们有
+            \[p(\mathcal{A})T=\mathcal{A}^2T-T=\mathcal{A}T^*-T=T-T=\mbf0\]
+            又$\mathcal{A}$的特征值为$1,-1$.于是$p(z)=z^2-1$是$\mathcal{A}$的最小多项式.
+    \end{enumerate}
+\end{solution}
+\begin{problem}[14.]
+    在$\P_2(\R)$上定义内积$\inprod\cdot\cdot$为$\inprod{p}{q}=\displaystyle\int_0^1pq$.定义算子$T\in\L(\P_2(\R))$为
+    \[T(ax^2+bx+c)=bx\]
+    回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$T$不是自伴算子.
+        \item $T$关于$\P_2(\R)$的标准基$1,x,x^2$的矩阵为
+            \[\begin{pmatrix}
+                0&0&0\\0&1&0\\0&0&0
+            \end{pmatrix}\]
+            这矩阵与它的共轭转置相等,尽管$T$不是自伴的.试解释这为什么不矛盾.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$p(x)=1,q(x)=x\in\P_2(\R)$.我们有
+            \[\inprod{Tp}{q}=\inprod{\mbf0}{x}=0\]
+            \[\inprod{p}{Tq}=\int_{0}^{1}x\dx=\dfrac12\]
+            于是$\inprod{Tp}{q}=\inprod{p}{T^*q}\neq\inprod{p}{Tq}$.于是$T\neq T^*$,因而它不自伴.
+        \item $1,x,x^2$不是$\P_2(\R)$的规范正交基.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[15.]
+    设$T\in\L(V)$可逆,试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $T$自伴,当且仅当$T^{-1}$自伴.
+        \item $T$正规,当且仅当$T^{-1}$正规.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由于$\left(T^*\right)^{-1}=\left(T^{-1}\right)^*$,于是在$T=T^*$两边取逆可得$T^{-1}=\left(T^{-1}\right)^*$,从而$T$与$T^{-1}$的自伴性等价.
+        \item 同理,在$T^*T=TT^*$两边取逆可得$T^{-1}\left(T^{-1}\right)^*=\left(T^{-1}\right)^*T^{-1}$,于是$T$与$T^{-1}$的正规性等价.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[16.]
+    设$\F=\R$,回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$V$上的自伴算子构成的集合是$\L(V)$的子空间.
+        \item 求\tbf{(1)}中的子空间的维数.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$U=\left\{T\in\L(V):T=T^*\right\}$.显然$\mbf0^*=\mbf0$,于是$\mbf0\in U$.\\
+            对于任意$S,T\in U$,都有$(S+T)^*=S^*+T^*=S+T$,于是$S+T\in U$,即$U$对加法封闭.\\
+            对于任意$T\in U$和$\lambda\in\R$,都有$\left(\lambda T\right)^*=\lambda T^*=\lambda T$,即$\lambda T\in U$,于是$U$对标量乘法封闭.\\
+            于是$U$是$V$的子空间.
+        \item 令$\dim V=n$.考虑所有$n\times n$的自伴矩阵.对于任意$j,k\in\{1,\cdots,n\}$且$j\leqslant k$,定义$\mathcal{M}_{j,k}$如下
+            \[\mathcal{M}_{j,k}=\left\{\begin{array}{l}
+                \mathcal{M}_{j,k}=\mathcal{M}_{k,j}=1\text{且其余元素为}0,j\neq k\\
+                \mathcal{M}_{k,k}=1\text{且其余元素为}0,j=k
+            \end{array}\right.\]
+            容易验证这样的$\mathcal{M}_{j,k}$线性无关,且所有自伴矩阵都可以写为上述矩阵的线性组合.\\
+            具体来说,若$A\in\R^{n,n}$自伴,那么
+            \[A=\sum_{1\leqslant j\leqslant k\leqslant n}A_{j,k}\mathcal{M}_{j,k}\]
+            因而$U=\span(\mathcal{M}_{1,1},\cdots,\mathcal{M}_{n,n})$.于是$\dim U=\dfrac{n(n+1)}{2}$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[17.]
+    设$\F=\C$.试证明:$V$上的自伴算子构成的集合不是$\L(V)$的子空间.
+\end{problem}
+\begin{proof}
+    对于$\lambda\in\C\backslash\R$有$\lambda\neq\overline{\lambda}$.于是对于某个自伴的$T\in\L(V)$有
+    \[\left(\lambda T\right)^*=\overline{\lambda}T^*=\overline{\lambda}T\neq\lambda T\]
+    从而$\lambda T$不是自伴的,于是这集合对标量乘法不封闭,不是$\L(V)$的子空间.
+\end{proof}
+\begin{problem}[18.]
+    设$\dim V\geqslant2$,试证明:$V$上的正规算子构成的集合不是$\L(V)$的子空间.
+\end{problem}
+\begin{proof}
+    不妨令$A,B\in\L(V)$关于$V$上的某规范正交基的矩阵为
+    \[\mathcal{M}(A)=\begin{pmatrix}
+        1&0&\cdots&0\\
+        0&0&\cdots&0\\
+        \vdots&\vdots&\ddots&\vdots\\
+        0&0&\cdots&0
+    \end{pmatrix}\ \ \ \ \ 
+    \mathcal{M}(B)=\begin{pmatrix}
+        0&1&\cdots&0\\
+        -1&0&\cdots&0\\
+        \vdots&\vdots&\ddots&\vdots\\
+        0&0&\cdots&0
+    \end{pmatrix}\]
+    容易验证$A=A^*,B=B^*$,于是$A,B$都是自伴的.然而
+    \[\mathcal{M}((A+B)(A+B)^*)=
+    \begin{pmatrix}
+        2&-1&\cdots&0\\
+        -1&1&\cdots&0\\
+        \vdots&\vdots&\ddots&\vdots\\
+        0&0&\cdots&0
+    \end{pmatrix}\neq
+    \begin{pmatrix}
+        2&1&\cdots&0\\
+        1&1&\cdots&0\\
+        \vdots&\vdots&\ddots&\vdots\\
+        0&0&\cdots&0
+    \end{pmatrix}=\mathcal{M}((A+B)^*(A+B))\]
+    从而$A+B$不是正规算子,于是这集合对加法不封闭.
+\end{proof}
+\begin{problem}[19.]
+    设$T\in\L(V)$且对任意$v\in V$都有$||T^*v||\leqslant||Tv||$.试证明$T$是正规算子.
+\end{problem}
+\begin{proof}
+    令$\li e,n$是$V$的规范正交基,根据\tbf{7A.5}有
+    \[||Te_1||^2+\cdots+||Te_n||^2=||T^*e_1||^2+\cdots+||T^*e_n||^2\]
+    根据题意可知$||Te_k||\geqslant||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立.于是只能有$||Te_k||=||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立.\\
+    对于任意$v:=a_1e_1+\cdots+a_ne_n$,我们有
+    \[||Tv||^2=\inprod{}{}\]
 \end{proof}
 \end{document}
