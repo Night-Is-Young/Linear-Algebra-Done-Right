@@ -313,8 +313,144 @@
 \begin{proof}
     令$\li e,n$是$V$的规范正交基,根据\tbf{7A.5}有
     \[||Te_1||^2+\cdots+||Te_n||^2=||T^*e_1||^2+\cdots+||T^*e_n||^2\]
-    根据题意可知$||Te_k||\geqslant||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立.于是只能有$||Te_k||=||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立.\\
-    对于任意$v:=a_1e_1+\cdots+a_ne_n$,我们有
-    \[||Tv||^2=\inprod{}{}\]
+    根据题意可知$||Te_k||\geqslant||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立.于是只能有$||Te_k||=||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立.%
+    于是对于任意$e\in V$且$||e||=1$都有$||Te||=||T^*e||$.于是对于任意$v\in V$有
+    \[\left|\left|T\left(\dfrac{v}{||v||}\right)\right|\right|=\left|\left|T^*\left(\dfrac{v}{||v||}\right)\right|\right|\]
+    于是$||Tv||=||T^*v||$,因而$T$是正规算子.
+\end{proof}
+\begin{problem}[20.]
+    设$P\in\L(V)$且$P^2=P$.试证明下列命题是等价的.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $P$是自伴的.
+        \item $P$是正规的.
+        \item 存在$V$的子空间$U$使得$P=P_U$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:假设$P=P^*$,显然有$P^*P=PP^*=P^2$.于是$P$是正规的.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(c)}:假设$P$是正规的,于是
+    \[\nul P=\nul P^*=(\range P)^\bot\]
+    根据\tbf{6C.9}可知存在$V$的子空间$U$使得$P=P_U$.\\
+    \tbf{(c)}$\Rightarrow$\tbf{(a)}:对于任意$v_1,v_2\in V$,设$v_1=u_1+w_1,v_2=u_2+w_2$,其中$u_1,u_2\in U,w_1,w_2\in U^\bot$.于是
+    \[\inprod{P_Uv_1}{v_2}=\inprod{u_1}{u_2+w_2}=\inprod{u_1}{u_2}=\inprod{u_1+w_1}{u_2}=\inprod{v_1}{P_Uv_2}\]
+    于是$P_U^*=P_U$,因而$P_U$是自伴算子.
+\end{proof}
+\begin{problem}[21.]
+    设$D:\P_8(\R)\to\P_8(\R)$是定义为$Dp=p'$的微分算子.试证明:$\P_8(\R)$上不存在使得$D$为正规算子的内积.
+\end{problem}
+\begin{proof}
+    我们有
+    \[Tv=\mbf0\Leftrightarrow\inprod{Tv}{Tv}=0\Leftrightarrow\inprod{T^*Tv}{v}=0\]
+\end{proof}
+\begin{problem}[22.]
+    给出一例$T\in\L(\R^3)$正规但不自伴.
+\end{problem}
+\begin{solution}
+    令$T$关于$\R^3$的标准基的矩阵为
+    \[\M(T)=\begin{pmatrix}
+        0&0&0\\1&0&0\\0&0&0
+    \end{pmatrix}\]
+    于是$TT^*=T^*T=\mbf0$,而$T\neq T^*$.
+\end{solution}
+\begin{problem}[23.]
+    设$T$是$V$上的正规算子,设$v,w\in V$满足
+    \[||v||=||w||=2,Tv=3v,Tw=4w\]
+    试证明:$||T(v+w)||=10$.
+\end{problem}
+\begin{proof}
+    由于$v,w$对应于$T$的不同特征值,又因为$T$是正规算子,于是$v,w$正交.于是
+    \[||T(v+w)||=\sqrt{\inprod{3v+4w}{3v+4w}}=\sqrt{9||v||^2+16||w||^2}=\sqrt{100}=10\]
+\end{proof}
+\begin{problem}[24.]
+    设$T\in\L(V)$且$T$的最小多项式为
+    \[a_0+a_1z+\cdots+a_{m-1}z^{m-1}+z^m\]
+    试证明:$T^*$的最小多项式为
+    \[\overline{a_0}+\overline{a_1}z+\cdots+\overline{a_{m-1}}z^{m-1}+z^m\]
+\end{problem}
+\begin{proof}
+    设$T$的最小多项式为$p(z)$,其系数取复共轭得到的多项式为$\overline{p}(z)$.根据\tbf{7A.2},我们有
+    \[p(T)=\mbf0\Rightarrow(p(T))^*=\mbf0\Rightarrow\overline{p}(T^*)=\mbf0\]
+    假定$s\in\P(\F)$且$\deg s<\deg p$,那么$\overline{s}$一定不是$T$的最小多项式.我们有
+    \[\overline{s}(T)\neq\mbf0\Rightarrow(\overline{s}(T))^*\neq\mbf0\Rightarrow s(T^*)\neq\mbf0\]
+    于是$T^*$的最小多项式的次数不低于$p$的次数.\\
+    又$\overline{p}(T^*)=\mbf0$且$\deg\overline{p}=\deg p$且$\overline{p}$是首一的,于是$\overline{p}$是$T^*$的最小多项式.
+\end{proof}
+\begin{problem}[25.]
+    设$T\in\L(V)$.试证明:$T$可对角化,当且仅当$T^*$可对角化.
+\end{problem}
+\begin{proof}
+    假设$T$可对角化,那么不妨设$T$的最小多项式为$p(z)=(z-\lambda_1)\cdots(z-\lambda_n)$.于是对于任意$k\in\{1,\cdots,n\}$有
+    \[p(\lambda_k)=0\Leftrightarrow\overline{p(\lambda_k)}=0\Leftrightarrow\overline{p}(\overline{\lambda_k})=0\]
+    于是$\overline{p}(z)=(z-\overline{\lambda_1})\cdots(z-\overline{\lambda_n})$.由\tbf{7A.24}可知$\overline{p}(z)$是$T^*$的最小多项式,于是$T^*$可对角化.\\
+    交换$T^*$与$T$即可证得另一方向.于是命题得证.
+\end{proof}
+\begin{problem}[26.]
+    给定$u,x\in V$.定义$T\in\L(V)$为$Tv=\inprod{v}{u}x$对任意$v\in V$成立.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:如果$V$是实向量空间,那么$T$自伴当且仅当$u,x$线性相关.
+        \item 试证明:$T$正规当且仅当$u,x$线性相关.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    注意到$T^*v=\inprod{v}{x}u$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\Rightarrow$:若$u=\mbf0$,那么显然$u,x$线性相关.否则,取任意$v\in V$且$v\neq0$,则有
+            \[Tv=\inprod{v}{u}x=\inprod{v}{x}u=T^*v\]
+            于是$x=\dfrac{\inprod{v}{x}}{\inprod{v}{u}}u$,即$x,u$线性相关.\\
+            $\Leftarrow$:令$u=\lambda x$,其中$\lambda\in\R$.那么对于任意$v\in V$有
+            \[Tv=\inprod{v}{u}x=\inprod{v}{\lambda x}x=\lambda\inprod{v}{x}x=\inprod{v}{x}(\lambda x)=\inprod{v}{x}u=T^*v\]
+            从而$T^*=T$,于是$T$自伴.
+        \item 注意到
+            \[(T^*T-TT^*)v=\inprod vx\inprod uux-\inprod vu\inprod xxu\]
+            $\Leftarrow$若$u,x$线性相关,不妨令$u=\lambda x$,其中$\lambda\in\F$.于是
+            \[\begin{aligned}
+                (T^*T-TT^*)v
+                &= \inprod{v}{x}\inprod{\lambda x}{\lambda x}x-\inprod{v}{\lambda x}\inprod{x}{x}(\lambda x) \\
+                &= \inprod vx|\lambda|^2||x||^2x-\overline{\lambda}\lambda\inprod vx||x||^2x \\
+                &= \mbf0
+            \end{aligned}\]
+            于是$T^*T-TT^*=\mbf0$,即$T$正规.\\
+            $\Rightarrow$:若$u=\mbf0$或$x=\mbf0$,那么显然$u,x$线性相关.否则令$v=u$可得
+            \[\mbf0u=\inprod{u}{x}\inprod{u}{u}x-\inprod{u}{u}\inprod{x}{x}u=\mbf0\]
+            于是可得$x=\dfrac{\inprod ux}{||x||^2}u$,因而$u,x$线性相关.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[27.]
+    设$T\in\L(V)$正规.试证明:对于任意$k\in\N^*$,都有
+    \[\nul T^k=\nul T,\range T^k=\range T\]
+\end{problem}
+\begin{proof}
+    我们使用归纳法证明$\nul T^k=\nul T$.$k=1$的情形是显然成立的.\\
+    现在设$k>1$,并且命题对所有小于$k$的正整数都成立.\\
+    $\nul T^{k-1}\subseteq\nul T$是显然的.现在,对于任意$v\in\nul T^k$有
+    \[||T^k v||=0\Leftrightarrow||T(T^{k-1}v)||=0\Leftrightarrow||T^*(T^{k-1}v)||=0\Leftrightarrow T^*T^{k-1}v=\mbf0\]
+    于是我们有
+    \[\inprod{T^*T^{k-1}v}{T^{k-2}v}=0\Leftrightarrow\inprod{T^{k-1}v}{T^{k-1}v}=0\Leftrightarrow T^{k-1}v=\mbf0\]
+    于是$\nul T^{k}\subseteq\nul T^{k-1}$,进而$\nul T^{k}=\nul T^{k-1}=\nul T$.\\
+    由于$T$是正规算子,于是
+    \[\range T=(\nul T^*)^\bot=(\nul (T^*)^k)^\bot=(\nul(T^k)^*)^\bot=\range T^k\]
+    综上,命题得证.
+\end{proof}
+\begin{problem}[28.]
+    设$T\in\L(V)$是正规的.试证明:如果$\lambda\in\F$,那么$T$的最小多项式不是$(x-\lambda)^2$的多项式倍.
+\end{problem}
+\begin{proof}
+    设$p\in\P(\F)$是$T$的最小多项式.假定存在$r\in\P(\F)$和$\lambda\in\F$使得$p(z)=(z-\lambda)^2r(z)$.\\
+    由于$\deg (z-\lambda)r(z)<\deg p$,于是$(z-\lambda)r(z)$不是$T$的最小多项式,也即$r(T)v\notin\nul(T-\lambda I)$.\\
+    又因为$p(T)=\mbf0$,于是$r(T)v\in\nul(T-\lambda I)^2$,因此$\nul(T-\lambda I)\neq\nul(T-\lambda I)^2$.\\
+    因为$T$是正规算子,所以$T-\lambda I$是正规算子.根据\tbf{7A.27}可知$\nul(T-\lambda I)^2=\nul (T-\lambda I)$.\\
+    这与前面的推导矛盾,于是不存在$\lambda\in\F$使得$p(z)$是$(z-\lambda)^2$的多项式倍.
+\end{proof}
+\begin{problem}[29.]
+    证明或给出反例:如果$T\in\L(V)$且存在$V$的规范正交基$\li e,n$使得$||Te_k||=||T^*e_k||$对任意$k\in\{1,\cdots,n\}$成立,那么$T$是正规的.
+\end{problem}
+\begin{proof}
+    令$T$关于$\F^2$的标准基$e_1,e_2$的矩阵为
+    \[\M(T)=\begin{pmatrix}
+        1&1\\-1&0
+    \end{pmatrix}\]
+    我们在\tbf{7A.18}中已经证明$T$不是正规的,然而
+    \[||Te_1||=||T^*e_1||=\sqrt2,||Te_2||=||T^*e_2||=1\]
+    于是就给出了一个反例.
 \end{proof}
 \end{document}
