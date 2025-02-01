@@ -1,0 +1,322 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 7B}
+\end{center}
+\begin{problem}[1.]
+    试证明:复内积空间上的正规算子是自伴的,当且仅当它的所有特征值是实的.
+\end{problem}
+\begin{proof}
+    设$\F=\C,T\in\L(V)$.如果$T$是自伴的,那么它的特征值就应当是实数.\\
+    如果$T$的所有特征值都是实数,那么根据复谱定理可得$T$关于$V$的某个规范正交基有对角矩阵$\M(T)$,%
+    这矩阵的对角线上元素均为实数,从而可知$\M(T)$与其共轭转置相等,因而$T$自伴.
+\end{proof}
+\begin{problem}[2.]
+    设$\F=\C$,$T\in\L(V)$是正规算子且仅有一个特征值.试证明:$T$是恒等算子的标量倍.
+\end{problem}
+\begin{proof}
+    设$T$的特征值为$\lambda$.根据复谱定理,存在$V$的某个规范正交基使得$T$有对角矩阵$\M(T)$.\\
+    于是这矩阵的对角线上元素均为$\lambda$,因而$\M(T)=\lambda I$,即$T=\lambda I$.
+\end{proof}
+\begin{problem}[3.]
+    设$\F=\C$且$T\in\L(V)$是正规算子.试证明:$T$的特征值构成的集合包含于$\{0,1\}$,当且仅当存在$V$的子空间$U$使得$T=P_U$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$T$对应于$0$和$1$的特征向量分别为$\li e,m,\li f,n$.根据复谱定理,这向量组构成$V$的规范正交基.\\
+    令$U=\span(\li f,n)$.于是对于任意$v:=a_1e_1+\cdots+a_me_m+b_1f_1+\cdots+b_nf_n$有
+    \[\begin{aligned}
+        Tv
+        &= T(a_1e_1+\cdots+a_me_m+b_1f_1+\cdots+b_nf_n) \\
+        &= a_1Te_1+\cdots+a_mTe_m+b_1Tf_1+\cdots+b_nTf_n \\
+        &= b_1f_1+\cdots+b_nf_n \\
+        &= P_Uv
+    \end{aligned}\]
+    于是$T=P_U$.\\
+    $\Leftarrow$:设$U$的一组规范正交基为$\li f,n$,$U^\bot$的一组规范正交基为$\li e,m$.\\
+    于是$P_Uf_k=f_k,P_Ue_j=\mbf0$对任意$k\in\{1,\cdots,n\},j\in\{1,\cdots,m\}$都成立.\\
+    于是$V$有$P_U$的特征向量$\li f,n,\li e,m$构成的规范正交基,且分别对应于特征值$0,1$.\\
+    根据复谱定理,$P_U$是珍贵算子,且其特征值构成的集合包含于$\{0,1\}$.
+\end{proof}
+\begin{problem}[4.]
+    试证明:复内积空间上的正规算子是斜的,当且仅当它的所有特征值都是纯虚数.
+\end{problem}
+\begin{proof}
+    设$\F=\C,T\in\L(V)$.由于$T$是正规算子,于是$T$关于$V$的一组规范正交基有对角矩阵$\M(T)$,不妨记为$A$.于是
+    \[\begin{aligned}
+        T\text{是斜的}
+        &\Leftrightarrow T^*=-T \\
+        &\Leftrightarrow A^*=-A \\
+        &\Leftrightarrow A_{k,k}+\overline{A_{k,k}}=0,\forall k\in\{1,\cdots,\dim V\} \\
+        &\Leftrightarrow A_{k,k}\in\C\backslash\R,\forall k\in\{1,\cdots,\dim V\} \\
+        &\Leftrightarrow T\text{的所有特征值都是纯虚数}
+    \end{aligned}\]
+\end{proof}
+\begin{problem}[5.]
+    证明或给出一反例:若$T\in\L(C^3)$可对角化,那么$T$是正规的.
+\end{problem}
+\begin{solution}
+    考虑$\C^3$的基$v_1=(1,0,0),v_2=(0,1,0),v_3=(1,0,1)$和$T\in\L(\C^3)$使得
+    \[Tv_1=v_1,Tv_2=v_2,Tv_3=2v_3\]
+    于是$T$关于$v_1,v_2,v_3$有对角矩阵.然而$\inprod{v_1}{v_3}=1$,于是$v_1,v_3$不正交.\\
+    这和正规算子对应于不同特征值的特征向量正交相矛盾,于是$T$不是正规算子.
+\end{solution}
+\begin{problem}[6.]
+    设$V$是复内积空间,$T\in\L(V)$是使得$T^9=T^8$的正规算子.试证明:$T$是自伴的且$T^2=T$.
+\end{problem}
+\begin{proof}
+    由复谱定理,存在$T$的特征向量$\li e,n$构成的$V$的规范正交基.\\
+    对于任意$k\in\{1,\cdots,n\}$,设$Te_k=\lambda_ke_k$,于是我们有
+    \[T^9=T^8\Leftrightarrow T^9e_k=T^8e_k\Leftrightarrow \lambda_k^9e_k=\lambda_k^8e_k\Leftrightarrow \lambda_k^8(\lambda_k-1)=0\Leftrightarrow\lambda_k\in\{0,1\}\]
+    根据\tbf{7B.3}可知存在$V$的子空间$U$使得$T=P_U$.此时$T^2=P_U^2=P_U=T$.\\
+    另外,根据\tbf{7B.1}可知$T$是自伴算子.
+\end{proof}
+\begin{problem}[7.]
+    给出一例复内积空间$V$上的算子使得$T^9=T^8$而$T^2\neq T$.
+\end{problem}
+\begin{solution}
+    考虑$V=\C^2$和$T\in\L(\C^2)$使得$T(x,y)=(y,0)$.%
+    于是$T^9=T^8=T^2=\mbf0$而$T\neq\mbf{0}$.
+\end{solution}
+\begin{problem}[8.]
+    设$\F=\C$且$T\in\L(V)$.试证明:$T$是正规的,当且仅当$T$的每个特征向量都是$T^*$的特征向量.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:假设$T$是正规的,我们已经在正规算子的性质中证明了$Tv=\lambda v$当且仅当$T^*v=\overline{\lambda}v$.\\
+    $\Leftarrow$:根据Schur定理,存在一组$V$的规范正交基$\li e,n$使得$T$关于其有上三角矩阵$A$.\\
+    于是$Te_1=A_{1,1}e_1$.因此,$e_1$也是$T^*$的特征向量,不妨设$T^*e_1=\mu_1e_1$.另一方面,由于$\M(T^*)=A^*$,于是
+    \[T^*e_1=\overline{A_{1,1}}e_1+\cdots+\overline{A_{n,1}}e_n\]
+    于是$A_{2,1}=\cdots=A_{n,1}=0$.因此$Te_2=A_{2,2}e_2$.同理有
+    \[T^*e_2=\overline{A_{2,2}}e_2+\cdots+\overline{A_{n,2}}e_n\]
+    于是$A_{3,2}=\cdots=A_{n,2}=0$.以此类推,可知$A$是对角矩阵.\\
+    于是根据复谱定理可知$T$是正规算子.
+\end{proof}
+\begin{problem}[9.]
+    设$\F=\C$且$T\in\L(V)$.试证明:$T$是正规的,当且仅当存在$p\in\P(\C)$使得$T^*=p(T)$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:假设存在$p\in\P(\C)$使得$T^*=p(T)$,那么令$q(z):=zp(z)\in\P(\C)$.我们有
+    \[T^*T=p(T)T=q(T)=Tp(T)=TT^*\]
+    于是$T$是正规算子.\\
+    $\Rightarrow$:假设$T$是正规的.根据复谱定理,存在由$T$的特征向量$\li e,n$使得其为$V$的规范正交基.\\
+    不妨设它们对应的特征向量分别为$\li\lambda,n$.\\
+    \tbf{4.7}表明存在$p\in\P(\C)$使得$p(\lambda_k)=\overline{\lambda_k}$对任意$k\in\{1,\cdots,n\}$成立.于是有
+    \[p(T)e_k=p(\lambda_k)e_k=\overline{\lambda_k}e_k=T^*e_k\]
+    于是$p(T)=T^*$,命题得证.
+\end{proof}
+\begin{problem}[10.]
+    设$V$是复内积空间,试证明:$V$上每个正规算子都有平方根.
+\end{problem}
+\begin{proof}
+    设$T\in\L(V)$是正规的,于是根据复谱定理可知$T$关于$V$的一规范正交基$\li e,n$有对角矩阵$\M(T)$.\\
+    设$\M(T)$的对角线元素依次为$\li\lambda,n$.根据代数基本定理,$z^2-\lambda_k$一定有复根,不妨设$\mu_k^2=\lambda_k$.\\
+    设$S\in\L(V)$关于$\li e,n$的矩阵为对角矩阵,且对角线上元素以此为$\li\mu,n$.\\
+    不难得到$\left(\M(S)\right)^2=\M(T)$,于是$S^2=T$,即$S$是$T$的平方根.
+\end{proof}
+\begin{problem}[11.]
+    试证明:$V$上的每个自伴算子都有立方根.
+\end{problem}
+\begin{proof}
+    证明方法与\tbf{7B.10}基本一致,在此略去.
+\end{proof}
+\begin{problem}[12.]
+    设$V$是复向量空间,且$T\in\L(V)$是正规算子,试证明:如果$S\in\L(V)$与$T$可交换,那么$S$和$T^*$可交换.
+\end{problem}
+\begin{proof}
+    设$S,T\in\L(V)$且两者可交换.由\tbf{7B.9}可知存在$p\in\P(\C)$使得$T^*=p(T)$.于是
+    \[ST^*=Sp(T)=S\sum_{k=0}^{\deg p}a_{k}T^k=\sum_{k=0}^{\deg p}a_k(T^kS)=p(T)S=T^*S\]
+    于是$S$和$T^*$可交换.
+\end{proof}
+\begin{problem}[13.]
+    用Schur定理证明:如果$\F=\C$且$T\in\L(V)$是正规的,那么$T$关于$V$的某个规范正交基有对角矩阵.
+\end{problem}
+\begin{proof}
+    在\tbf{6B.20}中令$\mathcal{E}=\{T,T^*\}$可知存在$V$的一组规范正交基$\li e,n$使得$T,T^*$关于其有上三角矩阵.\\
+    又因为$\M(T^*)=\left(\M(T)\right)^*$,于是$\M(T)$既是上三角矩阵又是下三角矩阵,因而$\M(T)$是对角矩阵.
+\end{proof}
+\begin{problem}[14.]
+    设$\F=\R$且$T\in\L(V)$.试证明:$T$是自伴的,当且仅当$T$的对应于不同特征值的特征向量两两正交且$\displaystyle V=\bigoplus_{k=1}^{m}E(\lambda_k,T)$,%
+    其中$\li\lambda,m$为$T$的互异特征值.
+\end{problem}
+\begin{proof}
+    选定$E(\lambda_k,T)$的规范正交基$e_{k,1},\cdots,e_{k,n_k}$,其中$n_k=\dim E(\lambda_k,T)$.\\
+    对于任意$j,k\in\{1,\cdots,m\}$且$j\neq k$,有$Te_{j,\cdot}=\lambda_{j}e_{j,\cdot}$,$Te_{k,\cdot}=\lambda_ke_{k,\cdot}$.由题意可知$\lambda_j\neq\lambda_k$,于是$\inprod{e_{j,\cdot}}{e_{k,\cdot}}=0$.\\
+    于是不难得知所有的$e_{k,\cdot}$构成的向量组是$V$的规范正交基.即上述条件等价于$V$有$T$的特征向量构成的规范正交基.\\
+    根据实谱定理,这与$T$是自伴的等价,于是命题得证.
+\end{proof}
+\begin{problem}[15.]
+    设$\F=\C$且$T\in\L(V)$.试证明:$T$是正规的,当且仅当$T$的对应于不同特征值的特征向量两两正交且$\displaystyle V=\bigoplus_{k=1}^{m}E(\lambda_k,T)$,%
+    其中$\li\lambda,m$为$T$的互异特征值.
+\end{problem}
+\begin{proof}
+    与\tbf{7B.14}同理,这条件等价于$V$有$T$的特征向量构成的规范正交基.\\
+    根据复谱定理,这与$T$是正规的等价,于是命题得证.
+\end{proof}
+\begin{problem}[16.]
+    设$\F=\C$且$\mathcal{E}\subseteq\L(V)$.试证明:存在$V$的规范正交基使得$\mathcal{E}$中每个元素关于其有对角矩阵,%
+    当且仅当对于所有$S,T\in\mathcal{E}$都有$S,T$是可交换的正规算子.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$\li e,n$是$V$的规范正交基使得对任意$T\in\mathcal{E}$,$T$关于其都有对角矩阵.\\
+    根据复谱定理,这样的$T$是正规算子.另外,对任意$S,T\in\mathcal{E}$有
+    \[\M(ST)=\M(S)\M(T)=\M(T)\M(S)=\M(TS)\]
+    于是$ST=TS$,即$\mathcal{E}$中的元素两两可交换.\\
+    $\Leftarrow$:根据\tbf{6B.20}可知存在$V$的规范正交基$\li e,n$使得$\mathcal{E}$中每个元素关于其有上三角矩阵.\\
+    又因为$\mathcal{E}$中每个元素都是正规的,于是根据复谱定理可知这上三角矩阵实际上都是对角矩阵.\\
+    综上可知命题成立.
+\end{proof}
+\begin{problem}[17.]
+    设$\F=\R$且$\mathcal{E}\subseteq\L(V)$.试证明:存在$V$的规范正交基使得$\mathcal{E}$中每个元素关于其有对角矩阵,%
+    当且仅当对于所有$S,T\in\mathcal{E}$都有$S,T$是可交换的自伴算子.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$\li e,n$是$V$的规范正交基使得对任意$T\in\mathcal{E}$,$T$关于其都有对角矩阵.\\
+    根据实谱定理,这样的$T$是自伴算子.另外,对任意$S,T\in\mathcal{E}$有
+    \[\M(ST)=\M(S)\M(T)=\M(T)\M(S)=\M(TS)\]
+    于是$ST=TS$,即$\mathcal{E}$中的元素两两可交换.\\
+    $\Leftarrow$:根据\tbf{5E.2}可知存在$V$的基$\li v,n$使得$\mathcal{E}$中每个元素关于其有对焦矩阵.\\
+    对$\li e,n$应用Gram-Schmidt过程得到$V$的规范正交基$\li e,n$.于是对于任意$k\in\{1,\cdots,n\}$有
+    \[\span(\li v,k)=\span(\li e,k)\]
+    于是对于任意$T\in\mathcal{E}$,$T$关于$\li e,n$有上三角矩阵.又因为$\mathcal{E}$中每个元素都是自伴的,于是根据复谱定理可知这上三角矩阵实际上都是对角矩阵.\\
+    综上可知命题成立.
+\end{proof}
+\begin{problem}[18.]
+    给出一例实内积空间$V$上的算子$T\in\L(V)$以及实数$b,c(b^2<4c)$使得$T^2+bT+cI$不是可逆的.
+\end{problem}
+\begin{solution}
+    令$T(x,y)=(-y,x)$且$b=0,c=1$.于是$T^2+bT+cI=T^2+I=\mbf0$不是可逆的.
+\end{solution}
+\begin{problem}[19.]
+    设$T\in\L(V)$是自伴的,$U$是$V$在$T$下不变的子空间.试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $U^\bot$在$T$下不变.
+        \item $T|_U\in\L(U)$自伴.
+        \item $T|_{U^\bot}\in\L(U^\bot)$自伴.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 对于任意$u\in U$和$w\in U^\bot$有$Tu\in U$,于是
+            \[\inprod{Tu}{w}=\inprod{u}{T^*w}=\inprod{u}{Tw}=0\]
+            于是$Tw\in U^\bot$对所有$w\in U^\bot$成立,因而$U^\bot$在$T$下不变.
+        \item 这是显然的.
+        \item 这也是显然的.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[20.]
+    设$T\in\L(V)$是正规的,$U$是$V$在$T$下不变的子空间.试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $U^\bot$在$T$下不变.
+        \item $U$在$T^*$下不变.
+        \item $\left(T|_U\right)^*=\left(T^*\right)|_U$.
+        \item $T|_U$和$T|_{U^\bot}$是正规算子.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$U$的一组规范正交基$\li e,n$和$U^\bot$的一组规范正交基$\li f,m$.由于$V=U\oplus U^\bot$,于是
+            \[\li e,n,\li f,m\]
+            是$V$的规范正交基.由于$U$在$T$下不变,于是$T$关于这基的矩阵$A$应有如下形式.
+            \[\begin{pmatrix}
+                A_{1,1}&\cdots&A_{n,1}&A_{n+1,1}&\cdots&A_{n+m,1}\\
+                \vdots&\ddots&\vdots&\vdots&\ddots&\vdots\\
+                A_{1,n}&\cdots&A_{n,n}&A_{n+1,n}&\cdots&A_{n+m,n}\\
+                0&\cdots&0&A_{n+1,n+1}&\cdots&A_{n+m,n+1}\\
+                \vdots&\ddots&\vdots&\vdots&\ddots&\vdots\\
+                0&\cdots&0&A_{n+1,n+m}&\cdots&A_{n+m,n+m}\\
+            \end{pmatrix}\]
+            由于$T$是正规算子,于是$||Tv||=||T^*v||$对所有$v\in V$都成立.对于任意$j\in\{1,\cdots,m\}$有
+            \[||Tf_j||^2=\sum_{k=1}^{n+m}|A_{n+j,k}|^2,||T^*f_j||^2=\sum_{k=1}^{n+m}|A_{k,n+j}|^2=\sum_{k=n+1}^{n+m}|A_{k,n+j}|^2\]
+            于是$A_{n+j,1}=\cdots=A_{n+j,n}=0$.这表明$Tf_j\in U^\bot$,于是$U^\bot$在$T$下不变.
+        \item 观察上面的矩阵即可得出结论.
+        \item 观察上面的矩阵即可得出结论.
+        \item 观察上面的矩阵即可得出结论.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[21.]
+    设$T$是有限维内积空间上的自伴算子,且$2$和$3$是$T$仅有的特征值.试证明:$T^2-5T+6I=\mbf0$.
+\end{problem}
+\begin{proof}
+    由\tbf{7B.14}可知$V=E(2,T)\oplus E(3,T)$.\\
+    于是对于任意$v\in V$,令$x\in E(2,T),y\in E(3,T)$使得$v=x+y$.我们有
+    \[(T^2-5T+6I)v=(T^2-5T+6I)(x+y)=(T-3I)(T-2I)x+(T-2I)(T-3I)y=\mbf0\]
+    于是$T^2-5T+6I=\mbf0$.
+\end{proof}
+\begin{problem}[22.]
+    给出一例$T\in\L(\C^3)$使得$2$和$3$是$T$仅有的特征值,而$T^2-5T+6I\neq0$.
+\end{problem}
+\begin{solution}
+    令$T$关于$\C^3$的标准基$e_1,e_2,e_3$的矩阵为
+    \[\begin{pmatrix}
+        2&1&0\\0&2&0\\0&0&3
+    \end{pmatrix}\]
+    这是一个上三角矩阵,于是$T$的特征值为$2,3$.另一方面又有
+    \[(T^2-5T+6I)e_2=-e_1\neq\mbf0\]
+    于是$T^2-5T+6I\neq\mbf0$.
+\end{solution}
+\begin{problem}[23.]
+    设$T\in\L(V)$是自伴的,$\lambda\in\F$且$\ep>0$.设存在$v\in V$使得$||v||=1$且$||Tv-\lambda v||<\ep$.%
+    试证明:存在$T$的特征值$\lambda'$使得$|\lambda-\lambda'|<\ep$.
+\end{problem}
+\begin{proof}
+    谱定理表明,存在$T$的特征向量构成的$V$的规范正交基$\li e,n$.设$Te_k=\lambda_ke_k$对任意$k\in\{1,\cdots,n\}$成立.\\
+    于是$\li\lambda,n$即$T$的特征值.我们有
+    \[||Tv-\lambda v||^2=|\lambda_1-\lambda|^2\left|\inprod{v}{e_1}\right|^2+\cdots+|\lambda_n-\lambda|^2\left|\inprod{v}{e_n}\right|^2\]
+    令$\lambda'$是$\li\lambda,n$中使得$|\lambda-\lambda'|$最小的,于是
+    \[\begin{aligned}
+        |\lambda-\lambda'|^2
+        &= |\lambda-\lambda'|^2\left|\inprod{v}{e_1}\right|^2+\cdots+|\lambda-\lambda'|^2\left|\inprod{v}{e_n}\right|^2 \\
+        &\leqslant |\lambda_1-\lambda|^2\left|\inprod{v}{e_1}\right|^2+\cdots+|\lambda_n-\lambda|^2\left|\inprod{v}{e_n}\right|^2 \\
+        &= ||Tv-\lambda v||^2 \\
+        &< \ep^2
+    \end{aligned}\]
+    于是$|\lambda-\lambda'|<\ep$.
+\end{proof}
+\begin{problem}[24.]
+    设$V$是有限维向量空间,$T\in\L(V)$.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$\F=\R$.试证明:$T$是可对角化的,当且仅当存在$V$的一组基使得$V$关于这基的矩阵等于其转置.
+        \item 设$\F=\C$.试证明:$T$可对角化,当且仅当存在$V$的一组基使得$V$关于这基的矩阵与其共轭转置可交换.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\Rightarrow$:设$T$关于$V$的基$\li v,n$有矩阵$A$,那么自然有$A=A^\text{t}$.\\
+            $\Leftarrow$:假设存在这样的基$\li e,n$使得$T$关于$\li e,n$的矩阵等于其转置.\\
+            对于任意$v:=a_1e_1+\cdots+a_ne_n,u:=b_1e_1+\cdots+b_ne_n\in V$,定义内积
+            \[\inprod{u}{v}=a_1b_1+\cdots+a_nb_n\]
+            容易证明这内积是符合要求的,$\li e,n$即为对应于这内积的规范正交基.\\
+            于是可知$T$关于这内积自伴.根据实谱定理,存在由$T$的特征向量构成的$V$的规范正交基,因而$T$可对角化.
+        \item $\Rightarrow$:设$T$关于$V$的基$\li v,n$有矩阵$A$,那么自然有$AA^*=A^*A$.\\
+            $\Leftarrow$:与\tbf{(1)}同理可知$T$关于$V$的这组基的矩阵与其共轭转置可交换,即$T$是正规的.\\
+            根据复谱定理,存在由$T$的特征向量构成的$V$的规范正交基,因而$T$可对角化.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[25.]
+    设$T\in\L(V)$且$V$有一规范正交基$\li e,n$由$T$对应于特征值$\li\lambda,n$的特征向量构成.试证明:对于任意$k\in\{1,\cdots,n\}$,伪逆$T^\dagger$满足
+    \[T^\dagger e_k=\left\{\begin{array}{l}
+        \dfrac{1}{\lambda_k}e_k,\lambda_k\neq0\\
+        \mbf0,\lambda_k=0
+    \end{array}\right.\]
+\end{problem}
+\begin{proof}
+    考虑$k\in\{1,\cdots,n\}$.若$\lambda_k=0$,那么$Te_k=\mbf0$,即$e_k\in\nul T=(\range T)^\bot$.自然,我们有
+    \[T^\dagger e_k=\left(T|_{(\nul T)^\bot}\right)^{-1}P_{\range T}e_k=\left(T|_{(\nul T)^\bot}\right)^{-1}\mbf0=\mbf0\]
+    若$\lambda_k\neq0$,那么我们有$\dfrac{1}{\lambda_k}Te_k=e_k$,于是$e_k\in\range T$.于是$P_{\range T}e_k=e_k$.又因为
+    \[T|_{(\nul T)^\bot}e_k=T|_{\range T}e_k=\lambda_ke_k\]
+    于是
+    \[T^\dagger e_k=\left(T|_{(\nul T)^\bot}\right)^{-1}P_{\range T}e_k=\left(T|_{(\nul T)^\bot}\right)^{-1}e_k=\dfrac{1}{\lambda_k}e_k\]
+    于是命题得证.
+\end{proof}
+\end{document}
