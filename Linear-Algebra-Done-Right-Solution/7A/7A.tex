@@ -339,8 +339,8 @@
     设$D:\P_8(\R)\to\P_8(\R)$是定义为$Dp=p'$的微分算子.试证明:$\P_8(\R)$上不存在使得$D$为正规算子的内积.
 \end{problem}
 \begin{proof}
-    我们有
-    \[Tv=\mbf0\Leftrightarrow\inprod{Tv}{Tv}=0\Leftrightarrow\inprod{T^*Tv}{v}=0\]
+    根据\tbf{7A.27}可知如果$D$是正规算子,那么$\nul D^2=\nul D$.\\
+    然而$D^2(x)=\mbf0,D(x)=1$,于是$\nul D\neq\nul D^2$,从而$D$无论如何不能是正规算子.
 \end{proof}
 \begin{problem}[22.]
     给出一例$T\in\L(\R^3)$正规但不自伴.
@@ -452,5 +452,54 @@
     我们在\tbf{7A.18}中已经证明$T$不是正规的,然而
     \[||Te_1||=||T^*e_1||=\sqrt2,||Te_2||=||T^*e_2||=1\]
     于是就给出了一个反例.
+\end{proof}
+\begin{problem}[30.]
+    设$T\in\L(\F^3)$是正规的且$T(1,1,1)=(2,2,2)$.设$(z_1,z_2,z_3)\in\nul T$,试证明:$z_1+z_2+z_3=0$.
+\end{problem}
+\begin{proof}
+    令$u:=(z_1,z_2,z_3)$.若$u=\mbf0$,那么命题显然成立.\\
+    若$u\neq\mbf0$,那么$u$是对应于$0$的$T$的特征向量.又因为$(1,1,1)$是对应于$2$的$T$的特征向量,于是
+    \[u\cdot(1,1,1)=0\]
+    即$z_1+z_2+z_3=0$.
+\end{proof}
+\begin{problem}[31.]
+    给定$n\in\N^*$.在由$[-\pi,\pi]$上全体连续实值函数构成的,具有内积$\inprod fg=\displaystyle\int_{-\pi}^{\pi}fg$的内积空间中,令
+    \[V=\span(1,\cos x,\cos 2x,\cdots,\cos nx,\sin x,\sin 2x,\cdots,\sin nx)\]
+    回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 定义$D\in\L(V)$为$Df=f'$.试证明$D^*=-D$.
+        \item 定义$T\in\L(V)$为$Tf=f''$.试证明$T$是自伴的.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    根据\tbf{6B.4}可知
+    \[\dfrac{1}{\sqrt{2\pi}},\dfrac{\cos x}{\sqrt{\pi}},\cdots,\dfrac{\cos nx}{\sqrt{\pi}},\dfrac{\sin x}{\sqrt{\pi}},\cdots,\dfrac{\sin nx}{\sqrt{\pi}}\]
+    是$C[-\pi,\pi]$上的规范正交组.易知这就是$V$的一组规范正交基.不妨令$v=\dfrac{1}{\sqrt{2\pi}},e_k=\dfrac{\cos kx}{\sqrt{\pi}},f_k=\dfrac{\sin kx}{\sqrt\pi}$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 我们有
+            \[D^*v=\mbf0=-Dv\]
+            \[D^*e_k=kf_k=-De_k\]
+            \[D^*f_k=-ke_k=-Df_k\]
+            于是$D=-D^*$.
+        \item 注意到$T=D^2$.于是
+            \[T^*=\left(D^2\right)^*=\left(D^*\right)^2=(-D)^2=D^2=T\]
+            于是$T$是自伴的.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[32.]
+    设$T\in\L(V,W)$.试证明
+    \[T'(\varphi_w)=\varphi_{T^*w}\]
+    对所有$w\in W$成立.
+\end{problem}
+\begin{proof}
+    对于任意$v\in V$和任意$w\in W$有
+    \[T'(\varphi_w)v
+    =(\varphi_w\circ T)v
+    =\varphi_w(Tv)
+    =\inprod{Tv}{w}
+    =\inprod{v}{T^*w}
+    =\varphi_{T^*w}v
+    \]
+    从而$T'(\varphi_w)=\varphi_{T^*w}$.
 \end{proof}
 \end{document}
