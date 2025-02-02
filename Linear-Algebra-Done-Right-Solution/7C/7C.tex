@@ -1,0 +1,75 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 7C}
+\end{center}
+\begin{problem}[1.]
+    设$T\in\L(V)$.试证明:如果$T$和$-T$都是正算子,那么$T=\mbf0$.
+\end{problem}
+\begin{proof}
+    由题意可知对任意$v\in V$有
+    \[\inprod{Tv}{v}\geqslant0\]
+    且
+    \[\inprod{-Tv}{v}=-\inprod{Tv}{v}\geqslant\]
+    于是$\inprod{Tv}{v}=0$,因而$T=\mbf0$(在实内积空间上需要$T$自伴,这由正算子的定义可得).
+\end{proof}
+\begin{problem}[2.]
+    设$T\in\L(\F^4)$关于其标准基的矩阵为
+    \[\begin{pmatrix}
+        2&-1&0&0\\
+        -1&2&-1&0\\
+        0&-1&2&-1\\
+        0&0&-1&2
+    \end{pmatrix}\]
+    试证明:$T$是可逆正算子.
+\end{problem}
+\begin{proof}
+    $\F^4$的标准基也是$\F^4$的规范正交基.观察这矩阵,可知$(\M(T))^*=\M(T)$,于是$T^*=T$,即$T$自伴.\\
+    一些计算表明$T$的特征值为
+    \[\dfrac{3\pi\sqrt5}{2},\dfrac{5\pm\sqrt5}{2}\]
+    于是$T$的特征值均非零且非负,因而它是可逆正算子.
+\end{proof}
+\begin{problem}[3.]
+    设$n\in\N^*$,算子$T\in\L(\F^n)$关于其标准基的矩阵中的元素均为$1$.试证明:$T$是正算子.
+\end{problem}
+\begin{proof}
+    对于任意$v:=(\li x,n)\in\F^n$有
+    \[\begin{aligned}
+        \inprod{Tv}{v}
+        &= \inprod{T(\li x,n)}{(\li x,n)} \\
+        &= \left(\li x+n\right)^2 \\
+        &\geqslant 0
+    \end{aligned}\]
+    于是$T$是正算子.
+\end{proof}
+\begin{problem}[4.]
+    设$n\in\N^*$且$n>1$,试证明:存在$n\times n$矩阵$A$,其所有元素都是正数且$A=A^*$,%
+    但$\F^n$上关于其标准基的矩阵为$A$的算子不是正算子.
+\end{problem}
+\begin{proof}
+    考虑矩阵
+    \[A=\begin{pmatrix}
+        1&2&\cdots&2\\
+        2&1&\cdots&2\\
+        \vdots&\vdots&\ddots&
+    \end{pmatrix}\]
+    令$A$为$T\in\L(\F^2)$对应于$\F^2$的标准基的矩阵.于是
+    \[\inprod{T(x,y)}{(x,y)}
+    =\inprod{(x+2y,2x+y)}{(x,y)}
+    =(x+y)^2+2xy\]
+    令$(x,y)=(1,-1)$,则有$\inprod{T(x,y)}{(x,y)}<0$,于是$T$不是正算子.
+\end{proof}
+
+\end{document}
