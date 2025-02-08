@@ -71,5 +71,128 @@
     =(x+y)^2+2xy\]
     令$(x,y)=(1,-1)$,则有$\inprod{T(x,y)}{(x,y)}<0$,于是$T$不是正算子.
 \end{proof}
-
+\begin{problem}[5.]
+    设$T\in\L(V)$是自伴的.试证明:$T$是正算子当且仅当对于$V$的任意规范正交基$\li e,n$都有$T$关于其的矩阵的对角线元素全为非负数.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:对于任意$V$的规范正交基$\li e,n$和任意$k\in\{1,\cdots,n\}$,由于$T$是正算子,于是
+    \[\inprod{Te_k}{e_k}\geqslant0\]
+    又因为$Te_k=\inprod{Te_k}{e_1}e_1+\cdots+\inprod{Te_k}{e_n}e_n$,于是
+    \[\M(T,(\li e,n))_{k,k}=\inprod{Te_k}{e_k}\geqslant0\]
+    于是此矩阵的对角线上均为非负数.\\
+    $\Leftarrow$:由于$T$是自伴的,于是存在$V$的规范正交基$\li e,n$使得$T$关于其有对角矩阵$A$.\\
+    根据题意,$A_{1,1},\cdots,A_{n,n}\geqslant0$,从而对于任意$v:=a_1e_1+\cdots+a_ne_n\in V$有
+    \[\begin{aligned}
+        \inprod{Tv}{v}
+        &= \inprod{A_{1,1}a_1e_1}{a_1e_1}+\cdots+\inprod{A_{n,n}a_ne_n}{a_ne_n} \\
+        &= A_{1,1}a_1^2+\cdots+A_{n,n}a_n^2 \\
+        &\geqslant 0
+    \end{aligned}\]
+    从而$T$为正算子.
+\end{proof}
+\begin{problem}[6.]
+    试证明:$V$上两正算子之和为正算子.
+\end{problem}
+\begin{proof}
+    对于任意正的$S,T\in\L(V)$和任意$v\in V$有
+    \[\inprod{(S+T)v}{v}=\inprod{Sv+Tv}{v}=\inprod{Sv}{v}+\inprod{Tv}{v}\geqslant 0\]
+    于是$S+T$是正的.
+\end{proof}
+\begin{problem}[7.]
+    设$S\in\L(V)$是可逆正算子,$T\in\L(V)$是正算子,试证明:$S+T$可逆.
+\end{problem}
+\begin{lemma}[Lemma.L.11]
+    设$T\in\L(V)$是正算子,那么$T$可逆当且仅当$\inprod{Tv}{v}>0$对所有非零的$v\in V$成立.
+\end{lemma}
+\begin{proof}
+    $\Rightarrow$:由于$T$可逆,于是对于任意非零的$v\in V$有$Tv\neq\mbf0$.于是$\inprod{Tv}{v}>0$.\\
+    $\Leftarrow$:如果$T$不可逆,那么存在非零的$v\in V$使得$Tv=\mbf0$,从而$\inprod{Tv}{v}=0$,这与条件矛盾.于是$T$可逆.
+\end{proof}
+\begin{proof}
+    根据\tbf{Lemma.L.11}可知$\inprod{Sv}{v}>0$对所有非零的$v\in V$成立.于是对于任意非零的$v\in V$有
+    \[\inprod{(S+T)v}{v}=\inprod{Sv}{v}+\inprod{Tv}{v}>0\]
+    从而$S+T$是可逆的.
+\end{proof}
+\begin{problem}[8.]
+    设$T\in\L(V)$.试证明:$T$是正算子,当且仅当$T^\dagger$是正算子.
+\end{problem}
+\begin{proof}
+    由于$T$是正算子,于是令$V$有一规范正交基$\li e,n$是分别对应于$T$的特征值$\li\lambda,n$的特征向量.\\
+    于是$\li\lambda,n\geqslant0$.根据\tbf{7B.25}有
+    \[T^\dagger e_k=\left\{\begin{array}{l}
+        \frac{1}{\lambda_k}e_k,\lambda_k\neq0\\\mbf0,\lambda_k=0
+    \end{array}\right.\]
+    对所有$k\in\{1,\cdots,n\}$成立.于是$T^\dagger$关于$\li e,n$的矩阵是对角线上均为非负数的对角矩阵,从而$T^\dagger$是正算子.\\
+    交换$T$和$T^\dagger$即可证得另一方向.于是命题得证.
+\end{proof}
+\begin{problem}[9.]
+    设$T\in\L(V)$是正算子,$S\in\L(W,V)$.试证明:$S^*TS$是$W$上的正算子.
+\end{problem}
+\begin{proof}
+    对于任意$w\in W$有
+    \[\inprod{S^*TSw}{w}=\inprod{T(Sw)}{Sw}\geqslant0\]
+    于是$S^*TS$是$W$上的正算子.
+\end{proof}
+\begin{problem}[10.]
+    设$T$是$V$上的正算子,设$v,w\in V$满足$Tv=w$且$Tw=v$.试证明:$v=w$.
+\end{problem}
+\begin{proof}
+    我们有
+    \[\inprod{T(v-w)}{v-w}=\inprod{w-v}{v-w}=-||v-w||^2\geqslant0\]
+    于是$||v-w||=0$,即$v=w$.
+\end{proof}
+\begin{problem}[11.]
+    设$T$是$V$上的正算子,$U$是$V$在$T$下不变的子空间,试证明:$T|_U\in\L(U)$是$U$上的正算子.
+\end{problem}
+\begin{proof}
+    对于任意$u\in U$都有$Tu\in U\subseteq V$,又因为$T$是正的,于是
+    \[\inprod{T|_Uu}{u}=\inprod{Tu}{u}\geqslant0\]
+    于是$T|_U$是$U$上的正算子.
+\end{proof}
+\begin{problem}[12.]
+    设$T\in\L(V)$是正算子,试证明:对于任意$k\in\N^*$,$T^k$都是正算子.
+\end{problem}
+\begin{proof}
+    由于$T$是正算子,于是$T$关于$V$的某组规范正交基$\li e,n$有对角矩阵
+    \[\M(T)=\begin{pmatrix}
+        \lambda_1&\cdots&0\\
+        \vdots&\ddots&\vdots\\
+        0&\cdots&\lambda_n
+    \end{pmatrix}\]
+    且$\li\lambda,n\geqslant0$.\\
+    于是$T^k$关于这基的矩阵为
+    \[\M(T^k)=(\M(T))^k=\begin{pmatrix}
+        \lambda_1^k&\cdots&0\\
+        \vdots&\ddots&\vdots\\
+        0&\cdots&\lambda_n^k
+    \end{pmatrix}\]
+    这是对角线均为非负数的对角矩阵,从而$T^k$也是正算子.
+\end{proof}
+\begin{problem}[13.]
+    设$T\in\L(V)$是自伴的,设$\alpha\in\R$.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:$T-\alpha I$是正算子,当且仅当$\alpha$不大于$T$的任意特征值.
+        \item 试证明:$\alpha I-T$是正算子,当且仅当$\alpha$不小于$T$的任意特征值.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由于$T$是自伴算子,于是考虑$V$的某个规范正交基$\li e,n$使得$T$关于其有对角矩阵
+            \[\M(T)=\begin{pmatrix}
+                \lambda_1&\cdots&0\\
+                \vdots&\ddots&\vdots\\
+                0&\cdots&\lambda_n
+            \end{pmatrix}\]
+            则$\li\lambda,n$为$T$的特征值.\\
+            于是$T-\alpha I$关于这基的矩阵为
+            \[\M(T-\alpha I)=\begin{pmatrix}
+                \lambda_1-\alpha&\cdots&0\\
+                \vdots&\ddots&\vdots\\
+                0&\cdots&\lambda_n-\alpha
+            \end{pmatrix}\]
+            因为$\alpha\leqslant\displaystyle\min_{k\in\{1,\cdots,n\}}\{\lambda_k\}$,于是$\lambda_1-\alpha,\cdots,\lambda_n-\alpha\geqslant0$.\\
+            于是$T-\alpha I$关于这基有对角线元素非负的对角矩阵,于是$T-\alpha I$是正算子.
+        \item 与\tbf{(1)}类似,不再赘述.
+    \end{enumerate}
+\end{proof}
 \end{document}
