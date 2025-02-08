@@ -195,4 +195,196 @@
         \item 与\tbf{(1)}类似,不再赘述.
     \end{enumerate}
 \end{proof}
+\begin{problem}[14.]
+    设$T$是$V$上的正算子,$\li v,m\in V$.试证明
+    \[\sum_{j=1}^{m}\sum_{k=1}^{m}\inprod{Tv_k}{v_j}\geqslant0\]
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        \sum_{j=1}^{m}\sum_{k=1}^{m}\inprod{Tv_k}{v_j}
+        &= \sum_{j=1}^{m}\inprod{Tv_1+\cdots+Tv_m}{v_j} \\
+        &= \sum_{j=1}^{m}\inprod{T(\li v+m)}{v_j} \\
+        &= \inprod{T(\li v+m)}{\li v+m} \\
+        &\geqslant0
+    \end{aligned}\]
+\end{proof}
+\begin{problem}[15.]
+    设$T\in\L(V)$是自伴的,试证明:存在正算子$A,B\in\L(V)$使得
+    \[T=A-B\text{\ \ 且\ \ }\sqrt{TT^*}=A+B\text{\ \ 且\ \ }AB=BA=\mbf0\]
+\end{problem}
+\begin{proof}
+    由于$T$是自伴的,于是存在由$T$的特征向量$\li e,n,\li f,m$构成的$V$的规范正交基.\\
+    不妨设它们对应的特征值为$\li\lambda,n,\li\mu,m$,其中$\li\lambda,n\geqslant0,\li\mu,m<0$.\\
+    令$A,B\in\L(V)$满足对所有$k\in\{1,\cdots,n\}$和$j\in\{1,\cdots,m\}$有
+    \[\left\{\begin{array}{l}
+        Ae_k=\lambda_ke_k\\Af_j=\mbf0
+    \end{array}\right.\ \ \ \ \ 
+    \left\{\begin{array}{l}
+        Be_k=\mbf0\\Bf_j=-\mu_jf_j
+    \end{array}\right.\]
+    考虑它们的矩阵,不难验证题设的条件成立.于是命题得证.
+\end{proof}
+\begin{problem}[16.]
+    设$T$是$V$上的正算子.试证明:$\nul\sqrt{T}=\nul T$且$\range\sqrt{T}=\range T$.
+\end{problem}
+\begin{proof}
+    注意到$\sqrt{T}$是正算子,于是$\sqrt{T}$是正规的.根据\tbf{7A.27}可知
+    \[\nul T=\nul(\sqrt{T})^2=\nul\sqrt{T},\range T=\range(\sqrt{T})^2=\range\sqrt T\]
+\end{proof}
+\begin{problem}[17.]
+    设$T\in\L(V)$是正算子,试证明:存在实系数多项式$p$使得$\sqrt{T}=p(T)$.
+\end{problem}
+\begin{proof}
+    考虑$T$的特征向量$\li e,n$构成的$V$的规范正交基和对应的特征值$\li\lambda,n$.\\
+    由于$T$是正算子,于是$\lambda_k\geqslant0$.令$p\in\P(\R)$满足
+    \[p(\lambda_k)=\sqrt{\lambda_k},\forall k\in\{1,\cdots,n\}\]
+    于是对于任意$k\in\{1,\cdots,n\}$有
+    \[\sqrt{T}e_k=\sqrt{\lambda_k}e_k=p(\lambda_k)e_k=p(T)e_k\]
+    于是$\sqrt{T}=p(T)$.
+\end{proof}
+\begin{problem}[18.]
+    设$S$和$T$是$V$上的正算子.试证明:$ST$是正算子,当且仅当$S$和$T$可交换.
+\end{problem}
+\begin{proof}
+    根据\tbf{7A.9},如果$S$和$T$不可交换,那么$ST$不是自伴算子,也就不是正算子.\\
+    现在假设$S,T$可交换,于是根据\tbf{7B.16/17}可知存在$V$的规范正交基$\li e,n$使得$S,T$关于其有对角矩阵.\\
+    不妨设
+    \[\M(S)=\begin{pmatrix}
+        \mu_1&\cdots&0\\
+        \vdots&\ddots&\vdots\\
+        0&\cdots&\mu_n
+    \end{pmatrix}\ \ \ \ \ 
+    \M(T)=\begin{pmatrix}
+        \lambda_1&\cdots&0\\
+        \vdots&\ddots&\vdots\\
+        0&\cdots&\lambda_n
+    \end{pmatrix}\]
+    于是
+    \[\M(TS)=\begin{pmatrix}
+        \mu_1\lambda_1&\cdots&0\\
+        \vdots&\ddots&\vdots\\
+        0&\cdots&\mu_n\lambda_n
+    \end{pmatrix}\]
+    其中$\mu_1\lambda_1,\cdots,\mu_n\lambda_n\geqslant0$.于是$ST$是正算子.
+\end{proof}
+\begin{problem}[19.]
+    试证明:$\F^2$上的恒等算子具有无穷多个自伴的平方根.
+\end{problem}
+\begin{proof}
+    对于任意$t\in(0,1)$,令$T\in\L(\F^2)$关于其标准基的矩阵为
+    \[\M(T)=\begin{pmatrix}
+        \sqrt{1-t^2}&t\\t&-\sqrt{1-t^2}
+    \end{pmatrix}\]
+    不难验证$\M(T^2)=(\M(T))^2=I$,且$T$是自伴的.于是存在无穷多个$T$使得$T^2=I$.
+\end{proof}
+\begin{problem}[20.]
+    设$T\in\L(V)$,$\li e,n$是$V$的规范正交基.试证明:$T$是正算子,当且仅当存在$\li v,n\in V$使得
+    \[\inprod{Te_k}{e_j}=\inprod{v_k}{v_j}\]
+    对所有$j,k=1,\cdots,n$成立.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$T$是正算子,那么$\sqrt{T}$自伴.于是
+    \[\inprod{Te_k}{e_j}=\inprod{\sqrt{T}\sqrt{T}e_k}{e_j}=\inprod{\sqrt{T}e_k}{\sqrt{T}e_j}\]
+    对于任意$j,k\in\{1,\cdots,n\}$都成立.于是令$v_k=\sqrt{T}e_k$即可.\\
+    $\Leftarrow$:设$R\in\L(V)$使得$Re_k=v_k$.于是
+    \[\inprod{Te_k}{e_j}=\inprod{v_k}{v_j}=\inprod{Re_k}{Re_j}=\inprod{R^*Re_k}{e_j}\]
+    于是$\M(T,(\li e,n))=\M(R^*R,(\li e,n))$,即$T=R^*R$.根据正算子的性质可知$T$是正算子.
+\end{proof}
+\begin{problem}[21.]
+    设$n\in\N^*$.$n\times n$的\tbf{希尔伯特矩阵}是第$j$行第$k$列元素为$\dfrac{1}{j+k-1}$的$n\times n$矩阵.%
+    设算子$T\in\L(V)$关于$V$的某个规范正交基的矩阵为$n\times n$阶希尔伯特矩阵,试证明:$T$是可逆正算子.
+\end{problem}
+\begin{proof}
+    设这组规范正交基为$\li e,n$.考虑$v:=x_1e_1+\cdots+x_ne_n\in V$,我们有
+    \[\begin{aligned}
+        \inprod{Tv}{v}
+        &= \inprod{\sum_{k=1}^{n}x_kTe_k}{\sum_{j=1}^{n}x_je_j} 
+        = \sum_{j,k=1}^{n}\overline{x_j}x_k\inprod{Te_k}{e_j} \\
+        &= \sum_{j,k=1}^{n}\dfrac{\overline{x_j}x_k}{j+k-1} 
+        = \sum_{j,k=1}^{n}\overline{x_j}x_k\int_{0}^{1}t^{j+k-2}\di t \\
+        &= \int_0^1\sum_{j,k=1}^{n}\overline{x_j}x_kt^{j+k-2}\di t \\
+        &= \int_0^1\left(\sum_{j=1}^{n}\overline{x_j}t^{j-1}\right)\left(\sum_{k=1}^{n}x_kt^{k-1}\right)\di t \\
+        &= \int_0^1\overline{\left(\sum_{j=1}^nx_jt^{j-1}\right)}\left(\sum_{k=1}^{n}x_kt^{k-1}\right)\di t \\
+        &= \int_0^1\left|\sum_{k=1}^{n}x_kt^{k-1}\right|^2\di t
+        \geqslant0
+    \end{aligned}\]
+    于是$T$是正算子.当$\inprod{Tv}{v}=0$时,要求
+    \[\sum_{k=1}^{n}x_kt^{k-1}=0\]
+    对任意$t\in[0,1]$成立.于是$\li x=n=0$,即$v=\mbf0$,从而$\nul T=\{\mbf0\}$,于是$T$可逆.\\
+    因此$T$是可逆正算子.
+\end{proof}
+\begin{problem}[22.]
+    设$T\in\L(V)$是正算子,$u\in V$满足$||u||=1$且$||Tu||\geqslant||Tv||$对所有满足$||v||=1$的$v\in V$成立.%
+    试证明:$u$是$T$的特征向量,对应于$T$的最大的特征值.
+\end{problem}
+\begin{proof}
+    考虑$T$的所有特征值$0\leqslant\li\lambda<n$.于是
+    \[V=E(\lambda_1,T)\oplus E(\lambda_n,T)\]
+    考虑$u=\li v+n$,其中$v_k\in E(\lambda_k,T)$.于是$1=||u||^2=||v_1||^2+\cdots+||v_n||^2$.于是
+    \[||Tu||^2=\lambda_1^2||v_1||^2+\cdots+\lambda_n^2||v_n||^2\leqslant\lambda_n^2\left(||v_1||^2+\cdots+||v_n||^2\right)=\lambda_n^2\]
+    现在考虑$w\in E(\lambda_n,T)$且$||w||=1$.根据题意,我们有
+    \[||Tw||^2=\lambda_n^2\leqslant||Tu||^2\]
+    于是$||Tu||=\lambda_n$.考虑第一个不等式的取等条件,当且仅当$\lambda_1=\cdots=\lambda_{n-1}=0$时成立,于是$u=v_n\in E(\lambda_n,T)$.\\
+    于是$u$是$T$的特征向量,对应于$T$最大的特征值.
+\end{proof}
+\begin{problem}[23.]
+    对于$T\in\L(V)$和$u,v\in V$,定义$\inprod{u}{v}_T$为$\inprod uv_T=\inprod{Tu}{v}$.回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$T\in\L(V)$.试证明:$\inprod{\cdot}{\cdot}_T$是$V$上的内积,当且仅当$T$是关于原内积的可逆正算子.
+        \item 试证明:$V$上的任意内积都具有$\inprod{\cdot}{\cdot}_T$的形式,其中$T$是某个$V$上的可逆正算子.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\Leftarrow$:我们依次证明$\inprod\cdot\cdot_T$具有内积的性质.
+            \begin{enumerate}[label=\tbf{(\alph*)}]
+                \item \tbf{正性}:由于$T$是正算子,于是对于任意$v\in V$有
+                    \[\inprod{v}{v}_T=\inprod{Tv}{v}\geqslant0\]
+                \item \tbf{定性}:由于$\inprod{Tv}{v}=0$当且仅当$v=\mbf0$,于是$\inprod{v}{v}_T=0$当且仅当$v=\mbf0$.
+                \item \tbf{可加性}:对于任意$u,v,w\in V$有
+                    \[\inprod{u+v}{w}_T=\inprod{T(u+v)}{w}=\inprod{Tu+Tv}{w}=\inprod{Tu}{w}+\inprod{Tv}{w}=\inprod{u}{w}_T+\inprod vw_T\]
+                \item \tbf{齐次性}:对于任意$\lambda\in\F$和任意$u,v\in V$有
+                    \[\inprod{\lambda u}{v}_T=\inprod{T(\lambda u)}{v}=\inprod{\lambda Tu}{v}=\lambda\inprod{Tu}{v}=\lambda\inprod{u}{v}_T\]
+                \item \tbf{共轭对称性}:由于$T$是正算子,于是$T$自伴,于是对于任意$u,v\in V$有
+                    \[\inprod uv_T=\inprod {Tu}v=\overline{\inprod{v}{Tu}}=\overline{\inprod{Tv}{u}}=\overline{\inprod{v}{u}_T}\]
+            \end{enumerate}
+            综上可以得出$\inprod\cdot\cdot_T$是$V$上的内积.\\
+            $\Rightarrow$:对于任意$u,v\in V$有
+            \[\inprod{Tu}{v}=\inprod{u}{v}_T=\overline{\inprod vu_T}=\overline{\inprod{Tv}{u}}=\inprod{u}{Tv}\]
+            从而$T$是自伴的.对于任意$v\in V$,我们有
+            \[\inprod{Tv}{v}=\inprod vv_T\geqslant0\]
+            当且仅当$v=\mbf0$时等式成立.于是根据\tbf{Lamma.L.11}可知$T$是可逆正算子.
+        \item 考虑$V$原有的内积$\inprod\cdot\cdot_1$和任意的内积$\inprod\cdot\cdot_2$.\\
+            考虑$V$关于$\inprod\cdot\cdot_1$的规范正交基$\li e,n$和关于$\inprod\cdot\cdot_2$的规范正交基$\li f,n$.\\
+            定义$R\in\L(V)$使得$Rf_k=e_k$对任意$k\in\{1,\cdots,n\}$都成立.由于$R$是基到基的映射,因此$R$可逆.\\
+            现在令$T=R^*R$,由于$R$可逆,那么$T$也可逆.根据正算子的性质可知$T$是正算子.\\
+            现在,对于任意$u:=a_1f_1+\cdots+a_nf_n$和$v:=b_1f_1+\cdots+b_nf_n$,我们有
+            \[\inprod{u}{v}_2=a_1\overline{b_1}+\cdots+a_n\overline{b_n}=\inprod{Ru}{Rv}_1=\inprod{R^*Ru}{v}_1=\inprod{Tu}{v}_1\]
+            从而存在可逆正算子$T\in\L(V)$使得$\inprod\cdot\cdot_2=\inprod\cdot\cdot_T$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[24.]
+    设$S,T$是$V$上的正算子.试证明:$\nul(S+T)=\nul S\cap\nul T$.
+\end{problem}
+\begin{problem}
+    根据\tbf{7C.6}可知$S+T$也是正算子.于是对于$v\in V$有
+    \[\begin{aligned}
+        v\in\nul(S+T)
+        &\Leftrightarrow\inprod{(S+T)v}{v}=0
+        \Leftrightarrow\inprod{Sv}{v}+\inprod{Tv}{v}=0 \\
+        &\Leftrightarrow\inprod{Sv}{v}=\inprod{Tv}{v}=0
+        \Leftrightarrow Sv=Tv=\mbf0 \\
+        &\Leftrightarrow v\in\nul S\cap\nul T
+    \end{aligned}\]
+    于是$\nul(S+T)=\nul S\cap\nul T$.
+\end{problem}
+\begin{problem}[25.]
+    令$T$是\tbf{7A.31(2)}中的二阶求导算子.试证明:$-T$是正算子.
+\end{problem}
+\begin{proof}
+    设$D$是\tbf{7A.31(1)}中的一阶求导算子,于是$T=D^2$且$D^*=-D$.于是对于任意$f\in V$有
+    \[\inprod{-Tf}{f}=\inprod{-D^2f}{f}=\inprod{D^*Df}{f}=\inprod{Df}{Df}=||Df||^2\geqslant0\]
+    于是$-T$是$V$上的正算子.
+\end{proof}
 \end{document}
