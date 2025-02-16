@@ -1,0 +1,136 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 7D}
+\end{center}
+\begin{problem}[1.]
+    设$\dim V\geqslant2 $,$S\in\L(V,W)$.试证明:$S$是等距映射,当且仅当对于任意$V$中一长度为$2$的规范正交组$e_1,e_2$都有$Se_1,Se_2$是$W$中的规范正交组.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:考虑$U=\span(e_1,e_2)$,于是$S|_U$是等距映射.\\
+    根据\tbf{7.49(d)}可知这等价于$Se_1,Se_2$是$\range(S|_U)$中的规范正交组,即$W$中的规范正交组.\\
+    $\Leftarrow$:考虑$V$的规范正交基$\li e,n$.对任意$j,k\in\{1,\cdots,n\}$且$j<k$有$Se_j,Se_k$是$W$中的规范正交组,即
+    \[||Se_j||=||Se_k||=1,\inprod{Se_j}{Se_k}=0\]
+    于是$\li {Se},n$是$W$中的规范正交组.根据\tbf{7.49(d)}可知$S$是等距映射.
+\end{proof}
+\begin{problem}[2.]
+    设$T\in\L(V,W)$,试证明:$T$是等距映射的标量倍,当且仅当$T$保持正交性.\\
+    \tbf{注}:所谓$T$保持正交性,即$\inprod{Tu}{Tv}=0$对所有满足$\inprod uv=0$的$u,v\in V$都成立.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$T$满足$T=\lambda S$,其中$S\in\L(V,W)$是等距映射.$\lambda\in\F$.\\
+    于是根据\tbf{7.49(c)}可知$\inprod{Su}{Sv}=\inprod uv$对所有$u,v\in V$都成立.于是
+    \[\inprod{Tu}{Tv}=\inprod{\lambda Su}{\lambda Sv}=|\lambda|^2\inprod{Su}{Sv}=|\lambda|^2\inprod uv=0\]
+    于是$T$保持正交性.\\
+    $\Leftarrow$:假定$T$保持正交性.设$\li e,n$为$V$的规范正交基,于是对于任意$k\in\{1,\cdots,n\}$有
+    \[\inprod{e_1+e_k}{e_1-e_k}=||e_1||-||e_k||=0\Rightarrow\inprod{Te_1+Te_k}{Te_1-Te_k}=||Te_1||-||Te_k||=0\]
+    于是令$\lambda=||Te_1||$,则有$\lambda=||Te_k||$对于任意$k\in\{1,\cdots,n\}$都成立.\\
+    若$\lambda=0$,则$T=0I$是等距映射的标量倍.若$\lambda\neq0$,那么令$S=\dfrac{T}{\lambda}$,则有
+    \[\inprod{e_j}{e_k}=0\Rightarrow\inprod{Te_j}{Te_k}=0\Rightarrow\inprod{\lambda Se_j}{\lambda Se_k}=0\Rightarrow\inprod{Se_j}{Se_k}=0\]
+    对所有$j,k\in\{1,\cdots,n\},j\neq k$成立.又因为$||Se_k||=\left|\left|\dfrac{Te_k}{\lambda}\right|\right|=\left|\dfrac{\lambda}{\lambda}\right|=1$,于是$\li {Se},n$是$W$中的规范正交组.\\
+    根据\tbf{7.49(d)}可知$S$是等距映射,于是$T$是等距映射的标量倍.
+\end{proof}
+\begin{problem}[3.]
+    证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $V$上的两酉算子之积是酉算子.
+        \item $V$上的酉算子之逆是酉算子.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 设$S,T\in\L(V)$是酉算子,$\li e,n$是$V$的规范正交基.\\
+            根据\tbf{7.53(d)}可知$\li {Se},n$是$V$的规范正交基,于是$T(Se_1),\cdots,T(Se_n)$是$V$的规范正交基.\\
+            于是$TS$是$V$上的酉算子.
+        \item 设$S\in\L(V)$是酉算子,由\tbf{7.53(c)}可知$S^{-1}=S^*$,由\tbf{7.53(f)}可知$S^*$是酉算子,于是命题得证.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[4.]
+    设$\F=\C$,且$A,B\in\L(V)$自伴.试证明:$A+\i B$是酉算子,当且仅当$AB=BA$且$A^2+B^2=I$.
+\end{problem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        A+\i B\text{是酉算子}
+        &\Leftrightarrow (A+\i B)(A+\i B)^*=I \\
+        &\Leftrightarrow (A+\i B)(A^*-\i B^*)= I \\
+        &\Leftrightarrow (A+\i B)(A-\i B)= I \\
+        &\Leftrightarrow A^2+B^2+\i(BA-AB)= I \\
+        &\Leftrightarrow A^2+B^2=I,AB=BA
+    \end{aligned}\]
+\end{proof}
+\begin{problem}[5.]
+    设$S\in\L(V)$.试证明下列命题等价.
+    \begin{enumerate}[label=\tbf(\alph*)]
+        \item $S$是自伴的酉算子.
+        \item $S=2P-I$,其中$P$是$V$上的某个正交投影.
+        \item 存在$V$的子空间$U$使得$Su=u$对任意$u\in U$成立而$Sw=-w$对所有$w\in U^\bot$成立.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \tbf{(a)}$\Rightarrow$\tbf{(b)}:设$S\in\L(V)$是自伴的酉算子,那么令$P=\dfrac{S+I}{2}$.\\
+    根据\tbf{7.53}可知$S^2=SS^*=I$,于是
+    \[P^2=\dfrac{S^2+2S+I}{4}=\dfrac{S+I}{2}=P\]
+    根据\tbf{7A.20(c)}可知存在$V$的子空间$U$使得$P=P_U$,于是$P$是$V$上的某个正交投影,此时有$S=2P-I$.\\
+    \tbf{(b)}$\Rightarrow$\tbf{(c)}:对任意$u\in U$有$Su=2Pu-u=u$,对任意$w\in U^\bot$有$Sw=2P_Uw-w=\mbf0-w=-w$.\\
+    \tbf{(c)}$\Rightarrow$\tbf{(a)}:对任意$v_1:=u_1+w_1,v_2:=u_2+w_2\in V$,其中$u_1,u_2\in U,w_1,w_2\in U^\bot$有
+    \[\inprod{Sv_1}{v_2}=\inprod{u_1-w_1}{u_2+w_2}=\inprod{u_1}{u_2}-\inprod{w_1}{w_2}=\inprod{u_1+w_1}{u_2-w_2}=\inprod{v_1}{Sv_2}\]
+    于是$S$自伴.另外我们有
+    \[S^2v=S^2(u+w)=S(u-w)=u+w=v\]
+    于是$S^2=I$,即$SS^*=S^*=I$,因而$S$是酉算子.
+\end{proof}
+\begin{problem}[6.]
+    设$T_1,T_2$都是$\F^3$上以$2,5,7$为特征值的正规算子.试证明:存在酉算子$S\in\L(\F^3)$使得$T_1=S^*T_2S$.
+\end{problem}
+\begin{proof}
+    令$\li\lambda,3$为$T_1,T_2$共有的特征值.设$T_1$对应的特征向量为$\li e,3$,$T_2$对应的特征向量为$\li f,3$.\\
+    于是$\li e,3$和$\li f,3$均为$V$的基.现在,令$Se_k=f_k$对$k=1,2,3$成立,于是
+    \[Te_k=S^*T_2Se_k=S^{-1}T_2Se_k=S^{-1}T_2f_k=S^{-1}\lambda_k f_k=\lambda_ke_k\]
+    对$k=1,2,3$成立,从而$T=S^*T_2S$.
+\end{proof}
+\begin{problem}[7.]
+    给出两个自伴算子$T_1,T_2\in\L(\F^4)$使得其特征值均为$2,5,7$但不存在一酉算子$S\in\L(V)$使得$T_1=S^*T_2S$.
+\end{problem}
+\begin{proof}
+    令$T_1,T_2$关于$\F^4$的标准基$\li e,4$的矩阵为
+    \[\M(T_1)=\begin{pmatrix}
+        2&0&0&0\\
+        0&2&0&0\\
+        0&0&5&0\\
+        0&0&0&7
+    \end{pmatrix}\ \ \ \ \ 
+    \M(T_2)=\begin{pmatrix}
+        2&0&0&0\\
+        0&5&0&0\\
+        0&0&5&0\\
+        0&0&0&7
+    \end{pmatrix}\]
+    假定存在酉算子$S\in\L(V)$使得$T_1=S^*T_2S$.由于$SS^*=S^*S=I$,于是
+    \[T_1-2I=S^*T_2S-2S^*S=S^*(T_2S-2S)=S^*(T_2-2I)S\]
+    从而根据\tbf{3D.8}可知$\dim\nul(T_1-2I)=\dim\nul(T_2-2I)$.\\
+    然而根据两者的矩阵可以看出
+    \[\dim\nul(T_1-2I)=2\neq1=\dim\nul(T_2-2I)\]
+    于是命题不成立.
+\end{proof}
+\begin{problem}[8.]
+    证明或给出一反例:如果$S\in\L(V)$且存在$V$的一规范正交基$\li e,n$使得任意$e_k$都有$||Se_k||=1$,那么$S$是酉算子.
+\end{problem}
+\begin{proof}
+    考虑这样的规范正交基$\li e,n$,令$Se_k=e_1$对任意$e_k$成立.显然$S$不可逆,于是$S$不是酉算子.
+\end{proof}
+\begin{problem}[9.]
+    设$\F=\C$且$T\in\L(V)$.设$T$的每个特征值的绝对值都是$1$且$||Tv||\leqslant||v||$对任意$v\in V$都成立.试证明:$T$是酉算子.
+\end{problem}
+\end{document}
