@@ -133,4 +133,79 @@
 \begin{problem}[9.]
     设$\F=\C$且$T\in\L(V)$.设$T$的每个特征值的绝对值都是$1$且$||Tv||\leqslant||v||$对任意$v\in V$都成立.试证明:$T$是酉算子.
 \end{problem}
+\begin{proof}
+    根据Schur定理可知$T$关于$V$的某组规范正交基$\li e,n$有上三角矩阵$A$.\\
+    由于$T$的每个特征值的绝对值都是$1$,于是$|A_{1,1}|=\cdots=|A_{n,n}|$.对于任意$k\in\{2,\cdots,n\}$有
+    \[||Te_k||^2=\sum_{j=1}^{k}|A_{k,j}|^2=1+\sum_{j=1}^{k-1}|A_{k,j}|^2\leqslant||e_k||^2=1\]
+    于是
+    \[\sum_{j=1}^{k-1}|A_{k,j}|^2=0\]
+    这表明$A$是上三角矩阵,从而$\li e,n$均为$T$的特征向量.根据\tbf{7.53}可知$T$为酉算子.
+\end{proof}
+\begin{problem}[10.]
+    设$\F=\C$且$T\in\L(V)$是使得$||Tv||\leqslant||v||$对所有$v\in V$成立的自伴算子.证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $I-T^2$是正算子.
+        \item $T+\i\sqrt{I-T^2}$是酉算子.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由于$T$自伴,于是$I-T^2=(I-T)(I+T)=(I-T)^*(I+T)$.对于任意$v\in V$有
+            \[\inprod{(I-T^2)v}{v}=\inprod{(I-T)^*(I+T)v}{v}=\inprod{(I+T)v}{(I-T)v}=||v||^2-||Tv||^2\geqslant0\]
+            于是$I-T^2$是正算子.
+        \item 令$A=T,B=\sqrt{I-T^2}$.于是$A^2+B^2=I$.\\
+            由于$T(I-T^2)=T-T^3=(I-T^2)T$,于是$A$与$B^2$可交换.\\
+            又因为存在多项式$p$使得$B=p(B^2)$,于是$A$与$B$可交换.\\
+            根据\tbf{7D.4}可知$A+\i B$是酉算子.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[11.]
+    设$S\in\L(V)$.试证明:$S$是酉算子,当且仅当
+    \[\{Sv:v\in V,||v||\leqslant1\}=\{v\in V:||v||\leqslant 1\}\]
+\end{problem}
+\begin{proof}
+    设$X=\{Sv:v\in V,||v||\leqslant1\},Y=\{v\in V:||v||\leqslant 1\}$.\\
+    $\Rightarrow$:假设$S$是酉算子.对于任意$Sv\in X$都有$||Sv||=||v||\leqslant1$,从而$Sv\in Y$,即$X\subseteq Y$.\\
+    考虑到$S^{-1}$也是酉算子,于是上面的包含关系反过来也成立,从而$X=Y$.\\
+    $\Leftarrow$:假定$S$不是酉算子.\\
+    若$S$不可逆,那么考虑$(\range T)^\bot$中的非零向量$w$使得$||w||=1$,则有$w\in Y$.\\
+    由于$w\in(\range T)^\bot$,于是不存在$v\in V$使得$Sv=w$,从而$w\notin X$,从而$X\neq Y$.\\
+    若$S$可逆,那么存在$v\in V$使得$||Sv||\neq||v||$.不失一般性地,假定$||v||=1$.\\
+    若$||Sv||>1$,那么$Sv\in X$且$Sv\notin Y$.于是$X\neq Y$.\\
+    若$0<||Sv||<1$,那么令$u=\dfrac{Sv}{||Sv||}$,则有$u\in Y$.现在假定$u\in X$,于是存在$w\in V$使得$Sw=u$,那么我们有
+    \[Sw=\dfrac{Sv}{||Sv||}\Rightarrow v=||Sv||w\Rightarrow||v||<1\]
+    这和我们的假设不符,于是$u\notin X$,从而$X\neq Y$.\\
+    于是我们知道当$X=Y$是必然有$S$是酉算子.
+\end{proof}
+\begin{problem}[12.]
+    证明或给出一反例:如果$S\in\L(V)$可逆且$||S^{-1}v||=||Sv||$对任意$v\in V$都成立,那么$S$是酉算子.
+\end{problem}
+\begin{proof}
+    设$S\in\L(\C^2)$关于$\C^2$的标准基的矩阵为$\begin{pmatrix}
+        \i&\sqrt2\\\sqrt2&-\i
+    \end{pmatrix}$.\\
+    我们有$S^2=I$,于是$S^{-1}=S$.而
+    \[||S(1,0)||=||(\i,\sqrt2)||=\sqrt3\neq1=||(0,1)||\]
+    于是$S$不是酉算子.
+\end{proof}
+\begin{problem}[13.]
+    试证明:复数构成的方阵的列构成$\C^n$中的规范正交组,当且仅当其行可构成$\C^n$中的规范正交组.
+\end{problem}
+\begin{proof}
+    我们设这方阵为$A$,是$S\in\L(\C^n)$关于其标准正交基的矩阵.于是
+    \[\begin{aligned}
+        A\text{的列构成}\C^n\text{中的规范正交组}
+        \Leftrightarrow S\text{是酉算子}
+        A\text{的行构成}\C^n\text{中的规范正交组}
+    \end{aligned}\]
+\end{proof}
+\begin{problem}[14.]
+    设$v\in V$且$||v||=1$,$b\in\F$.又设$\dim V\geqslant2$.试证明:存在酉算子$S\in\L(V)$使得$\inprod{Sv}{v}=b$当且仅当$|b|\leqslant1$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:根据Cauchy-Schwarz不等式可知
+    \[|b|=|\inprod{Sv}{v}|\leqslant||Sv||||v||=||v||^2=1\]
+    于是$|b|\leqslant1$.\\
+    $\Leftarrow$:
+\end{proof}
 \end{document}
