@@ -204,8 +204,131 @@
 \end{problem}
 \begin{proof}
     $\Rightarrow$:根据Cauchy-Schwarz不等式可知
-    \[|b|=|\inprod{Sv}{v}|\leqslant||Sv||||v||=||v||^2=1\]
+    \[|b|=\left|\inprod{Sv}{v}\right|\leqslant||Sv||||v||=||v||^2=1\]
     于是$|b|\leqslant1$.\\
-    $\Leftarrow$:
+    $\Leftarrow$:令$e_1=v$,将其扩展为$V$的一组规范正交基为$\li e,n$.现在,定义$S\in\L(V)$如下
+    \[Se_1=be_1+\sqrt{1-b^2}e_2,Se_2=be_2-\sqrt{1-b^2}e_1,Se_k=e_k(k\geqslant3)\]
+    我们有
+    \[\inprod{Sv}{v}=\inprod{be_1+\sqrt{1-b^2}e_2}{e_1}=\inprod{be_1}{e_1}=b\]
+    \[\inprod{Se_1}{Se_2}=\inprod{be_1+\sqrt{1-b^2}e_2}{be_2-\sqrt{1-b^2}e_1}=b\sqrt{1-b^2}-b\sqrt{1-b^2}=0\]
+    于是不难验证$\li{Se},n$是$V$的规范正交基,且有$\inprod{Sv}{v}=b$.这样的$S$自然是酉算子.
+\end{proof}
+\begin{problem}[15.]
+    设$T$是$V$上的酉算子,$T-I$可逆.证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $(T+I)(T-I)^{-1}$是斜算子.
+        \item 若$\F=\C$,那么$\i(T+I)(T-I)^{-1}$是自伴算子.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 令$R=(T-I)^{-1}$.\\
+            于是$(T-I)(T+I)^*=TT^*+T-T^*-I=T-T^*$,即$(T+I)^*=R(T-T^*)$.于是
+            \[\left[(T+I)(T-I)^{-1}\right]^*=R^*R(T-T^*)\]
+            又$(T+I)(T^*-I)=T^*-T$,于是$T+I=-(T-T^*)(T^*-I)^{-1}=-(T-T^*)R^*$,于是
+            \[-(T+I)(T-I)^{-1}=(T-T^*)R^*R\]
+            另外,注意到
+            \[\left(R^*R\right)^{-1}T=(T-I)(T^*-I)T=(2I-T-T^*)T=T(2I-T-T^*)=T(R^*R)^{-1}\]
+            对上式两端取逆可得$T^*(R^*R)=(R^*R)T^*$.同样可知$R^*R$与$T$可交换,于是$R^*R$与$T-T^*$可交换.\\
+            因此$\left[(T+I)(T-I)^{-1}\right]^*=-(T+I)(T-I)^{-1}$,即$(T+I)(T-I)^*$是斜算子.
+        \item 我们有
+            \[\left[\i(T+I)(T-I)^{-1}\right]^*=-\i\left[(T+I)(T-I)^{-1}\right]^*=-\i\left(-(T+I)(T-I)^{-1}\right)=\i(T+I)(T-I)^{-1}\]
+            于是$\i(T+I)(T-I)^{-1}$是自伴算子.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[16.]
+    设$\F=\C$且$T\in\L(V)$是自伴的.试证明:$(T+\i I)(T-\i I)^{-1}$是酉算子且$1$不是其特征值.
+\end{problem}
+\begin{proof}
+    令$Q=(T+\i I)(T-\i I)^{-1}$.复谱定理表明存在$T$的特征向量$\li e,n$构成的$V$的规范正交基.\\
+    由于$T$是自伴的,于是上述特征向量对应的特征值$\li\lambda,n$均为实数.现在,对于任意$j\in\{1,\cdots,n\}$有
+    \[(T-\i I)e_k=Te_k-\i Ie_k=\lambda_ke_k-\i e_k=(\lambda_k-\i)e_k\]
+    于是
+    \[Qe_k=(T+\i I)(T-\i I)^{-1}e_k=(T+\i I)\dfrac{e_k}{\lambda_k-\i}=\dfrac{\lambda_k+\i}{\lambda_k-i}e_k\]
+    而
+    \[||Qe_k||=\left|\dfrac{\lambda_k+\i}{\lambda_k-i}\right|||e_k||=\left|\dfrac{\lambda_k^2-1+2\lambda_k\i}{\lambda_k^2+1}\right|
+    =\sqrt{\left(\dfrac{\lambda_k^2-1}{\lambda_k^2+1}\right)^2+\left(\dfrac{2\lambda_k}{\lambda_k^2+1}\right)^2}=1\]
+    于是$\li{Qe},n$是$V$的规范正交基,因而$Q$是酉算子.\\
+    另外,$Q$的特征值总是满足$\dfrac{\lambda_k+\i}{\lambda_k-\i}$的形式,其中$\lambda_k\in\R$,于是它总是虚数,不可能为$1$.
+\end{proof}
+\begin{problem}[17.]
+    解释\tbf{7.57}中给出的酉矩阵的结论为何成立.
+\end{problem}
+\begin{proof}
+    我们考虑$\F^n$的规范正交基$\li e,n$.于是每个方阵都对应于$\F^n$上的算子,其结论就与酉算子的性质等价.
+\end{proof}
+\begin{problem}[18.]
+    方阵$A$被称为是\tbf{对称的},如果$A=A^\text{t}$.证明:如果$A$是实对称矩阵,那么存在实的酉矩阵$Q$使得$Q^*AQ$是对角矩阵.
+\end{problem}
+\begin{proof}
+    设$\F=\R$,考虑$\R^n$的某规范正交基$\li e,n$,设$A$是$T\in\L(\R^n)$关于这组基的矩阵,那么$T=T^{-1}=T^*$.\\
+    根据实谱定理,存在$\R^n$的规范正交基$\li f,n$使得$D:=\M(T,(\li f,n))$是对角矩阵.\\
+    现在,令$Q=\M(I,(\li f,n),(\li e,n))$.根据换基公式有
+    \[D=Q^{-1}AQ\]
+    由于$Q$对应的算子为酉算子,于是$Q$为酉矩阵,因而$Q^*=Q^{-1}$.因此有
+    \[D=Q^*AQ\]
+\end{proof}
+\begin{problem}[19.]
+    设$n\in\N^*$.我们采取如下记号:将$\C^n$的元素记为$z=(z_0,\cdots,z_{n-1})$.定义$C^n$上的线性泛函$\omega_0,\cdots,\omega_{n-1}$为
+    \[\omega_j(z_0,\cdots,z_{n-1})=\dfrac{1}{\sqrt{n}}\sum_{m=0}^{n-1}z_m\e^{-\frac{2\pi\i jm}{n}}\]
+    \tbf{离散傅里叶变换}即定义为$\mathcal{F}z=\left(\omega_0(z),\cdots,\omega_{n-1}(z)\right)$的算子$\F\in\L(\C^n)$.证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\mathcal{F}$是$\C^n$上的酉算子.
+        \item 如果$(z_0,\cdots,z_{n-1})\in\C^n$,规定$z_n=z_0$,那么
+            \[\mathcal{F}^{-1}(z_0,\cdots,z_{n-1})=\mathcal{F}(z_n,\cdots,z_1)\]
+        \item $\mathcal{F}^4=I$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$\C^n$的标准正交基$e_0,\cdots,e_{n-1}$.对于任意$j,k\in\{0,\cdots,n-1\}$有
+            \[\omega_je_k=\dfrac{\e^{\frac{2\pi\i jk}{n}}}{\sqrt{n}}=\dfrac{\alpha^{jk}}{\sqrt{n}},\alpha=\e^{-\frac{2\pi\i}{n}}\]
+            于是$\mathcal{F}$关于该基的矩阵为
+            \[\M(\mathcal{F})=\dfrac{1}{\sqrt{n}}\begin{pmatrix}
+                1&1&1&\cdots&1\\
+                1&\alpha&\alpha^2&\cdots&\alpha^{n-1}\\
+                1&\alpha^2&\alpha^4&\cdots&\alpha^{2(n-1)}\\
+                \vdots&\vdots&\vdots&\ddots&\vdots\\
+                1&\alpha^{n-1}&\alpha^{2(n-1)}&\cdots&\alpha^{(n-1)^2}
+            \end{pmatrix}\]
+            记$\M(\mathcal{F})=A$.现在考虑$j,k\in\{0,\cdots,n-1\}$.$A$的第$j$列和第$k$列的内积为
+            \[\inprod{A_{\cdot,j}}{A_{\cdot,k}}=\dfrac{1}{n}\sum_{m=0}^{n-1}\left(\alpha^j\overline{\alpha^k}\right)^m\]
+            注意到
+            \[\overline{\e^{t\i}}=\overline{\cos t+\i\sin t}=\cos(-t)+\i\sin(-t)=\e^{-t\i}\]
+            于是
+            \[\inprod{A_{\cdot,j}}{A_{\cdot,k}}=\dfrac{1}{n}\sum_{m=0}^{n-1}\e^{\frac{2\pi\i(k-j)m}{n}}\]
+            当$j=k$时有
+            \[||A_{\cdot,j}||=\dfrac 1n\sum_{m=0}^{n-1}1=1\]
+            当$j\neq k$时有
+            \[\inprod{A_{\cdot,j}}{A_{\cdot,k}}=\dfrac{1}{n}\sum_{m=0}^{n-1}\e^{\frac{2\pi\i(k-j)m}{n}}=\dfrac 1n\cdot\dfrac{1-\e^{2\pi\i(k-j)}}{1-\e^{\frac{2\pi\i(k-j)}{n}}}=0\]
+            于是$A$的各列构成$\C^n$的规范正交基,因而$\F$是酉算子.
+        \item 考虑线性映射$\mathcal{G}$使得$\mathcal{G}(z_0,\cdots,z_{n-1})=\mathcal{F}(z_n,\cdots,z_1)$.于是
+            \[\mathcal{G}e_k=\left\{\begin{array}{l}
+                \mathcal{F}e_0,k=0\\
+                \mathcal{F}e_{n-k},1\leqslant k<n
+            \end{array}\right.\]
+            令$A=\M(\mathcal{F}),B=\M(\mathcal{G})$,于是
+            \[B_{j,k}=\left\{\begin{array}{l}
+                A_{j,k},k=0\\
+                A_{j,n-k},1\leqslant k<n
+            \end{array}\right.\]
+            注意到$k>0$时
+            \[B_{j,k}=A_{j,n-k}=\dfrac{1}{\sqrt n}\e^{\frac{2\pi\i(n-k)j}{n}}=\dfrac{1}{\sqrt n}\e^{2\pi\i-\frac{2\pi\i kj}{n}}=\overline{\dfrac{1}{\sqrt n}\e^{\frac{2\pi\i kj}{n}}}=\overline{A_{k,j}}=A^*_{j,k}\]
+            又$B_{1,k}=1=A^*{j,k}$.于是$B=A^*$,从而$\mathcal{G}=\mathcal{F}^*$.\\
+            由于$\mathcal{F}$是酉算子,于是$\mathcal{F}^*=\mathcal{F}^{-1}$,即$\mathcal{G}=\mathcal{F}^{-1}$.
+        \item 注意到
+            \[\mathcal{F}^2(z_0,\cdots,z_{n-1})=(z_{n},\cdots,z_1)\]
+            又
+            \[\mathcal{F}^2(z_n,\cdots,z_{n-1})=(z_0,\cdots,z_{n-1})\]
+            于是$\mathcal{F}^4=I$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[20.]
+    设$A$是各列线性无关的方阵,试证明:存在唯一的矩阵$R,Q$使得$A=RQ$,其中$R$是对角线上仅有正数的下三角矩阵,而$Q$是酉矩阵.
+\end{problem}
+\begin{proof}
+    由于$A$的各列线性无关,因而其各行也线性无关,于是$A^*$的各列线性无关.\\
+    根据QR分解,存在唯一的矩阵$P,U$使得$A^*=PU$,其中$P$是酉矩阵,而$U$是对角线上仅有正数的上三角矩阵.\\
+    对上式两边取复共轭可得$A=U^*P^*$,令$R=U^*,Q=P^*$即可证得该命题.
 \end{proof}
 \end{document}
