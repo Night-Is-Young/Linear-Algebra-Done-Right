@@ -1,0 +1,289 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 7E}
+\end{center}
+\begin{problem}[1.]
+    设$T\in\L(V,W)$.试证明:$T=\mbf0$,当且仅当$T$的所有奇异值均为$0$.
+\end{problem}
+\begin{proof}
+    根据\tbf{7A.2}可知
+    \[T=\mbf0\Leftrightarrow T^*T=\mbf0\Leftrightarrow T\text{的所有特征值均为}0\]
+\end{proof}
+\begin{problem}[2.]
+    设$T\in\L(V,W)$,$s>0$.试证明:$s$是$T$的奇异值,当且仅当存在非零的$v\in V$和非零的$w\in W$使得$Tv=sw$且$T^*w=sv$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:假定$s$是$T$的奇异值,那么设存在非零的$u\in V$使得$T^*Tu=s^2u$.\\
+    令$w=Tu$,$v=su$,那么$Tv=T(su)=sTu=sw$,$T^*w=T^*Tu=s^2u=sv$.\\
+    $\Leftarrow$:假定存在这样的$v,w$.令$u=\dfrac{v}{s}$,那么$u\neq\mbf0$,于是
+    \[T^*Tu=T^*\dfrac{Tv}{s}=T^*w=sv=s^2u\]
+    于是$s$是$T^*T$的特征值的非负平方根,即$T$的奇异值.
+\end{proof}
+\begin{problem}[3.]
+    给出一例$T\in\L(\C^2)$,$0$是$T$的唯一特征值,而$T$的奇异值却是$0$和$5$.
+\end{problem}
+\begin{solution}
+    令$T$关于$\C^2$的标准基的矩阵为
+    \[\M(T)=\begin{pmatrix}
+        0&5\\0&0
+    \end{pmatrix}\]
+    这是一个上三角矩阵,于是$T$的特征值仅有$0$.而
+    \[\M(T^*T)=\begin{pmatrix}
+        0&5\\0&0
+    \end{pmatrix}\begin{pmatrix}
+        0&0\\5&0
+    \end{pmatrix}=\begin{pmatrix}
+        0&0\\0&25
+    \end{pmatrix}\]
+    于是$T$的特征值为$0,5$.
+\end{solution}
+\begin{problem}[4.]
+    设$T\in\L(V,W)$,$s_1$是$T$的最大奇异值,$s_n$是$T$的最小奇异值.试证明:$\{||Tv||:v\in V,||v||=1\}=[s_n,s_1]$.
+\end{problem}
+\begin{proof}
+    令$X=\{||Tv||:v\in V,||v||=1\}$我们分情况讨论.\\
+    \tbf{Case 1.}$s_1=0$.这表明$T$的所有奇异值均为$0$,从而根据\tbf{7E.1}可知$T=\mbf0$.于是$||Tv||=0$对所有$v\in V$成立.\\
+    \tbf{Case 2.}$s_1=s_n>0$.这表明$\dfrac{T}{s_1}$是等距映射,从而$||Tv||=s_1$对所有$v\in V$且$||v||=1$成立.\\
+    \tbf{Case 3.}$s_1>s_n>0$.考虑$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    于是对于满足$||v||=1$的$v\in V$有
+    \[||Tv||^2=s_1^2\left|\inprod{v}{e_1}\right|^2+\cdots+s_n^2\left|\inprod{v}{e_n}\right|^2\]
+    由于$||v||^2=\left|\inprod{v}{e_1}\right|^2+\cdots+\left|\inprod{v}{e_n}\right|^2=1$,于是
+    \[s_n^2\leqslant||Tv||^2\leqslant s_1^2\Rightarrow ||Tv||\in[s_n,s_1]\]
+    因此$X\subseteq[s_n,s_1]$.现在对于任意$p\in[s_n,s_1]$,令$v=\sqrt{\dfrac{p^2-s_n^2}{s_1^2-s_n^2}}e_1+\sqrt{\dfrac{s_1^2-p^2}{s_1^2-s_n^2}}e_n$.于是
+    \[||v||=1,||Tv||=\sqrt{s_1^2\cdot\dfrac{p^2-s_n^2}{s_1^2-s_n^2}+s_n^2\cdot\dfrac{s_1^2-p^2}{s_1^2-s_n^2}}=\sqrt{p^2}=p\]
+    于是$[s_n,s_1]\subseteq X$,即$X=[s_n,s_1]$.\\
+    综上可知命题得证.
+\end{proof}
+\begin{problem}[5.]
+    设$T\in\L(\C^2)$定义为$T(x,y)=(-4y,x)$,求$T$的奇异值.
+\end{problem}
+\begin{solution}
+    考虑$T$关于$\C^2$的标准基的矩阵为
+    \[\begin{pmatrix}
+        0&1\\-4&0
+    \end{pmatrix}\]
+    于是
+    \[\M(T^*T)=\begin{pmatrix}
+        0&-4\\1&0
+    \end{pmatrix}\begin{pmatrix}
+        0&1\\-4&0
+    \end{pmatrix}=\begin{pmatrix}
+        16&0\\0&1
+    \end{pmatrix}\]
+    于是$T$的奇异值为$1$和$4$.
+\end{solution}
+\begin{problem}[6.]
+    求定义为$Dp=p'$的微分算子$D\in\L(\P_2(\R))$的奇异值,其中$\P_2(\R)$的内积如\tbf{6.34}所示.
+\end{problem}
+\begin{solution}
+    根据\tbf{6.34}可知$\P_2(\R)$的一组规范正交基为$\sqrt{\dfrac12},\sqrt{\dfrac32}x,\sqrt{\dfrac{45}{8}}\left(x^2-\dfrac13\right)$.$D$关于这基的矩阵为
+    \[\M(D)=\begin{pmatrix}
+        0&\sqrt{3}&0\\
+        0&0&\sqrt{15}\\
+        0&0&0
+    \end{pmatrix}\]
+    于是
+    \[\M(D^*D)=\begin{pmatrix}
+        0&0&0\\0&3&0\\0&0&15
+    \end{pmatrix}\]
+    于是$D$的奇异值为$0$,$\sqrt{3}$和$\sqrt{15}$.
+\end{solution}
+\begin{problem}[7.]
+    设$T\in\L(V)$是自伴的(当$\F=\C$是可令$T$是正规的),令$\li\lambda,n$为$T$的特征值,每个特征值出现的次数等于其对应特征空间的维数.%
+    试证明:$T$的奇异值是按降序排列后的$|\lambda_1|,\cdots,|\lambda_n|$.
+\end{problem}
+\begin{proof}
+    不妨假定$\li\lambda,n$已经按照绝对值大小降序排列好.\\
+    根据谱定理,存在$T$的特征向量$\li e,n$构成的$V$的规范正交基.设它们分别对应于$\li\lambda,n$.于是
+    \[T^*Te_k=T^*\lambda_ke_k=\lambda_kT^*e_k=\lambda_k\overline{\lambda_k}e_k=|\lambda_k|^2e_k\]
+    根据奇异值的定义,$|\lambda_k|$即为$T$的奇异值,且按照大小降序排列好.
+\end{proof}
+\begin{problem}[8.]
+    设$T\in\L(V,W)$.设$\li s\geqslant n>0$,$\li e,n$和$\li f,n$分别是$V$和$W$中的规范正交组,使得
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    对所有$v\in V$成立.证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\li f,n$是$\range T$的规范正交基.
+        \item $\li e,n$是$(\nul T)^\bot$的规范正交基.
+        \item $\li s,n$是$T$的正奇异值.
+        \item 如果$k\in\{1,\cdots,n\}$,那么$e_k$是$T^*T$的特征向量,对应特征值为$s_k^2$.
+        \item $TT^*w=s_1^2\inprod{w}{f_1}f_1+\cdots+s_m^2\inprod{w}{f_n}f_n$对任意$w\in W$都成立.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由题意$\range T=\span(\li f,n)$.又因为$\li f,n$线性无关,故其为$V$的规范正交基.
+        \item 对任意$k\in\{1,\cdots,n\}$有
+            \[Te_k=s_1\inprod{e_k}{e_1}f_1+\cdots+s_n\inprod{e_k}{e_n}f_n=s_kf_k\neq\mbf0\]
+            于是$e_k\notin\nul T$,即$e\in(\nul T)^\bot$.\\
+            于是$(\nul T)^\bot=\span(\li e,n)$,又因为$\li e,n$线性无关,故其为$(\nul T)^\bot$的基.
+        \item 将$\li e,n$扩展为$V$的规范正交基$\li e,{\dim V}$.将$\li f,n$扩展为$W$的规范正交基$\li f,{\dim W}$.\\
+            于是不难有
+            \[Te_k=\left\{\begin{array}{l}
+                s_kf_k,1\leqslant k\leqslant n\\
+                \mbf0,k>n
+            \end{array}\right.\]
+            对于任意$j\in\{1,\cdots,\dim W\}$有
+            \[T^*f_j=\sum_{k=1}^{\dim V}\inprod{T^*f_j}{v_k}v_k=\sum_{k=1}^{\dim V}\inprod{f_j}{Te_k}e_k=\left\{\begin{array}{l}
+                s_je_j,1\leqslant k\leqslant n\\
+                \mbf0,j>n
+            \end{array}\right.\]
+            于是
+            \[T^*Te_k=\left\{\begin{array}{l}
+                s_k^2e_k,1\leqslant k\leqslant n\\
+                \mbf0,k>n
+            \end{array}\right.\]
+            于是$\li s,n$为$T$的正奇异值.
+        \item 我们在\tbf{(3)}中已经证明.
+        \item 在\tbf{(3)}中我们已经知道了$T^*f_j$的表达式.于是对任意$w\in W$有
+            \[TT^*w=TT^*\left(\sum_{j=1}^{\dim W}\inprod{w}{f_j}f_j\right)=T\left(\sum_{j=1}^{n}s_j\inprod{w}{f_j}e_j\right)=\sum_{j=1}^{n}s_j^2\inprod{w}{f_j}f_j\]
+    \end{enumerate}
+\end{proof}
+\begin{problem}[9.]
+    设$T\in\L(V,W)$.试证明:$T$和$T^*$的正奇异值相同.
+\end{problem}
+\begin{proof}
+    根据\tbf{7.75},考虑$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    和$T^*$的奇异值分解
+    \[T^*w=s_1\inprod{w}{f_1}e_1+\cdots+s_1\inprod{w}{f_n}e_n\]
+    观察两式可得$T$和$T^*$具有相同的特征值.
+\end{proof}
+\begin{problem}[10.]
+    设$T\in\L(V,W)$的奇异值是$\li s,n$.试证明:如果$T$是可逆线性映射,那么$T^{-1}$的奇异值为$\dfrac{1}{s_1},\cdots,\dfrac{1}{s_n}$.
+\end{problem}
+\begin{proof}
+    如果存在$k\in\{1,\cdots,n\}$使得$s_k=0$,那么设非零的$v\in V$使得$T^*Tv=0v=\mbf0$.\\
+    于是$\nul T=\nul T^*T\supseteq\span(v)$,从而$\nul T\neq\{\mbf0\}$,即$T$不可逆.\\
+    于是$T$的特征值均为正数.考虑$T$的伪逆$T^\dagger$的奇异值分解
+    \[T^\dagger w=\dfrac{\inprod{w}{f_1}}{s_1}e_1+\cdots+\dfrac{\inprod{w}{f_m}}{s_m}e_m\]
+    当$T$可逆时,$T^{-1}=T^\dagger$,于是根据\tbf{7E.8}可知$T^{-1}$的奇异值为$\dfrac{1}{s_1},\cdots,\dfrac{1}{s_n}$.
+\end{proof}
+\begin{problem}[11.]
+    设$T\in\L(V,W)$,$\li v,n$为$V$的规范正交基.令$\li s,n$表示$T$的奇异值.证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\displaystyle\sum_{k=1}^{n}||Tv_k||^2=\sum_{k=1}^{n}s_k^2$.
+        \item 如果$W=V$且$T$是正算子,那么
+            \[\sum_{k=1}^{n}\inprod{Tv_k}{v_k}=\sum_{k=1}^{n}s_k\]
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 考虑$V$的奇异值分解
+            \[Tv=\sum_{k=1}^{m}s_k\inprod{v}{e_k}f_k\]
+            并令其余$s_j=0(m<j\leqslant n)$.其中$\li e,m$和$\li f,m$分别为$V$和$W$上的规范正交组.\\
+            将$\li e,m$扩展为$V$的规范正交基$\li e,n$.不难知道
+            \[Te_k=\left\{\begin{array}{l}
+                s_kf_k,1\leqslant k\leqslant m\\
+                \mbf0,k>m
+            \end{array}\right.\]
+            根据\tbf{7A.5}可知
+            \[\sum_{k=1}^{n}||Tv_k||^2=\sum_{k=1}^{n}||Te_k||^2=\sum_{k=1}^{m}||s_kf_k||^2=\sum_{k=1}^{n}s_k^2\]
+        \item 令$\li\lambda,n$为$T$的特征值,由于$T$是正算子,于是$\li\lambda,n\geqslant0$.\\
+            于是根据\tbf{7E.7}可知$s_k=\lambda_k$对所有$k\in\{1,\cdots,n\}$成立.\\
+            由于$\sqrt{T}$的特征值为$\sqrt{\lambda_1},\cdots,\sqrt{\lambda_n}$,即为其奇异值,于是
+            \[\sum_{k=1}^{n}\inprod{Tv_k}{v_k}=\sum_{k=1}^{n}||\sqrt{T}v_k||^2=\sum_{k=1}^{n}\left(\sqrt{\lambda_k}\right)^2=\sum_{k=1}^{n}s_k\]
+    \end{enumerate}
+\end{proof}
+\begin{problem}[12.]
+    回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 给出一例:有限维向量空间$V$上的算子$T$使得$T^2$的奇异值不等于$T$的奇异值的平方.
+        \item 设$T\in\L(V)$是正规的,试证明:$T^2$的奇异值等于$T$的奇异值的平方.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 令$T\in\L(\F^2)$为$T(x,y)=(y,0)$.于是$T$的奇异值为$0,1$而$T^2$的奇异值为$0,0$.
+        \item 设$\li s,n$为$T$的奇异值,于是存在$V$的规范正交基$\li e,n$使得$T^*Te_k=s_k^2e_k$.由于$T$正规,于是
+            \[(T^2)^*T^2e_k=(T^*T^*TT)e_k=(T^*T)^2e_k=s^4e_k\]
+            于是$s_k^2$为$T^2$的特征值.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[13.]
+    设$T_1,T_2\in\L(V)$.试证明:$T_1$和$T_2$的奇异值相同,当且仅当存在酉算子$S_1,S_2\in\L(V)$使得$T_1=S_1T_2S_2$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:假定存在这样的$S_1,S_2$,于是
+    \[\begin{aligned}
+        T_1=S_1T_2S_2
+        &\Rightarrow T_1^*=S_2^*T_2^*S_1^*=S_2^{-1}T_2^*S_1^{-1} \\
+        &\Rightarrow T_1^*T_1=S_2^{-1}T_2^*S^*{-1}S_1T_2S_2 \\
+        &\Rightarrow T_1^*T_1=S_2^{-1}T_2^*T_2S_2 \\
+        &\Rightarrow T_1^*T_1-\lambda I=S_2^{-1}(T_2^*T_2-\lambda I)S_2,\forall\lambda\in\F \\
+        &\Rightarrow \dim E(\lambda,T_1^*T_1)=\dim E(\lambda,T_2^*T_2),\forall\lambda\in\F
+    \end{aligned}\]
+    于是$T_1,T_2$拥有相同的奇异值.\\
+    $\Rightarrow$:由于$T_1,T_2$的奇异值相同,于是考虑$T_1$的奇异值分解
+    \[T_1v=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    和$T_2$的奇异值分解
+    \[T_1v=s_1\inprod{v}{g_1}h_1+\cdots+s_n\inprod{v}{g_n}h_n\]
+    其中各向量均为$V$上的规范正交组.将它们扩展为$V$的规范正交基.不难得到
+    \[T_1e_k=\left\{\begin{array}{l}
+        s_kf_k,1\leqslant k\leqslant n\\
+        \mbf0,n<k\leqslant\dim V
+    \end{array}\right.\ \ \ \ \ 
+    T_2g_k=\left\{\begin{array}{l}
+        s_kh_k,1\leqslant k\leqslant n\\
+        \mbf0,n<k\leqslant\dim V
+    \end{array}\right.\]
+    令$S_1h_k=f_k,S_2e_k=g_k$,显然两者是酉算子.对于任意$k\in\{1,\cdots,n\}$有
+    \[S_1T_2S_2e_k=S_1T_2g_k=S_1(s_kh_k)=s_1S_1h_k=s_1f_k\]
+    于是存在这样的酉算子$S_1,S_2$使得$T_1=S_1T_2S_2$.
+\end{proof}
+\begin{problem}[14.]
+    设$T\in\L(V,W)$,令$s_n$表示$T$的最小奇异值.试证明:$s_n||v||\leqslant||Tv||$对任意$v\in V$都成立.
+\end{problem}
+\begin{proof}
+    若$s_n=0$,那么$||Tv||\geqslant0=s_n||v||$显然成立.\\
+    若$s_n>0$,那么考虑$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    于是
+    \[||Tv||^2=s_1^2\left|\inprod{v}{e_1}\right|^2+\cdots+s_n^2\left|\inprod{v}{e_n}\right|^2
+    \geqslant s_n^2\left(\left|\inprod{v}{e_1}\right|^2+\cdots+\left|\inprod{v}{e_n}\right|^2\right)=s_n^2||v||^2\]
+    从而$||Tv||\geqslant s_n||v||$.
+\end{proof}
+\begin{problem}[15.]
+    设$T\in\L(V)$,$\li s\geqslant n$是$V$的奇异值.试证明:如果$\lambda$是$T$的特征值,那么$s_1\geqslant|\lambda|\geqslant s_n$.
+\end{problem}
+\begin{proof}
+    设$\lambda$为$T$的特征值,对应的特征向量为$v$.不妨令$||v||=1$,于是根据\tbf{7E.4}可知$|\lambda|\in[s_n,s_1]$,即$s_1\geqslant|\lambda|\geqslant s_n$.
+\end{proof}
+\begin{problem}[16.]
+    设$T\in\L(V,W)$.试证明:$\left(T^*\right)^\dagger=\left(T^\dagger\right)^*$.
+\end{problem}
+\begin{proof}
+    考虑$T$的奇异值分解
+    \[Tv=s_1\inprod{v}{e_1}f_1+\cdots+s_n\inprod{v}{e_n}f_n\]
+    对于任意$w\in W$有
+    \[T^*w=s_1\inprod{w}{f_1}e_1+\cdots+s_m\inprod{w}{f_m}e_m\]
+    以及
+    \[T^\dagger w=\dfrac{\inprod{w}{f_1}}{s_1}e_1+\cdots+\dfrac{\inprod{w}{f_m}}{s_m}e_m\]
+    于是
+    \[(T^*)^\dagger v=\dfrac{\inprod{v}{e_1}}{s_1}f_1+\cdots+\dfrac{\inprod{v}{e_m}}{s_m}f_m=\left(T^\dagger\right)^*\]
+    对所有$v\in V$成立,于是命题得证.
+\end{proof}
+\begin{problem}[17.]
+    设$T\in\L(V)$.试证明:$T$自伴当且仅当$T^\dagger$自伴.
+\end{problem}
+\begin{proof}
+    我们有
+    \[T\text{自伴}\Leftrightarrow T=T^*\Leftrightarrow T^\dagger=\left(T^*\right)^\dagger
+    \Leftrightarrow T^\dagger=\left(T^\dagger\right)^*\Leftrightarrow T^*\text{自伴}\]
+    于是命题得证.
+\end{proof}
+\end{document}
