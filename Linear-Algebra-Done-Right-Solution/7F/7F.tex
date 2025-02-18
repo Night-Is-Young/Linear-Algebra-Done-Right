@@ -1,0 +1,128 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 7F}
+\end{center}
+\begin{problem}[1.]
+    设$S,T\in\L(V,W)$.试证明:$\left|||S||-||T||\right|\leqslant||S-T||$.
+\end{problem}
+\begin{proof}
+    由线性映射的范数的定义可知存在$v\in V$且$||v||\leqslant1$使得$||S-T||=||(S-T)v||$.于是
+    \[||S-T||=||(S-T)v||=||Sv-Tv||\geqslant\left|||Sv||-||Tv||\right|\geqslant\left|||S||-||T||\right|\]
+    以上不等式即\tbf{反向三角不等式}.
+\end{proof}
+\begin{problem}[2.]
+    设$T\in\L(V)$是自伴的(如果$\F=\C$则令$T$是正规的),试证明:$||T||=\max\{|\lambda|:\lambda\text{是}T\text{的特征值}\}$.
+\end{problem}
+\begin{proof}
+    由\tbf{7.88}和\tbf{7E.7}可知
+    \[||T||=T\text{的最大奇异值}=T\text{的绝对值最大的特征值}\]
+\end{proof}
+\begin{problem}[3.]
+    设$T\in\L(V,W)$且$v\in V$.试证明:$||Tv||=||T||||v||$当且仅当$T^*Tv=||T||^2v$.
+\end{problem}
+\begin{proof}
+    $\Leftarrow$:由\tbf{7.88(c)}和\tbf{7.91}可得
+    \[||T||^2||v||=||T^*Tv||\leqslant||T^*||||Tv||=||T||||Tv||\Rightarrow||Tv||\geqslant||T||||v||\]
+    而$||Tv||\leqslant||T||||v||$,于是$||Tv||=||T||||v||$.\\
+    $\Rightarrow$:我们有
+    \[\begin{aligned}
+        ||T^*Tv-||T||^2v||^2
+        &= \inprod{T^*Tv-||T||^2v}{T^*Tv-||T||^2v} \\
+        &= ||T^*Tv||^2+||T||^4||v||^2-2\text{Re}\inprod{T^*Tv}{||T||^2v} \\
+        &\leqslant ||T^*||^2||Tv||^2+||T||^4||v||^2-2||T||^2||Tv||^2 \\
+        &= 0
+    \end{aligned}\]
+    于是$T^*Tv=||T||^2v$.
+\end{proof}
+\begin{problem}[4.]
+    设$T\in\L(V,W),v\in V$且$||Tv||=||T||||v||$.试证明:如果$u\in V$且$\inprod uv=0$,那么$\inprod{Tu}{Tv}=0$.
+\end{problem}
+\begin{proof}
+    根据\tbf{7F.3}有
+    \[\inprod{Tu}{Tv}=\inprod{u}{T^*Tv}=\inprod{u}{||T||^2v}=||T||^2\inprod uv=0\]
+\end{proof}
+\begin{problem}[5.]
+    设$U$是有限维内积空间,$T\in\L(V,U)$且$S\in\L(U,W)$.试证明:$||ST||\leqslant||S||||T||$.
+\end{problem}
+\begin{proof}
+    由线性映射的范数的定义可知存在$v\in V$且$||v||\leqslant1$使得$||ST||=||STv||$.于是
+    \[||ST||=||STv||=||Tv||\left|\left|S\left(\dfrac{Tv}{||Tv||}\right)\right|\right|\leqslant||Tv||||S||\leqslant||S||||T||\]
+\end{proof}
+\begin{problem}[6.]
+    证明或给出一反例:如果$S,T\in\L(V)$,那么$||ST||=||TS||$.
+\end{problem}
+\begin{solution}
+    令$V=\F^2$,$S(x,y)=(x,0),T(x,y)=(y,0)$.于是$ST=\mbf0\neq TS$.根据\tbf{7.87(b)},即$||ST||=0\neq||TS||$.
+\end{solution}
+\begin{problem}[8.]
+    回答下列问题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 试证明:如果$T\in\L(V)$且$||I-T||<1$,那么$T$可逆.
+        \item 设$S\in\L(V)$可逆.试证明:如果$T\in\L(V)$且$||S-T||<\dfrac{1}{||S^{-1}||}$,那么$T$是可逆的.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 如果$T$不可逆,那么存在$v\in V$使得$Tv=\mbf0$.令$u=\dfrac{v}{||v||}$,于是$||u||=1$.于是
+            \[||I-T||\geqslant||(I-T)u||=||u-\mbf0||=||u||=1\]
+            这与$||I-T||<1$矛盾,于是$T$可逆.
+        \item 取与\tbf{(1)}同样的$v,u$,我们有$||S-T||\geqslant||(S-T)u|||=||Su||$.\\
+            而$1=||u||=||S^{-1}Su||\leqslant||S^{-1}||||Su||$,即$||Su||\geqslant\dfrac{1}{||S^{-1}||}$.即$||S-T||\geqslant\dfrac{1}{||S^{-1}||}$.\\
+            这与题设不符,于是$T$可逆.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[9.]
+    设$T\in\L(V)$.试证明:对于任意$\ep>0$,都存在可逆的$S\in\L(V)$使得$0<||T-S||<\ep$.
+\end{problem}
+\begin{proof}
+    取$\delta\in(0,\ep)$且$\delta$不是$T$的特征值,于是$T-\delta I$可逆.令$S=T-\delta I$,则有
+    \[||T-S||=||\delta I||=|\delta|\in(0,\ep)\]
+    于是命题得证.
+\end{proof}
+\begin{problem}[10.]
+    设$\dim V>1$,$T\in\L(V)$不可逆.试证明:对于任意$\ep>0$,都存在$S\in\L(V)$使得$0<||T-S||<\ep$且$S$不可逆.
+\end{problem}
+\begin{proof}
+    由于$T$不可逆,于是存在$e_1\in V$且$||e_1||=1$使得$Te_1=\mbf0$.将$e_1$扩展为$V$的规范正交基$\li e,n$.\\
+    令$Se_1=\mbf0,Se_k=Te_k-\dfrac{\ep}{2}e_k(k=2,\cdots,n)$,于是$S$不可逆.对于任意$v\in V$且$v\notin\span(e_1)$有
+    \[0<||(T-S)v||^2=\left|\left|\dfrac{\ep}{2}\sum_{k=2}^{n}\inprod{v}{e_k}e_k\right|\right|^2\leqslant\dfrac{\ep^2}{4}\]
+    于是$0<||T-S||\leqslant\dfrac\ep2<\ep$
+\end{proof}
+\begin{problem}[11.]
+    设$\F=\C$,$T\in\L(V)$.试证明:对于任意$\ep>0$,都存在可对角化的$S\in\L(V)$使得$0<||T-S||<\ep$.
+\end{problem}
+\begin{proof}
+    根据Schur定理,存在$V$的规范正交基$\li e,n$使得$T$关于其有上三角矩阵$A$,其对角线元素为$\li\lambda,n$.\\
+    考虑$D\in\L(V)$满足$De_k=ke_k$,显然$||D||=n$.\\
+    由于$\li\lambda,n$的数目是有限的,于是存在$\delta\in\left(0,\dfrac{\ep}{n}\right)$使得$\lambda_k+k\delta$互异.\\
+    令$S=T+\delta D$,于是
+    \[0<||T-S||=||\delta D||=\delta||D||<\dfrac{\ep}{n}\cdot n=\ep\]
+    于是命题得证.
+\end{proof}
+\begin{problem}[12.]
+    设$T\in\L(V)$是正算子,试证明:$\left|\left|\sqrt{T}\right|\right|=\sqrt{\left|\left|T\right|\right|}$.
+\end{problem}
+\begin{proof}
+    不妨设$T$的最大特征值为$\lambda$,于是$\sqrt{T}$的最大特征值为$\sqrt{\lambda}$.\\
+    根据\tbf{7E.7}可知$T$和$\sqrt{T}$的最大奇异值分别为$\lambda$和$\sqrt{\lambda}$.于是命题得证.
+\end{proof}
+\begin{problem}[13.]
+    设$S,T\in\L(V)$是正算子.试证明$||S-T||\leqslant\max\{||S||,||T||\}\leqslant||S+T||$.
+\end{problem}
+\begin{lemma}[Lemma.L.]
+    
+\end{lemma}
+\end{document}
