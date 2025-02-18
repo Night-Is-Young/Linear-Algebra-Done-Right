@@ -122,7 +122,42 @@
 \begin{problem}[13.]
     设$S,T\in\L(V)$是正算子.试证明$||S-T||\leqslant\max\{||S||,||T||\}\leqslant||S+T||$.
 \end{problem}
-\begin{lemma}[Lemma.L.]
-    
+\begin{lemma}[Lemma.L.13]
+    如果$A\in\L(V)$是自伴的,那么$||A||I-A$是正算子.
 \end{lemma}
+\begin{proof}
+    考虑到$A,I$均为自伴算子,于是$||A||I-A$也是自伴的.\\
+    考虑$||A||I-A$的特征值$\lambda$,则存在非零的$v\in V$使得$||A||v-Av=\lambda v$,从而$||A||-\lambda$是$A$的特征值.\\
+    根据\tbf{7F.2}可得$\left|||A||-\lambda\right|\leqslant||A||$,从而$\lambda\geqslant0$,即$||A||I-A$是正算子.
+\end{proof}
+\begin{lemma}[Lemma.L.14]
+    如果$A,B\in\L(V)$且$A,B-A$均为正算子,那么$||A||\leqslant||B||$.
+\end{lemma}
+\begin{proof}
+    根据\tbf{7C.6}可知$B=A+(B-A)$是正算子,于是根据\tbf{Lemma.L.13}可知$||B||I-B$是正算子.于是
+    \[||B||I-A=(||B||I-B)+(B-A)\]
+    是正算子.考虑$A$的任意特征值$\lambda\geqslant0$和对应的特征向量$v$,我们有
+    \[\left(||B||I-A\right)v=\left(||B||-\lambda\right)v\]
+    由于$B-A$是正算子,于是$||B||-\lambda\geqslant0$,从而$||B||\geqslant\lambda$.\\
+    于是$||A||=\max\{\lambda:\lambda\text{为}A\text{的特征值}\}\leqslant||B||$,命题得证.
+\end{proof}
+\begin{proof}
+    回到我们的命题.设$\lambda$为自伴算子$S-T$的特征值,其特征向量为$v$.于是
+    \[\left(||S||I-(S-T)\right)v=\left(||S||-\lambda\right)v\]
+    根据\tbf{Lemma.L.13}和\tbf{7C.6}可知$||S||I-(S-T)$是正算子,于是$||S||-\lambda\geqslant0$.\\
+    同理可知$||T||+\lambda\geqslant0$.由于上述两条等式对于所有$S-T$的特征值$\lambda$都成立,于是$||S-T||\leqslant\max\{||S||,||T||\}$.\\
+    根据\tbf{Lemma.L.14},令$A=S,B=S+T$可知$||S||\leqslant||S+T||$,同理有$||T||\leqslant||S+T||$.\\
+    于是$\max\{||S||,||T||\}\leqslant||S+T||$.
+\end{proof}
+\begin{problem}[14.]
+    设$U,W$是$V$的子空间且$||P_U-P_W||<1$.试证明$\dim U=\dim W$.
+\end{problem}
+\begin{proof}
+    注意到$P_U=I-P_{U^\bot},P_W=I-P_{W^\bot}$.根据\tbf{7F.8(1)}可知$P_U+P_{W^\bot}$和$P_W+P_{U^\bot}$都是可逆的.于是
+    \[U\cap W^\bot=(\nul P_{U^{\bot}})\cap(\nul P_W)\subseteq\nul(P_{U^\bot}+P_W)=\{\mbf0\}\Rightarrow U\cap W^\bot=\{\mbf0\}\]
+    \[V=\range(P_U+P_{W^\bot})\supseteq(\range P_U)+(\range P_{W^\bot})=U+W^\bot\Rightarrow U+W^\bot=V\]
+    于是
+    \[\dim V=\dim(U+W^\bot)=\dim U+\dim W^\bot-\dim(U\cap W^\bot)=\dim U+\dim V-\dim W\]
+    于是$\dim U=\dim W$.
+\end{proof}
 \end{document}
