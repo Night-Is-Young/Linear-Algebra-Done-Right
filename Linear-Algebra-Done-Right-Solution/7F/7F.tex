@@ -160,4 +160,146 @@
     \[\dim V=\dim(U+W^\bot)=\dim U+\dim W^\bot-\dim(U\cap W^\bot)=\dim U+\dim V-\dim W\]
     于是$\dim U=\dim W$.
 \end{proof}
+\begin{problem}[15.]
+    定义$T\in\L(\F^3)$为$T(z_1,z_2,z_3)=(z_3,2z_1,3z_2)$.求使得$T=S\sqrt{T^*T}$的$S\in\L(\F^3)$的表达式.
+\end{problem}
+\begin{solution}
+    考虑$T$关于$\F^3$的标准基的矩阵
+    \[\M(T)=\begin{pmatrix}
+        0&0&1\\2&0&0\\0&3&0
+    \end{pmatrix}\]
+    于是
+    \[\M(T^*T)=\begin{pmatrix}
+        4&0&0\\0&9&0\\0&0&1
+    \end{pmatrix}\]
+    于是$\sqrt{T^*T}e_1=2e_1,\sqrt{T^*T}e_2=3e_2,\sqrt{T^*T}e_3=e_3$.于是$S$应满足
+    \[Te_1=S\sqrt{T^*T}e_1=2Se_1=2e_2\Rightarrow Se_1=e_2\]
+    \[Te_2=S\sqrt{T^*T}e_2=3Se_2=3e_3\Rightarrow Se_2=e_3\]
+    \[Te_3=S\sqrt{T^*T}e_3=Se_3=e_1\Rightarrow Se_3=e_1\]
+    于是
+    \[S(z_1,z_2,z_3)=\left(z_3,z_1,z_2\right)\]
+\end{solution}
+\begin{problem}[16.]
+    设$S\in\L(V)$是可逆正算子.试证明:存在$\delta>0$使得任意满足$||S-T||<\delta$的自伴算子$T$都是正算子.
+\end{problem}
+\begin{proof}
+    设$\mu$是$S$的最小奇异值.由于$S$可逆,于是$\mu>0$.\\
+    根据\tbf{7E.12(2)}可知$\sqrt{\mu}$是$\sqrt{T}$的最小奇异值,于是由\tbf{7E.14}可得
+    \[\inprod{Sv}{v}=\inprod{\sqrt{S}v}{\sqrt{S}v}=\left|\left|\sqrt{S}v\right|\right|^2\geqslant\mu||v||^2\]
+    设自伴算子$T\in\L(V)$满足$||S-T||<\mu$.由Cauchy不等式可得
+    \[\inprod{(S-T)v}{v}\leqslant||(S-T)v||||v||\leqslant||S-T||||v||^2\leqslant\mu||v||^2\leqslant\inprod{Sv}{v}\]
+    于是$\inprod{Tv}{v}\geqslant0$对任意$v\in V$都成立,因而$T$是正算子.
+\end{proof}
+\begin{problem}[17.]
+    试证明:如果$u\in V$而$\varphi_u$是$V$上定义为$\varphi_u(v)=\inprod{v}{u}$的线性泛函,那么$||\varphi_u||=||u||$.
+\end{problem}
+\begin{proof}
+    对于任意$v\in V$,由Cauchy不等式可得
+    \[\left|\varphi_u(v)\right|=\left|\inprod{u}{v}\right|\leqslant||u||||v||\]
+    当且仅当$v=\lambda u$时等号成立.对于所有满足$||v||=1$的$v\in V$则有
+    \[\left|\varphi_u(v)\right|\leqslant||u||\]
+    根据线性映射的范数的定义可知$||\varphi_u||=||u||$.
+\end{proof}
+\begin{problem}[18.]
+    设$\li e,n$是$V$的规范正交基,$T\in\L(V,W)$.试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $\displaystyle\max_{1\leqslant k\leqslant n}\{||Te_k||\}\leqslant||T||\leqslant\sqrt{\sum_{k=1}^{n}||Te_k||^2}$.
+        \item $\displaystyle||T||=\sqrt{\sum_{k=1}^{n}||Te_k||^2}$当且仅当$\dim\range T\leqslant1$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 根据$||T||$的定义,对任意$v\in V$且$||v||=1$都有$||T||\geqslant||Tv||$,于是
+            \[\max_{1\leqslant k\leqslant n}\{||Te_k||\}\leqslant||T||\]
+            令$s_1,\cdots,s_n$为$T$的(按降序排列的)奇异值,根据\tbf{7E.11(1)}有
+            \[\sum_{k=1}^{n}||Te_k||^2=\sum_{k=1}^{n}s_k^2\]
+            由\tbf{7.88(a)}可知$||T||=s_1$,于是
+            \[||T||=s_1=\sqrt{s_1^2}\leqslant\sqrt{\sum_{k=1}^{n}s_k^2}=\sqrt{\sum_{k=1}^{n}||Te_k||^2}\]
+            于是命题得证.
+        \item 这要求$T$除了其最大奇异值外其余所有奇异值为$0$.于是$\dim\range T\leqslant1$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[19.]
+    试证明:如果$T\in\L(V,W)$,那么$||T^*T||=||T||^2$.
+\end{problem}
+\begin{proof}
+    考虑$||T||$的最大奇异值$s_1$,根据\tbf{7.88(a)}有$||T||=s_1$.\\
+    而$T^*T$是正算子,其关于$V$的某规范正交基$\li e,n$由对角矩阵.不妨设对角线元素为$\li \lambda,n$.于是
+    \[||T^*Tv||^2=\left|\left|\sum_{k=1}^{n}\lambda_k\inprod{v}{e_k}e_k\right|\right|
+    =\sum_{k=1}^{n}\lambda_k^2\left|\inprod{v}{e_k}\right|^2
+    \leqslant\left(\max_{1\leqslant k\leqslant n}\{\lambda_k\}\right)^2\sum_{k=1}^{n}\left|\inprod{v}{e_k}\right|
+    \leqslant\left(\max_{1\leqslant k\leqslant n}\{\lambda_k\}\right)^2||v||^2\]
+    于是$||T^*Tv||\leqslant\max_{1\leqslant k\leqslant n}\{\lambda_k\}||v||$,取$v=e_j$使得$\lambda_k$最大即可取等.\\
+    因而$\displaystyle||T^*T||=\max_{1\leqslant k\leqslant n}\{\lambda_k\}=s_1^2=||T||^2$.
+\end{proof}
+\begin{proof}
+    对于任意$v\in V$有
+    \[\left|\left|\sqrt{T^*T}v\right|\right|^2=\inprod{T^*Tv}{v}=\inprod{Tv}{Tv}=||Tv||^2\leqslant||T||^2||v||^2\]
+    于是$\left|\left|\sqrt{T^*T}\right|\right|\leqslant||T||$.考虑$T$的极分解$T=S\sqrt{T^*T}$,由于$S$是酉算子,于是$||S||=1$.于是根据\tbf{7F.5}有
+    \[||T||=\left|\left|S\sqrt{T^*T}\right|\right|\leqslant||S||\left|\left|\sqrt{T^*T}\right|\right|=\left|\left|\sqrt{T^*T}\right|\right|\]
+    于是$\left|\left|\sqrt{T^*T}\right|\right|=||T||$.根据\tbf{7F.12}有$||T^*T||=||T||^2$.
+\end{proof}
+\begin{problem}[20.]
+    设$T\in\L(V)$是正规的,试证明:对于任意$k\in\N^*$都有$||T||^k=||T^k||$.
+\end{problem}
+\begin{proof}
+    设$\li s,n$为$T$的奇异值,那么$||T||=s_1$.\\
+    根据\tbf{7E.12(2)},考虑$V$的规范正交基$\li e,n$使得$T^*Te_j=s_j^2e_j(j=1,\cdots,n)$.于是根据$T$的正规性可得
+    \[\left(T^k\right)^*T^ke_j=(T^*T)^ke_j=s_j^{2k}e_j\]
+    从而$T^k$的奇异值为$s_1^k,\cdots,s_n^k$,于是$||T^k||=s_1^k=||T||^k$.
+\end{proof}
+\begin{problem}[21.]
+    设$\dim V>1$且$\dim W>1$.试证明:$\L(V,W)$上的范数并不来自内积.换言之,试证明:不存在$\L(V,W)$上的内积使得
+    \[\max\left\{||Tv||:v\in V\text{且}||v||=1\right\}=\sqrt{\inprod TT}\]
+    对所有$T\in\L(V,W)$都成立.
+\end{problem}
+\begin{proof}
+    考虑$V$的规范正交基$\li e,n$和$W$的规范正交基$\li f,m$,其中$m,n\geqslant 2$.\\
+    令$T,S\in\L(V,W)$为
+    \[Se_1=f_1,Se_2=f_2,Se_k=\mbf0(k>2)\]
+    \[Te_1=-f_1,Te_2=f_2,Te_k=\mbf0(k>2)\]
+    于是$||S+T||=||S-T||=2$且$||S||=||T||=1$,则有
+    \[||S+T||^2+||S-T||^2=8\neq4=2\left(||S||^2+||T||^2\right)\]
+    这不符合平行四边形等式,于是不存在这样的内积.
+\end{proof}
+\begin{problem}[22.]
+    设$T\in\L(V,W)$.令$n=\dim V$,$\li s,n$为$T$的按降序排列的奇异值.试证明:如果$1\leqslant k\leqslant n$,%
+    那么$\min\left\{||T|_U||:U\text{是}V\text{的子空间且}\dim U=k\right\}=s_{n-k+1}$.
+\end{problem}\noindent
+当你做到这里的时候,是否感到了绝望?
+\begin{proof}
+    对于给定的$k\in\{1,\cdots,n\}$,令$E_k=\min\left\{||T|_U||:U\text{是}V\text{的子空间且}\dim U=k\right\}$.\\
+    如果$T$没有正奇异值,也即$T=\mbf0$,我们有$T|_U=\mbf0$,于是$E_k=0=s_{n-k+1}$.\\
+    当$k=n$时,唯一可取的子空间为$V$,于是$E_n=||T||=s_1$.\\
+    现在,假定$1\leqslant k<n$,并假设$\li s,m$为$T$的正奇异值.\\
+    考虑$T$的奇异值分解
+    \[Tv=\sum_{j=1}^{m}s_j\inprod{v}{e_j}f_j\]
+    将$\li e,m$扩展为$V$的规范正交基$\li e,n$,于是
+    \[Te_j=\left\{\begin{array}{l}
+        s_jf_j,1\leqslant j\leqslant m\\
+        \mbf0,m<j\leqslant n
+    \end{array}\right.\]
+    令$X=\span(e_{n-k+1},\cdots,e_k)$,那么$\dim X=k$.考虑以下两种情况.\\
+    如果$1\leqslant k\leqslant n-m$,那么$s_{n-k+1}=0$.另外,$T|_X=\mbf0$,从而$E_k=||\mbf0||=0=s_{n-k+1}$.\\
+    如果$n-m<k<n$,那么$1\leqslant n-k<m$.考虑$V$的任意一个$k$维子空间$U$.\\
+    对于任意$v\in V$且$||v||\leqslant1$都有$P_Uv\in U$且$||P_Uv||\leqslant||v||\leqslant1$.\\
+    于是根据$||T_U||$的定义可知$||TP_Uv||\leqslant||T|_U||$,即$||TP_U||\leqslant||T|_U||$.
+    现在,注意到
+    \[\dim\range(TP_{U^\bot})\leqslant\dim\range P_{U^\bot}=\dim U^\bot=n-k\]
+    根据\tbf{7.92}可知$||T-TP_{U^\bot}||\geqslant s_{n-k+1}$.另一方面,有$P_U=I-P_{U^\bot}$,于是$||TP_U||\geqslant s_{n-k+1}$.\\
+    于是$||T|_U||\geqslant||TP_U||\geqslant s_{n-k+1}$,我们得到了$||T|_U||$的下界.\\
+    现在,对任意$x\in X$有
+    \[||T|_Xx||^2=\sum_{j=n-k+1}^{m}s_j^2\left|\inprod{x}{e_j}\right|^2\leqslant s_{n-k+1}^2||x||^2\]
+    从而$||T|_X||\leqslant s_{n-k+1}$.结合$T|_X$的下界可知$||T|_X||=s_{n-k+1}$,于是$E_k=s_{n-k+1}$.\\
+    综上可知命题得证.
+\end{proof}
+\begin{problem}[24.]
+    设$T\in\L(V)$可逆.试证明:$||T^{-1}||=\dfrac{1}{||T||}$当且仅当$\dfrac{T}{||T||}$是酉算子.
+\end{problem}
+\begin{proof}
+    设$T$的奇异值为$\li s,n$.由于$T$可逆,于是$\li s,n>0$.\\
+    根据伪逆的奇异值分解和伪逆的性质可知$T^{-1}$的奇异值(按降序排列)为$\dfrac{1}{s_n},\cdots,\dfrac{1}{s_1}$.\\
+    于是$||T^{-1}||=\dfrac{1}{s_n}$.于是
+    \[||T^{-1}||=\dfrac{1}{||T||}\Leftrightarrow\dfrac{1}{s_n}=\dfrac{1}{s_1}\Leftrightarrow\li s=n\Leftrightarrow\dfrac{T}{||T||}\text{的所有奇异值均为}1\Leftrightarrow \dfrac{T}{||T||}\text{是酉算子}\]
+\end{proof}
 \end{document}
