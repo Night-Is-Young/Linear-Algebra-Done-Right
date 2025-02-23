@@ -302,4 +302,125 @@
     于是$||T^{-1}||=\dfrac{1}{s_n}$.于是
     \[||T^{-1}||=\dfrac{1}{||T||}\Leftrightarrow\dfrac{1}{s_n}=\dfrac{1}{s_1}\Leftrightarrow\li s=n\Leftrightarrow\dfrac{T}{||T||}\text{的所有奇异值均为}1\Leftrightarrow \dfrac{T}{||T||}\text{是酉算子}\]
 \end{proof}
+\begin{problem}[25.]
+    取定$u,x\in V$,其中$u\neq\mbf0$.定义$T\in\L(V)$为对任意$v\in V$有$Tv=\inprod{v}{u}x$.%
+    试证明:\[\sqrt{T^*T}v=\dfrac{||x||}{||u||}\inprod{v}{u}u\]对任意$v\in V$成立.
+\end{problem}
+\begin{proof}
+    我们有
+    \[\inprod{Tv}{v}=\inprod{v}{u}\cdot\inprod{x}{v}=\inprod{v}{\inprod{v}{x}u}=\inprod{v}{T^*v}\]
+    于是$T^*v=\inprod{v}{x}u$.令$R=\dfrac{||x||}{||u||}\inprod{v}{u}u$,我们有
+    \[T^*Tv=\inprod{v}{u}T^*x=||x||^2\inprod{v}{u}u\]
+    而
+    \[R^2v=\dfrac{||x||^2}{||u||^2}\inprod{v}{u}||u||^2u=||x||^2\inprod vuu=T^*Tv\]
+    于是$R^2=T^*T$.对于任意$v\in V$有
+    \[\inprod{Rv}{v}=\dfrac{||x||}{||u||}\inprod{v}{u}\inprod{u}{v}=\dfrac{||x||}{||u||}\left|\inprod vu\right|^2\geqslant0\]
+    于是$R$是正算子,因而$R=\sqrt{T^*T}$.
+\end{proof}
+\begin{problem}[26.]
+    设$T\in\L(V)$.试证明:$T$可逆,当且仅当存在唯一的酉算子$S\in\L(V)$使得$T=S\sqrt{T^*T}$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:设$T$可逆,那么根据$T$的极分解可知存在酉算子$S$使得$T=S\sqrt{T^*T}$.\\
+    又因为$T$可逆,于是$\nul\sqrt{T^*T}=\nul T^*T=\nul T=\{\mbf0\}$,进而$\sqrt{T^*T}$可逆.于是
+    \[S=T\left(\sqrt{T^*T}\right)^{-1}\]
+    是唯一的.\\
+    $\Leftarrow$:如果$T$不可逆,那么考虑$T$的奇异值分解
+    \[Tv=\sum_{k=1}^{m}s_k\inprod{v}{e_k}f_k\]
+    将$\li e,m$和$\li f,m$扩展为$V$的规范正交基$\li e,n$和$\li f,n$.\\
+    由于$T$不可逆,那么其存在为$0$的奇异值,则有$n>m$.\\
+    令$S,R\in\L(V)$,满足$Se_k=Re_k=f_k(k=1,\cdots,n-1)$和$Se_n=-Re_n=f_n$.\\
+    显然$R\neq S$,并且它们都是酉算子.而
+    \[S\sqrt{T^*T}v=S\left(\sum_{k=1}^{m}s_k\inprod{v}{e_k}e_k\right)=Tv\]
+    \[R\sqrt{T^*T}v=R\left(\sum_{k=1}^{m}s_k\inprod{v}{e_k}e_k\right)=Tv\]
+    于是存在互异的$S,R$使得$T=S\sqrt{T^*T}=R\sqrt{T^*T}$,这与假设矛盾,于是$T$可逆.
+\end{proof}
+\begin{problem}[27.]
+    设$T\in\L(V)$,$T$的奇异值为$\li s,n$.令$\li e,n$和$\li f,n$为$V$的规范正交基,使得
+    \[Tv=\sum_{k=1}^{n}s_k\inprod{v}{e_k}f_k\]
+    对任意$v\in V$成立.定义$S\in\L(V)$为
+    \[Sv=\sum_{k=1}^n\inprod{v}{e_k}f_k\]
+    试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item $S$是酉算子且$\displaystyle||T-S||=\max_{k=1,\cdots,n}\{|s_k-1|\}$.
+        \item 如果$E\in\L(V)$是酉算子,那么$||T-E||\geqslant||T-S||$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 注意到$Se_k=f_k$对任意$k=1,\cdots,n$都成立,于是$S$是酉算子.我们有
+            \[(T-S)v=\sum_{k=1}^{n}\left(s_k-1\right)\inprod{v}{e_k}f_k=\sum_{k=1}^{n}\left|s_k-1\right|\inprod{v}{e_k}\dfrac{f_k}{\text{sgn}\left(s_k-1\right)}\]
+            上式即为$T-S$的奇异值分解.于是$T-S$的奇异值为$\left|s_1-1\right|,\cdots,\left|s_n-1\right|$.\\
+            于是$||T-S||=\displaystyle\max_{k=1,\cdots,n}\{|s_k-1|\}$.
+        \item 对于任意$k=1,\cdots,n$都有$||Ee_k||=||e_k||=1$,于是
+            \[||T-E||\geqslant||(T-E)e_k||\geqslant\left|||Te_k||-||Ee_k||\right|\geqslant\left|||s_kf_k||-1\right|=\left|s_k-1\right|\]
+            于是$||T-E||\geqslant\displaystyle\max_{k=1,\cdots,n}\{|s_k-1|\}=||T-S||$.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[28.]
+    设$T\in\L(V)$.试证明:存在酉算子$S\in\L(V)$使得$T=\sqrt{TT^*}S$.
+\end{problem}
+\begin{proof}
+    考虑$T$的奇异值分解
+    \[Tv=\sum_{k=1}^{m}s_k\inprod{v}{e_k}f_k\]
+    根据$T^*$的奇异值分解,代入可得
+    \[\sqrt{TT^*}v=\sum_{k=1}^{m}s_k\inprod{v}{f_k}f_k\]
+    将$\li e,m$和$\li f,m$扩展为$V$的规范正交基$\li e,n$和$\li f,n$.\\
+    定义$S\in\L(V)$为
+    \[Sv=\sum_{k=1}^{n}\inprod{v}{e_k}f_k\]
+    则有$\inprod{Sv}{f_k}=\inprod{v}{e_k}$对于任意$k=1,\cdots,m$成立.于是
+    \[\sqrt{TT^*}Sv=\sum_{k=1}^{m}s_k\inprod{Sv}{f_k}f_k=\sum_{k=1}^{m}s_k\inprod{v}{f_k}f_k=Tv\]
+    于是$T=\sqrt{TT^*}S$.
+\end{proof}
+\begin{problem}[29.]
+    设$T\in\L(V)$.试证明下列命题.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 存在酉算子$S\in\L(V)$使得$TT^*=ST^*TS^*$.
+        \item 上一问的结论蕴含$T$和$T^*$的奇异值相同.
+    \end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 根据\tbf{7.93}和\tbf{7F.28}可知存在酉算子$S$使得$T=S\sqrt{T^*T}=\sqrt{TT^*}S$.\\
+            由于$S$是酉算子,于是$S$可逆,并且$S=S^*$.在上式右乘$S^*$可得
+            \[\sqrt{TT^*}=S\sqrt{T^*T}S^*\]
+            于是
+            \[TT^*=S\sqrt{T^*T}S^*S\sqrt{T^*T}S^*=S\sqrt{T^*T}\sqrt{T^*T}S^*=ST^*TS^*\]
+        \item 由\tbf{5A.13}可得$T^*T$和$TT^*$的特征值相同,于是$T$和$T^*$的奇异值相同.
+    \end{enumerate}
+\end{proof}
+\begin{problem}[30.]
+    设$T\in\L(V)$,酉算子$S\in\L(V)$,正算子$R\in\L(V)$使得$T=SR$.试证明:$R=\sqrt{T^*T}$.
+\end{problem}
+\begin{proof}
+    注意到
+    \[T^*T=(SR)^*(SR)=R^*S^*SR=R^*R=R^2\]
+    由于$R$是正算子,于是$R=\sqrt{T^*T}$.
+\end{proof}
+\begin{problem}[31.]
+    设$\F=\C$且$T\in\L(V)$是正规的.试证明:存在酉算子$S\in\L(V)$使得$T=S\sqrt{T^*T}$,并且$S$和$\sqrt{T^*T}$关于$V$的同一个规范正交基有对角矩阵.
+\end{problem}
+\begin{proof}
+    根据\tbf{7.93}和\tbf{7F.28}可知存在酉算子$S$使得$T=S\sqrt{T^*T}=\sqrt{TT^*}S$.\\
+    由于$T$正规,于是$T^*T=TT^*$,因此$S\sqrt{T^*T}=\sqrt{T^*T}S$,即$S$和$\sqrt{T^*T}$可交换.\\
+    根据\tbf{7B.16}可知$S$和$\sqrt{T^*T}$关于$V$的同一个规范正交基有对角矩阵.
+\end{proof}
+\begin{problem}[32.]
+    设$T\in\L(V,W)$且$T\neq\mbf0$.令$\li s,m$为$T$的正奇异值,试证明:存在$(\nul T)^\bot$的规范正交基$\li e,m$使得
+    \[T\left(E\left(\dfrac{e_1}{s_1},\cdots,\dfrac{e_m}{s_m}\right)\right)\]
+    为$\range T$中以$\mbf0$为中心,半径为$1$的球.
+\end{problem}
+\begin{proof}
+    考虑$T$的奇异值分解
+    \[T=\sum_{k=1}^ms_k\inprod{v}{e_k}f_k\]
+    其中$\li e,m$和$\li f,m$分别为$V$和$W$中的规范正交组.\\
+    又因为$Tv\neq\mbf0$当且仅当$v\in\span(\li e,m)$,于是$\li e,m$是$(\nul T)^\bot$的规范正交基.\\
+    对于任意$v\in E\left(\dfrac{e_1}{s_1},\cdots,\dfrac{e_m}{s_m}\right)$有
+    \[s_1^2\left|\inprod{v}{e_1}\right|^2+\cdots+s_m^2\left|\inprod{v}{e_m}\right|^2<1
+    \Leftrightarrow \left|\inprod{Tv}{f_1}\right|^2+\cdots+\left|\inprod{Tv}{f_m}\right|^2<1
+    \Leftrightarrow ||Tv||<1\]
+    由于$\li f,m$为$\range T$的基,于是
+    \[T\left(E\left(\dfrac{e_1}{s_1},\cdots,\dfrac{e_m}{s_m}\right)\right)\]
+    为$\range T$中的单位球.
+\end{proof}
 \end{document}
