@@ -1,0 +1,142 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{template}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}\large 广义特征向量和幂零算子\end{center}
+\tbf{1.算子的幂的零空间}\\
+我们从研究算子的幂的零空间开始本章.
+\begin{formal}[1.1 递增的零空间序列]
+    设$T\in\L(V)$,那么
+    \[\{0\}=\nul T^0\subseteq\nul T^1\subseteq\cdots\subseteq\nul T^k\subseteq\nul T^{k+1}\subseteq\cdots\]
+\end{formal}\noindent
+通过归纳法是可以很容易证明此定理成立的.下面的定理进一步说明,如果上述式子中有两个相邻项相同,那么%
+排在它们之后的所有项都相同.
+\begin{formal}[1.2 零空间序列中的等式]
+    设$T\in\L(V)$,$m\in\N$,使得$\nul T^m=\nul T^{m+1}$,那么$\nul T^m=\nul T^{m+k}$对所有$k\in\N$成立.
+\end{formal}
+\begin{proof}
+    对于$k\in\N^*$,只需证明$\nul T^{m+k}=\nul T^{m+k+1}$即可.\\
+    根据\tbf{1.1}可知$\nul T^{m+k}\subseteq\nul T^{m+k+1}$.对于任意$v\in \nul T^{m+k+1}$有
+    \[T^{m+1}\left(T^kv\right)=T^{m+k+1}v=\mbf0\]
+    于是$T^{k}v\in\nul T^{m+1}=\nul T^{m}$,因此
+    \[T^{m}\left(T^{k}v\right)=T^{k+m}v=\mbf0\]
+    于是$v\in\nul T^{k+m}$,因此$\nul T^{k+m+1}\subseteq\nul T^{k+m}$,从而$\nul T^{k+m}=\nul T^{k+m+1}$.\\
+    归纳即可证明该命题.
+\end{proof}\noindent
+上面的定理引出了一个问题:零空间在什么时候会停止增长?下面的定理给出了结论.
+\begin{formal}[1.3 零空间停止增长]
+    设$T\in\L(V)$,那么$\nul T^{\dim V}=\nul T^{\dim V+1}=\cdots$.
+\end{formal}
+\begin{proof}
+    由\tbf{1.2},我们只需证明$\nul T^{\dim V}=\nul T^{\dim V+1}$.%
+    假定此式不成立,那么由\tbf{1.1}和\tbf{1.2}可知
+    \[\{0\}=\nul T^0\subset\nul T^1\subset\cdots\subset\nul T^{\dim V}\subset\nul T^{\dim V+1}\]
+    由于包含关系严格成立,那么每一项都至少比前一项的维度高$1$,从而$\dim\nul T^{\dim V+1}\geqslant\dim V+1$.\\
+    由于$V$子空间的维度不可能大于$\dim V$,于是假设不成立,即$\nul T^{\dim V}=\nul T^{\dim V+1}$.
+\end{proof}\noindent
+我们知道$V=\nul T\oplus\range T$并不总是适用,但是我们有以下的替代结论.
+\begin{formal}[1.4 $V$的直和分解]
+    设$T\in\L(V)$,那么$V=\nul T^{\dim V}\oplus\range T^{\dim V}$.
+\end{formal}
+\begin{proof}
+    令$n=\dim V$.我们先证明$\nul T^n\cap\range T^n=\{\mbf0\}$.\\
+    设$v\in\nul T^n\cap\range T^n$,那么$T^nv=\mbf0$.同时,存在$u\in V$使得$v=T^nu$.\\
+    于是$T^nv=T^n\left(T^n\right)u=T^{2n}u=\mbf0$,于是根据\tbf{1.3}可知$T^nu=\mbf0$,即$v=\mbf0$.\\
+    这就证明了$\nul T^n+\range T^n$是直和.根据线性映射基本定理又有
+    \[\dim V=\dim \nul T^n+\dim\range T^n\]
+    于是$V=\nul T^n\oplus\range T^n$.
+\end{proof}\noindent
+\tbf{2.广义特征向量}\\
+仅凭特征向量不足以很好的描述算子.我们知道,对于实向量空间上的自伴算子和复向量空间上的正规算子有
+\[V=E(\lambda_1,T)\oplus\cdots\oplus E(\lambda_m,T)\]
+即谱定理所指出的那样.然而对于一般的算子则不然.为此,我们引入广义特征向量.
+\begin{definition}[2.1 定义:广义特征向量]
+    设$T\in\L(V)$,$\lambda$是$T$的特征值.称向量$v\in V$是$T$对应于$\lambda$的%
+    \tbf{广义特征向量},如果$v\neq\mbf0$且对某个$k\in\N^*$有$(T-\lambda I)^kv=\mbf0$.
+\end{definition}\noindent
+下面的定理说明,复向量空间上的算子的广义特征向量总能形成该空间的基.
+\begin{formal}[2.2 广义特征向量构成基]
+    设$\F=\C$且$T=\L(V)$,那么存在由$T$的广义特征向量构成的$V$的基.
+\end{formal}
+\begin{proof}
+    令$n=\dim V$,我们对$n$使用归纳法.\\
+    当$n=1$时,命题显然成立,因为$V$上的每个向量都是$T$的特征向量.\\
+    当$n>1$时,假定命题对所有小于$n$的正整数都成立.设$\lambda$为$T$的特征值,由\tbf{1.4}可得
+    \[V=\nul(T-\lambda I)^n\oplus\range(T-\lambda I)^n\]
+    如果$\nul(T-\lambda I)^n=V$,那么$V$中的每个非零向量都是$T$的广义特征向量,自然$V$的任意一组基也包含在内.\\
+    如果$\nul(T-\lambda I)^n\neq V$,那么$\range(T-\lambda I)^n\neq\{\mbf0\}$.同时,由于$\lambda$是$T$的特征向量,那么$\range(T-\lambda I)^n\neq V$.\\
+    于是我们有$0<\dim\range(T-\lambda I)^n<n$.将$T$限制在$\range(T-\lambda I)^n$上并应用归纳假设,可知该空间上存在$T$的广义特征向量构成的基.%
+    将这组基与$\nul(T-\lambda I)^n$的基合并,就得到了$V$的一组基.
+\end{proof}
+\begin{formal}[2.3 广义特征向量对应唯一特征值]
+    设$T\in\L(V)$,那么$T$的每个广义特征向量都仅对应于$T$的一个特征值.
+\end{formal}
+\begin{proof}
+    设$v\in V$是$T$对应于两个不同特征值$\alpha,\beta$的广义特征向量.令$m$是满足$(T-\alpha I)^nv=\mbf0$的最小正整数,令$n=\dim V$,则有
+    \[\mbf0=(T-\beta I)^nv=\left((T-\alpha I)+(\alpha-\beta)I\right)^nv=\sum_{k=0}^nb_k\left(\alpha-\beta\right)^{n-k}(T-\alpha I)^{k}v\]
+    其中$b_0=1$,其余为二项展开的系数,在此可以不讨论.在上式两边作用$(T-\alpha I)^{m-1}$后有
+    \[\mbf0=(\alpha-\beta)(T-\alpha I)^{m-1}v\]
+    于是$\alpha-\beta=0$,命题得证.
+\end{proof}\noindent
+同样地,我们可以证明对应于不同特征值的广义特征向量是线性无关的.
+\begin{formal}[2.4 线性无关的广义特征向量]
+    设$T\in\L(V)$,那么由对应于$T$的互异特征值的广义特征向量构成的每个向量组都是线性无关组.
+\end{formal}
+\begin{proof}
+    设欲证结论不成立,那么存在最小的$m$使得对应于$T$的互异特征值$\li\lambda,m$的广义特征向量$\li v,m$构成的线性相关组.于是,存在不全为$0$的$\li a,m\in\F$使得
+    \[a_1v_1+\cdots+a_mv_m=\mbf0\]
+    令$n=\dim V$,将$(T-\lambda_m I)^n$作用于上式两侧可得
+    \[a_1(T-\lambda_m I)^n v_1+\cdots+a_{m-1}(T-\lambda_m I)^n v_{m-1}=\mbf0\]
+    设$k\in\{1,\cdots,m-1\}$,那么由\tbf{2.3}可知$(T-\lambda_m I)^n v_k\neq\mbf0$.又有
+    \[(T-\lambda_k I)^n\left[(T-\lambda_m I)^nv_k\right]=(T-\lambda_m I)^n\left[(T-\lambda_k I)^nv_k\right]=\mbf0\]
+    从而综合上述两式可得$(T-\lambda_m I)^nv_k$是$T$对应于$\lambda_k$的广义特征向量.因此
+    \[(T-\lambda_m I)^nv_1,\cdots,(T-\lambda_m I)^nv_{m-1}\]
+    是由对应于$m-1$个互异特征值构成的广义特征向量构成的线性相关组,从而这与$m$最小矛盾,因而假设不成立,即这样的向量组都是线性无关组.
+\end{proof}\noindent
+\tbf{3.幂零算子}
+\begin{definition}[3.1 定义:幂零]
+    称一个算子是\tbf{幂零}的,如果它的某个幂等于零.
+\end{definition}\noindent
+下面一个稍强一些的结论告诉我们不用考虑幂次高于空间维数的幂零算子的幂.
+\begin{formal}[3.2 $n$维空间上幂零算子的$n$次幂为零]
+    如果$T\in\L(V)$是幂零算子,那么$T^{\dim V}=\mbf0$.
+\end{formal}
+\begin{proof}
+    由于$T$是幂零的,于是存在$k\in\N^*$使得$T^k=\mbf0$.由\tbf{1.1}和\tbf{1.3}可得$T^{\dim V}=\mbf0$.
+\end{proof}
+\begin{formal}[3.3 幂零算子的特征值]
+    设$T\in\L(V)$.
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 如果$T$是幂零的,那么$0$是$T$的唯一特征值.
+        \item 若$\F=\C$,且$0$是$T$的唯一特征值,那么$T$是幂零的.
+    \end{enumerate}
+\end{formal}
+\begin{proof}
+    \begin{enumerate}[label=\tbf{(\arabic*)}]
+        \item 由于$T$是幂零的,那么存在$k\in\N^*$使得$T^k=\mbf0$.设$\lambda$为$T$的特征值,对应特征向量为$v$,则有
+            \[T^kv=\lambda^k v=\mbf0\]
+            于是$\lambda=0$,命题得证.
+        \item 设$\F=\C$且$0$是$T$的唯一特征值,根据\tbf{5.27(b)}可知$T$的最小多项式为$z^m$(其中$m\in\N^*$),于是$T^m=\mbf0$,即$T$是幂零的.
+    \end{enumerate}
+\end{proof}
+\begin{formal}[3.4 幂零算子的最小多项式和上三角矩阵]
+    设$T\in\L(V)$,那么下列命题等价.
+    \begin{enumerate}[label=\tbf{(\alph*)}]
+        \item $T$是幂零的.
+        \item $T$的最小多项式为$z^m$,其中$m\in\N^*$.
+        \item 存在$V$的一个基使得$T$关于该基的矩阵是对角线全为$0$的上三角矩阵.
+    \end{enumerate}
+\end{formal}\noindent
+上述定理是不难证明的,在此略去过程.
+\end{document}
