@@ -1,0 +1,45 @@
+\documentclass{ctexart}
+\usepackage{geometry}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{solution}
+
+\allowdisplaybreaks
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}\pagestyle{empty}
+\begin{center}
+    \large\tbf{Linear Algebra Done Right 8A}
+\end{center}
+\begin{problem}[1.]
+    设$T\in\L(V)$.试证明:若$\dim\nul T^4=8,\dim\nul T^6=9$,那么对任意整数$m\geqslant5$都有$\dim\nul T^m=9$.
+\end{problem}
+\begin{proof}
+    根据\tbf{8.1}有$\nul T^4\subseteq\nul T^5\subseteq\nul T^6$,于是$8\leqslant\dim\nul T^5\leqslant9$.\\
+    如果$\dim\nul T^5=8$,则有$\nul T^4=\nul T^5$,根据\tbf{8.2}应有$\nul T^6=\nul T^4$,矛盾.\\
+    于是$\dim\nul T^5=9$.
+\end{proof}
+\begin{problem}[2.]
+    设$T\in\L(V)$,$m\in\N^*$,$v\in V$,$T^{m-1}v\neq\mbf0$且$T^mv=\mbf0$.试证明:$v,Tv,\cdots,T^{m-1}v$线性无关.
+\end{problem}
+\begin{proof}
+    考虑$a_0,\cdots,a_{m-1}\in\F$使得
+    \[a_0v+a_1Tv+\cdots+a_{m-1}T^{m-1}v=\mbf0\]
+    在等式两端作用$T^{m-1}$可得$a_0T^{m-1}v=\mbf0$,由于$T^{m-1}v\neq\mbf0$,则$a_0=0$.\\
+    于是我们有
+    \[a_1Tv+\cdots+a_{m-1}T^{m-1}v=\mbf0\]
+    在等式两端作用$T^{m-2}$,同理可得$a_1=0$.\\
+    依次递推可知$a_0=\cdots=a_{m-1}=0$,于是$v,Tv,\cdots,T^{m-1}v$线性无关.
+\end{proof}
+\begin{problem}[3.]
+    设$T\in\L(V)$.试证明$V=\nul T\oplus\range T$当且仅当$\nul T=\nul T^2$.
+\end{problem}
+\begin{proof}
+    $\Rightarrow$:显然$\nul T\subseteq\nul T^2$.又有
+    \[T^2v=\mbf0\Rightarrow T(Tv)=\mbf0\Rightarrow\]
+\end{proof}
+\end{document}
